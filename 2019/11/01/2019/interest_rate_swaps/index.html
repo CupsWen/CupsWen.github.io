@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>fabric-samples之interest-rate-swaps(利率互换) | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,fabric-samples">
+    <meta name="description" content="Interest-rate swaps利率互换This is a sample of how interest-rate swaps can be handled on a blockchain usingfabric and state-based endorsement. State-based endorsementis a new feature released in Hyperledg">
+<meta name="keywords" content="Fabric,fabric-samples">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fabric-samples之interest-rate-swaps(利率互换)">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;2019&#x2F;interest_rate_swaps&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="Interest-rate swaps利率互换This is a sample of how interest-rate swaps can be handled on a blockchain usingfabric and state-based endorsement. State-based endorsementis a new feature released in Hyperledg">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-01T01:45:48.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">fabric-samples之interest-rate-swaps(利率互换)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">fabric-samples之interest-rate-swaps(利率互换)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-01T01:45:10.000Z" itemprop="datePublished" class="page-time">
+  2019-11-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Interest-rate-swaps"><span class="post-toc-text">Interest-rate swaps</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#利率互换"><span class="post-toc-text">利率互换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Network"><span class="post-toc-text">Network</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络"><span class="post-toc-text">网络</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Data-model"><span class="post-toc-text">Data model</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据模型"><span class="post-toc-text">数据模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chaincode"><span class="post-toc-text">Chaincode</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Trust-model"><span class="post-toc-text">Trust model</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Sample-network"><span class="post-toc-text">Sample network</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Prerequisites"><span class="post-toc-text">Prerequisites</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Bringing-up-the-network"><span class="post-toc-text">Bringing up the network</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Transactions"><span class="post-toc-text">Transactions</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Clean-up"><span class="post-toc-text">Clean up</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#清理"><span class="post-toc-text">清理</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/interest_rate_swaps"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">fabric-samples之interest-rate-swaps(利率互换)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-01 09:45:10" datetime="2019-11-01T01:45:10.000Z"  itemprop="datePublished">2019-11-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Interest-rate-swaps"><a href="#Interest-rate-swaps" class="headerlink" title="Interest-rate swaps"></a>Interest-rate swaps</h1><h1 id="利率互换"><a href="#利率互换" class="headerlink" title="利率互换"></a>利率互换</h1><p>This is a sample of how interest-rate swaps can be handled on a blockchain using<br>fabric and state-based endorsement. <a href="https://hyperledger-fabric.readthedocs.io/en/release-1.3/endorsement-policies.html#key-level-endorsement" target="_blank" rel="noopener">State-based endorsement</a><br>is a new feature released in Hyperledger Fabric 1.3.</p>
+<p><strong>这是如何使用以下方法在区块链上处理利率互换的示例</strong><br><strong>结构和基于国家的认可。 [基于国家的认可]（<a href="https://hyperledger-fabric.readthedocs.io/en/release-1.3/endorsement-policies.html#key-level-endorsement）" target="_blank" rel="noopener">https://hyperledger-fabric.readthedocs.io/en/release-1.3/endorsement-policies.html#key-level-endorsement）</a></strong><br><strong>是Hyperledger Fabric 1.3中发布的一项新功能。</strong></p>
+<p>An interest-rate swap is a financial swap traded over the counter. It is a<br>contractual agreement between two parties, where two parties (A and B) exchange<br>payments. The amount of individual payments is based on the principal amount of the<br>swap and an interest rate. The interest rates of the two parties differ. In a<br>typical scenario, one payment (A to B) is based on a fixed rate set in the<br>contract. The other payment (B to A) is based on a floating rate. This rate is<br>defined through a reference rate, such as LIBOR from LSE, and an offset to this<br>rate.</p>
+<p><strong>利率互换是在柜台交易的金融互换。 它是一个</strong><br><strong>两方之间的合同协议，其中两方（A和B）交换</strong><br><strong>付款。 单笔付款金额基于付款的本金金额</strong><br><strong>掉期和利率。 双方的利率不同。 在一个</strong><br><strong>在典型情况下，一次付款（A到B）是基于在</strong><br><strong>合同。 其他付款（从B到A）基于浮动汇率。 这个速率是</strong><br><strong>通过参考汇率定义，例如LSE的LIBOR，并对此进行补偿</strong><br><strong>率。</strong></p>
+<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>We assume organizations of the following roles participate in our network:</p>
+<ul>
+<li>Parties that want to exchange payments</li>
+<li>Parties that provide reference rates</li>
+<li>Auditors that need to audit certain swaps</li>
+</ul>
+<p>The chaincode-level endorsement policy is set to require an endorsement from an<br>auditor as well as an endorsement from any swap participant.</p>
+<p><strong>我们假设具有以下角色的组织参与我们的网络：</strong></p>
+<p><strong>-想要交换付款的各方</strong><br><strong>-提供参考汇率的缔约方</strong><br><strong>-需要审核某些掉期的审核员</strong></p>
+<p><strong>链码级认可政策设置为要求来自</strong><br><strong>审核员以及任何互换参与者的认可。</strong></p>
+<h2 id="Data-model"><a href="#Data-model" class="headerlink" title="Data model"></a>Data model</h2><h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>We represent a swap on the ledger as a JSON with the following fields:</p>
+<p>我们用以下字段将账本的交换表示为JSON：</p>
+<ul>
+<li><code>StartDate</code> and <code>EndDate</code> of the swap</li>
+<li><code>PaymentInterval</code> - the time interval of the payments</li>
+<li><code>PrincipalAmount</code> - the principal amount of the swap</li>
+<li><code>FixedRate</code> - the fixed rate of the swap</li>
+<li><code>FloatingRate</code> - the floating rate of the swap (offset to the reference rate)</li>
+<li><code>ReferenceRate</code> - the key name of the KVS pair that holds the reference rate</li>
+</ul>
+<p><strong>-交换的<code>StartDate</code>和<code>EndDate</code></strong><br><strong>-<code>PaymentInterval</code>-付款的时间间隔</strong><br><strong>-<code>PrincipalAmount</code>-互换的本金</strong><br><strong>-<code>FixedRate</code>-互换的固定利率</strong><br><strong>-<code>FloatingRate</code>-互换的浮动利率（相对于参考利率的偏移）</strong><br><strong>-<code>ReferenceRate</code>-保持参考汇率的KVS对的键名</strong></p>
+<p>The key for the swap is a unique identifier combined with a common prefix <code>swap</code><br>that identifies swap entries in the KVS namespace. Upon creation the key-level<br>endorsement policy for the swap is set to the participants of the swap and,<br>potentially, an auditor.</p>
+<p><strong>交换的密钥是一个唯一标识符，并带有一个通用前缀swap。</strong><br><strong>标识KVS名称空间中的交换项。 创建密钥级别后</strong><br><strong>掉期的背书政策设置为互换参与者，并且</strong><br><strong>可能是审核员。</strong></p>
+<p>We represent the payment information as a single KVS entry per swap with the<br>same unique identifier as the swap itself and a common prefix <code>payment</code> for payments.<br>If payments are due, the entry states the amount due. Otherwise, it is “none”.<br>A payment information KVS entry has the same key-level endorsement policy<br>set as its corresponding swap entry.</p>
+<p><strong>我们将每次付款的付款信息表示为单个KVS条目，</strong><br><strong>与互换本身相同的唯一标识符，以及付款的通用前缀“付款”。</strong><br><strong>如果应付款，该条目将说明应付款。 否则，为“无”。</strong><br><strong>付款信息KVS条目具有相同的密钥级认可策略</strong><br><strong>设置为其对应的交换条目。</strong></p>
+<p>We represent the reference rates as a KVS entry per rate with an identifier per<br>rate and a common prefix for reference rates. The key-level endorsement policy<br>for a reference rate entry is set to the provider of the corresponding reference<br>rate, such as LSE for LIBOR.<br>The reference rate could also be modeled via a separate chaincode, where the<br>chaincode-level endorsement policies only allows reference rate providers to<br>create keys.</p>
+<p><strong>我们将参考汇率表示为每个汇率的KVS条目，并带有一个标识符</strong><br><strong>率和参考率的通用前缀。 关键级别的认可政策</strong><br><strong>将参考汇率条目设置为相应参考的提供者</strong><br><strong>利率，例如伦敦银行同业拆借利率。</strong><br><strong>参考汇率也可以通过单独的链码建模，其中</strong><br><strong>链码级认可政策仅允许参考费率提供者</strong><br><strong>创建密钥。</strong></p>
+<p>Taken together, here is an example of the KVS entries involved in a swap:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">KEY          | VALUE</span><br><span class="line">-------------|-----------------------------------------------------</span><br><span class="line">swap1        | &#123;StartDate: 2018-10-01, ..., ReferenceRate: &quot;libor&quot;&#125;</span><br><span class="line">payment1     | &quot;none&quot;</span><br><span class="line">rr_libor     | 0.27</span><br></pre></td></tr></table></figure>
+<p>In this example, the swap with ID 1 is represented by the <code>swap1</code> and <code>payment1</code><br>KVS entries. The reference rate is set to <code>libor</code>, which will cause the chaincode<br>to look up the <code>rr_libor</code> entry in the KVS to calculate the rate for the<br>floating leg of the swap.</p>
+<h2 id="Chaincode"><a href="#Chaincode" class="headerlink" title="Chaincode"></a>Chaincode</h2><p>The interest-rate swap chaincode provides the following API:</p>
+<ul>
+<li><code>createSwap(swapID, swap_info, partyA, partyB)</code> - create a new swap with the<br>given identifier and swap parameters among the two parties specified. This<br>function creates the entry for the swap and the corresponding payment. It<br>also sets the key-level endorsement policies for both keys to the participants<br>to the swap. In case the swap’s principal amount exceeds a certain threshold,<br>it adds an auditor to the endorsement policy for the keys.</li>
+<li><code>calculatePayment(swapID)</code> - calculate the net payment from party A to party<br>B and set the payment entry accordingly. If the payment information is negative,<br>the payment due flows from B to A. The payment information is calculated based<br>on the rates specified in the swap and the principal amount. If the payment<br>key is not “none”, this function returns an error, indicating that a prior<br>payment has not been settled yet.</li>
+<li><code>settlePayment(swapID)</code> - set the payment entry for the given swap ID to “none”.<br>This function is supposed to be invoked after the two parties have settled the<br>payment off-chain.</li>
+<li><code>setReferenceRate(rrID, value)</code> - set a given reference rate to a given value.</li>
+<li><code>Init(auditor, threshold, rrProviders...)</code> - the chaincode namespace is initialized<br>with a threshold for the principal amount above which a designated auditor<br>needs to be involved as well as a list of reference rate providers and rate IDs.</li>
+</ul>
+<h2 id="Trust-model"><a href="#Trust-model" class="headerlink" title="Trust model"></a>Trust model</h2><p>The state-based endorsement policies used in this sample ensure the following<br>trust model:</p>
+<ul>
+<li>All operations related to a specific swap need to be endorsed (at least) by<br>the participants to that swap. This includes both creation of a swap, as well<br>as calculating the payment information and agreeing that the payments have<br>been settled.</li>
+<li>Operations related to a reference rate need to be endorsed by the provider of<br>a reference rate.</li>
+<li>Under certain circumstances an auditor needs to endorse operations for a swap,<br>e.g., if it exceeds a threshold for the principal amount.</li>
+</ul>
+<p>The chaincode-level endorsement policy requires at least one potential swap<br>participant and an auditor. This endorsement policy sets the trust relationship<br>for creating a swap.</p>
+<h2 id="Sample-network"><a href="#Sample-network" class="headerlink" title="Sample network"></a>Sample network</h2><p>The <code>network</code> subdirectory contains scripts that will launch a sample network<br>and run a swap transaction flow from creation to settlement.</p>
+<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>The following prerequisites are needed to run this sample:</p>
+<ul>
+<li>You need to run this sample from your GOPATH. If you have downloaded the<br><code>fabric-samples</code> directory outside your GOPATH, then you need to copy or<br>move the interest rate sample into your GOPATH.</li>
+<li>Fabric docker images. By default the <code>network/network.sh</code> script will look for<br>fabric images with the <code>latest</code> tag, this can be adapted with the <code>-i</code> command<br>line parameter of the script.</li>
+<li>A local installation of <code>configtxgen</code> and <code>cryptogen</code> in the <code>PATH</code> environment,<br>or included in <code>fabric-samples/bin</code> directory.</li>
+<li>Vendoring the chaincode. In the <code>chaincode</code> directory, run <code>govendor init</code> and<br><code>govendor add +external</code> to vendor the shim from your local copy of fabric.</li>
+</ul>
+<h3 id="Bringing-up-the-network"><a href="#Bringing-up-the-network" class="headerlink" title="Bringing up the network"></a>Bringing up the network</h3><p>Navigate to the <code>network</code> folder. Run the command <code>./network.sh up</code> to bring up<br>the network. This will spawn docker containers running a network of 3 “regular”<br>organizations, one auditor organization and one reference rate provider as well<br>as a solo orderer.</p>
+<p>An additional CLI container will run <code>network/scripts/script.sh</code> to join the<br>peers to the <code>irs</code> channel and deploy the chaincode. In the init parameters it<br>supplies the audit threshold, the auditor organization and the reference rate<br>provider with the corresponding reference rate ID. In the following transactions<br>it sets the reference rate, creates a swap, calculates payment information for<br>the swap and marks them as settled afterwards. We will show the corresponding<br>commands in the following section.</p>
+<h3 id="Transactions"><a href="#Transactions" class="headerlink" title="Transactions"></a>Transactions</h3><p>The chaincode is instantiated as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode instantiate -o irs-orderer:7050 -C irs -n irscc -l golang -v 0 -c &apos;&#123;&quot;Args&quot;:[&quot;init&quot;,&quot;auditor&quot;,&quot;1000000&quot;,&quot;rrprovider&quot;,&quot;myrr&quot;]&#125;&apos; -P &quot;AND(OR(&apos;partya.peer&apos;,&apos;partyb.peer&apos;,&apos;partyc.peer&apos;), &apos;auditor.peer&apos;)&quot;</span><br></pre></td></tr></table></figure>
+<p>This sets an auditing threshold of 1M, above which the <code>auditor</code> organization<br>needs to be involved. It also specifies the <code>myrr</code> reference rate provided by<br>the <code>rrprovider</code> organization.</p>
+<p>To set a reference rate:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode invoke -o irs-orderer:7050 -C irs --waitForEvent -n irscc --peerAddresses irs-rrprovider:7051 -c &apos;&#123;&quot;Args&quot;:[&quot;setReferenceRate&quot;,&quot;myrr&quot;,&quot;300&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>Note that the transaction is endorsed by a peer of the organization we have<br>specified as providing this reference rate in the init parameters.</p>
+<p>To create a swap named “myswap”:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode invoke -o irs-orderer:7050 -C irs --waitForEvent -n irscc --peerAddresses irs-partya:7051 --peerAddresses irs-partyb:7051 --peerAddresses irs-auditor:7051 -c &apos;&#123;&quot;Args&quot;:[&quot;createSwap&quot;,&quot;myswap&quot;,&quot;&#123;\&quot;StartDate\&quot;:\&quot;2018-09-27T15:04:05Z\&quot;,\&quot;EndDate\&quot;:\&quot;2018-09-30T15:04:05Z\&quot;,\&quot;PaymentInterval\&quot;:395,\&quot;PrincipalAmount\&quot;:100000,\&quot;FixedRate\&quot;:400,\&quot;FloatingRate\&quot;:500,\&quot;ReferenceRate\&quot;:\&quot;myrr\&quot;&#125;&quot;, &quot;partya&quot;, &quot;partyb&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>Note that the transaction is endorsed by both parties that are part of this<br>swap as well as the auditor. Since the principal amount in this case is lower<br>than the audit threshold we set as init parameters, no auditor will be required<br>to endorse changes to the payment info or swap details.</p>
+<p>To calculate payment info for “myswap”:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode invoke -o irs-orderer:7050 -C irs --waitForEvent -n irscc --peerAddresses irs-partya:7051 --peerAddresses irs-partyb:7051 -c &apos;&#123;&quot;Args&quot;:[&quot;calculatePayment&quot;,&quot;myswap&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>Note that we target only peers of<br>party A and party B, since the swap is below the auditing threshold.</p>
+<p>To settle payment of “myswap”:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode invoke -o irs-orderer:7050 -C irs --waitForEvent -n irscc `--peerAddresses irs-partya:7051 --peerAddresses irs-partyb:7051 -c &apos;&#123;&quot;Args&quot;:[&quot;settlePayment&quot;,&quot;myswap&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+<p>As an exercise, try to create a new swap above the auditing threshold and see<br>how validation fails if the auditor is not involved in every operation on the<br>swap. Also try to calculate payment info before settling a prior payment to a<br>swap. You can run the commands yourself using the CLI container by issuing the<br>command <code>docker exec -it cli bash</code>. You will need to set the corresponding<br>environment variables for the organization issuing the command. You refer to the<br><code>network/scripts/script.sh</code> file for more information.</p>
+<h2 id="Clean-up"><a href="#Clean-up" class="headerlink" title="Clean up"></a>Clean up</h2><h2 id="清理"><a href="#清理" class="headerlink" title="清理"></a>清理</h2><p>When you are finished using the network, you can bring down the docker images<br>and remove any artifacts by running the command <code>./network.sh down</code> from the<br><code>network</code> folder.</p>
+<p><strong>使用完网络后，您可以关闭docker映像</strong><br><strong>并通过从命令行运行命令<code>./network.sh down</code>除去任何工件。</strong><br><strong>网络文件夹。</strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-11-01T01:45:48.000Z" itemprop="dateUpdated">2019-11-01 09:45:48</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fabric-samples/" rel="tag">fabric-samples</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/&title=《fabric-samples之interest-rate-swaps(利率互换)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/&title=《fabric-samples之interest-rate-swaps(利率互换)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之interest-rate-swaps(利率互换)》 — Cups&url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/01/2019/off_chain_data/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">fabric-samples之off-chain-data(离链数据)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/01/2019/balance-transfer/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fabric-samples之balance-transfer(余额代偿)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/&title=《fabric-samples之interest-rate-swaps(利率互换)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/&title=《fabric-samples之interest-rate-swaps(利率互换)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之interest-rate-swaps(利率互换)》 — Cups&url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/11/01/2019/interest_rate_swaps/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

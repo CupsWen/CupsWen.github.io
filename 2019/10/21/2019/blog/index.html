@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>github+jekyll快速搭建个人博客 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jekyll,博客">
+    <meta name="description" content="原因 在10月份买了一台腾讯的服务器（99元一年），觉着不能空闲浪费了。 最开始是想用云服务器搭建博客，但发现没有域名。 如果再化点钱搞个域名，服务器、域名都需要有持续的钱投入，更费钱了。 最后使用的是github+jekyll搭建个人博客。  过程12345678&amp;apos;&amp;apos;&amp;apos;	1.在ubuntu上安装Jekyll。	2.在github上查找博客模板。	3.下载博客模板，并修改。	4.创建github项">
+<meta name="keywords" content="jekyll,博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github+jekyll快速搭建个人博客">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;10&#x2F;21&#x2F;2019&#x2F;blog&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="原因 在10月份买了一台腾讯的服务器（99元一年），觉着不能空闲浪费了。 最开始是想用云服务器搭建博客，但发现没有域名。 如果再化点钱搞个域名，服务器、域名都需要有持续的钱投入，更费钱了。 最后使用的是github+jekyll搭建个人博客。  过程12345678&amp;apos;&amp;apos;&amp;apos;	1.在ubuntu上安装Jekyll。	2.在github上查找博客模板。	3.下载博客模板，并修改。	4.创建github项">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-21T10:11:44.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">github+jekyll快速搭建个人博客</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header page-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">github+jekyll快速搭建个人博客</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-21T09:24:10.000Z" itemprop="datePublished" class="page-time">
+  2019-10-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BD%91%E7%AB%99/">网站</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    <article class="page-article fade" itemprop="blogPage">
+        <div class="post-content page-content" id="page-content" itemprop="pageContent">
+            <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><blockquote>
+<p>在10月份买了一台腾讯的服务器（99元一年），觉着不能空闲浪费了。</p>
+<p>最开始是想用云服务器搭建博客，但发现没有域名。</p>
+<p>如果再化点钱搞个域名，服务器、域名都需要有持续的钱投入，更费钱了。</p>
+<p>最后使用的是github+jekyll搭建个人博客。</p>
+</blockquote>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">'''</span><br><span class="line">	1.在ubuntu上安装Jekyll。</span><br><span class="line">	2.在github上查找博客模板。</span><br><span class="line">	3.下载博客模板，并修改。</span><br><span class="line">	4.创建github项目。</span><br><span class="line">	5.上传本地代码到github。</span><br><span class="line">	6.验证。</span><br><span class="line">'''</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装Jekyll"><a href="#安装Jekyll" class="headerlink" title="安装Jekyll"></a>安装Jekyll</h4><p>aa</p>
+<h4 id="找博客模板"><a href="#找博客模板" class="headerlink" title="找博客模板"></a>找博客模板</h4><ul>
+<li>b</li>
+</ul>
+<h4 id="下载博客模板"><a href="#下载博客模板" class="headerlink" title="下载博客模板"></a>下载博客模板</h4><p><strong>aaa</strong></p>
+<h4 id="修改博客模板"><a href="#修改博客模板" class="headerlink" title="修改博客模板"></a>修改博客模板</h4><p><strong><em>aaa</em></strong></p>
+<h4 id="创建github项目"><a href="#创建github项目" class="headerlink" title="创建github项目"></a>创建github项目</h4><p><u>aa</u></p>
+<h4 id="上传本地代码到github"><a href="#上传本地代码到github" class="headerlink" title="上传本地代码到github"></a>上传本地代码到github</h4><p><code>aaa</code></p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4>
+        </div>
+
+        
+        <div class="card page-about-me flex-row">
+            <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/the_Huanghe_River.png"></a>
+            <div class="content flex-col">
+                <p><strong>CupsWen</strong></p>
+                <p><em></em></p>
+                <p>22<br>男<br>区块链方向在读研究生</p>
+            </div>
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/10/21/2019/blog/&title=《github+jekyll快速搭建个人博客》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/10/21/2019/blog/&title=《github+jekyll快速搭建个人博客》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/10/21/2019/blog/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《github+jekyll快速搭建个人博客》 — Cups&url=http://cupswen.github.io/2019/10/21/2019/blog/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/10/21/2019/blog/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+        
+
+        
+
+
+        
+
+    </article>
+    
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/10/21/2019/blog/&title=《github+jekyll快速搭建个人博客》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/10/21/2019/blog/&title=《github+jekyll快速搭建个人博客》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/10/21/2019/blog/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《github+jekyll快速搭建个人博客》 — Cups&url=http://cupswen.github.io/2019/10/21/2019/blog/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/10/21/2019/blog/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/10/21/2019/blog/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

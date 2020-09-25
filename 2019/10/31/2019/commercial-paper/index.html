@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>fabric-samples之commercial-paper-tutorial(商业票据教程) | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,fabric-samples">
+    <meta name="description" content="Commercial Paper Tutorial商业票据教程This folder contains the code for an introductory tutorial to Smart Contract development. It is based around the scenario of Commercial Paper.The full tutorial, includin">
+<meta name="keywords" content="Fabric,fabric-samples">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fabric-samples之commercial-paper-tutorial(商业票据教程)">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;10&#x2F;31&#x2F;2019&#x2F;commercial-paper&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="Commercial Paper Tutorial商业票据教程This folder contains the code for an introductory tutorial to Smart Contract development. It is based around the scenario of Commercial Paper.The full tutorial, includin">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;hyperledger-fabric.readthedocs.io&#x2F;en&#x2F;release-1.4&#x2F;_images&#x2F;commercial_paper.diagram.1.png">
+<meta property="og:updated_time" content="2019-10-31T08:39:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;hyperledger-fabric.readthedocs.io&#x2F;en&#x2F;release-1.4&#x2F;_images&#x2F;commercial_paper.diagram.1.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">fabric-samples之commercial-paper-tutorial(商业票据教程)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">fabric-samples之commercial-paper-tutorial(商业票据教程)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-31T08:38:10.000Z" itemprop="datePublished" class="page-time">
+  2019-10-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Commercial-Paper-Tutorial"><span class="post-toc-text">Commercial Paper Tutorial</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#商业票据教程"><span class="post-toc-text">商业票据教程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Scenario"><span class="post-toc-text">Scenario</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#情境"><span class="post-toc-text">情境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quick-Start"><span class="post-toc-text">Quick Start</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快速开始"><span class="post-toc-text">快速开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Steps"><span class="post-toc-text">Steps</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#步骤"><span class="post-toc-text">步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Setup"><span class="post-toc-text">Setup</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开始"><span class="post-toc-text">开始</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Running-the-Infrastructure"><span class="post-toc-text">Running the Infrastructure</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运行基础架构"><span class="post-toc-text">运行基础架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-and-Instantiate-the-contract"><span class="post-toc-text">Install and Instantiate the contract</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装和实例化智能合约"><span class="post-toc-text">安装和实例化智能合约</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Client-Applications"><span class="post-toc-text">Client Applications</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#客户应用程序"><span class="post-toc-text">客户应用程序</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Issue-the-paper"><span class="post-toc-text">Issue the paper</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发行票据"><span class="post-toc-text">发行票据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Buy-and-Redeem-the-paper"><span class="post-toc-text">Buy and Redeem the paper</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#购买和兑换票据"><span class="post-toc-text">购买和兑换票据</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/commercial-paper"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">fabric-samples之commercial-paper-tutorial(商业票据教程)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-31 16:38:10" datetime="2019-10-31T08:38:10.000Z"  itemprop="datePublished">2019-10-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Commercial-Paper-Tutorial"><a href="#Commercial-Paper-Tutorial" class="headerlink" title="Commercial Paper Tutorial"></a>Commercial Paper Tutorial</h1><h1 id="商业票据教程"><a href="#商业票据教程" class="headerlink" title="商业票据教程"></a>商业票据教程</h1><p>This folder contains the code for an introductory tutorial to Smart Contract development. It is based around the scenario of Commercial Paper.<br>The full tutorial, including full scenario details and line by line code walkthroughs is in the <a href="https://hyperledger-fabric.readthedocs.io/en/release-1.4/tutorial/commercial_paper.html" target="_blank" rel="noopener">Hyperledger Fabric documentation</a>.</p>
+<p><strong>该文件夹包含用于智能合约开发的入门教程的代码。 它基于商业票据的情况。</strong><br><strong>完整的教程，包括完整的场景详细信息和逐行代码演练，位于[Hyperledger Fabric文档]（<a href="https://hyperledger-fabric.readthedocs.io/en/release-1.4/tutorial/commercial_paper.html）中。" target="_blank" rel="noopener">https://hyperledger-fabric.readthedocs.io/en/release-1.4/tutorial/commercial_paper.html）中。</a></strong></p>
+<h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><h2 id="情境"><a href="#情境" class="headerlink" title="情境"></a>情境</h2><p>In this tutorial two organizations, MagnetoCorp and DigiBank, trade commercial paper with each other using PaperNet, a Hyperledger Fabric blockchain network.</p>
+<p><strong>在本教程中，MagnetoCorp和DigiBank这两个组织使用Hyperledger Fabric区块链网络PaperNet彼此进行商业票据交易。</strong></p>
+<p>Once you’ve set up a basic network, you’ll act as Isabella, an employee of MagnetoCorp, who will issue a commercial paper on its behalf. You’ll then switch hats to take the role of Balaji, an employee of DigiBank, who will buy this commercial paper, hold it for a period of time, and then redeem it with MagnetoCorp for a small profit.</p>
+<p><strong>建立基本网络后，您将担任MagnetoCorp员工Isabella的代表，他将代表该公司发行商业票据。 然后，您将转而担任DigiBank员工Balaji的角色，他将购买此商业票据，保留一段时间，然后与MagnetoCorp赎回以获取少量利润。</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://hyperledger-fabric.readthedocs.io/en/release-1.4/_images/commercial_paper.diagram.1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><p>You are strongly advised to read the full tutorial to get information about the code and the scenario. Below are the quick start instructions for running the tutorial, but no details on the how or why it works.</p>
+<p><strong>强烈建议您阅读完整的教程，以获取有关代码和方案的信息。 以下是运行本教程的快速入门说明，但没有有关其工作方式或原因的详细信息。</strong></p>
+<h3 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h3><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>1) Start the Hyperledger Fabric infrastructure</p>
+<p>   <em>although the scenario has two organizations, the ‘basic’ or ‘developement’ Fabric infrastructure will be used</em></p>
+<p><strong>启动Hyperledger Fabric基础架构尽管该场景有两个组织，但将使用“基本”或“开发” Fabric基础结构</strong></p>
+<p>2) Install and Instantiate the Contracts</p>
+<p><strong>安装并实例化合同</strong></p>
+<p>3) Run client applications in the roles of MagnetoCorp and Digibank to trade the commecial paper</p>
+<ul>
+<li>Issue the Paper as Magnetocorp</li>
+<li>Buy the paper as DigiBank</li>
+<li>Redeem the paper as DigiBank</li>
+</ul>
+<p><strong>以Magneto Corp和Digibank的身份运行客户应用程序以交易商业票据</strong></p>
+<p><strong>以Magnetocorp的身份发行票据</strong></p>
+<p><strong>以DigiBank的价格购买票据</strong></p>
+<p><strong>将该票据赎回为DigiBank</strong></p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>You will need a a machine with the following</p>
+<ul>
+<li>Docker and docker-compose installed</li>
+<li>Node.js v8 if you want to run Javascript client applications</li>
+<li>Java v8 if you want to run Java client applications</li>
+<li>Maven to build the Java applications</li>
+</ul>
+<p><strong>您需要一台具有以下功能的机器</strong> </p>
+<p><strong>安装Docker和docker-compose</strong></p>
+<p><strong>如果要运行JavaScript客户端应用程序，则node.jsV8</strong> </p>
+<p><strong>如果您想运行java客户端应用程序，请使用JavaV 8</strong> </p>
+<p><strong>Maven构建Java应用程序</strong></p>
+<p>It is advised to have 3 console windows open; one to monitor the infrastructure and one each for MagnetoCorp and DigiBank</p>
+<p><strong>建议有3台控制台窗口打开；一个用于监视基础架构，一个用于磁公司和数字库。</strong> </p>
+<p>If you haven’t already clone the repository to a directory of your choice, and change to the <code>commercial-paper</code> directory</p>
+<p><strong>如果您还没有将存储库克隆到您选择的目录中，然后更改为<code>commercial-paper</code>目录</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/hyperledger/fabric-samples.git</span><br><span class="line">cd fabric-samples/commercial-paper</span><br></pre></td></tr></table></figure>
+
+<p>This <code>README.md</code> file is in the the <code>commercial-paper</code> directory, the source code for client applications and the contracts ins in the <code>ogranization</code> directory, and some helper scripts are in the <code>roles</code> directory.</p>
+<p><strong>这个`readme.md‘文件位于“商业-纸质”目录、客户端应用程序的源代码和“ogranization”目录中的Contracts ins中，一些助手脚本位于“roles”目录中。</strong> </p>
+<h2 id="Running-the-Infrastructure"><a href="#Running-the-Infrastructure" class="headerlink" title="Running the Infrastructure"></a>Running the Infrastructure</h2><h2 id="运行基础架构"><a href="#运行基础架构" class="headerlink" title="运行基础架构"></a>运行基础架构</h2><p>In one console window, run the <code>./roles/network-starter.sh</code> script; this will start the basic infrastructure and also start monitoring all the docker containers. </p>
+<p><strong>在一个控制台窗口中，运行`./Roles/Network-starter.sh‘脚本；这将启动基本的基础设施，并开始监视所有的停靠容器。</strong> </p>
+<p>You can cancel this if you wish to reuse the terminal, but it’s best left open. </p>
+<p><strong>如果您希望重用终端，可以取消此操作，但最好保持打开状态。</strong> </p>
+<h3 id="Install-and-Instantiate-the-contract"><a href="#Install-and-Instantiate-the-contract" class="headerlink" title="Install and Instantiate the contract"></a>Install and Instantiate the contract</h3><h3 id="安装和实例化智能合约"><a href="#安装和实例化智能合约" class="headerlink" title="安装和实例化智能合约"></a>安装和实例化智能合约</h3><p>The contract code is available as either JavaScript or Java. You can use either one, and the choice of contract language does not affect the choice of client langauge.</p>
+<p><strong>合同代码可以作为javascript或java使用。您可以使用这两种语言之一，合同语言的选择不影响客户端语言的选择。</strong> </p>
+<p>In your ‘MagnetoCorp’ window run the following command</p>
+<p><strong>在“MagnetoCorp”窗口中运行以下命令</strong> </p>
+<p><code>./roles/magnetocorp.sh</code></p>
+<p>This will start a docker container for Fabric CLI commands, and put you in the correct directory for the source code. </p>
+<p><strong>这将为FabricCLI命令启动Docker容器，并将您置于源代码的正确目录中。</strong> </p>
+<p><strong>For a JavaScript Contract:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec cliMagnetoCorp peer chaincode install -n papercontract -v 0 -p /opt/gopath/src/github.com/contract -l node</span><br><span class="line"></span><br><span class="line">docker exec cliMagnetoCorp peer chaincode instantiate -n papercontract -v 0 -l node -c &apos;&#123;&quot;Args&quot;:[&quot;org.papernet.commercialpaper:instantiate&quot;]&#125;&apos; -C mychannel -P &quot;AND (&apos;Org1MSP.member&apos;)&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>For a Java Contract:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec cliMagnetoCorp peer chaincode install -n papercontract -v 0 -p /opt/gopath/src/github.com/contract-java -l java</span><br><span class="line"></span><br><span class="line">docker exec cliMagnetoCorp peer chaincode instantiate -n papercontract -v 0 -l java -c &apos;&#123;&quot;Args&quot;:[&quot;org.papernet.commercialpaper:instantiate&quot;]&#125;&apos; -C mychannel -P &quot;AND (&apos;Org1MSP.member&apos;)&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>If you want to try both a Java and JavaScript Contract, then you will need to restart the infrastructure and deploy the other contract. </p>
+</blockquote>
+<h2 id="Client-Applications"><a href="#Client-Applications" class="headerlink" title="Client Applications"></a>Client Applications</h2><h2 id="客户应用程序"><a href="#客户应用程序" class="headerlink" title="客户应用程序"></a>客户应用程序</h2><p>Note for Java applications you will need to compile the Java Code using maven.  Use this command in each application-java directory</p>
+<p><strong>注意：对于Java应用程序，需要使用maven编译Java代码。在每个应用程序-java目录中使用此命令。</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+
+<p>Note for JavaScript applications you will need to install the dependencies first. Use this command in each application directory</p>
+<p><strong>请注意，您需要先安装依赖项的JavaScript应用程序。在每个应用程序目录中使用此命令</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p> Note that there is NO dependency between the langauge of any one client application and any contract. Mix and match as you wish!</p>
+<p> <strong>请注意，任何一个客户端应用程序的languge与任何合同之间不存在依赖关系。根据您的愿望进行混合和匹配！</strong> </p>
+</blockquote>
+<h3 id="Issue-the-paper"><a href="#Issue-the-paper" class="headerlink" title="Issue the paper"></a>Issue the paper</h3><h3 id="发行票据"><a href="#发行票据" class="headerlink" title="发行票据"></a>发行票据</h3><p>This is running as <em>MagnetoCorp</em> so you can stay in the same window. These commands are to be run in the<br><code>commercial-paper/organization/magnetocorp/application</code> directory or the <code>commercial-paper/organization/magnetocorp/application-java</code></p>
+<p><em>Add the Identity to be used</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node addToWallet.js</span><br><span class="line"># or </span><br><span class="line">java -cp target/commercial-paper-0.0.1-SNAPSHOT.jar org.magnetocorp.AddToWallet</span><br></pre></td></tr></table></figure>
+
+<p><em>Issue the Commercial Paper</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node issue.js</span><br><span class="line"># or </span><br><span class="line">java -cp target/commercial-paper-0.0.1-SNAPSHOT.jar org.magnetocorp.Issue</span><br></pre></td></tr></table></figure>
+
+<h3 id="Buy-and-Redeem-the-paper"><a href="#Buy-and-Redeem-the-paper" class="headerlink" title="Buy and Redeem the paper"></a>Buy and Redeem the paper</h3><h3 id="购买和兑换票据"><a href="#购买和兑换票据" class="headerlink" title="购买和兑换票据"></a>购买和兑换票据</h3><p>This is running as <em>Digibank</em>; you’ve not acted as this organization before so in your ‘Digibank’ window run the following command in the<br><code>fabric-samples/commercial-paper/</code> directory</p>
+<p><code>./roles/digibank.sh</code> </p>
+<p>You can now run the applications to buy and redeem the paper. Change to either the<br><code>commercial-paper/organization/digibank/application</code> directory or  <code>commercial-paper/organization/digibank/application-java</code></p>
+<p><em>Add the Identity to be used</em></p>
+<p><strong>添加要使用的标识</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node addToWallet.js</span><br><span class="line"># or </span><br><span class="line">java -cp target/commercial-paper-0.0.1-SNAPSHOT.jar org.digibank.AddToWallet</span><br></pre></td></tr></table></figure>
+
+<p><em>Buy the paper</em></p>
+<p><strong>购买票据</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node buy.js</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">java -cp target/commercial-paper-0.0.1-SNAPSHOT.jar org.digibank.Buy</span><br></pre></td></tr></table></figure>
+
+<p><em>Redeem</em></p>
+<p><strong>赎回</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node redeem.js</span><br><span class="line"><span class="meta">#</span><span class="bash"> or </span></span><br><span class="line">java -cp target/commercial-paper-0.0.1-SNAPSHOT.jar org.digibank.Redeem</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-10-31T08:39:20.000Z" itemprop="dateUpdated">2019-10-31 16:39:20</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fabric-samples/" rel="tag">fabric-samples</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/&title=《fabric-samples之commercial-paper-tutorial(商业票据教程)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/&title=《fabric-samples之commercial-paper-tutorial(商业票据教程)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/10/31/2019/commercial-paper/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之commercial-paper-tutorial(商业票据教程)》 — Cups&url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/01/2019/balance-transfer/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">fabric-samples之balance-transfer(余额代偿)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/10/31/2019/chaincode-docker-devmode/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fabric-sample之chaincode-docker-devmode(开发者模式下调试chaincode)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/&title=《fabric-samples之commercial-paper-tutorial(商业票据教程)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/&title=《fabric-samples之commercial-paper-tutorial(商业票据教程)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/10/31/2019/commercial-paper/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之commercial-paper-tutorial(商业票据教程)》 — Cups&url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/10/31/2019/commercial-paper/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/10/31/2019/commercial-paper/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

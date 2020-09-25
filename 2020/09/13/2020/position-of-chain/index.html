@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Fabric区块链链,链的存在位置 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,链的位置">
+    <meta name="description" content="动机 想看看Fabric区块链，链的存储结构和位置。 Fabric中的数据库：idStore、blkstorage、statedb、historydb。 到底是什么样子的？？？   Fabric区块链网络中，每个通道都有其账本，每个Peer节点都保存着其所加入通道的账本，Peer节点的账本包含如下数据：A、账本编号，用于快速查询存在哪些账本B、账本数据，用于区块数据存储C、区块索引，用于快速查询区">
+<meta name="keywords" content="Fabric,链的位置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fabric区块链链,链的存在位置">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2020&#x2F;09&#x2F;13&#x2F;2020&#x2F;position-of-chain&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="动机 想看看Fabric区块链，链的存储结构和位置。 Fabric中的数据库：idStore、blkstorage、statedb、historydb。 到底是什么样子的？？？   Fabric区块链网络中，每个通道都有其账本，每个Peer节点都保存着其所加入通道的账本，Peer节点的账本包含如下数据：A、账本编号，用于快速查询存在哪些账本B、账本数据，用于区块数据存储C、区块索引，用于快速查询区">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;ledger.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;first-network.png">
+<meta property="og:updated_time" content="2020-09-20T11:42:51.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;ledger.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Fabric区块链链,链的存在位置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Fabric区块链链,链的存在位置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-13T07:52:10.000Z" itemprop="datePublished" class="page-time">
+  2020-09-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#动机"><span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#过程"><span class="post-toc-text">过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、启动first-network"><span class="post-toc-text">1、启动first-network</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、逐步找到docker镜像的volumes"><span class="post-toc-text">2、逐步找到docker镜像的volumes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、把目录单独拿出来"><span class="post-toc-text">3、把目录单独拿出来</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、目录解析"><span class="post-toc-text">4、目录解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、其他"><span class="post-toc-text">5、其他</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2020/position-of-chain"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Fabric区块链链,链的存在位置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-09-13 15:52:10" datetime="2020-09-13T07:52:10.000Z"  itemprop="datePublished">2020-09-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><blockquote>
+<p>想看看Fabric区块链，链的存储结构和位置。</p>
+<p>Fabric中的数据库：idStore、blkstorage、statedb、historydb。</p>
+<p>到底是什么样子的？？？</p>
+</blockquote>
+<blockquote>
+<p>Fabric区块链网络中，每个通道都有其账本，每个Peer节点都保存着其所加入通道的账本，Peer节点的账本包含如下数据：<br>A、账本编号，用于快速查询存在哪些账本<br>B、账本数据，用于区块数据存储<br>C、区块索引，用于快速查询区块／交易<br>D、状态数据，用于最新的世界状态数据<br>E、历史数据：跟踪键的历史<br>Fabric的Peer节点账本中有四种数据库，idStore（ledgerID数据库）、blkstorage（block文件存储）、statedb（状态数据库）、historydb（历史数据库）。<br>账本数据库基于文件系统，将区块存储在文件块中，然后在区块索引LevelDB中存储区块交易对应的文件块及其偏移，即将区块索引LevelDB作为账本数据库的索引。目前支持的区块索引有：区块编号、区块哈希、交易ID、区块交易编号。<br>状态数据库存储的是所有曾经在交易中出现的键值对的最新值。调用链码执行交易可以改变状态数据，为了高效的执行链码调用，所有数据的最新值都被存放在状态数据库中；状态数据库是有序交易日志的快照，任何时候都可以根据交易日志重新生成状态数据库；状态数据库会在Peer节点启动的时候自动恢复或重构，未完备前，本Peer节点不会接受新的交易；状态数据库可以使用LevelDB或者CouchDB，CouchDB能够存储任意的二进制数据，支持富文本查询。<br>历史状态数据库用于查询某个key的历史修改记录，历史状态数据库并不存储key具体的值，而只记录在某个区块的某个交易里，某key变动了一次。后续需要查询的时候，根据变动历史去查询实际变动的值。<br>ledgerID数据库存储chainID，用于快速查询节点存在哪些账本。<br>对于单链的Peer节点账本（不包含ledgerID数据库）结构如下： </p>
+</blockquote>
+<p><img src="/img/ledger.png" alt="a"></p>
+<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><h2 id="1、启动first-network"><a href="#1、启动first-network" class="headerlink" title="1、启动first-network"></a>1、启动first-network</h2><ol>
+<li>在ubuntu中配置好fabric的运行环境。</li>
+<li>进入~/go/src/github.com/hyperledger/fabric-samples/first-network$ </li>
+<li>执行sudo ./byfn.sh up</li>
+</ol>
+<p>结果图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/first-network.png" alt="a" title="">
+                </div>
+                <div class="image-caption">a</div>
+            </figure>
+
+<p>命令行数据：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~/go/src/github.com/hyperledger/fabric-samples/first-network$ sudo ./byfn.sh up</span><br><span class="line">Starting for channel 'mychannel' with CLI timeout of '10' seconds and CLI delay of '3' seconds</span><br><span class="line">Continue? [Y/n] y</span><br><span class="line">proceeding ...</span><br><span class="line">LOCAL_VERSION=1.4.3</span><br><span class="line">DOCKER_IMAGE_VERSION=1.4.3</span><br><span class="line">/home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/../bin/cryptogen</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#########################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#### Generate certificates using cryptogen tool #########</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#########################################################</span></span></span><br><span class="line">+ cryptogen generate --config=./crypto-config.yaml</span><br><span class="line">org1.example.com</span><br><span class="line">org2.example.com</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line"></span><br><span class="line">Generate CCP files for Org1 and Org2</span><br><span class="line">/home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/../bin/configtxgen</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#########################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">########  Generating Orderer Genesis block ##############</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#########################################################</span></span></span><br><span class="line">CONSENSUS_TYPE=solo</span><br><span class="line">+ '[' solo == solo ']'</span><br><span class="line">+ configtxgen -profile TwoOrgsOrdererGenesis -channelID byfn-sys-channel -outputBlock ./channel-artifacts/genesis.block</span><br><span class="line">2020-09-13 00:05:48.255 PDT [common.tools.configtxgen] main -&gt; INFO 001 Loading configuration</span><br><span class="line">2020-09-13 00:05:48.358 PDT [common.tools.configtxgen.localconfig] completeInitialization -&gt; INFO 002 orderer type: solo</span><br><span class="line">2020-09-13 00:05:48.358 PDT [common.tools.configtxgen.localconfig] Load -&gt; INFO 003 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:48.511 PDT [common.tools.configtxgen.localconfig] completeInitialization -&gt; INFO 004 orderer type: solo</span><br><span class="line">2020-09-13 00:05:48.511 PDT [common.tools.configtxgen.localconfig] LoadTopLevel -&gt; INFO 005 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:48.512 PDT [common.tools.configtxgen] doOutputBlock -&gt; INFO 006 Generating genesis block</span><br><span class="line">2020-09-13 00:05:48.513 PDT [common.tools.configtxgen] doOutputBlock -&gt; INFO 007 Writing genesis block</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## Generating channel configuration transaction 'channel.tx' ###</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################################</span></span></span><br><span class="line">+ configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID mychannel</span><br><span class="line">2020-09-13 00:05:48.552 PDT [common.tools.configtxgen] main -&gt; INFO 001 Loading configuration</span><br><span class="line">2020-09-13 00:05:48.620 PDT [common.tools.configtxgen.localconfig] Load -&gt; INFO 002 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:48.692 PDT [common.tools.configtxgen.localconfig] completeInitialization -&gt; INFO 003 orderer type: solo</span><br><span class="line">2020-09-13 00:05:48.692 PDT [common.tools.configtxgen.localconfig] LoadTopLevel -&gt; INFO 004 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:48.692 PDT [common.tools.configtxgen] doOutputChannelCreateTx -&gt; INFO 005 Generating new channel configtx</span><br><span class="line">2020-09-13 00:05:48.694 PDT [common.tools.configtxgen] doOutputChannelCreateTx -&gt; INFO 006 Writing new channel tx</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">######    Generating anchor peer update for Org1MSP   ##########</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################################</span></span></span><br><span class="line">+ configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID mychannel -asOrg Org1MSP</span><br><span class="line">2020-09-13 00:05:48.734 PDT [common.tools.configtxgen] main -&gt; INFO 001 Loading configuration</span><br><span class="line">2020-09-13 00:05:48.801 PDT [common.tools.configtxgen.localconfig] Load -&gt; INFO 002 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:48.873 PDT [common.tools.configtxgen.localconfig] completeInitialization -&gt; INFO 003 orderer type: solo</span><br><span class="line">2020-09-13 00:05:48.873 PDT [common.tools.configtxgen.localconfig] LoadTopLevel -&gt; INFO 004 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:48.873 PDT [common.tools.configtxgen] doOutputAnchorPeersUpdate -&gt; INFO 005 Generating anchor peer update</span><br><span class="line">2020-09-13 00:05:48.873 PDT [common.tools.configtxgen] doOutputAnchorPeersUpdate -&gt; INFO 006 Writing anchor peer update</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">######    Generating anchor peer update for Org2MSP   ##########</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################################</span></span></span><br><span class="line">+ configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID mychannel -asOrg Org2MSP</span><br><span class="line">2020-09-13 00:05:48.911 PDT [common.tools.configtxgen] main -&gt; INFO 001 Loading configuration</span><br><span class="line">2020-09-13 00:05:48.981 PDT [common.tools.configtxgen.localconfig] Load -&gt; INFO 002 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:49.052 PDT [common.tools.configtxgen.localconfig] completeInitialization -&gt; INFO 003 orderer type: solo</span><br><span class="line">2020-09-13 00:05:49.052 PDT [common.tools.configtxgen.localconfig] LoadTopLevel -&gt; INFO 004 Loaded configuration: /home/cups/go/src/github.com/hyperledger/fabric-samples/first-network/configtx.yaml</span><br><span class="line">2020-09-13 00:05:49.052 PDT [common.tools.configtxgen] doOutputAnchorPeersUpdate -&gt; INFO 005 Generating anchor peer update</span><br><span class="line">2020-09-13 00:05:49.052 PDT [common.tools.configtxgen] doOutputAnchorPeersUpdate -&gt; INFO 006 Writing anchor peer update</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line"></span><br><span class="line">Creating network "net_byfn" with the default driver</span><br><span class="line">Creating volume "net_peer0.org2.example.com" with default driver</span><br><span class="line">Creating volume "net_peer1.org2.example.com" with default driver</span><br><span class="line">Creating volume "net_peer1.org1.example.com" with default driver</span><br><span class="line">Creating volume "net_peer0.org1.example.com" with default driver</span><br><span class="line">Creating volume "net_orderer.example.com" with default driver</span><br><span class="line">Creating peer1.org2.example.com ... done</span><br><span class="line">Creating peer1.org1.example.com ... done</span><br><span class="line">Creating peer0.org1.example.com ... done</span><br><span class="line">Creating orderer.example.com    ... done</span><br><span class="line">Creating peer0.org2.example.com ... done</span><br><span class="line">Creating cli                    ... done</span><br><span class="line">CONTAINER ID        IMAGE                               COMMAND             CREATED             STATUS                  PORTS                      NAMES</span><br><span class="line">d645595ab67d        hyperledger/fabric-tools:latest     "/bin/bash"         1 second ago        Up Less than a second                              cli</span><br><span class="line">e33ac164fb4f        hyperledger/fabric-orderer:latest   "orderer"           5 seconds ago       Up 1 second             0.0.0.0:7050-&gt;7050/tcp     orderer.example.com</span><br><span class="line">8c175a6916d8        hyperledger/fabric-peer:latest      "peer node start"   5 seconds ago       Up 2 seconds            0.0.0.0:7051-&gt;7051/tcp     peer0.org1.example.com</span><br><span class="line">6196272a7a25        hyperledger/fabric-peer:latest      "peer node start"   5 seconds ago       Up Less than a second   0.0.0.0:9051-&gt;9051/tcp     peer0.org2.example.com</span><br><span class="line">c8a2f1381201        hyperledger/fabric-peer:latest      "peer node start"   5 seconds ago       Up Less than a second   0.0.0.0:8051-&gt;8051/tcp     peer1.org1.example.com</span><br><span class="line">2523e2cb1f4e        hyperledger/fabric-peer:latest      "peer node start"   5 seconds ago       Up 2 seconds            0.0.0.0:10051-&gt;10051/tcp   peer1.org2.example.com</span><br><span class="line"></span><br><span class="line"> ____    _____      _      ____    _____ </span><br><span class="line">/ ___|  |_   _|    / \    |  _ \  |_   _|</span><br><span class="line">\___ \    | |     / _ \   | |_) |   | |  </span><br><span class="line"> ___) |   | |    / ___ \  |  _ &lt;    | |  </span><br><span class="line">|____/    |_|   /_/   \_\ |_| \_\   |_|  </span><br><span class="line"></span><br><span class="line">Build your first network (BYFN) end-to-end test</span><br><span class="line"></span><br><span class="line">Channel name : mychannel</span><br><span class="line">Creating channel...</span><br><span class="line">+ peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:05:54.918 UTC [channelCmd] InitCmdFactory -&gt; INFO 001 Endorser and orderer connections initialized</span><br><span class="line">2020-09-13 07:05:54.981 UTC [cli.common] readBlock -&gt; INFO 002 Received block: 0</span><br><span class="line">===================== Channel 'mychannel' created ===================== </span><br><span class="line"></span><br><span class="line">Having all peers join the channel...</span><br><span class="line">+ peer channel join -b mychannel.block</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:05:55.075 UTC [channelCmd] InitCmdFactory -&gt; INFO 001 Endorser and orderer connections initialized</span><br><span class="line">2020-09-13 07:05:55.215 UTC [channelCmd] executeJoin -&gt; INFO 002 Successfully submitted proposal to join channel</span><br><span class="line">===================== peer0.org1 joined channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">+ peer channel join -b mychannel.block</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:05:58.300 UTC [channelCmd] InitCmdFactory -&gt; INFO 001 Endorser and orderer connections initialized</span><br><span class="line">2020-09-13 07:05:58.408 UTC [channelCmd] executeJoin -&gt; INFO 002 Successfully submitted proposal to join channel</span><br><span class="line">===================== peer1.org1 joined channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">+ peer channel join -b mychannel.block</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:06:01.476 UTC [channelCmd] InitCmdFactory -&gt; INFO 001 Endorser and orderer connections initialized</span><br><span class="line">2020-09-13 07:06:01.595 UTC [channelCmd] executeJoin -&gt; INFO 002 Successfully submitted proposal to join channel</span><br><span class="line">===================== peer0.org2 joined channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">+ peer channel join -b mychannel.block</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:06:04.679 UTC [channelCmd] InitCmdFactory -&gt; INFO 001 Endorser and orderer connections initialized</span><br><span class="line">2020-09-13 07:06:04.808 UTC [channelCmd] executeJoin -&gt; INFO 002 Successfully submitted proposal to join channel</span><br><span class="line">===================== peer1.org2 joined channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">Updating anchor peers for org1...</span><br><span class="line">+ peer channel update -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/Org1MSPanchors.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:06:07.869 UTC [channelCmd] InitCmdFactory -&gt; INFO 001 Endorser and orderer connections initialized</span><br><span class="line">2020-09-13 07:06:07.880 UTC [channelCmd] update -&gt; INFO 002 Successfully submitted channel update</span><br><span class="line">===================== Anchor peers updated for org 'Org1MSP' on channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">Updating anchor peers for org2...</span><br><span class="line">+ peer channel update -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/Org2MSPanchors.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:06:10.960 UTC [channelCmd] InitCmdFactory -&gt; INFO 001 Endorser and orderer connections initialized</span><br><span class="line">2020-09-13 07:06:10.973 UTC [channelCmd] update -&gt; INFO 002 Successfully submitted channel update</span><br><span class="line">===================== Anchor peers updated for org 'Org2MSP' on channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">Installing chaincode on peer0.org1...</span><br><span class="line">+ peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:06:14.030 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 001 Using default escc</span><br><span class="line">2020-09-13 07:06:14.030 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 002 Using default vscc</span><br><span class="line">2020-09-13 07:06:15.400 UTC [chaincodeCmd] install -&gt; INFO 003 Installed remotely response:&lt;status:200 payload:"OK" &gt; </span><br><span class="line">===================== Chaincode is installed on peer0.org1 ===================== </span><br><span class="line"></span><br><span class="line">Install chaincode on peer0.org2...</span><br><span class="line">+ peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:06:15.471 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 001 Using default escc</span><br><span class="line">2020-09-13 07:06:15.472 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 002 Using default vscc</span><br><span class="line">2020-09-13 07:06:15.591 UTC [chaincodeCmd] install -&gt; INFO 003 Installed remotely response:&lt;status:200 payload:"OK" &gt; </span><br><span class="line">===================== Chaincode is installed on peer0.org2 ===================== </span><br><span class="line"></span><br><span class="line">Instantiating chaincode on peer0.org2...</span><br><span class="line">+ peer chaincode instantiate -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n mycc -l golang -v 1.0 -c '&#123;"Args":["init","a","100","b","200"]&#125;' -P 'AND ('\''Org1MSP.peer'\'','\''Org2MSP.peer'\'')'</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:06:15.657 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 001 Using default escc</span><br><span class="line">2020-09-13 07:06:15.657 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 002 Using default vscc</span><br><span class="line">===================== Chaincode is instantiated on peer0.org2 on channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">Querying chaincode on peer0.org1...</span><br><span class="line">===================== Querying on peer0.org1 on channel 'mychannel'... ===================== </span><br><span class="line">Attempting to Query peer0.org1 ...3 secs</span><br><span class="line">+ peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line"></span><br><span class="line">100</span><br><span class="line">===================== Query successful on peer0.org1 on channel 'mychannel' ===================== </span><br><span class="line">Sending invoke transaction on peer0.org1 peer0.org2...</span><br><span class="line">+ peer chaincode invoke -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n mycc --peerAddresses peer0.org1.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses peer0.org2.example.com:9051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '&#123;"Args":["invoke","a","b","10"]&#125;'</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:07:07.489 UTC [chaincodeCmd] chaincodeInvokeOrQuery -&gt; INFO 001 Chaincode invoke successful. result: status:200 </span><br><span class="line">===================== Invoke transaction successful on peer0.org1 peer0.org2 on channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">Installing chaincode on peer1.org2...</span><br><span class="line">+ peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line">2020-09-13 07:07:07.666 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 001 Using default escc</span><br><span class="line">2020-09-13 07:07:07.666 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 002 Using default vscc</span><br><span class="line">2020-09-13 07:07:07.821 UTC [chaincodeCmd] install -&gt; INFO 003 Installed remotely response:&lt;status:200 payload:"OK" &gt; </span><br><span class="line">===================== Chaincode is installed on peer1.org2 ===================== </span><br><span class="line"></span><br><span class="line">Querying chaincode on peer1.org2...</span><br><span class="line">===================== Querying on peer1.org2 on channel 'mychannel'... ===================== </span><br><span class="line">Attempting to Query peer1.org2 ...3 secs</span><br><span class="line">+ peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">+ res=0</span><br><span class="line">+ set +x</span><br><span class="line"></span><br><span class="line">90</span><br><span class="line">===================== Query successful on peer1.org2 on channel 'mychannel' ===================== </span><br><span class="line"></span><br><span class="line">========= All GOOD, BYFN execution completed =========== </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> _____   _   _   ____   </span><br><span class="line">| ____| | \ | | |  _ \  </span><br><span class="line">|  _|   |  \| | | | | | </span><br><span class="line">| |___  | |\  | | |_| | </span><br><span class="line">|_____| |_| \_| |____/  </span><br><span class="line"></span><br><span class="line">cups@ubuntu:~/go/src/github.com/hyperledger/fabric-samples/first-network$</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、逐步找到docker镜像的volumes"><a href="#2、逐步找到docker镜像的volumes" class="headerlink" title="2、逐步找到docker镜像的volumes"></a>2、逐步找到docker镜像的volumes</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~$ sudo su</span><br><span class="line">[sudo] password for cups: </span><br><span class="line">root@ubuntu:/home/cups# ls</span><br><span class="line">APP   Desktop    examples.desktop    go        Public</span><br><span class="line">bin   Documents  fabric-release-1.4  Music     Templates</span><br><span class="line">Demo  Downloads  fabric-samples      Pictures  Videos</span><br><span class="line">root@ubuntu:/home/cups# cd /var</span><br><span class="line">root@ubuntu:/var# ls</span><br><span class="line">backups  crash  local  log   metrics  run   spool</span><br><span class="line">cache    lib    lock   mail  opt      snap  tmp</span><br><span class="line">root@ubuntu:/var# cd lib</span><br><span class="line">root@ubuntu:/var/lib# ls</span><br><span class="line">AccountsService      initramfs-tools  snapd</span><br><span class="line">acpi-support         initscripts      snmp</span><br><span class="line">alsa                 insserv          sudo</span><br><span class="line">apparmor             ispell           systemd</span><br><span class="line">app-info             libreoffice      ubiquity</span><br><span class="line">apt                  lightdm          ubuntu-drivers-common</span><br><span class="line">aspell               lightdm-data     ubuntu-release-upgrader</span><br><span class="line">avahi-autoipd        locales          ucf</span><br><span class="line">bluetooth            logrotate        udisks2</span><br><span class="line">colord               man-db           update-manager</span><br><span class="line">containerd           misc             update-notifier</span><br><span class="line">dbus                 mlocate          update-rc.d</span><br><span class="line">dhcp                 mysql            upower</span><br><span class="line">dictionaries-common  mysql-files      urandom</span><br><span class="line">doc-base             mysql-keyring    ureadahead</span><br><span class="line">docker               NetworkManager   usb_modeswitch</span><br><span class="line">docker-engine        nssdb            usbutils</span><br><span class="line">dpkg                 os-prober        vim</span><br><span class="line">emacsen-common       pam              vmware</span><br><span class="line">fwupd                plymouth         whoopsie</span><br><span class="line">gconf                polkit-1         xfonts</span><br><span class="line">ghostscript          python           xkb</span><br><span class="line">git                  resolvconf       xml-core</span><br><span class="line">hp                   sgml-base</span><br><span class="line">root@ubuntu:/var/lib# cd docker</span><br><span class="line">root@ubuntu:/var/lib/docker# ls</span><br><span class="line">builder   containers  network   plugins   swarm  trust</span><br><span class="line">buildkit  image       overlay2  runtimes  tmp    volumes</span><br><span class="line">root@ubuntu:/var/lib/docker# cd volumes/</span><br><span class="line">root@ubuntu:/var/lib/docker/volumes# ls</span><br><span class="line">metadata.db</span><br><span class="line">net_orderer.example.com</span><br><span class="line">net_peer0.org1.example.com</span><br><span class="line">net_peer0.org2.example.com</span><br><span class="line">net_peer1.org1.example.com</span><br><span class="line">net_peer1.org2.example.com</span><br><span class="line">root@ubuntu:/var/lib/docker/volumes# </span><br><span class="line">root@ubuntu:/var/lib/docker/volumes# cd net_peer0.org1.example.com</span><br><span class="line">root@ubuntu:/var/lib/docker/volumes/net_peer0.org1.example.com# ls</span><br><span class="line">_data</span><br><span class="line">root@ubuntu:/var/lib/docker/volumes/net_peer0.org1.example.com# tree</span><br><span class="line">.</span><br><span class="line">└── _data</span><br><span class="line">    ├── chaincodes</span><br><span class="line">    │   └── mycc.1.0</span><br><span class="line">    ├── ledgersData</span><br><span class="line">    │   ├── bookkeeper</span><br><span class="line">    │   │   ├── 000001.log</span><br><span class="line">    │   │   ├── CURRENT</span><br><span class="line">    │   │   ├── LOCK</span><br><span class="line">    │   │   ├── LOG</span><br><span class="line">    │   │   └── MANIFEST-000000</span><br><span class="line">    │   ├── chains</span><br><span class="line">    │   │   ├── chains</span><br><span class="line">    │   │   │   └── mychannel</span><br><span class="line">    │   │   │       └── blockfile_000000</span><br><span class="line">    │   │   └── index</span><br><span class="line">    │   │       ├── 000001.log</span><br><span class="line">    │   │       ├── CURRENT</span><br><span class="line">    │   │       ├── LOCK</span><br><span class="line">    │   │       ├── LOG</span><br><span class="line">    │   │       └── MANIFEST-000000</span><br><span class="line">    │   ├── configHistory</span><br><span class="line">    │   │   ├── 000001.log</span><br><span class="line">    │   │   ├── CURRENT</span><br><span class="line">    │   │   ├── LOCK</span><br><span class="line">    │   │   ├── LOG</span><br><span class="line">    │   │   └── MANIFEST-000000</span><br><span class="line">    │   ├── fileLock</span><br><span class="line">    │   │   ├── 000001.log</span><br><span class="line">    │   │   ├── CURRENT</span><br><span class="line">    │   │   ├── LOCK</span><br><span class="line">    │   │   ├── LOG</span><br><span class="line">    │   │   └── MANIFEST-000000</span><br><span class="line">    │   ├── historyLeveldb</span><br><span class="line">    │   │   ├── 000001.log</span><br><span class="line">    │   │   ├── CURRENT</span><br><span class="line">    │   │   ├── LOCK</span><br><span class="line">    │   │   ├── LOG</span><br><span class="line">    │   │   └── MANIFEST-000000</span><br><span class="line">    │   ├── ledgerProvider</span><br><span class="line">    │   │   ├── 000001.log</span><br><span class="line">    │   │   ├── CURRENT</span><br><span class="line">    │   │   ├── LOCK</span><br><span class="line">    │   │   ├── LOG</span><br><span class="line">    │   │   └── MANIFEST-000000</span><br><span class="line">    │   ├── pvtdataStore</span><br><span class="line">    │   │   ├── 000001.log</span><br><span class="line">    │   │   ├── CURRENT</span><br><span class="line">    │   │   ├── LOCK</span><br><span class="line">    │   │   ├── LOG</span><br><span class="line">    │   │   └── MANIFEST-000000</span><br><span class="line">    │   └── stateLeveldb</span><br><span class="line">    │       ├── 000001.log</span><br><span class="line">    │       ├── CURRENT</span><br><span class="line">    │       ├── LOCK</span><br><span class="line">    │       ├── LOG</span><br><span class="line">    │       └── MANIFEST-000000</span><br><span class="line">    └── transientStore</span><br><span class="line">        ├── 000001.log</span><br><span class="line">        ├── CURRENT</span><br><span class="line">        ├── LOCK</span><br><span class="line">        ├── LOG</span><br><span class="line">        └── MANIFEST-000000</span><br><span class="line"></span><br><span class="line">15 directories, 47 files</span><br><span class="line">root@ubuntu:/var/lib/docker/volumes/net_peer0.org1.example.com#</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、把目录单独拿出来"><a href="#3、把目录单独拿出来" class="headerlink" title="3、把目录单独拿出来"></a>3、把目录单独拿出来</h2><blockquote>
+<p>.<br>└── _data<br> ├── chaincodes                    <strong>二进制形式的链码</strong><br> │   └── mycc.1.0<br> ├── ledgersData                    <strong>账本数据</strong><br> │   ├── bookkeeper<br> │   │   ├── 000001.log<br> │   │   ├── CURRENT<br> │   │   ├── LOCK<br> │   │   ├── LOG<br> │   │   └── MANIFEST-000000<br> │   ├── chains                            <strong>链</strong><br> │   │   ├── chains                        <strong>账本</strong><br> │   │   │   └── mychannel<br> │   │   │       └── blockfile_000000</p>
+<p> <strong>当要去BlockFile中读取一个块的时候要什么样的条件才能快速的找到对应块？</strong> </p>
+<p> <strong>区块数据是不可篡改的，也就是说BlockFile的size是持续增长的，如果size过大超过了位置偏移量的最大范围怎么办？</strong> </p>
+<p><strong>将区块数据存储在多个文件块中，以blockfile_ 为前缀，以块的生成次序为后缀。解决了上面的两个问题后，查询一个块数据的过程如下：</strong></p>
+<p><strong>setup1： 从indexDB中读取Block的位置信息（blockfile的编号、位置偏移量）;</strong></p>
+<p><strong>setup2： 打开对应的blockfile，位移到指定位置，读取Block数据。</strong></p>
+<p> │   │   └── index                        <strong>索引</strong></p>
+<p> <strong>如果查询者能知道一个Block数据在文件中的偏移量则可以快速定位到Block，相反则只能通过遍历的方式。为了解决这个问题Fabric 将Block在BlockFile文件中的偏移量记载到了一个非关系形DB中，这个DB的名称为indexDB。</strong> </p>
+<p> │   │       ├── 000001.log<br> │   │       ├── CURRENT<br> │   │       ├── LOCK<br> │   │       ├── LOG<br> │   │       └── MANIFEST-000000<br> │   ├── configHistory            <strong>历史配置</strong><br> │   │   ├── 000001.log<br> │   │   ├── CURRENT<br> │   │   ├── LOCK<br> │   │   ├── LOG<br> │   │   └── MANIFEST-000000<br> │   ├── fileLock                        <strong>乐观锁</strong> </p>
+<p><strong>FileLock，文件锁。 文件锁在OS中很常见，如果多个程序同时访问、修改同一个文件，很容易因为文件数据不同步而出现问题。给文件加一个锁，同一时间，只能有一个程序修改此文件，或者程序都只能读此文件，这就解决了同步问题，保证了线程安全。</strong><br> │   │   ├── 000001.log<br> │   │   ├── CURRENT<br> │   │   ├── LOCK<br> │   │   ├── LOG<br> │   │   └── MANIFEST-000000<br> │   ├── historyLeveldb            <strong>历史数据库Leveldb</strong><br> │   │   ├── 000001.log<br> │   │   ├── CURRENT<br> │   │   ├── LOCK<br> │   │   ├── LOG<br> │   │   └── MANIFEST-000000<br> │   ├── ledgerProvider            <strong>账本提供者</strong><br> │   │   ├── 000001.log<br> │   │   ├── CURRENT<br> │   │   ├── LOCK<br> │   │   ├── LOG<br> │   │   └── MANIFEST-000000<br> │   ├── pvtdataStore                <strong>私有数据</strong><br> │   │   ├── 000001.log<br> │   │   ├── CURRENT<br> │   │   ├── LOCK<br> │   │   ├── LOG<br> │   │   └── MANIFEST-000000<br> │   └── stateLeveldb                <strong>状态数据库Leveldb</strong><br> │       ├── 000001.log<br> │       ├── CURRENT<br> │       ├── LOCK<br> │       ├── LOG<br> │       └── MANIFEST-000000<br> └── transientStore                    <strong>交易数据</strong><br>     ├── 000001.log<br>     ├── CURRENT<br>     ├── LOCK<br>     ├── LOG<br>     └── MANIFEST-000000</p>
+</blockquote>
+<h2 id="4、目录解析"><a href="#4、目录解析" class="headerlink" title="4、目录解析"></a>4、目录解析</h2><blockquote>
+<p>其中_data是整个账本的根目录：</p>
+<p>（1）<strong><em>chains</em></strong>：chains/chains下包含的mychannel是对应的channel的名称，因为Fabric是有多channel的机制，而channel之间的账本是隔离的，每个channel都有自己的账本空间。chains/index下面包含的是levelDB数据库文件，在Fabric中默认所有的数据库都是LevelDB，DB中存储的就是区块索引部分。chains/chains和chains/index就是File System和indexDB;</p>
+<p>（2）<strong><em>stateLeveldb：</em></strong> 同样是levelDB数据库，存储的就是智能合约putstate写入的数据;</p>
+<p>（3）<strong><em>ledgerProvider：</em></strong>数据库内存储的是当前节点所包含channel的信息（已经创建的channel id 和正在创建中的channel id），主要是为了Fabric的多channel机制服务的;</p>
+<p>（4）<strong><em>historyLeveldb：</em></strong>数据库内存储的是智能合约中写入的key的历史记录的索引地址。</p>
+</blockquote>
+<h2 id="5、其他"><a href="#5、其他" class="headerlink" title="5、其他"></a>5、其他</h2><blockquote>
+<p>（1）账本存储位置的设定：</p>
+<p> 对于peer，我们可以定义卷，如下所示 ： </p>
+<p> volumes:</p>
+<p>​    -backup_peer:/var/hyperledger/production </p>
+<p> 对于orderer，我们可以定义如下所示：</p>
+<p> volumes: </p>
+<p>​    - backup_orderer:/var/hyperledger/production/orderer </p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-09-20T11:42:51.464Z" itemprop="dateUpdated">2020-09-20 19:42:51</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%93%BE%E7%9A%84%E4%BD%8D%E7%BD%AE/" rel="tag">链的位置</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/&title=《Fabric区块链链,链的存在位置》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/&title=《Fabric区块链链,链的存在位置》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/13/2020/position-of-chain/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Fabric区块链链,链的存在位置》 — Cups&url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/09/14/2020/disaster-recovery-backup-and-recovery-method/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hyperledger Fabric的容灾备份及恢复方法简介</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/13/2019/Fabric_Glossary/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Fabric术语表</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/&title=《Fabric区块链链,链的存在位置》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/&title=《Fabric区块链链,链的存在位置》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/13/2020/position-of-chain/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Fabric区块链链,链的存在位置》 — Cups&url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/13/2020/position-of-chain/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2020/09/13/2020/position-of-chain/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

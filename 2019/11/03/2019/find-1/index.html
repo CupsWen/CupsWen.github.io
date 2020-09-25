@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>find1 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,fabric-samples">
+    <meta name="description" content="寻找底层逻辑(chaincode)chaincode代码C:\Users\Administrator\go\src\github.com\hyperledger\fabric\examples\fabric-samples\chaincode\chaincode_example02\go\chaincode_example02.go 12345678910111213141516171819202">
+<meta name="keywords" content="Fabric,fabric-samples">
+<meta property="og:type" content="article">
+<meta property="og:title" content="find1">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;2019&#x2F;find-1&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="寻找底层逻辑(chaincode)chaincode代码C:\Users\Administrator\go\src\github.com\hyperledger\fabric\examples\fabric-samples\chaincode\chaincode_example02\go\chaincode_example02.go 12345678910111213141516171819202">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;Handler.png">
+<meta property="og:updated_time" content="2019-11-03T08:40:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;Handler.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">find1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">find1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-03T08:35:00.000Z" itemprop="datePublished" class="page-time">
+  2019-11-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#寻找底层逻辑-chaincode"><span class="post-toc-text">寻找底层逻辑(chaincode)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#chaincode代码"><span class="post-toc-text">chaincode代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接口"><span class="post-toc-text">接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#往下找-结合java接口的使用"><span class="post-toc-text">往下找(结合java接口的使用)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#再往下找"><span class="post-toc-text">再往下找</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#延伸函数"><span class="post-toc-text">延伸函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#callPeerWithChaincodeMsg"><span class="post-toc-text">callPeerWithChaincodeMsg</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#createChannel"><span class="post-toc-text">createChannel</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#sendReceive"><span class="post-toc-text">sendReceive</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ChaincodeStub"><span class="post-toc-text">ChaincodeStub</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#peer"><span class="post-toc-text">peer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据结构"><span class="post-toc-text">数据结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Handler数据结构"><span class="post-toc-text">Handler数据结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ChaincodeStubs数据结构"><span class="post-toc-text">ChaincodeStubs数据结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GetState数据结构"><span class="post-toc-text">GetState数据结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ChaincodeMessage数据结构"><span class="post-toc-text">ChaincodeMessage数据结构</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Go-语言-select-语句"><span class="post-toc-text">Go 语言 select 语句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语法"><span class="post-toc-text">语法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例"><span class="post-toc-text">实例</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Go-并发"><span class="post-toc-text">Go 并发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Go-并发-1"><span class="post-toc-text">Go 并发</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例-1"><span class="post-toc-text">实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通道（channel）"><span class="post-toc-text">通道（channel）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例-2"><span class="post-toc-text">实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通道缓冲区"><span class="post-toc-text">通道缓冲区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例-3"><span class="post-toc-text">实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Go-遍历通道与关闭通道"><span class="post-toc-text">Go 遍历通道与关闭通道</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例-4"><span class="post-toc-text">实例</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/find-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">find1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-03 16:35:00" datetime="2019-11-03T08:35:00.000Z"  itemprop="datePublished">2019-11-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="寻找底层逻辑-chaincode"><a href="#寻找底层逻辑-chaincode" class="headerlink" title="寻找底层逻辑(chaincode)"></a>寻找底层逻辑(chaincode)</h2><h3 id="chaincode代码"><a href="#chaincode代码" class="headerlink" title="chaincode代码"></a>chaincode代码</h3><p>C:\Users\Administrator\go\src\github.com\hyperledger\fabric\examples\fabric-samples\chaincode\chaincode_example02\go\chaincode_example02.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Copyright IBM Corp. 2016 All Rights Reserved.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Licensed under the Apache License, Version 2.0 (the "License");</span></span><br><span class="line"><span class="comment">you may not use this file except in compliance with the License.</span></span><br><span class="line"><span class="comment">You may obtain a copy of the License at</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		 http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment">distributed under the License is distributed on an "AS IS" BASIS,</span></span><br><span class="line"><span class="comment">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="comment">See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="comment">limitations under the License.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">//WARNING - this chaincode's ID is hard-coded in chaincode_example04 to illustrate one way of</span></span><br><span class="line"><span class="comment">//calling chaincode from a chaincode. If this example is modified, chaincode_example04.go has</span></span><br><span class="line"><span class="comment">//to be modified as well with the new ID of chaincode_example02.</span></span><br><span class="line"><span class="comment">//chaincode_example05 show's how chaincode ID can be passed in as a parameter instead of</span></span><br><span class="line"><span class="comment">//hard-coding.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/hyperledger/fabric/core/chaincode/shim"</span></span><br><span class="line">	pb <span class="string">"github.com/hyperledger/fabric/protos/peer"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// SimpleChaincode example simple Chaincode implementation</span></span><br><span class="line"><span class="keyword">type</span> SimpleChaincode <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *SimpleChaincode)</span> <span class="title">Init</span><span class="params">(stub shim.ChaincodeStubInterface)</span> <span class="title">pb</span>.<span class="title">Response</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"ex02 Init"</span>)</span><br><span class="line">	_, args := stub.GetFunctionAndParameters()</span><br><span class="line">	<span class="keyword">var</span> A, B <span class="keyword">string</span>    <span class="comment">// Entities</span></span><br><span class="line">	<span class="keyword">var</span> Aval, Bval <span class="keyword">int</span> <span class="comment">// Asset holdings</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(args) != <span class="number">4</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Incorrect number of arguments. Expecting 4"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Initialize the chaincode</span></span><br><span class="line">	A = args[<span class="number">0</span>]</span><br><span class="line">	Aval, err = strconv.Atoi(args[<span class="number">1</span>])</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Expecting integer value for asset holding"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	B = args[<span class="number">2</span>]</span><br><span class="line">	Bval, err = strconv.Atoi(args[<span class="number">3</span>])</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Expecting integer value for asset holding"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"Aval = %d, Bval = %d\n"</span>, Aval, Bval)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Write the state to the ledger</span></span><br><span class="line">	err = stub.PutState(A, []<span class="keyword">byte</span>(strconv.Itoa(Aval)))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	err = stub.PutState(B, []<span class="keyword">byte</span>(strconv.Itoa(Bval)))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> shim.Success(<span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *SimpleChaincode)</span> <span class="title">Invoke</span><span class="params">(stub shim.ChaincodeStubInterface)</span> <span class="title">pb</span>.<span class="title">Response</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"ex02 Invoke"</span>)</span><br><span class="line">	function, args := stub.GetFunctionAndParameters()</span><br><span class="line">	<span class="keyword">if</span> function == <span class="string">"invoke"</span> &#123;</span><br><span class="line">		<span class="comment">// Make payment of X units from A to B</span></span><br><span class="line">		<span class="keyword">return</span> t.invoke(stub, args)</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> function == <span class="string">"delete"</span> &#123;</span><br><span class="line">		<span class="comment">// Deletes an entity from its state</span></span><br><span class="line">		<span class="keyword">return</span> t.<span class="built_in">delete</span>(stub, args)</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> function == <span class="string">"query"</span> &#123;</span><br><span class="line">		<span class="comment">// the old "Query" is now implemtned in invoke</span></span><br><span class="line">		<span class="keyword">return</span> t.query(stub, args)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> shim.Error(<span class="string">"Invalid invoke function name. Expecting \"invoke\" \"delete\" \"query\""</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Transaction makes payment of X units from A to B</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *SimpleChaincode)</span> <span class="title">invoke</span><span class="params">(stub shim.ChaincodeStubInterface, args []<span class="keyword">string</span>)</span> <span class="title">pb</span>.<span class="title">Response</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> A, B <span class="keyword">string</span>    <span class="comment">// Entities</span></span><br><span class="line">	<span class="keyword">var</span> Aval, Bval <span class="keyword">int</span> <span class="comment">// Asset holdings</span></span><br><span class="line">	<span class="keyword">var</span> X <span class="keyword">int</span>          <span class="comment">// Transaction value</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(args) != <span class="number">3</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Incorrect number of arguments. Expecting 3"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	A = args[<span class="number">0</span>]</span><br><span class="line">	B = args[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Get the state from the ledger</span></span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> will be nice to have a GetAllState call to ledger</span></span><br><span class="line">	Avalbytes, err := stub.GetState(A)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Failed to get state"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> Avalbytes == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Entity not found"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	Aval, _ = strconv.Atoi(<span class="keyword">string</span>(Avalbytes))</span><br><span class="line"></span><br><span class="line">	Bvalbytes, err := stub.GetState(B)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Failed to get state"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> Bvalbytes == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Entity not found"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	Bval, _ = strconv.Atoi(<span class="keyword">string</span>(Bvalbytes))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Perform the execution</span></span><br><span class="line">	X, err = strconv.Atoi(args[<span class="number">2</span>])</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Invalid transaction amount, expecting a integer value"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	Aval = Aval - X</span><br><span class="line">	Bval = Bval + X</span><br><span class="line">	fmt.Printf(<span class="string">"Aval = %d, Bval = %d\n"</span>, Aval, Bval)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Write the state back to the ledger</span></span><br><span class="line">	err = stub.PutState(A, []<span class="keyword">byte</span>(strconv.Itoa(Aval)))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	err = stub.PutState(B, []<span class="keyword">byte</span>(strconv.Itoa(Bval)))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> shim.Success(<span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Deletes an entity from state</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *SimpleChaincode)</span> <span class="title">delete</span><span class="params">(stub shim.ChaincodeStubInterface, args []<span class="keyword">string</span>)</span> <span class="title">pb</span>.<span class="title">Response</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(args) != <span class="number">1</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Incorrect number of arguments. Expecting 1"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	A := args[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Delete the key from the state in ledger</span></span><br><span class="line">	err := stub.DelState(A)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Failed to delete state"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> shim.Success(<span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// query callback representing the query of a chaincode</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *SimpleChaincode)</span> <span class="title">query</span><span class="params">(stub shim.ChaincodeStubInterface, args []<span class="keyword">string</span>)</span> <span class="title">pb</span>.<span class="title">Response</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> A <span class="keyword">string</span> <span class="comment">// Entities</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(args) != <span class="number">1</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> shim.Error(<span class="string">"Incorrect number of arguments. Expecting name of the person to query"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	A = args[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Get the state from the ledger</span></span><br><span class="line">	Avalbytes, err := stub.GetState(A)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		jsonResp := <span class="string">"&#123;\"Error\":\"Failed to get state for "</span> + A + <span class="string">"\"&#125;"</span></span><br><span class="line">		<span class="keyword">return</span> shim.Error(jsonResp)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> Avalbytes == <span class="literal">nil</span> &#123;</span><br><span class="line">		jsonResp := <span class="string">"&#123;\"Error\":\"Nil amount for "</span> + A + <span class="string">"\"&#125;"</span></span><br><span class="line">		<span class="keyword">return</span> shim.Error(jsonResp)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	jsonResp := <span class="string">"&#123;\"Name\":\""</span> + A + <span class="string">"\",\"Amount\":\""</span> + <span class="keyword">string</span>(Avalbytes) + <span class="string">"\"&#125;"</span></span><br><span class="line">	fmt.Printf(<span class="string">"Query Response:%s\n"</span>, jsonResp)</span><br><span class="line">	<span class="keyword">return</span> shim.Success(Avalbytes)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	err := shim.Start(<span class="built_in">new</span>(SimpleChaincode))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"Error starting Simple chaincode: %s"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>考虑到接口的使用方式和项目设计(代码调用应该在一个包下)。</p>
+<p>参考：<a href="https://studygolang.com/articles/18716?fr=sidebar" target="_blank" rel="noopener">https://studygolang.com/articles/18716?fr=sidebar</a></p>
+<blockquote>
+<p>如Go method中提及，Golang没有明确支持多态，但是通过其他手段可以实现类似C++中的多态特性，即本文中即将介绍的Go interface功能。</p>
+<p>​        interface(接口)是golang最重要的特性之一，Interface类型可以定义<strong>一组方法</strong>，但是这些不需要实现。请注意：此处限定是<strong>一组方法</strong>，既然是方法，就不能是变量；而且是<strong>一组</strong>，表明可以有多个方法。再多声明一点，interface本质上是一种类型，确切的说，是<strong>指针类型</strong>，此处暂且不多表，后文中自然能体会到。<br>  interface是为实现多态功能，多态是指代码可以根据类型的具体实现采取不同行为的能力。如果一个类型实现了某个接口，所有使用这个接口的地方，都可以支持这种类型的值。</p>
+</blockquote>
+<p>C:\Users\Administrator\go\src\github.com\hyperledger\fabric\core\chaincode\shim\interfaces.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GetState从账本中返回指定的“ key”的值。 </span></span><br><span class="line"><span class="comment">//请注意，GetState不会从尚未提交到分类帐的写入集中读取数据。</span></span><br><span class="line"><span class="comment">//换句话说，GetState不会考虑尚未提交的PutState修改的数据。</span></span><br><span class="line"><span class="comment">//如果状态数据库中不存在该键，则返回（nil，nil）。</span></span><br><span class="line">GetState(key <span class="keyword">string</span>) ([]<span class="keyword">byte</span>, error)</span><br></pre></td></tr></table></figure>
+
+<h3 id="往下找-结合java接口的使用"><a href="#往下找-结合java接口的使用" class="headerlink" title="往下找(结合java接口的使用)"></a>往下找(结合java接口的使用)</h3><p>C:\Users\Administrator\go\src\github.com\hyperledger\fabric\core\chaincode\shim\chaincode.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以在interfaces.go中找到GetState文档</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(stub *ChaincodeStub)</span> <span class="title">GetState</span><span class="params">(key <span class="keyword">string</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 通过将集合设置为空字符串来访问公共数据</span></span><br><span class="line">	collection := <span class="string">""</span></span><br><span class="line">	<span class="keyword">return</span> stub.handler.handleGetState(collection, key, stub.ChannelId, stub.TxID)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="再往下找"><a href="#再往下找" class="headerlink" title="再往下找"></a>再往下找</h3><p>C:\Users\Administrator\go\src\github.com\hyperledger\fabric\core\chaincode\shim\handler.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现一种方法来一次获取多个密钥[FAB-1244] handleGetState与peer通信，</span></span><br><span class="line"><span class="comment">// 以从账本中获取请求的状态信息。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(handler *Handler)</span> <span class="title">handleGetState</span><span class="params">(collection <span class="keyword">string</span>, key <span class="keyword">string</span>, channelId <span class="keyword">string</span>, txid <span class="keyword">string</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 为GET_STATE构造有效负载</span></span><br><span class="line">    <span class="comment">// marshal:直译为“编排”， 在计算机中特指将数据按某种描述格式编排出来，</span></span><br><span class="line">    <span class="comment">// 通常来说一般是从非文本格式到文本格式的数据转化。</span></span><br><span class="line">    <span class="comment">// unmarshal自然是指marshal的逆过程。</span></span><br><span class="line">    <span class="comment">// 比如在WebService中，我们需要把java对象以xml方式表示并在网络间传输，</span></span><br><span class="line">    <span class="comment">// 把java对象转化成xml片段的过程就是marshal.</span></span><br><span class="line">	payloadBytes, _ := proto.Marshal(&amp;pb.GetState&#123;Collection: collection, Key: key&#125;)</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// ChaincodeMessage</span></span><br><span class="line">	msg := &amp;pb.ChaincodeMessage&#123;Type: pb.ChaincodeMessage_GET_STATE, Payload: payloadBytes, Txid: txid, ChannelId: channelId&#125;</span><br><span class="line">	chaincodeLogger.Debugf(<span class="string">"[%s] Sending %s"</span>, shorttxid(msg.Txid), pb.ChaincodeMessage_GET_STATE)</span><br><span class="line"></span><br><span class="line">	responseMsg, err := handler.callPeerWithChaincodeMsg(msg, channelId, txid)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.WithMessage(err, fmt.Sprintf(<span class="string">"[%s] error sending GET_STATE"</span>, shorttxid(txid)))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> responseMsg.Type.String() == pb.ChaincodeMessage_RESPONSE.String() &#123;</span><br><span class="line">		<span class="comment">// Success response</span></span><br><span class="line">		chaincodeLogger.Debugf(<span class="string">"[%s] GetState received payload %s"</span>, shorttxid(responseMsg.Txid), pb.ChaincodeMessage_RESPONSE)</span><br><span class="line">		<span class="keyword">return</span> responseMsg.Payload, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> responseMsg.Type.String() == pb.ChaincodeMessage_ERROR.String() &#123;</span><br><span class="line">		<span class="comment">// Error response</span></span><br><span class="line">		chaincodeLogger.Errorf(<span class="string">"[%s] GetState received error %s"</span>, shorttxid(responseMsg.Txid), pb.ChaincodeMessage_ERROR)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="keyword">string</span>(responseMsg.Payload[:]))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Incorrect chaincode message received</span></span><br><span class="line">	chaincodeLogger.Errorf(<span class="string">"[%s] Incorrect chaincode message %s received. Expecting %s or %s"</span>, shorttxid(responseMsg.Txid), responseMsg.Type, pb.ChaincodeMessage_RESPONSE, pb.ChaincodeMessage_ERROR)</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, errors.Errorf(<span class="string">"[%s] incorrect chaincode message %s received. Expecting %s or %s"</span>, shorttxid(responseMsg.Txid), responseMsg.Type, pb.ChaincodeMessage_RESPONSE, pb.ChaincodeMessage_ERROR)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Handler主要用于异步消息的处理：当发出一个消息之后，首先进入一个消息队列，发送消息的函数即刻返回，而另外一个部分在消息队列中逐一将消息取出，然后对消息进行处理，也就是发送消息和接收消息不是同步的处理。 这种机制通常用来处理相对耗时比较长的操作。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/Handler.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="延伸函数"><a href="#延伸函数" class="headerlink" title="延伸函数"></a>延伸函数</h3><h4 id="callPeerWithChaincodeMsg"><a href="#callPeerWithChaincodeMsg" class="headerlink" title="callPeerWithChaincodeMsg"></a>callPeerWithChaincodeMsg</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对于给定的txid，callPeerWithChaincodeMsg向peer发送链码消息（例如GetState和密钥），</span></span><br><span class="line"><span class="comment">// 并接收响应。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(handler *Handler)</span> <span class="title">callPeerWithChaincodeMsg</span><span class="params">(msg *pb.ChaincodeMessage, channelID, txid <span class="keyword">string</span>)</span> <span class="params">(pb.ChaincodeMessage, error)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 创建用于传达peer响应的channel</span></span><br><span class="line">	<span class="keyword">var</span> respChan <span class="keyword">chan</span> pb.ChaincodeMessage</span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line">	<span class="keyword">if</span> respChan, err = handler.createChannel(channelID, txid); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> pb.ChaincodeMessage&#123;&#125;, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> handler.deleteChannel(channelID, txid)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> handler.sendReceive(msg, respChan)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="createChannel"><a href="#createChannel" class="headerlink" title="createChannel"></a>createChannel</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(handler *Handler)</span> <span class="title">createChannel</span><span class="params">(channelID, txid <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">chan</span> pb.ChaincodeMessage, error)</span></span> &#123;</span><br><span class="line">	handler.Lock()</span><br><span class="line">	<span class="keyword">defer</span> handler.Unlock()</span><br><span class="line">	<span class="keyword">if</span> handler.responseChannel == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.Errorf(<span class="string">"[%s] cannot create response channel"</span>, shorttxid(txid))</span><br><span class="line">	&#125;</span><br><span class="line">	txCtxID := handler.getTxCtxId(channelID, txid)</span><br><span class="line">	<span class="keyword">if</span> handler.responseChannel[txCtxID] != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.Errorf(<span class="string">"[%s] channel exists"</span>, shorttxid(txCtxID))</span><br><span class="line">	&#125;</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> pb.ChaincodeMessage)</span><br><span class="line">	handler.responseChannel[txCtxID] = c</span><br><span class="line">	<span class="keyword">return</span> c, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="sendReceive"><a href="#sendReceive" class="headerlink" title="sendReceive"></a>sendReceive</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送一条消息并选择</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(handler *Handler)</span> <span class="title">sendReceive</span><span class="params">(msg *pb.ChaincodeMessage, c <span class="keyword">chan</span> pb.ChaincodeMessage)</span> <span class="params">(pb.ChaincodeMessage, error)</span></span> &#123;</span><br><span class="line">	errc := <span class="built_in">make</span>(<span class="keyword">chan</span> error, <span class="number">1</span>)</span><br><span class="line">	handler.serialSendAsync(msg, errc)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 上面的serialsend将发送一个err或nil的选择过滤器，</span></span><br><span class="line">    <span class="comment">// 该过滤器会第一个错误（或nil）并继续等待响应，</span></span><br><span class="line">    <span class="comment">// 有可能首先触发响应，在这种情况下errc显然起作用并且被忽略</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="comment">// https://www.runoob.com/go/go-select-statement.html</span></span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> err := &lt;-errc:</span><br><span class="line">			<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 将被记录，返回false</span></span><br><span class="line">			<span class="keyword">return</span> pb.ChaincodeMessage&#123;&#125;, err</span><br><span class="line">		<span class="keyword">case</span> outmsg, val := &lt;-c:</span><br><span class="line">			<span class="keyword">if</span> !val &#123;</span><br><span class="line">				<span class="keyword">return</span> pb.ChaincodeMessage&#123;&#125;, errors.New(<span class="string">"unexpected failure on receive"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> outmsg, <span class="literal">nil</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ChaincodeStub"><a href="#ChaincodeStub" class="headerlink" title="ChaincodeStub"></a>ChaincodeStub</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ChaincodeStub is an object passed to chaincode <span class="keyword">for</span> shim side handling of APIs.</span><br></pre></td></tr></table></figure>
+
+<h2 id="peer"><a href="#peer" class="headerlink" title="peer"></a>peer</h2><p>C:\Users\Administrator\go\src\github.com\hyperledger\fabric\protos\peer\chaincode_shim.pb.go</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h4 id="Handler数据结构"><a href="#Handler数据结构" class="headerlink" title="Handler数据结构"></a>Handler数据结构</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链码的Shim端的处理程序实现。 </span></span><br><span class="line"><span class="keyword">type</span> Handler <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// 需要锁定以保护链码不被尝试向peer发出并发请求</span></span><br><span class="line">	sync.Mutex</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 从Shim到对等GRPC序列化程序。用户只在串行发送。</span></span><br><span class="line">	serialLock sync.Mutex</span><br><span class="line"></span><br><span class="line">	To         <span class="keyword">string</span></span><br><span class="line">	ChatStream PeerChaincodeStream</span><br><span class="line">	cc         Chaincode</span><br><span class="line">	state      state</span><br><span class="line">	<span class="comment">// 对于这个链码，可以并行执行具有不同txid的多个查询(和一个事务)。</span></span><br><span class="line">	<span class="comment">// Responsechannel是由SHIM传送到链码存根的响应的通道。</span></span><br><span class="line">	responseChannel <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">chan</span> pb.ChaincodeMessage</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ChaincodeStubs数据结构"><a href="#ChaincodeStubs数据结构" class="headerlink" title="ChaincodeStubs数据结构"></a>ChaincodeStubs数据结构</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ChaincodeStub <span class="keyword">struct</span> &#123;</span><br><span class="line">	TxID                       <span class="keyword">string</span></span><br><span class="line">	ChannelId                  <span class="keyword">string</span></span><br><span class="line">	chaincodeEvent             *pb.ChaincodeEvent</span><br><span class="line">	args                       [][]<span class="keyword">byte</span></span><br><span class="line">	handler                    *Handler</span><br><span class="line">	signedProposal             *pb.SignedProposal</span><br><span class="line">	proposal                   *pb.Proposal</span><br><span class="line">	validationParameterMetakey <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Additional fields extracted from the signedProposal</span></span><br><span class="line">	creator   []<span class="keyword">byte</span></span><br><span class="line">	transient <span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">byte</span></span><br><span class="line">	binding   []<span class="keyword">byte</span></span><br><span class="line"></span><br><span class="line">	decorations <span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">byte</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="GetState数据结构"><a href="#GetState数据结构" class="headerlink" title="GetState数据结构"></a>GetState数据结构</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> GetState <span class="keyword">struct</span> &#123;</span><br><span class="line">	Key                  <span class="keyword">string</span>   <span class="string">`protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`</span></span><br><span class="line">	Collection           <span class="keyword">string</span>   <span class="string">`protobuf:"bytes,2,opt,name=collection,proto3" json:"collection,omitempty"`</span></span><br><span class="line">	XXX_NoUnkeyedLiteral <span class="keyword">struct</span>&#123;&#125; <span class="string">`json:"-"`</span>		<span class="comment">// 没有固定文字</span></span><br><span class="line">	XXX_unrecognized     []<span class="keyword">byte</span>   <span class="string">`json:"-"`</span>		<span class="comment">// 无法识别</span></span><br><span class="line">	XXX_sizecache        <span class="keyword">int32</span>    <span class="string">`json:"-"`</span>		<span class="comment">// 缓存大小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ChaincodeMessage数据结构"><a href="#ChaincodeMessage数据结构" class="headerlink" title="ChaincodeMessage数据结构"></a>ChaincodeMessage数据结构</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ChaincodeMessage <span class="keyword">struct</span> &#123;</span><br><span class="line">	Type      ChaincodeMessage_Type <span class="string">`protobuf:"varint,1,opt,name=type,proto3,enum=protos.ChaincodeMessage_Type" json:"type,omitempty"`</span></span><br><span class="line">	Timestamp *timestamp.Timestamp  <span class="string">`protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`</span></span><br><span class="line">	Payload   []<span class="keyword">byte</span>                <span class="string">`protobuf:"bytes,3,opt,name=payload,proto3" json:"payload,omitempty"`</span></span><br><span class="line">	Txid      <span class="keyword">string</span>                <span class="string">`protobuf:"bytes,4,opt,name=txid,proto3" json:"txid,omitempty"`</span></span><br><span class="line">	Proposal  *SignedProposal       <span class="string">`protobuf:"bytes,5,opt,name=proposal,proto3" json:"proposal,omitempty"`</span></span><br><span class="line">	<span class="comment">// 由链码发出的事件。仅与Init或Invoke一起使用。</span></span><br><span class="line">	<span class="comment">// 然后存储该事件（当前） </span></span><br><span class="line">	<span class="comment">// with Block.NonHashData.TransactionResult</span></span><br><span class="line">	ChaincodeEvent *ChaincodeEvent <span class="string">`protobuf:"bytes,6,opt,name=chaincode_event,json=chaincodeEvent,proto3" json:"chaincode_event,omitempty"`</span></span><br><span class="line">	<span class="comment">// channel id</span></span><br><span class="line">	ChannelId            <span class="keyword">string</span>   <span class="string">`protobuf:"bytes,7,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`</span></span><br><span class="line">	XXX_NoUnkeyedLiteral <span class="keyword">struct</span>&#123;&#125; <span class="string">`json:"-"`</span></span><br><span class="line">	XXX_unrecognized     []<span class="keyword">byte</span>   <span class="string">`json:"-"`</span></span><br><span class="line">	XXX_sizecache        <span class="keyword">int32</span>    <span class="string">`json:"-"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Go-语言-select-语句"><a href="#Go-语言-select-语句" class="headerlink" title="Go 语言 select 语句"></a>Go 语言 select 语句</h2><blockquote>
+<p>参考:<a href="https://www.runoob.com/go/go-select-statement.html" target="_blank" rel="noopener">https://www.runoob.com/go/go-select-statement.html</a></p>
+<p>select 是 Go 中的一个控制结构，类似于用于通信的 switch 语句。每个 case 必须是一个通信操作，要么是发送要么是接收。</p>
+<p>select 随机执行一个可运行的 case。如果没有 case 可运行，它将阻塞，直到有 case 可运行。</p>
+<p>一个默认的子句应该总是可运行的。</p>
+</blockquote>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>Go 编程语言中 select 语句的语法如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> communication clause  :</span><br><span class="line">       statement(s);      </span><br><span class="line">    <span class="keyword">case</span> communication clause  :</span><br><span class="line">       statement(s); </span><br><span class="line">    <span class="comment">// 你可以定义任意数量的</span></span><br><span class="line">    <span class="keyword">default</span> :  <span class="comment">// 可选</span></span><br><span class="line">       statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下描述了 select 语句的语法：</p>
+<ul>
+<li>每个 case 都必须是一个通信</li>
+<li>所有 channel 表达式都会被求值</li>
+<li>所有被发送的表达式都会被求值</li>
+<li>如果任意某个通信可以进行，它就执行，其他被忽略。</li>
+<li>如果有多个 case 都可以运行，Select 会随机公平地选出一个执行。其他不会执行。</li>
+<li>否则：<ol>
+<li>如果有 default 子句，则执行该语句。</li>
+<li>如果没有 default 子句，select 将阻塞，直到某个通信可以运行；Go 不会重新对 channel 或值进行求值。</li>
+</ol>
+</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>select 语句应用演示：</p>
+<blockquote>
+<p>实例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">package</span> main</span><br><span class="line">&gt;<span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> c1, c2, c3 <span class="keyword">chan</span> <span class="keyword">int</span></span><br><span class="line">  <span class="keyword">var</span> i1, i2 <span class="keyword">int</span></span><br><span class="line">  <span class="keyword">select</span> &#123;</span><br><span class="line">     <span class="keyword">case</span> i1 = &lt;-c1:</span><br><span class="line">        fmt.Printf(<span class="string">"received "</span>, i1, <span class="string">" from c1\n"</span>)</span><br><span class="line">     <span class="keyword">case</span> c2 &lt;- i2:</span><br><span class="line">        fmt.Printf(<span class="string">"sent "</span>, i2, <span class="string">" to c2"</span>)</span><br><span class="line">     <span class="keyword">case</span> i3, ok := (&lt;-c3):  <span class="comment">// same as: i3, ok := &lt;-c3</span></span><br><span class="line">        <span class="keyword">if</span> ok &#123;</span><br><span class="line">           fmt.Printf(<span class="string">"received "</span>, i3, <span class="string">" from c3\n"</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           fmt.Printf(<span class="string">"c3 is closed\n"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">     <span class="keyword">default</span>:</span><br><span class="line">        fmt.Printf(<span class="string">"no communication\n"</span>)</span><br><span class="line">  &#125;    </span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果为：</p>
+<p>no communication</p>
+</blockquote>
+<h2 id="Go-并发"><a href="#Go-并发" class="headerlink" title="Go 并发"></a>Go 并发</h2><p>请参考：<a href="https://www.runoob.com/go/go-concurrent.html" target="_blank" rel="noopener">https://www.runoob.com/go/go-concurrent.html</a></p>
+<blockquote>
+<h3 id="Go-并发-1"><a href="#Go-并发-1" class="headerlink" title="Go 并发"></a>Go 并发</h3><p>Go 语言支持并发，我们只需要通过 go 关键字来开启 goroutine 即可。</p>
+<p>goroutine 是轻量级线程，goroutine 的调度是由 Golang 运行时进行管理的。</p>
+<p>// Goroutine是建立在线程之上的轻量级的抽象。</p>
+<p>// 它允许我们以非常低的代价在同一个地址空间中并行地执行多个函数或者方法。</p>
+<p>// 相比于线程，它的创建和销毁的代价要小很多，并且它的调度是独立于线程的。</p>
+<p>goroutine 语法格式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">go</span> 函数名( 参数列表 )</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">go</span> f(x, y, z)</span><br></pre></td></tr></table></figure>
+
+<p>开启一个新的 goroutine:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;f(x, y, z)</span><br></pre></td></tr></table></figure>
+
+<p>Go 允许使用 go 语句开启一个新的运行期线程， 即 goroutine，以一个不同的、新创建的 goroutine 来执行一个函数。 同一个程序中的所有 goroutine 共享同一个地址空间。</p>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">package</span> main</span><br><span class="line">&gt;<span class="keyword">import</span> (</span><br><span class="line">       <span class="string">"fmt"</span></span><br><span class="line">       <span class="string">"time"</span></span><br><span class="line">&gt;)</span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">say</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">       <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">               time.Sleep(<span class="number">100</span> * time.Millisecond)</span><br><span class="line">               fmt.Println(s)</span><br><span class="line">       &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">       <span class="keyword">go</span> say(<span class="string">"world"</span>)</span><br><span class="line">       say(<span class="string">"hello"</span>)</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行以上代码，你会看到输出的 hello 和 world 是没有固定先后顺序。因为它们是两个 goroutine 在执行：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;world</span><br><span class="line">&gt;hello</span><br><span class="line">&gt;hello</span><br><span class="line">&gt;world</span><br><span class="line">&gt;world</span><br><span class="line">&gt;hello</span><br><span class="line">&gt;hello</span><br><span class="line">&gt;world</span><br><span class="line">&gt;world</span><br><span class="line">&gt;hello</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="通道（channel）"><a href="#通道（channel）" class="headerlink" title="通道（channel）"></a>通道（channel）</h3><p>通道（channel）是用来传递数据的一个数据结构。</p>
+<p>通道可用于两个 goroutine 之间通过传递一个指定类型的值来同步运行和通讯。操作符 <code>&lt;-</code> 用于指定通道的方向，发送或接收。如果未指定方向，则为双向通道。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;ch &lt;- v    <span class="comment">// 把 v 发送到通道 ch</span></span><br><span class="line">&gt;v := &lt;-ch  <span class="comment">// 从 ch 接收数据</span></span><br><span class="line">          <span class="comment">// 并把值赋给 v</span></span><br></pre></td></tr></table></figure>
+
+<p>声明一个通道很简单，我们使用chan关键字即可，通道在使用前必须先创建：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：默认情况下，通道是不带缓冲区的。发送端发送数据，同时必须又接收端相应的接收数据。</p>
+<p>以下实例通过两个 goroutine 来计算数字之和，在 goroutine 完成计算后，它会计算两个结果的和：</p>
+<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">package</span> main</span><br><span class="line">&gt;<span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(s []<span class="keyword">int</span>, c <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">       sum := <span class="number">0</span></span><br><span class="line">       <span class="keyword">for</span> _, v := <span class="keyword">range</span> s &#123;</span><br><span class="line">               sum += v</span><br><span class="line">       &#125;</span><br><span class="line">       c &lt;- sum <span class="comment">// 把 sum 发送到通道 c</span></span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">       s := []<span class="keyword">int</span>&#123;<span class="number">7</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">-9</span>, <span class="number">4</span>, <span class="number">0</span>&#125;</span><br><span class="line">       c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">       <span class="keyword">go</span> sum(s[:<span class="built_in">len</span>(s)/<span class="number">2</span>], c)</span><br><span class="line">       <span class="keyword">go</span> sum(s[<span class="built_in">len</span>(s)/<span class="number">2</span>:], c)</span><br><span class="line">       x, y := &lt;-c, &lt;-c <span class="comment">// 从通道 c 中接收</span></span><br><span class="line">       fmt.Println(x, y, x+y)</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;-5 17 12</span><br></pre></td></tr></table></figure>
+
+<h3 id="通道缓冲区"><a href="#通道缓冲区" class="headerlink" title="通道缓冲区"></a>通道缓冲区</h3><p>通道可以设置缓冲区，通过 make 的第二个参数指定缓冲区大小：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ch := make(chan int, 100)</span><br></pre></td></tr></table></figure>
+
+<p>带缓冲区的通道允许发送端的数据发送和接收端的数据获取处于异步状态，就是说发送端发送的数据可以放在缓冲区里面，可以等待接收端去获取数据，而不是立刻需要接收端去获取数据。</p>
+<p>不过由于缓冲区的大小是有限的，所以还是必须有接收端来接收数据的，否则缓冲区一满，数据发送端就无法再发送数据了。</p>
+<p><strong>注意</strong>：如果通道不带缓冲，发送方会阻塞直到接收方从通道中接收了值。如果通道带缓冲，发送方则会阻塞直到发送的值被拷贝到缓冲区内；如果缓冲区已满，则意味着需要等待直到某个接收方获取到一个值。接收方在有值可以接收之前会一直阻塞。</p>
+<h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">package</span> main</span><br><span class="line">&gt;<span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="comment">// 这里我们定义了一个可以存储整数类型的带缓冲通道*</span></span><br><span class="line">   <span class="comment">// 缓冲区大小为2</span></span><br><span class="line">   ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">2</span>)</span><br><span class="line">   <span class="comment">// 因为 ch 是带缓冲的通道，我们可以同时发送两个数据*</span></span><br><span class="line">   <span class="comment">// 而不用立刻需要去同步读取数据*</span></span><br><span class="line">   ch &lt;- <span class="number">1</span></span><br><span class="line">   ch &lt;- <span class="number">2</span></span><br><span class="line">   <span class="comment">// 获取这两个数据*</span></span><br><span class="line">   fmt.Println(&lt;-ch)</span><br><span class="line">   fmt.Println(&lt;-ch)</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>执行输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;1</span><br><span class="line">&gt;2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Go-遍历通道与关闭通道"><a href="#Go-遍历通道与关闭通道" class="headerlink" title="Go 遍历通道与关闭通道"></a>Go 遍历通道与关闭通道</h3><p>Go 通过 range 关键字来实现遍历读取到的数据，类似于与数组或切片。格式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;v, ok := &lt;-ch</span><br></pre></td></tr></table></figure>
+
+<p>如果通道接收不到数据后 ok 就为 false，这时通道就可以使用 <strong>close()</strong> 函数来关闭。</p>
+<h3 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">package</span> main</span><br><span class="line">&gt;<span class="keyword">import</span> (</span><br><span class="line">       <span class="string">"fmt"</span></span><br><span class="line">&gt;)</span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">fibonacci</span><span class="params">(n <span class="keyword">int</span>, c <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">       x, y := <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">       <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">               c &lt;- x</span><br><span class="line">               x, y = y, x+y</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="built_in">close</span>(c)</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">       c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line">       <span class="keyword">go</span> fibonacci(<span class="built_in">cap</span>(c), c)</span><br><span class="line">       <span class="comment">// range 函数遍历每个从通道接收到的数据，因为 c 在发送完 10 个</span></span><br><span class="line">       <span class="comment">// 数据之后就关闭了通道，所以这里我们 range 函数在接收到 10 个数据</span></span><br><span class="line">       <span class="comment">// 之后就结束了。如果上面的 c 通道不关闭，那么 range 函数就不</span></span><br><span class="line">       <span class="comment">// 会结束，从而在接收第 11 个数据的时候就阻塞了。</span></span><br><span class="line">       <span class="keyword">for</span> i := <span class="keyword">range</span> c &#123;</span><br><span class="line">               fmt.Println(i)</span><br><span class="line">       &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行输出结果为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="number">0</span></span><br><span class="line">&gt;<span class="number">1</span></span><br><span class="line">&gt;<span class="number">1</span></span><br><span class="line">&gt;<span class="number">2</span></span><br><span class="line">&gt;<span class="number">3</span></span><br><span class="line">&gt;<span class="number">5</span></span><br><span class="line">&gt;<span class="number">8</span></span><br><span class="line">&gt;<span class="number">13</span></span><br><span class="line">&gt;<span class="number">21</span></span><br><span class="line">&gt;<span class="number">34</span></span><br></pre></td></tr></table></figure></blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-11-03T08:40:18.000Z" itemprop="dateUpdated">2019-11-03 16:40:18</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fabric-samples/" rel="tag">fabric-samples</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/03/2019/find-1/&title=《find1》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/03/2019/find-1/&title=《find1》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/03/2019/find-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《find1》 — Cups&url=http://cupswen.github.io/2019/11/03/2019/find-1/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/03/2019/find-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/03/2019/find-2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">find2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/02/2019/chaincode-core-function/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fabric-samples之chaincode-core-function(chaincode核心函数)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/03/2019/find-1/&title=《find1》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/03/2019/find-1/&title=《find1》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/03/2019/find-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《find1》 — Cups&url=http://cupswen.github.io/2019/11/03/2019/find-1/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/03/2019/find-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/11/03/2019/find-1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

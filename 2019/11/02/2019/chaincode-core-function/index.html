@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>fabric-samples之chaincode-core-function(chaincode核心函数) | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,fabric-samples">
+    <meta name="description" content="chaincode可用核心函数12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697">
+<meta name="keywords" content="Fabric,fabric-samples">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fabric-samples之chaincode-core-function(chaincode核心函数)">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;2019&#x2F;chaincode-core-function&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="chaincode可用核心函数12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-02T12:02:34.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">fabric-samples之chaincode-core-function(chaincode核心函数)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">fabric-samples之chaincode-core-function(chaincode核心函数)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-02T10:57:10.000Z" itemprop="datePublished" class="page-time">
+  2019-11-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#chaincode可用核心函数"><span class="post-toc-text">chaincode可用核心函数</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/chaincode-core-function"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">fabric-samples之chaincode-core-function(chaincode核心函数)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-02 18:57:10" datetime="2019-11-02T10:57:10.000Z"  itemprop="datePublished">2019-11-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="chaincode可用核心函数"><a href="#chaincode可用核心函数" class="headerlink" title="chaincode可用核心函数"></a>chaincode可用核心函数</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Copyright IBM Corp. All Rights Reserved.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> shim</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/golang/protobuf/ptypes/timestamp"</span></span><br><span class="line">	<span class="string">"github.com/hyperledger/fabric/protos/ledger/queryresult"</span></span><br><span class="line">	pb <span class="string">"github.com/hyperledger/fabric/protos/peer"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链码接口必须由所有链码实现。 fabric运行通过调用指定的这些函数进行交易。</span></span><br><span class="line"><span class="keyword">type</span> Chaincode <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// 在首次建立链码容器之后，在实例化事务期间调用Init，从而允许链码初始化其内部数据</span></span><br><span class="line">	Init(stub ChaincodeStubInterface) pb.Response</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 调用Invoke以更新或查询投标交易中的账本。 在提交事务之前，更新的状态变量不会提交到账本。</span></span><br><span class="line">	Invoke(stub ChaincodeStubInterface) pb.Response</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可部署的Chaincode应用程序使用ChaincodeStubInterface访问和修改其账本</span></span><br><span class="line"><span class="keyword">type</span> ChaincodeStubInterface <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// GetArgs返回用于链码Init和Invoke的参数作为字节数组的数组。</span></span><br><span class="line">	GetArgs() [][]<span class="keyword">byte</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetStringArgs返回用于链码Init和Invoke的参数作为字符串数组。 </span></span><br><span class="line">    <span class="comment">// 仅当客户端传递旨在用作字符串的参数时，才使用GetStringArgs。</span></span><br><span class="line">	GetStringArgs() []<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetFunctionAndParameters返回第一个参数作为函数名称，其余参数作为字符串数组中的参数。</span></span><br><span class="line">    <span class="comment">// 仅当客户端传递了打算用作字符串的参数时，才使用GetFunctionAndParameters。</span></span><br><span class="line">	GetFunctionAndParameters() (<span class="keyword">string</span>, []<span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetArgsSlice以字节数组形式返回用于链码Init和Invoke的参数</span></span><br><span class="line">	GetArgsSlice() ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetTxID返回交易建议的tx_id，每个交易和每个客户唯一。</span></span><br><span class="line">    <span class="comment">// 有关更多详细信息，请参见protos/common/ common.proto中的ChannelHeader。</span></span><br><span class="line">	GetTxID() <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetChannelID返回提案发送到的渠道以供链码处理。</span></span><br><span class="line">    <span class="comment">// 这将是交易提案的channel_id（请参阅protos/common/common.proto中的ChannelHeader），</span></span><br><span class="line">    <span class="comment">// 除非链码在另一个渠道上调用另一个</span></span><br><span class="line">	GetChannelID() <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// invokeChaincode使用相同的事务上下文在本地调用指定的链码Invoke。 </span></span><br><span class="line">    <span class="comment">// 也就是说，chaincode调用chaincode不会创建新的交易消息。 </span></span><br><span class="line">    <span class="comment">// 如果被调用链代码在同一通道上，则只需将被调用链代码的读集和写集添加到调用事务中。</span></span><br><span class="line">    <span class="comment">// 如果被调用链代码在不同的通道上，则仅将响应返回到调用链代码。 </span></span><br><span class="line">    <span class="comment">// 来自被调用链码的任何PutState调用都不会对账本产生任何影响； </span></span><br><span class="line">    <span class="comment">// 也就是说，在不同通道上的被调用链码不会将其读取集和写入集应用于事务。</span></span><br><span class="line">    <span class="comment">// 仅调用链代码的读取集和写入集将应用于事务。 </span></span><br><span class="line">    <span class="comment">// 实际上，在另一个通道上调用的链码实际上是一个“查询”，它不参与后续提交阶段的状态验证检查。</span></span><br><span class="line">    <span class="comment">// 如果“频道”为空，则假定为呼叫者的频道。</span></span><br><span class="line">	InvokeChaincode(chaincodeName <span class="keyword">string</span>, args [][]<span class="keyword">byte</span>, channel <span class="keyword">string</span>) pb.Response</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetState从账本中返回指定`key`的值。 </span></span><br><span class="line">    <span class="comment">// 请注意，GetState不会从尚未提交到账本的写入集中读取数据。 </span></span><br><span class="line">    <span class="comment">// 换句话说，GetState不会考虑由PutState修改的尚未提交的数据。 </span></span><br><span class="line">    <span class="comment">// 如果状态数据库中不存在该键，则返回（nil，nil）。</span></span><br><span class="line">	GetState(key <span class="keyword">string</span>) ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// PutState将指定的“键”和“值”作为数据写入提议放入事务的writeset中。</span></span><br><span class="line">    <span class="comment">// 在交易通过验证并成功提交之前，PutState不会影响账本。 </span></span><br><span class="line">    <span class="comment">// 简单键不能为空字符串，并且不能以空字符（0x00）开头，以避免与复合键的范围查询冲突，</span></span><br><span class="line">    <span class="comment">// 复合键在内部以0x00作为复合键的前缀关键名称空间。 </span></span><br><span class="line">    <span class="comment">// 此外，如果使用CouchDB，则密钥只能包含有效的UTF-8字符串，并且不能以下划线（“ _”）开头。</span></span><br><span class="line">	PutState(key <span class="keyword">string</span>, value []<span class="keyword">byte</span>) error</span><br><span class="line"></span><br><span class="line">	<span class="comment">// DelState在交易建议的writeset中记录要删除的指定`key`。</span></span><br><span class="line">    <span class="comment">// 验证交易并成功提交交易后，“键”及其值将从账本中删除。</span></span><br><span class="line">	DelState(key <span class="keyword">string</span>) error</span><br><span class="line"></span><br><span class="line">	<span class="comment">// SetStateValidationParameter设置“ key”的密钥级认可策略。</span></span><br><span class="line">	SetStateValidationParameter(key <span class="keyword">string</span>, ep []<span class="keyword">byte</span>) error</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetStateValidationParameter检索“ key”的密钥级认可策略。</span></span><br><span class="line">    <span class="comment">// 注意，这将在事务的读取集中引入对`key`的读取依赖性。</span></span><br><span class="line">	GetStateValidationParameter(key <span class="keyword">string</span>) ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetStateByRange returns a range iterator over a set of keys in the</span></span><br><span class="line">	<span class="comment">// ledger. The iterator can be used to iterate over all keys</span></span><br><span class="line">	<span class="comment">// between the startKey (inclusive) and endKey (exclusive).</span></span><br><span class="line">	<span class="comment">// However, if the number of keys between startKey and endKey is greater than the</span></span><br><span class="line">	<span class="comment">// totalQueryLimit (defined in core.yaml), this iterator cannot be used</span></span><br><span class="line">	<span class="comment">// to fetch all keys (results will be capped by the totalQueryLimit).</span></span><br><span class="line">	<span class="comment">// The keys are returned by the iterator in lexical order. Note</span></span><br><span class="line">	<span class="comment">// that startKey and endKey can be empty string, which implies unbounded range</span></span><br><span class="line">	<span class="comment">// query on start or end.</span></span><br><span class="line">	<span class="comment">// Call Close() on the returned StateQueryIteratorInterface object when done.</span></span><br><span class="line">	<span class="comment">// The query is re-executed during validation phase to ensure result set</span></span><br><span class="line">	<span class="comment">// has not changed since transaction endorsement (phantom reads detected).</span></span><br><span class="line">	GetStateByRange(startKey, endKey <span class="keyword">string</span>) (StateQueryIteratorInterface, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetStateByRangeWithPagination returns a range iterator over a set of keys in the</span></span><br><span class="line">	<span class="comment">// ledger. The iterator can be used to fetch keys between the startKey (inclusive)</span></span><br><span class="line">	<span class="comment">// and endKey (exclusive).</span></span><br><span class="line">	<span class="comment">// When an empty string is passed as a value to the bookmark argument, the returned</span></span><br><span class="line">	<span class="comment">// iterator can be used to fetch the first `pageSize` keys between the startKey</span></span><br><span class="line">	<span class="comment">// (inclusive) and endKey (exclusive).</span></span><br><span class="line">	<span class="comment">// When the bookmark is a non-emptry string, the iterator can be used to fetch</span></span><br><span class="line">	<span class="comment">// the first `pageSize` keys between the bookmark (inclusive) and endKey (exclusive).</span></span><br><span class="line">	<span class="comment">// Note that only the bookmark present in a prior page of query results (ResponseMetadata)</span></span><br><span class="line">	<span class="comment">// can be used as a value to the bookmark argument. Otherwise, an empty string must</span></span><br><span class="line">	<span class="comment">// be passed as bookmark.</span></span><br><span class="line">	<span class="comment">// The keys are returned by the iterator in lexical order. Note</span></span><br><span class="line">	<span class="comment">// that startKey and endKey can be empty string, which implies unbounded range</span></span><br><span class="line">	<span class="comment">// query on start or end.</span></span><br><span class="line">	<span class="comment">// Call Close() on the returned StateQueryIteratorInterface object when done.</span></span><br><span class="line">	<span class="comment">// This call is only supported in a read only transaction.</span></span><br><span class="line">	GetStateByRangeWithPagination(startKey, endKey <span class="keyword">string</span>, pageSize <span class="keyword">int32</span>,</span><br><span class="line">		bookmark <span class="keyword">string</span>) (StateQueryIteratorInterface, *pb.QueryResponseMetadata, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetStateByPartialCompositeKey queries the state in the ledger based on</span></span><br><span class="line">	<span class="comment">// a given partial composite key. This function returns an iterator</span></span><br><span class="line">	<span class="comment">// which can be used to iterate over all composite keys whose prefix matches</span></span><br><span class="line">	<span class="comment">// the given partial composite key. However, if the number of matching composite</span></span><br><span class="line">	<span class="comment">// keys is greater than the totalQueryLimit (defined in core.yaml), this iterator</span></span><br><span class="line">	<span class="comment">// cannot be used to fetch all matching keys (results will be limited by the totalQueryLimit).</span></span><br><span class="line">	<span class="comment">// The `objectType` and attributes are expected to have only valid utf8 strings and</span></span><br><span class="line">	<span class="comment">// should not contain U+0000 (nil byte) and U+10FFFF (biggest and unallocated code point).</span></span><br><span class="line">	<span class="comment">// See related functions SplitCompositeKey and CreateCompositeKey.</span></span><br><span class="line">	<span class="comment">// Call Close() on the returned StateQueryIteratorInterface object when done.</span></span><br><span class="line">	<span class="comment">// The query is re-executed during validation phase to ensure result set</span></span><br><span class="line">	<span class="comment">// has not changed since transaction endorsement (phantom reads detected).</span></span><br><span class="line">	GetStateByPartialCompositeKey(objectType <span class="keyword">string</span>, keys []<span class="keyword">string</span>) (StateQueryIteratorInterface, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetStateByPartialCompositeKeyWithPagination queries the state in the ledger based on</span></span><br><span class="line">	<span class="comment">// a given partial composite key. This function returns an iterator</span></span><br><span class="line">	<span class="comment">// which can be used to iterate over the composite keys whose</span></span><br><span class="line">	<span class="comment">// prefix matches the given partial composite key.</span></span><br><span class="line">	<span class="comment">// When an empty string is passed as a value to the bookmark argument, the returned</span></span><br><span class="line">	<span class="comment">// iterator can be used to fetch the first `pageSize` composite keys whose prefix</span></span><br><span class="line">	<span class="comment">// matches the given partial composite key.</span></span><br><span class="line">	<span class="comment">// When the bookmark is a non-emptry string, the iterator can be used to fetch</span></span><br><span class="line">	<span class="comment">// the first `pageSize` keys between the bookmark (inclusive) and the last matching</span></span><br><span class="line">	<span class="comment">// composite key.</span></span><br><span class="line">	<span class="comment">// Note that only the bookmark present in a prior page of query result (ResponseMetadata)</span></span><br><span class="line">	<span class="comment">// can be used as a value to the bookmark argument. Otherwise, an empty string must</span></span><br><span class="line">	<span class="comment">// be passed as bookmark.</span></span><br><span class="line">	<span class="comment">// The `objectType` and attributes are expected to have only valid utf8 strings</span></span><br><span class="line">	<span class="comment">// and should not contain U+0000 (nil byte) and U+10FFFF (biggest and unallocated</span></span><br><span class="line">	<span class="comment">// code point). See related functions SplitCompositeKey and CreateCompositeKey.</span></span><br><span class="line">	<span class="comment">// Call Close() on the returned StateQueryIteratorInterface object when done.</span></span><br><span class="line">	<span class="comment">// This call is only supported in a read only transaction.</span></span><br><span class="line">	GetStateByPartialCompositeKeyWithPagination(objectType <span class="keyword">string</span>, keys []<span class="keyword">string</span>,</span><br><span class="line">		pageSize <span class="keyword">int32</span>, bookmark <span class="keyword">string</span>) (StateQueryIteratorInterface, *pb.QueryResponseMetadata, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// CreateCompositeKey combines the given `attributes` to form a composite</span></span><br><span class="line">	<span class="comment">// key. The objectType and attributes are expected to have only valid utf8</span></span><br><span class="line">	<span class="comment">// strings and should not contain U+0000 (nil byte) and U+10FFFF</span></span><br><span class="line">	<span class="comment">// (biggest and unallocated code point).</span></span><br><span class="line">	<span class="comment">// The resulting composite key can be used as the key in PutState().</span></span><br><span class="line">	CreateCompositeKey(objectType <span class="keyword">string</span>, attributes []<span class="keyword">string</span>) (<span class="keyword">string</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// SplitCompositeKey splits the specified key into attributes on which the</span></span><br><span class="line">	<span class="comment">// composite key was formed. Composite keys found during range queries</span></span><br><span class="line">	<span class="comment">// or partial composite key queries can therefore be split into their</span></span><br><span class="line">	<span class="comment">// composite parts.</span></span><br><span class="line">	SplitCompositeKey(compositeKey <span class="keyword">string</span>) (<span class="keyword">string</span>, []<span class="keyword">string</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetQueryResult performs a "rich" query against a state database. It is</span></span><br><span class="line">	<span class="comment">// only supported for state databases that support rich query,</span></span><br><span class="line">	<span class="comment">// e.g.CouchDB. The query string is in the native syntax</span></span><br><span class="line">	<span class="comment">// of the underlying state database. An iterator is returned</span></span><br><span class="line">	<span class="comment">// which can be used to iterate over all keys in the query result set.</span></span><br><span class="line">	<span class="comment">// However, if the number of keys in the query result set is greater than the</span></span><br><span class="line">	<span class="comment">// totalQueryLimit (defined in core.yaml), this iterator cannot be used</span></span><br><span class="line">	<span class="comment">// to fetch all keys in the query result set (results will be limited by</span></span><br><span class="line">	<span class="comment">// the totalQueryLimit).</span></span><br><span class="line">	<span class="comment">// The query is NOT re-executed during validation phase, phantom reads are</span></span><br><span class="line">	<span class="comment">// not detected. That is, other committed transactions may have added,</span></span><br><span class="line">	<span class="comment">// updated, or removed keys that impact the result set, and this would not</span></span><br><span class="line">	<span class="comment">// be detected at validation/commit time.  Applications susceptible to this</span></span><br><span class="line">	<span class="comment">// should therefore not use GetQueryResult as part of transactions that update</span></span><br><span class="line">	<span class="comment">// ledger, and should limit use to read-only chaincode operations.</span></span><br><span class="line">	GetQueryResult(query <span class="keyword">string</span>) (StateQueryIteratorInterface, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetQueryResultWithPagination performs a "rich" query against a state database.</span></span><br><span class="line">	<span class="comment">// It is only supported for state databases that support rich query,</span></span><br><span class="line">	<span class="comment">// e.g., CouchDB. The query string is in the native syntax</span></span><br><span class="line">	<span class="comment">// of the underlying state database. An iterator is returned</span></span><br><span class="line">	<span class="comment">// which can be used to iterate over keys in the query result set.</span></span><br><span class="line">	<span class="comment">// When an empty string is passed as a value to the bookmark argument, the returned</span></span><br><span class="line">	<span class="comment">// iterator can be used to fetch the first `pageSize` of query results.</span></span><br><span class="line">	<span class="comment">// When the bookmark is a non-emptry string, the iterator can be used to fetch</span></span><br><span class="line">	<span class="comment">// the first `pageSize` keys between the bookmark and the last key in the query result.</span></span><br><span class="line">	<span class="comment">// Note that only the bookmark present in a prior page of query results (ResponseMetadata)</span></span><br><span class="line">	<span class="comment">// can be used as a value to the bookmark argument. Otherwise, an empty string</span></span><br><span class="line">	<span class="comment">// must be passed as bookmark.</span></span><br><span class="line">	<span class="comment">// This call is only supported in a read only transaction.</span></span><br><span class="line">	GetQueryResultWithPagination(query <span class="keyword">string</span>, pageSize <span class="keyword">int32</span>,</span><br><span class="line">		bookmark <span class="keyword">string</span>) (StateQueryIteratorInterface, *pb.QueryResponseMetadata, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetHistoryForKey returns a history of key values across time.</span></span><br><span class="line">	<span class="comment">// For each historic key update, the historic value and associated</span></span><br><span class="line">	<span class="comment">// transaction id and timestamp are returned. The timestamp is the</span></span><br><span class="line">	<span class="comment">// timestamp provided by the client in the proposal header.</span></span><br><span class="line">	<span class="comment">// GetHistoryForKey requires peer configuration</span></span><br><span class="line">	<span class="comment">// core.ledger.history.enableHistoryDatabase to be true.</span></span><br><span class="line">	<span class="comment">// The query is NOT re-executed during validation phase, phantom reads are</span></span><br><span class="line">	<span class="comment">// not detected. That is, other committed transactions may have updated</span></span><br><span class="line">	<span class="comment">// the key concurrently, impacting the result set, and this would not be</span></span><br><span class="line">	<span class="comment">// detected at validation/commit time. Applications susceptible to this</span></span><br><span class="line">	<span class="comment">// should therefore not use GetHistoryForKey as part of transactions that</span></span><br><span class="line">	<span class="comment">// update ledger, and should limit use to read-only chaincode operations.</span></span><br><span class="line">	GetHistoryForKey(key <span class="keyword">string</span>) (HistoryQueryIteratorInterface, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetPrivateData returns the value of the specified `key` from the specified</span></span><br><span class="line">	<span class="comment">// `collection`. Note that GetPrivateData doesn't read data from the</span></span><br><span class="line">	<span class="comment">// private writeset, which has not been committed to the `collection`. In</span></span><br><span class="line">	<span class="comment">// other words, GetPrivateData doesn't consider data modified by PutPrivateData</span></span><br><span class="line">	<span class="comment">// that has not been committed.</span></span><br><span class="line">	GetPrivateData(collection, key <span class="keyword">string</span>) ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetPrivateDataHash returns the hash of the value of the specified `key` from the specified</span></span><br><span class="line">	<span class="comment">// `collection`</span></span><br><span class="line">	GetPrivateDataHash(collection, key <span class="keyword">string</span>) ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// PutPrivateData puts the specified `key` and `value` into the transaction's</span></span><br><span class="line">	<span class="comment">// private writeset. Note that only hash of the private writeset goes into the</span></span><br><span class="line">	<span class="comment">// transaction proposal response (which is sent to the client who issued the</span></span><br><span class="line">	<span class="comment">// transaction) and the actual private writeset gets temporarily stored in a</span></span><br><span class="line">	<span class="comment">// transient store. PutPrivateData doesn't effect the `collection` until the</span></span><br><span class="line">	<span class="comment">// transaction is validated and successfully committed. Simple keys must not</span></span><br><span class="line">	<span class="comment">// be an empty string and must not start with a null character (0x00) in order</span></span><br><span class="line">	<span class="comment">// to avoid range query collisions with composite keys, which internally get</span></span><br><span class="line">	<span class="comment">// prefixed with 0x00 as composite key namespace. In addition, if using</span></span><br><span class="line">	<span class="comment">// CouchDB, keys can only contain valid UTF-8 strings and cannot begin with an</span></span><br><span class="line">	<span class="comment">// an underscore ("_").</span></span><br><span class="line">	PutPrivateData(collection <span class="keyword">string</span>, key <span class="keyword">string</span>, value []<span class="keyword">byte</span>) error</span><br><span class="line"></span><br><span class="line">	<span class="comment">// DelState records the specified `key` to be deleted in the private writeset of</span></span><br><span class="line">	<span class="comment">// the transaction. Note that only hash of the private writeset goes into the</span></span><br><span class="line">	<span class="comment">// transaction proposal response (which is sent to the client who issued the</span></span><br><span class="line">	<span class="comment">// transaction) and the actual private writeset gets temporarily stored in a</span></span><br><span class="line">	<span class="comment">// transient store. The `key` and its value will be deleted from the collection</span></span><br><span class="line">	<span class="comment">// when the transaction is validated and successfully committed.</span></span><br><span class="line">	DelPrivateData(collection, key <span class="keyword">string</span>) error</span><br><span class="line"></span><br><span class="line">	<span class="comment">// SetPrivateDataValidationParameter sets the key-level endorsement policy</span></span><br><span class="line">	<span class="comment">// for the private data specified by `key`.</span></span><br><span class="line">	SetPrivateDataValidationParameter(collection, key <span class="keyword">string</span>, ep []<span class="keyword">byte</span>) error</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetPrivateDataValidationParameter retrieves the key-level endorsement</span></span><br><span class="line">	<span class="comment">// policy for the private data specified by `key`. Note that this introduces</span></span><br><span class="line">	<span class="comment">// a read dependency on `key` in the transaction's readset.</span></span><br><span class="line">	GetPrivateDataValidationParameter(collection, key <span class="keyword">string</span>) ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetPrivateDataByRange returns a range iterator over a set of keys in a</span></span><br><span class="line">	<span class="comment">// given private collection. The iterator can be used to iterate over all keys</span></span><br><span class="line">	<span class="comment">// between the startKey (inclusive) and endKey (exclusive).</span></span><br><span class="line">	<span class="comment">// The keys are returned by the iterator in lexical order. Note</span></span><br><span class="line">	<span class="comment">// that startKey and endKey can be empty string, which implies unbounded range</span></span><br><span class="line">	<span class="comment">// query on start or end.</span></span><br><span class="line">	<span class="comment">// Call Close() on the returned StateQueryIteratorInterface object when done.</span></span><br><span class="line">	<span class="comment">// The query is re-executed during validation phase to ensure result set</span></span><br><span class="line">	<span class="comment">// has not changed since transaction endorsement (phantom reads detected).</span></span><br><span class="line">	GetPrivateDataByRange(collection, startKey, endKey <span class="keyword">string</span>) (StateQueryIteratorInterface, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetPrivateDataByPartialCompositeKey queries the state in a given private</span></span><br><span class="line">	<span class="comment">// collection based on a given partial composite key. This function returns</span></span><br><span class="line">	<span class="comment">// an iterator which can be used to iterate over all composite keys whose prefix</span></span><br><span class="line">	<span class="comment">// matches the given partial composite key. The `objectType` and attributes are</span></span><br><span class="line">	<span class="comment">// expected to have only valid utf8 strings and should not contain</span></span><br><span class="line">	<span class="comment">// U+0000 (nil byte) and U+10FFFF (biggest and unallocated code point).</span></span><br><span class="line">	<span class="comment">// See related functions SplitCompositeKey and CreateCompositeKey.</span></span><br><span class="line">	<span class="comment">// Call Close() on the returned StateQueryIteratorInterface object when done.</span></span><br><span class="line">	<span class="comment">// The query is re-executed during validation phase to ensure result set</span></span><br><span class="line">	<span class="comment">// has not changed since transaction endorsement (phantom reads detected).</span></span><br><span class="line">	GetPrivateDataByPartialCompositeKey(collection, objectType <span class="keyword">string</span>, keys []<span class="keyword">string</span>) (StateQueryIteratorInterface, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetPrivateDataQueryResult performs a "rich" query against a given private</span></span><br><span class="line">	<span class="comment">// collection. It is only supported for state databases that support rich query,</span></span><br><span class="line">	<span class="comment">// e.g.CouchDB. The query string is in the native syntax</span></span><br><span class="line">	<span class="comment">// of the underlying state database. An iterator is returned</span></span><br><span class="line">	<span class="comment">// which can be used to iterate (next) over the query result set.</span></span><br><span class="line">	<span class="comment">// The query is NOT re-executed during validation phase, phantom reads are</span></span><br><span class="line">	<span class="comment">// not detected. That is, other committed transactions may have added,</span></span><br><span class="line">	<span class="comment">// updated, or removed keys that impact the result set, and this would not</span></span><br><span class="line">	<span class="comment">// be detected at validation/commit time.  Applications susceptible to this</span></span><br><span class="line">	<span class="comment">// should therefore not use GetQueryResult as part of transactions that update</span></span><br><span class="line">	<span class="comment">// ledger, and should limit use to read-only chaincode operations.</span></span><br><span class="line">	GetPrivateDataQueryResult(collection, query <span class="keyword">string</span>) (StateQueryIteratorInterface, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetCreator returns `SignatureHeader.Creator` (e.g. an identity)</span></span><br><span class="line">	<span class="comment">// of the `SignedProposal`. This is the identity of the agent (or user)</span></span><br><span class="line">	<span class="comment">// submitting the transaction.</span></span><br><span class="line">	GetCreator() ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetTransient returns the `ChaincodeProposalPayload.Transient` field.</span></span><br><span class="line">	<span class="comment">// It is a map that contains data (e.g. cryptographic material)</span></span><br><span class="line">	<span class="comment">// that might be used to implement some form of application-level</span></span><br><span class="line">	<span class="comment">// confidentiality. The contents of this field, as prescribed by</span></span><br><span class="line">	<span class="comment">// `ChaincodeProposalPayload`, are supposed to always</span></span><br><span class="line">	<span class="comment">// be omitted from the transaction and excluded from the ledger.</span></span><br><span class="line">	GetTransient() (<span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetBinding返回事务绑定，该事务绑定用于强制应用程序数据（例如存储在上面的临时字段中的数据）</span></span><br><span class="line">    <span class="comment">// 与投标本身之间的链接。 这对于避免可能的重放攻击很有用。</span></span><br><span class="line">	GetBinding() ([]<span class="keyword">byte</span>, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetDecorations返回有关源自对等方的投标的其他数据（如果适用）。</span></span><br><span class="line">    <span class="comment">// 该数据由对等方的装饰器设置，装饰器附加或更改传递到链码的链码输入。</span></span><br><span class="line">	GetDecorations() <span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">byte</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetSignedProposal返回SignedProposal对象，</span></span><br><span class="line">    <span class="comment">// 该对象包含交易建议中所有数据元素的一部分。</span></span><br><span class="line">	GetSignedProposal() (*pb.SignedProposal, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// GetTxTimestamp返回创建事务时的时间戳。 </span></span><br><span class="line">    <span class="comment">// 这是从事务ChannelHeader中获取的，</span></span><br><span class="line">    <span class="comment">// 因此它将指示客户端的时间戳，并且在所有背书者中都具有相同的值。</span></span><br><span class="line">	GetTxTimestamp() (*timestamp.Timestamp, error)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// SetEvent允许链码在对提案的响应中设置一个事件，该事件将作为事务的一部分包括在内。 </span></span><br><span class="line">    <span class="comment">// 无论事务的有效性如何，事件都将在已提交的块中的事务内可用。</span></span><br><span class="line">	SetEvent(name <span class="keyword">string</span>, payload []<span class="keyword">byte</span>) error</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CommonIteratorInterface允许链码检查是否要从迭代器中获取更多结果，并在完成后将其关闭。</span></span><br><span class="line"><span class="keyword">type</span> CommonIteratorInterface <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// 如果范围查询迭代器包含其他键和值，则HasNext返回true。</span></span><br><span class="line">	HasNext() <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Close关闭迭代器。 完成从迭代器的读取以释放资源时，应调用此方法。</span></span><br><span class="line">	Close() error</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// StateQueryIteratorInterface允许链码迭代范围返回的一组键/值对并执行查询。</span></span><br><span class="line"><span class="keyword">type</span> StateQueryIteratorInterface <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// 继承HasNext（）和Close（）</span></span><br><span class="line">	CommonIteratorInterface</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Next返回范围内的下一个键和值，并执行查询迭代器。</span></span><br><span class="line">	Next() (*queryresult.KV, error)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// HistoryQueryIteratorInterface允许链码迭代历史查询返回的一组键值对。</span></span><br><span class="line"><span class="keyword">type</span> HistoryQueryIteratorInterface <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// 继承HasNext（）和Close（）</span></span><br><span class="line">	CommonIteratorInterface</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Next返回历史记录查询迭代器中的下一个键和值。</span></span><br><span class="line">	Next() (*queryresult.KeyModification, error)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MockQueryIteratorInterface允许链码迭代一组</span></span><br><span class="line"><span class="comment">// 范围查询返回的键值对。</span></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>在MockStub中实现了执行查询和历史记录查询后，我们需要更新此接口</span></span><br><span class="line"><span class="keyword">type</span> MockQueryIteratorInterface <span class="keyword">interface</span> &#123;</span><br><span class="line">	StateQueryIteratorInterface</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-11-02T12:02:34.000Z" itemprop="dateUpdated">2019-11-02 20:02:34</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fabric-samples/" rel="tag">fabric-samples</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/&title=《fabric-samples之chaincode-core-function(chaincode核心函数)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/&title=《fabric-samples之chaincode-core-function(chaincode核心函数)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之chaincode-core-function(chaincode核心函数)》 — Cups&url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/03/2019/find-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">find1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/01/2019/scripts/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fabric-samples之scripts(常用脚本)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/&title=《fabric-samples之chaincode-core-function(chaincode核心函数)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/&title=《fabric-samples之chaincode-core-function(chaincode核心函数)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之chaincode-core-function(chaincode核心函数)》 — Cups&url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/11/02/2019/chaincode-core-function/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

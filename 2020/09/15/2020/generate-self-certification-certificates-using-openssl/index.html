@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>使用openssl生成自签名证书并提供给fabric-ca使用 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,证书">
+    <meta name="description" content="动机 1.Fabric网络的启动是依赖证书的，证书就是Fabric中的账号。 2.使用cryptogen模块尽管非常简单容易，但是想要接入现实的系统必须融入现有的证书体系。 3.使用openssl生成自认证证书；使用该证书启动fabric-ca；使用fabric-ca-client向fabric-ca申请peer节点证书。  openssl（一）简介openssl 是目前最流行的 SSL 密码库工">
+<meta name="keywords" content="Fabric,证书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用openssl生成自签名证书并提供给fabric-ca使用">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2020&#x2F;09&#x2F;15&#x2F;2020&#x2F;generate-self-certification-certificates-using-openssl&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="动机 1.Fabric网络的启动是依赖证书的，证书就是Fabric中的账号。 2.使用cryptogen模块尽管非常简单容易，但是想要接入现实的系统必须融入现有的证书体系。 3.使用openssl生成自认证证书；使用该证书启动fabric-ca；使用fabric-ca-client向fabric-ca申请peer节点证书。  openssl（一）简介openssl 是目前最流行的 SSL 密码库工">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;openssl&#x2F;openssl-1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;openssl&#x2F;openssl-2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;openssl&#x2F;openssl-3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;fabric-ca&#x2F;fabric-ca-sqllite.png">
+<meta property="og:updated_time" content="2020-09-20T11:40:12.161Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;openssl&#x2F;openssl-1.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用openssl生成自签名证书并提供给fabric-ca使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用openssl生成自签名证书并提供给fabric-ca使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-15T01:01:10.000Z" itemprop="datePublished" class="page-time">
+  2020-09-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#动机"><span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#openssl"><span class="post-toc-text">openssl</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）简介"><span class="post-toc-text">（一）简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、构成部分"><span class="post-toc-text">1、构成部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、用途"><span class="post-toc-text">2、用途</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（二）安装"><span class="post-toc-text">（二）安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（三）生成自签名证书"><span class="post-toc-text">（三）生成自签名证书</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、生成SHA2-256位的椭圆曲线私钥"><span class="post-toc-text">1、生成SHA2,256位的椭圆曲线私钥</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、把私钥的格式转换为pkcs8格式"><span class="post-toc-text">2、把私钥的格式转换为pkcs8格式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、生成自签名证书"><span class="post-toc-text">3、生成自签名证书</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、私钥对比"><span class="post-toc-text">4、私钥对比</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、证书解析对比"><span class="post-toc-text">5、证书解析对比</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#fabric-ca"><span class="post-toc-text">fabric-ca</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、文件组织"><span class="post-toc-text">1、文件组织</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、fabric-ca的配置文件编写"><span class="post-toc-text">2、fabric-ca的配置文件编写</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、启动fabric-ca镜像"><span class="post-toc-text">3、启动fabric-ca镜像</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、获取注册证书"><span class="post-toc-text">4、获取注册证书</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、注册并获取一个peer证书"><span class="post-toc-text">5、注册并获取一个peer证书</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#查看fabric-ca镜像"><span class="post-toc-text">查看fabric-ca镜像</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2020/generate-self-certification-certificates-using-openssl"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用openssl生成自签名证书并提供给fabric-ca使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-09-15 09:01:10" datetime="2020-09-15T01:01:10.000Z"  itemprop="datePublished">2020-09-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><blockquote>
+<p>1.Fabric网络的启动是依赖证书的，证书就是Fabric中的账号。</p>
+<p>2.使用cryptogen模块尽管非常简单容易，但是想要接入现实的系统必须融入现有的证书体系。</p>
+<p>3.使用openssl生成自认证证书；使用该证书启动fabric-ca；使用fabric-ca-client向fabric-ca申请peer节点证书。</p>
+</blockquote>
+<h1 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h1><h2 id="（一）简介"><a href="#（一）简介" class="headerlink" title="（一）简介"></a>（一）简介</h2><p>openssl 是目前最流行的 SSL 密码库工具，其提供了一个通用、健壮、功能完备的工具套件，用以支持SSL/TLS 协议的实现。<br>官网：<a href="https://www.openssl.org/source/" target="_blank" rel="noopener">https://www.openssl.org/source/</a></p>
+<h3 id="1、构成部分"><a href="#1、构成部分" class="headerlink" title="1、构成部分"></a>1、构成部分</h3><ol>
+<li>密码算法库</li>
+<li>密钥和证书封装管理功能</li>
+<li>SSL通信API接口</li>
+</ol>
+<h3 id="2、用途"><a href="#2、用途" class="headerlink" title="2、用途"></a>2、用途</h3><ol>
+<li>建立 RSA、DH、DSA key 参数</li>
+<li>建立 X.509 证书、证书签名请求(CSR)和CRLs(证书回收列表)</li>
+<li>计算消息摘要</li>
+<li>使用各种 Cipher加密/解密</li>
+<li>SSL/TLS 客户端以及服务器的测试</li>
+<li>处理S/MIME 或者加密邮件</li>
+</ol>
+<h2 id="（二）安装"><a href="#（二）安装" class="headerlink" title="（二）安装"></a>（二）安装</h2><p>openssl的安装有两种方式：</p>
+<ol>
+<li>去openssl官网下载原版openssl按一套复杂的安装方式进行安装。</li>
+<li>下载开源平台提供的工具，傻瓜式一键安装。</li>
+</ol>
+<p>由于openssl只是一个工具，我没有理由给自己增加工作量，所以采用第二种方式。</p>
+<ol>
+<li>下载openssl安装包，下载地址为 <a href="http://slproweb.com/products/Win32OpenSSL.html" target="_blank" rel="noopener">http://slproweb.com/products/Win32OpenSSL.html</a> ，类型为 Windows 版本。解压后安装包名称为Win64OpenSSL_Light-1_1_1g.exe。</li>
+<li>一路同意加下一步，直至安装完成。</li>
+<li>添加环境变量。变量名称OPENSSL_HOME，变量路径C:\Program Files\OpenSSL-Win64\bin（openssl安装路径）。在系统环境变量path中添加%OPENSSL_HOME%。（这样做的目的在于，当我们在命令行中输入openssl时，计算机系统可以在path路径下找到可以解释执行该命令的应用程序。）</li>
+<li>在cmd中输入openssl version输出openssl的版本名称说明安装成功。</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/openssl/openssl-1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="（三）生成自签名证书"><a href="#（三）生成自签名证书" class="headerlink" title="（三）生成自签名证书"></a>（三）生成自签名证书</h2><p>不确定fabric-ca能否支持其他类型的证书。所以生成证书的格式按照fabric-ca的证书格式。</p>
+<ol>
+<li>ECDSAP256，椭圆曲线加密，256位。</li>
+<li>—–BEGIN PRIVATE KEY—–，pkcs8格式。</li>
+</ol>
+<h3 id="1、生成SHA2-256位的椭圆曲线私钥"><a href="#1、生成SHA2-256位的椭圆曲线私钥" class="headerlink" title="1、生成SHA2,256位的椭圆曲线私钥"></a>1、生成SHA2,256位的椭圆曲线私钥</h3><p>命令：<code>openssl ecparam -genkey -name secp256r1 |openssl ec -out ca.key.pem</code></p>
+<p>命令结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\cups&gt;openssl ecparam -genkey -name secp256r1 |openssl ec -out ca.key.pem</span><br><span class="line">using curve name prime256v1 instead of secp256r1</span><br><span class="line">read EC key</span><br><span class="line">writing EC key</span><br><span class="line"></span><br><span class="line">C:\Users\cups&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、把私钥的格式转换为pkcs8格式"><a href="#2、把私钥的格式转换为pkcs8格式" class="headerlink" title="2、把私钥的格式转换为pkcs8格式"></a>2、把私钥的格式转换为pkcs8格式</h3><p>命令：<code>openssl pkcs8 -topk8 -inform PEM -in ca.key.pem -outform PEM -nocrypt</code></p>
+<p>命令结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\cups&gt;openssl pkcs8 -topk8 -inform PEM -in ca.key.pem -outform PEM -nocrypt -out ca.key.pem</span><br><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgttnLpyF/m2dNGMpk</span><br><span class="line">w1sNOB1uxgH51wNNW/XH5m5zl5WhRANCAATYaqb/YzWIAnq3rrNYenc53OZKnaNz</span><br><span class="line">LXieY6e3pGG4HTf4Zz9RE+ulifQ2Tg3+hB3Gcpu66LNefT75adpUFlDe</span><br><span class="line">-----END PRIVATE KEY-----</span><br><span class="line"></span><br><span class="line">C:\Users\cups&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将生成的pkcs8 格式的私钥，写入到<code>C:\Users\cups\ca.key.pem</code>。（应该有直接就能写入的方法，手动操作不增加工作量）。</p>
+<h3 id="3、生成自签名证书"><a href="#3、生成自签名证书" class="headerlink" title="3、生成自签名证书"></a>3、生成自签名证书</h3><p>命令：<code>openssl req -config openssl.cnf -key ca.key.pem -new -x509 -days 7300 -sha256 -extensions v3_ca -out ca.cert.pem</code></p>
+<p>命令结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\cups&gt;openssl req -config openssl.cnf -key ca.key.pem -new -x509 -days 7300 -sha256 -extensions v3_ca -out ca.cert.pem</span><br><span class="line">You are about to be asked to enter information that will be incorporated</span><br><span class="line">into your certificate request.</span><br><span class="line">What you are about to enter is what is called a Distinguished Name or a DN.</span><br><span class="line">There are quite a few fields but you can leave some blank</span><br><span class="line">For some fields there will be a default value,</span><br><span class="line">If you enter '.', the field will be left blank.</span><br><span class="line">-----</span><br><span class="line">Country Name (2 letter code) [CN]:</span><br><span class="line">State or Province Name [China]:</span><br><span class="line">Locality Name []:</span><br><span class="line">Organization Name [Hyperledger]:</span><br><span class="line">Organizational Unit Name [Fabric]:</span><br><span class="line">Common Name [fabric-ca-server]:</span><br><span class="line">Email Address []:</span><br><span class="line"></span><br><span class="line">C:\Users\cups&gt;</span><br></pre></td></tr></table></figure>
+
+<p>openssl.cnf文件内容（位置在`C:\Users\cups\openssl.cnf，用于按照命令配置自认证证书的格式）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line">[ ca ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> `man ca`</span></span><br><span class="line">default_ca = CA_default</span><br><span class="line"></span><br><span class="line">[ CA_default ]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> SHA-1 is deprecated, so use SHA-2 instead.</span></span><br><span class="line">default_md        = sha256</span><br><span class="line"></span><br><span class="line">name_opt          = ca_default</span><br><span class="line">cert_opt          = ca_default</span><br><span class="line">default_days      = 375</span><br><span class="line">preserve          = no</span><br><span class="line">policy            = policy_strict</span><br><span class="line"></span><br><span class="line">[ policy_strict ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> The root CA should only sign intermediate certificates that match.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> See the POLICY FORMAT section of `man ca`.</span></span><br><span class="line">countryName             = match</span><br><span class="line">stateOrProvinceName     = match</span><br><span class="line">organizationName        = match</span><br><span class="line">organizationalUnitName  = optional</span><br><span class="line">commonName              = supplied</span><br><span class="line">emailAddress            = optional</span><br><span class="line"></span><br><span class="line">[ policy_loose ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Allow the intermediate CA to sign a more diverse range of certificates.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> See the POLICY FORMAT section of the `ca` man page.</span></span><br><span class="line">countryName             = optional</span><br><span class="line">stateOrProvinceName     = optional</span><br><span class="line">localityName            = optional</span><br><span class="line">organizationName        = optional</span><br><span class="line">organizationalUnitName  = optional</span><br><span class="line">commonName              = supplied</span><br><span class="line">emailAddress            = optional</span><br><span class="line"></span><br><span class="line">[ req ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Options <span class="keyword">for</span> the `req` tool (`man req`).</span></span><br><span class="line">default_bits        = 2048</span><br><span class="line">distinguished_name  = req_distinguished_name</span><br><span class="line">string_mask         = utf8only</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> SHA-1 is deprecated, so use SHA-2 instead.</span></span><br><span class="line">default_md          = sha256</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Extension to add when the -x509 option is used.</span></span><br><span class="line">x509_extensions     = v3_ca</span><br><span class="line"></span><br><span class="line">req_extensions = v3_req</span><br><span class="line"></span><br><span class="line">[ req_distinguished_name ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> See &lt;https://en.wikipedia.org/wiki/Certificate_signing_request&gt;.</span></span><br><span class="line">countryName                     = Country Name (2 letter code)</span><br><span class="line">stateOrProvinceName             = State or Province Name</span><br><span class="line">localityName                    = Locality Name</span><br><span class="line">0.organizationName              = Organization Name</span><br><span class="line">organizationalUnitName          = Organizational Unit Name</span><br><span class="line">commonName                      = Common Name</span><br><span class="line">emailAddress                    = Email Address</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Optionally, specify some defaults.</span></span><br><span class="line">countryName_default             = CN</span><br><span class="line">stateOrProvinceName_default     = China</span><br><span class="line">localityName_default            = </span><br><span class="line">0.organizationName_default      = Hyperledger</span><br><span class="line">organizationalUnitName_default  = Fabric</span><br><span class="line">commonName_default              = fabric-ca-server</span><br><span class="line">emailAddress_default            = </span><br><span class="line"></span><br><span class="line">[ v3_req ]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Extensions to add to a certificate request</span></span><br><span class="line"></span><br><span class="line">basicConstraints = CA:FALSE</span><br><span class="line">keyUsage = nonRepudiation, digitalSignature, keyEncipherment</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[ alt_names ]</span><br><span class="line">DNS.1 = zhihu.com</span><br><span class="line">DNS.2 = *.zhihu.com</span><br><span class="line"></span><br><span class="line">[ v3_ca ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Extensions <span class="keyword">for</span> a typical CA (`man x509v3_config`).</span></span><br><span class="line">keyUsage = critical, digitalSignature, cRLSign, keyCertSign</span><br><span class="line">basicConstraints = critical, CA:true, pathlen:1</span><br><span class="line">subjectKeyIdentifier = hash</span><br><span class="line"><span class="meta">#</span><span class="bash"> authorityKeyIdentifier = keyid:always,issuer</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[ v3_intermediate_ca ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Extensions <span class="keyword">for</span> a typical intermediate CA (`man x509v3_config`).</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> subjectKeyIdentifier = <span class="built_in">hash</span></span></span><br><span class="line">authorityKeyIdentifier = keyid:always,issuer</span><br><span class="line">basicConstraints = critical, CA:true, pathlen:0</span><br><span class="line">keyUsage = critical, digitalSignature, cRLSign, keyCertSign</span><br><span class="line"></span><br><span class="line">[ usr_cert ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Extensions <span class="keyword">for</span> client certificates (`man x509v3_config`).</span></span><br><span class="line">basicConstraints = CA:FALSE</span><br><span class="line">nsCertType = client, email</span><br><span class="line">nsComment = "OpenSSL Generated Client Certificate"</span><br><span class="line">subjectKeyIdentifier = hash</span><br><span class="line">authorityKeyIdentifier = keyid,issuer</span><br><span class="line">keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment</span><br><span class="line">extendedKeyUsage = clientAuth, emailProtection</span><br><span class="line"></span><br><span class="line">[ server_cert ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Extensions <span class="keyword">for</span> server certificates (`man x509v3_config`).</span></span><br><span class="line">basicConstraints = CA:FALSE</span><br><span class="line">nsCertType = server</span><br><span class="line">nsComment = "OpenSSL Generated Server Certificate"</span><br><span class="line">subjectKeyIdentifier = hash</span><br><span class="line">authorityKeyIdentifier = keyid,issuer:always</span><br><span class="line">keyUsage = critical, digitalSignature, keyEncipherment</span><br><span class="line">extendedKeyUsage = serverAuth</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[ crl_ext ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Extension <span class="keyword">for</span> CRLs (`man x509v3_config`).</span></span><br><span class="line">authorityKeyIdentifier=keyid:always</span><br><span class="line"></span><br><span class="line">[ ocsp ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Extension <span class="keyword">for</span> OCSP signing certificates (`man ocsp`).</span></span><br><span class="line">basicConstraints = CA:FALSE</span><br><span class="line">subjectKeyIdentifier = hash</span><br><span class="line">authorityKeyIdentifier = keyid,issuer</span><br><span class="line">keyUsage = critical, digitalSignature</span><br><span class="line">extendedKeyUsage = critical, OCSPSigning</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、私钥对比"><a href="#4、私钥对比" class="headerlink" title="4、私钥对比"></a>4、私钥对比</h3><p>cryptogen模块生成的ca私钥：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgTsWr0/P+JZIy8+oW</span><br><span class="line">YqOFL5iG4Qt3CTDIU+GqmvLdDGqhRANCAATLe54N5LqkuB+2exEAHa4OE2jAbA9z</span><br><span class="line">scCEnaxdK+19Y3wnmMELmVV/h+aBt5PJePAG8GpzNhP+XB3xwsdxKktx</span><br><span class="line">-----END PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<p>fabric-node-sdk申请的到的ca私钥：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg59mH9KjWbkq9PxDv</span><br><span class="line">ytdkLls2tLp35Pmj2w/bCzrNdcOhRANCAAQCbDNERQbkUwhOt6nZyKgMZaCSQs6R</span><br><span class="line">rWFl/DmUP3tESz3MFWJt4ORGj3zuom1cjtNsKk0jJFoWZhKuWLIq1fD0</span><br><span class="line">-----END PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<p>使用openssl生成的私钥：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgttnLpyF/m2dNGMpk</span><br><span class="line">w1sNOB1uxgH51wNNW/XH5m5zl5WhRANCAATYaqb/YzWIAnq3rrNYenc53OZKnaNz</span><br><span class="line">LXieY6e3pGG4HTf4Zz9RE+ulifQ2Tg3+hB3Gcpu66LNefT75adpUFlDe</span><br><span class="line">-----END PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<p>由以上对比可知私钥格式正确。</p>
+<h3 id="5、证书解析对比"><a href="#5、证书解析对比" class="headerlink" title="5、证书解析对比"></a>5、证书解析对比</h3><p>将生成的ca.cert.pem和ca.key.pem，复制到ubuntu下使用命令：<code>openssl x509 -in ca.cert.pem -noout -tex</code>解析其内容。结果如下图。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/openssl/openssl-2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>若不给fabric-ca镜像配置启动的私钥和证书，他会自己生成一个（可以认为，这个证书的格式是可以启动fabric-ca的证书格式）。解析结果如下。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/openssl/openssl-3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>由以上对比可知自签名证书格式正确。</p>
+<h1 id="fabric-ca"><a href="#fabric-ca" class="headerlink" title="fabric-ca"></a>fabric-ca</h1><h2 id="1、文件组织"><a href="#1、文件组织" class="headerlink" title="1、文件组织"></a>1、文件组织</h2><p>目录结构如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~/Desktop/test$ tree	# 目录</span><br><span class="line">.</span><br><span class="line">├── ca								# 存储fabric-ca私钥公钥</span><br><span class="line">│   ├── ca.cert.pem</span><br><span class="line">│   └── ca.key.pem</span><br><span class="line">└── docker-compose.yaml				# 启动fabric-ca的配置文件</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br><span class="line">cups@ubuntu:~/Desktop/test$</span><br></pre></td></tr></table></figure>
+
+<p>请自行创建相关文件。</p>
+<h2 id="2、fabric-ca的配置文件编写"><a href="#2、fabric-ca的配置文件编写" class="headerlink" title="2、fabric-ca的配置文件编写"></a>2、fabric-ca的配置文件编写</h2><p>配置文件docker-compose.yaml的内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line">services:</span><br><span class="line">  ca:</span><br><span class="line">    container_name: ca</span><br><span class="line">    image: hyperledger/fabric-ca</span><br><span class="line">    environment:</span><br><span class="line">      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server</span><br><span class="line">      - FABRIC_CA_SERVER_CA_NAME=ca</span><br><span class="line">      - FABRIC_CA_SERVER_TLS_ENABLED=false</span><br><span class="line">    ports:</span><br><span class="line">      - "7054:7054"</span><br><span class="line">    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/ca.key.pem -b admin:adminpw -d'</span><br><span class="line">    volumes:</span><br><span class="line">      - ./ca/:/etc/hyperledger/fabric-ca-server-config</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、启动fabric-ca镜像"><a href="#3、启动fabric-ca镜像" class="headerlink" title="3、启动fabric-ca镜像"></a>3、启动fabric-ca镜像</h2><p>在docker-compose.yaml目录下打开镜像，或者当前目录切换到docker-compose.yaml所在目录。</p>
+<p>命令：<code>docker-compose -f docker-compose.yaml up</code></p>
+<p>-f 指定配置文件路径；配置文件为docker-compose.yaml；动作是up。</p>
+<p>执行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~/Desktop/test$ docker-compose -f docker-compose.yaml up</span><br><span class="line">Starting ca ... done</span><br><span class="line">Attaching to ca</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Home directory: /etc/hyperledger/fabric-ca-server</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Configuration file location: /etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Starting server in home directory: /etc/hyperledger/fabric-ca-server</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Set log level: </span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Server Version: 1.4.3</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Server Levels: &amp;&#123;Identity:2 Affiliation:1 Certificate:1 Credential:1 RAInfo:1 Nonce:1&#125;</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Making server filenames absolute</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing default CA in directory /etc/hyperledger/fabric-ca-server</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Init CA with home /etc/hyperledger/fabric-ca-server and config &#123;Version:1.4.3 Cfg:&#123;Identities:&#123;PasswordAttempts:10 AllowRemove:false&#125; Affiliations:&#123;AllowRemove:false&#125;&#125; CA:&#123;Name:ca Keyfile:/etc/hyperledger/fabric-ca-server-config/ca.key.pem Certfile:/etc/hyperledger/fabric-ca-server-config/ca.cert.pem Chainfile:ca-chain.pem&#125; Signing:0xc0001cd4f0 CSR:&#123;CN:fabric-ca-server Names:[&#123;C:US ST:North Carolina L: O:Hyperledger OU:Fabric SerialNumber:&#125;] Hosts:[302115a9775b localhost] KeyRequest:0xc000542d60 CA:0xc000542de0 SerialNumber:&#125; Registry:&#123;MaxEnrollments:-1 Identities:[&#123; Name:**** Pass:**** Type:client Affiliation: MaxEnrollments:0 Attrs:map[hf.GenCRL:1 hf.Registrar.Attributes:* hf.AffiliationMgr:1 hf.Registrar.Roles:* hf.Registrar.DelegateRoles:* hf.Revoker:1 hf.IntermediateCA:1]  &#125;]&#125; Affiliations:map[org2:[department1] org1:[department1 department2]] LDAP:&#123; Enabled:false URL:ldap://****:****@&lt;host&gt;:&lt;port&gt;/&lt;base&gt; UserFilter:(uid=%s) GroupFilter:(memberUid=%s) Attribute:&#123;[uid member] [&#123; &#125;] map[groups:[&#123; &#125;]]&#125; TLS:&#123;false [] &#123; &#125;&#125;  &#125; DB:&#123; Type:sqlite3 Datasource:fabric-ca-server.db TLS:&#123;false [] &#123; &#125;&#125;  &#125; CSP:0xc0005425e0 Client:&lt;nil&gt; Intermediate:&#123;ParentServer:&#123; URL: CAName:  &#125; TLS:&#123;Enabled:false CertFiles:[] Client:&#123;KeyFile: CertFile:&#125;&#125; Enrollment:&#123; Name: Secret:**** CAName: AttrReqs:[] Profile: Label: CSR:&lt;nil&gt; Type:x509  &#125;&#125; CRL:&#123;Expiry:24h0m0s&#125; Idemix:&#123;IssuerPublicKeyfile: IssuerSecretKeyfile: RevocationPublicKeyfile: RevocationPrivateKeyfile: RHPoolSize:1000 NonceExpiration:15s NonceSweepInterval:15m&#125;&#125;</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] CA Home Directory: /etc/hyperledger/fabric-ca-server</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Checking configuration file version '1.4.3' against server version: '1.4.3'</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing BCCSP: &amp;&#123;ProviderName:SW SwOpts:0xc000466400 PluginOpts:&lt;nil&gt;&#125;</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing BCCSP with software options &amp;&#123;SecLevel:256 HashFamily:SHA2 Ephemeral:false FileKeystore:0xc00018ef30 DummyKeystore:&lt;nil&gt; InmemKeystore:&lt;nil&gt;&#125;</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initialize key material</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Making CA filenames absolute</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] The CA key and certificate files already exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Key file location: /etc/hyperledger/fabric-ca-server-config/ca.key.pem</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Certificate file location: /etc/hyperledger/fabric-ca-server-config/ca.cert.pem</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Validating the CA certificate and key</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Check CA certificate for valid dates</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Check CA certificate for valid usages</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Check CA certificate for valid IsCA value</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Check that key type is supported</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Check that key size is of appropriate length</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Check that public key and private key match</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Validation of CA certificate and key successful</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Loading CN from existing enrollment information</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing DB</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing 'sqlite3' database at '/etc/hyperledger/fabric-ca-server/fabric-ca-server.db'</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Using sqlite database, connect to database in home (/etc/hyperledger/fabric-ca-server/fabric-ca-server.db) directory</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating SQLite database (/etc/hyperledger/fabric-ca-server/fabric-ca-server.db) if it does not exist...</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating users table if it does not exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating affiliations table if it does not exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating certificates table if it does not exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating credentials table if it does not exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating revocation_authority_info table if it does not exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating nonces table if it does not exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Creating properties table if it does not exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Successfully opened sqlite3 DB</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing identity registry</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initialized DB identity registry</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Checking database levels '&amp;&#123;Identity:2 Affiliation:1 Certificate:1 Credential:1 RAInfo:1 Nonce:1&#125;' against server levels '&amp;&#123;Identity:2 Affiliation:1 Certificate:1 Credential:1 RAInfo:1 Nonce:1&#125;'</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Loading identity table</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Loading identity 'admin'</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] DB: Getting identity admin</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Identity 'admin' already registered, loaded identity</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Successfully loaded identity table</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Loading affiliations table</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] DB: Add affiliation org2</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Affiliation 'org2' already exists</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] DB: Add affiliation org2.department1</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Affiliation 'org2.department1' already exists</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] DB: Add affiliation org1</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Affiliation 'org1' already exists</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] DB: Add affiliation org1.department1</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Affiliation 'org1.department1' already exists</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] DB: Add affiliation org1.department2</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Affiliation 'org1.department2' already exists</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Successfully loaded affiliations table</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Initialized sqlite3 database at /etc/hyperledger/fabric-ca-server/fabric-ca-server.db</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing enrollment signer</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] validating configuration</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] validate local profile</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] profile is valid</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] validate local profile</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] profile is valid</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] validate local profile</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] profile is valid</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] CA initialization successful</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initializing Idemix issuer...</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] The Idemix issuer public and secret key files already exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO]    secret key file location: /etc/hyperledger/fabric-ca-server/msp/keystore/IssuerSecretKey</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO]    public key file location: /etc/hyperledger/fabric-ca-server/IssuerPublicKey</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Intializing revocation authority for issuer 'ca'</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Initialize Idemix issuer revocation key material</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] The Idemix issuer revocation public and secret key files already exist</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO]    private key file location: /etc/hyperledger/fabric-ca-server/msp/keystore/IssuerRevocationPrivateKey</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO]    public key file location: /etc/hyperledger/fabric-ca-server/IssuerRevocationPublicKey</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] Intializing nonce manager for issuer 'ca'</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Home directory for default CA: /etc/hyperledger/fabric-ca-server</span><br><span class="line">ca    | 2020/09/15 01:34:27 [DEBUG] 1 CA instance(s) running on server</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Operation Server Listening on 127.0.0.1:9443</span><br><span class="line">ca    | 2020/09/15 01:34:27 [INFO] Listening on http://0.0.0.0:7054</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、获取注册证书"><a href="#4、获取注册证书" class="headerlink" title="4、获取注册证书"></a>4、获取注册证书</h2><p>使用管理员的账号密码—&gt;fabric-ca-server—-&gt;注册证书。</p>
+<p>指定证书目录：<code>export FABRIC_CA_CLIENT_HOME=$HOME/fabric-ca/clients/admin</code></p>
+<p>访问fabric-ca获得证书：<code>fabric-ca-client enroll -u http://admin:adminpw@localhost:7054</code></p>
+<p>执行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~/Desktop/test$ export FABRIC_CA_CLIENT_HOME=$HOME/fabric-ca/clients/admin</span><br><span class="line">cups@ubuntu:~/Desktop/test$ fabric-ca-client enroll -u http://admin:adminpw@localhost:7054</span><br><span class="line">2020/09/14 18:38:36 [INFO] Created a default configuration file at /home/cups/fabric-ca/clients/admin/fabric-ca-client-config.yaml</span><br><span class="line">2020/09/14 18:38:36 [INFO] generating key: &amp;&#123;A:ecdsa S:256&#125;</span><br><span class="line">2020/09/14 18:38:36 [INFO] encoded CSR</span><br><span class="line">2020/09/14 18:38:36 [INFO] Stored client certificate at /home/cups/fabric-ca/clients/admin/msp/signcerts/cert.pem</span><br><span class="line">2020/09/14 18:38:36 [INFO] Stored root CA certificate at /home/cups/fabric-ca/clients/admin/msp/cacerts/localhost-7054.pem</span><br><span class="line">2020/09/14 18:38:36 [INFO] Stored Issuer public key at /home/cups/fabric-ca/clients/admin/msp/IssuerPublicKey</span><br><span class="line">2020/09/14 18:38:36 [INFO] Stored Issuer revocation public key at /home/cups/fabric-ca/clients/admin/msp/IssuerRevocationPublicKey</span><br><span class="line">cups@ubuntu:~/Desktop/test$ cd /home/cups/fabric-ca/clients/admin</span><br><span class="line">cups@ubuntu:~/fabric-ca/clients/admin$ tree</span><br><span class="line">.</span><br><span class="line">├── fabric-ca-client-config.yaml</span><br><span class="line">└── msp</span><br><span class="line">    ├── cacerts</span><br><span class="line">    │   └── localhost-7054.pem				# ca证书</span><br><span class="line">    ├── IssuerPublicKey</span><br><span class="line">    ├── IssuerRevocationPublicKey</span><br><span class="line">    ├── keystore</span><br><span class="line">    │   └── 3e1c4a697b91754e15a58bbf03b0cf70685209c0bc5623177a3c06cc9d3a98fb_sk# 私钥</span><br><span class="line">    ├── signcerts</span><br><span class="line">    │   └── cert.pem						# 证书</span><br><span class="line">    └── user</span><br><span class="line"></span><br><span class="line">5 directories, 6 files</span><br><span class="line">cups@ubuntu:~/fabric-ca/clients/admin$</span><br></pre></td></tr></table></figure>
+
+<p>私钥：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgy56nUOfyYJnHBZo0</span><br><span class="line">5QOfXL2uqsThSVrFsALeaw6uEzihRANCAAQQyAWFNnjrdZeqHB4neLqS2CvJwUSD</span><br><span class="line">dPsv90DYvn1mnsjkMOKvnSGu8kag3pZe8kz/V/N9oiizDG3V+QVH77iv</span><br><span class="line">-----END PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<p>证书：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIICMTCCAdegAwIBAgIUWxENL/cshDIfEePTfmjfaMsn0pQwCgYIKoZIzj0EAwIw</span><br><span class="line">XzELMAkGA1UEBhMCQ04xDjAMBgNVBAgMBUNoaW5hMRQwEgYDVQQKDAtIeXBlcmxl</span><br><span class="line">ZGdlcjEPMA0GA1UECwwGRmFicmljMRkwFwYDVQQDDBBmYWJyaWMtY2Etc2VydmVy</span><br><span class="line">MB4XDTIwMDkxNTAxMzQwMFoXDTIxMDkxNTAxMzkwMFowXTELMAkGA1UEBhMCVVMx</span><br><span class="line">FzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBlcmxlZGdlcjEP</span><br><span class="line">MA0GA1UECxMGY2xpZW50MQ4wDAYDVQQDEwVhZG1pbjBZMBMGByqGSM49AgEGCCqG</span><br><span class="line">SM49AwEHA0IABBDIBYU2eOt1l6ocHid4upLYK8nBRIN0+y/3QNi+fWaeyOQw4q+d</span><br><span class="line">Ia7yRqDell7yTP9X832iKLMMbdX5BUfvuK+jczBxMA4GA1UdDwEB/wQEAwIHgDAM</span><br><span class="line">BgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRT4BW5+I8m9l0T5Sio2XLeLmj0NDAfBgNV</span><br><span class="line">HSMEGDAWgBT0bmfAQrUHf90oZ1W1qPANiZwDOzARBgNVHREECjAIggZ1YnVudHUw</span><br><span class="line">CgYIKoZIzj0EAwIDSAAwRQIhAIJdWFplP+J0aE1t0dgUEXOIa2+KjnNCpmhzA0C6</span><br><span class="line">gAlPAiBEBcRu/0oY0nxgvG5aZZQImVcap6A/rsldOM7uFDHefQ==</span><br><span class="line">-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、注册并获取一个peer证书"><a href="#5、注册并获取一个peer证书" class="headerlink" title="5、注册并获取一个peer证书"></a>5、注册并获取一个peer证书</h2><p>指定含有证书目录：<code>export FABRIC_CA_CLIENT_HOME=$HOME/fabric-ca/clients/admin</code></p>
+<p>登记peer0：<code>fabric-ca-client register --id.name peer0 --id.type peer --id.affiliation org1.department1 --id.secret peer0pw</code></p>
+<p>指定peer0证书目录：<code>export FABRIC_CA_CLIENT_HOME=$HOME/fabric-ca/clients/peer0</code></p>
+<p>注册peer0证书：<code>fabric-ca-client enroll -u http://peer0:peer0pw@localhost:7054 -M $FABRIC_CA_CLIENT_HOME/msp</code></p>
+<p>执行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~/Desktop/test$ export FABRIC_CA_CLIENT_HOME=$HOME/fabric-ca/clients/admin</span><br><span class="line">cups@ubuntu:~/Desktop/test$ fabric-ca-client register --id.name peer0 --id.type peer --id.affiliation org1.department1 --id.secret peer0pw</span><br><span class="line">2020/09/14 18:48:26 [INFO] Configuration file location: /home/cups/fabric-ca/clients/admin/fabric-ca-client-config.yaml</span><br><span class="line">Password: peer0pw</span><br><span class="line">cups@ubuntu:~/Desktop/test$ export FABRIC_CA_CLIENT_HOME=$HOME/fabric-ca/clients/peer0</span><br><span class="line">cups@ubuntu:~/Desktop/test$ fabric-ca-client enroll -u http://peer0:peer0pw@localhost:7054 -M $FABRIC_CA_CLIENT_HOME/msp</span><br><span class="line">2020/09/14 18:49:04 [INFO] Created a default configuration file at /home/cups/fabric-ca/clients/peer0/fabric-ca-client-config.yaml</span><br><span class="line">2020/09/14 18:49:04 [INFO] generating key: &amp;&#123;A:ecdsa S:256&#125;</span><br><span class="line">2020/09/14 18:49:04 [INFO] encoded CSR</span><br><span class="line">2020/09/14 18:49:04 [INFO] Stored client certificate at /home/cups/fabric-ca/clients/peer0/msp/signcerts/cert.pem</span><br><span class="line">2020/09/14 18:49:04 [INFO] Stored root CA certificate at /home/cups/fabric-ca/clients/peer0/msp/cacerts/localhost-7054.pem</span><br><span class="line">2020/09/14 18:49:04 [INFO] Stored Issuer public key at /home/cups/fabric-ca/clients/peer0/msp/IssuerPublicKey</span><br><span class="line">2020/09/14 18:49:04 [INFO] Stored Issuer revocation public key at /home/cups/fabric-ca/clients/peer0/msp/IssuerRevocationPublicKey</span><br><span class="line">cups@ubuntu:~/Desktop/test$ cd /home/cups/fabric-ca/clients/peer0</span><br><span class="line">cups@ubuntu:~/fabric-ca/clients/peer0$ tree</span><br><span class="line">.</span><br><span class="line">├── fabric-ca-client-config.yaml</span><br><span class="line">└── msp</span><br><span class="line">    ├── cacerts</span><br><span class="line">    │   └── localhost-7054.pem													# ca证书</span><br><span class="line">    ├── IssuerPublicKey</span><br><span class="line">    ├── IssuerRevocationPublicKey</span><br><span class="line">    ├── keystore</span><br><span class="line">    │   └── ab887f7d2829a0fdf48efb3b14782ae67ce8aabdca0c38b0aa79ab7c2803f946_sk	# 私钥</span><br><span class="line">    ├── signcerts</span><br><span class="line">    │   └── cert.pem															# 证书</span><br><span class="line">    └── user</span><br><span class="line"></span><br><span class="line">5 directories, 6 files</span><br><span class="line">cups@ubuntu:~/fabric-ca/clients/peer0$</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看fabric-ca镜像"><a href="#查看fabric-ca镜像" class="headerlink" title="查看fabric-ca镜像"></a>查看fabric-ca镜像</h1><p>查看：<code>docker ps</code></p>
+<p>执行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~/Desktop/test$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">302115a9775b        hyperledger/fabric-ca   "sh -c 'fabric-ca-se…"   14 hours ago        Up 20 minutes       0.0.0.0:7054-&gt;7054/tcp   ca</span><br><span class="line">cups@ubuntu:~/Desktop/test$</span><br></pre></td></tr></table></figure>
+
+<p>进入docker镜像：<code>docker exec -it 302115a9775b /bin/bash</code></p>
+<p>进入fabric-ca-server工作目录：<code>cd /etc/hyperledger/fabric-ca-server</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cups@ubuntu:~/Desktop/test$ docker exec -it 302115a9775b /bin/bash</span><br><span class="line">root@302115a9775b:/# ls</span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@302115a9775b:/# cd /etc/hyperledger/fabric-ca-server</span><br><span class="line">root@302115a9775b:/etc/hyperledger/fabric-ca-server# ls</span><br><span class="line">IssuerPublicKey  IssuerRevocationPublicKey  ca-cert.pem  ca-key.pem  fabric-ca-server-config.yaml  fabric-ca-server.db  msp</span><br><span class="line">root@302115a9775b:/etc/hyperledger/fabric-ca-server#</span><br></pre></td></tr></table></figure>
+
+<p>ctrl+D退出伪终端。</p>
+<p>把镜像中的fabric-ca-server.db复制出来：<code>docker container cp 302115a9775b:/etc/hyperledger/fabric-ca-server/fabric-ca-server.db ./</code></p>
+<p>查看fabric-ca-server.db内容。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/fabric-ca/fabric-ca-sqllite.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-09-20T11:40:12.161Z" itemprop="dateUpdated">2020-09-20 19:40:12</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%81%E4%B9%A6/" rel="tag">证书</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/&title=《使用openssl生成自签名证书并提供给fabric-ca使用》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/&title=《使用openssl生成自签名证书并提供给fabric-ca使用》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用openssl生成自签名证书并提供给fabric-ca使用》 — Cups&url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/09/15/2020/kafka/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">kafka集群部署</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/14/2020/node-sdk-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fabric-node-sdk简单使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/&title=《使用openssl生成自签名证书并提供给fabric-ca使用》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/&title=《使用openssl生成自签名证书并提供给fabric-ca使用》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用openssl生成自签名证书并提供给fabric-ca使用》 — Cups&url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2020/09/15/2020/generate-self-certification-certificates-using-openssl/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>LeetCode之多线程 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="LeetCode">
+    <meta name="description" content="多线程按序打印题目 我们提供了一个类： public class Foo {  public void one() { print(“one”); }  public void two() { print(“two”); }  public void three() { print(“three”); }}三个不同的线程将会共用一个 Foo 实例。 线程 A 将会调用 one() 方法线程 B 将">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode之多线程">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;11&#x2F;05&#x2F;2019&#x2F;leetcode-multithreading&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="多线程按序打印题目 我们提供了一个类： public class Foo {  public void one() { print(“one”); }  public void two() { print(“two”); }  public void three() { print(“three”); }}三个不同的线程将会共用一个 Foo 实例。 线程 A 将会调用 one() 方法线程 B 将">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-05T01:59:00.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LeetCode之多线程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LeetCode之多线程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-05T01:58:10.000Z" itemprop="datePublished" class="page-time">
+  2019-11-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/LeetCode/">LeetCode</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多线程"><span class="post-toc-text">多线程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#按序打印"><span class="post-toc-text">按序打印</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目"><span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#队列"><span class="post-toc-text">队列</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#while循环等待"><span class="post-toc-text">while循环等待</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交替打印FooBar"><span class="post-toc-text">交替打印FooBar</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目-1"><span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程"><span class="post-toc-text">线程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#队列-1"><span class="post-toc-text">队列</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打印零与奇偶数"><span class="post-toc-text">打印零与奇偶数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目-2"><span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程-1"><span class="post-toc-text">线程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#队列-2"><span class="post-toc-text">队列</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#H2O生成"><span class="post-toc-text">H2O生成</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目-3"><span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#队列-3"><span class="post-toc-text">队列</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交替打印字符串"><span class="post-toc-text">交替打印字符串</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目-4"><span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#列表方式"><span class="post-toc-text">列表方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#哲学家进餐"><span class="post-toc-text">哲学家进餐</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题目-5"><span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#线程锁"><span class="post-toc-text">线程锁</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/leetcode-multithreading"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LeetCode之多线程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-05 09:58:10" datetime="2019-11-05T01:58:10.000Z"  itemprop="datePublished">2019-11-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/LeetCode/">LeetCode</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="按序打印"><a href="#按序打印" class="headerlink" title="按序打印"></a>按序打印</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>我们提供了一个类：</p>
+<p>public class Foo {<br>  public void one() { print(“one”); }<br>  public void two() { print(“two”); }<br>  public void three() { print(“three”); }<br>}<br>三个不同的线程将会共用一个 Foo 实例。</p>
+<p>线程 A 将会调用 one() 方法<br>线程 B 将会调用 two() 方法<br>线程 C 将会调用 three() 方法<br>请设计修改程序，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。</p>
+<p>示例 1:</p>
+<p>输入: [1,2,3]<br>输出: “onetwothree”<br>解释:<br>有三个线程会被异步启动。<br>输入 [1,2,3] 表示线程 A 将会调用 one() 方法，线程 B 将会调用 two() 方法，线程 C 将会调用 three() 方法。<br>正确的输出是 “onetwothree”。<br>示例 2:</p>
+<p>输入: [1,3,2]<br>输出: “onetwothree”<br>解释:<br>输入 [1,3,2] 表示线程 A 将会调用 one() 方法，线程 B 将会调用 three() 方法，线程 C 将会调用 two() 方法。<br>正确的输出是 “onetwothree”。</p>
+<p>注意:</p>
+<p>尽管输入中的数字似乎暗示了顺序，但是我们并不保证线程在操作系统中的调度顺序。</p>
+<p>你看到的输入格式主要是为了确保测试的全面性。</p>
+</blockquote>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.q2 = Queue.Queue()</span><br><span class="line">        self.q3 = Queue.Queue()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">first</span><span class="params">(self, printFirst)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printFirst: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># printFirst() outputs "first". Do not change or remove this line.</span></span><br><span class="line">        printFirst()</span><br><span class="line">        self.q2.put(<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">second</span><span class="params">(self, printSecond)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printSecond: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># printSecond() outputs "second". Do not change or remove this line.</span></span><br><span class="line">        self.q2.get()</span><br><span class="line">        printSecond()</span><br><span class="line">        self.q3.put(<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">third</span><span class="params">(self, printThird)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printThird: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># printThird() outputs "third". Do not change or remove this line.</span></span><br><span class="line">        self.q3.get()</span><br><span class="line">        printThird()</span><br></pre></td></tr></table></figure>
+
+<h3 id="while循环等待"><a href="#while循环等待" class="headerlink" title="while循环等待"></a>while循环等待</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.run_index = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">first</span><span class="params">(self, printFirst)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printFirst: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># printFirst() outputs "first". Do not change or remove this line.</span></span><br><span class="line">        printFirst()</span><br><span class="line">        self.run_index = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">second</span><span class="params">(self, printSecond)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printSecond: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> self.run_index != <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="comment"># printSecond() outputs "second". Do not change or remove this line.</span></span><br><span class="line">        printSecond()</span><br><span class="line">        self.run_index = <span class="number">2</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">third</span><span class="params">(self, printThird)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printThird: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> self.run_index != <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="comment"># printThird() outputs "third". Do not change or remove this line.</span></span><br><span class="line">        printThird()</span><br><span class="line">        self.run_index = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="交替打印FooBar"><a href="#交替打印FooBar" class="headerlink" title="交替打印FooBar"></a>交替打印FooBar</h2><h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>我们提供一个类：</p>
+<p>class FooBar {<br>  public void foo() {<br>    for (int i = 0; i &lt; n; i++) {<br>      print(“foo”);<br>    }<br>  }</p>
+<p>  public void bar() {<br>    for (int i = 0; i &lt; n; i++) {<br>      print(“bar”);<br>    }<br>  }<br>}<br>两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法。</p>
+<p>请设计修改程序，以确保 “foobar” 被输出 n 次。</p>
+<p>示例 1:</p>
+<p>输入: n = 1<br>输出: “foobar”<br>解释: 这里有两个线程被异步启动。其中一个调用 foo() 方法, 另一个调用 bar() 方法，”foobar” 将被输出一次。<br>示例 2:</p>
+<p>输入: n = 2<br>输出: “foobarfoobar”<br>解释: “foobar” 将被输出两次。</p>
+</blockquote>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        self.n = n</span><br><span class="line">        self.printf = threading.Lock()</span><br><span class="line">        self.printb = threading.Lock()</span><br><span class="line">        self.printb.acquire()</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self, printFoo)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printFoo: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(self.n):</span><br><span class="line">            self.printf.acquire()</span><br><span class="line">            <span class="comment"># printFoo() outputs "foo". Do not change or remove this line.</span></span><br><span class="line">            printFoo()</span><br><span class="line">            self.printb.release()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(self, printBar)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printBar: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(self.n):</span><br><span class="line">            self.printb.acquire()</span><br><span class="line"></span><br><span class="line">            <span class="comment"># printBar() outputs "bar". Do not change or remove this line.</span></span><br><span class="line">            printBar()</span><br><span class="line">            self.printf.release()</span><br></pre></td></tr></table></figure>
+
+<h3 id="队列-1"><a href="#队列-1" class="headerlink" title="队列"></a>队列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        self.n = n</span><br><span class="line">        self.q1 = Queue.Queue() </span><br><span class="line">        self.q2 = Queue.Queue() </span><br><span class="line">        self.q1.put(<span class="string">""</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self, printFoo)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printFoo: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(self.n):</span><br><span class="line">            self.q1.get()</span><br><span class="line">            <span class="comment"># printFoo() outputs "foo". Do not change or remove this line.</span></span><br><span class="line">            printFoo()</span><br><span class="line">            self.q2.put(<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(self, printBar)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printBar: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(self.n):</span><br><span class="line">            self.q2.get()</span><br><span class="line">            <span class="comment"># printBar() outputs "bar". Do not change or remove this line.</span></span><br><span class="line">            printBar()</span><br><span class="line">            self.q1.put(<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="打印零与奇偶数"><a href="#打印零与奇偶数" class="headerlink" title="打印零与奇偶数"></a>打印零与奇偶数</h2><h3 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>假设有这么一个类：</p>
+<p>class ZeroEvenOdd {<br> public ZeroEvenOdd(int n) { … }      // 构造函数<br> public void zero(printNumber) { … }  // 仅打印出 0<br> public void even(printNumber) { … }  // 仅打印出 偶数<br> public void odd(printNumber) { … }   // 仅打印出 奇数<br>}<br>相同的一个 ZeroEvenOdd 类实例将会传递给三个不同的线程：</p>
+<p>线程 A 将调用 zero()，它只输出 0 。<br>线程 B 将调用 even()，它只输出偶数。<br>线程 C 将调用 odd()，它只输出奇数。<br>每个线程都有一个 printNumber 方法来输出一个整数。请修改给出的代码以输出整数序列 010203040506… ，其中序列的长度必须为 2n。</p>
+<p>示例 1：</p>
+<p>输入：n = 2<br>输出：”0102”<br>说明：三条线程异步执行，其中一个调用 zero()，另一个线程调用 even()，最后一个线程调用odd()。正确的输出为 “0102”。<br>示例 2：</p>
+<p>输入：n = 5<br>输出：”0102030405”</p>
+</blockquote>
+<h3 id="线程-1"><a href="#线程-1" class="headerlink" title="线程"></a>线程</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Semaphore</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZeroEvenOdd</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        self.n = n</span><br><span class="line">        self.lock1 = Semaphore(<span class="number">1</span>)</span><br><span class="line">        self.lock2 = Semaphore(<span class="number">0</span>)</span><br><span class="line">        self.lock3 = Semaphore(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">	<span class="comment"># printNumber(x) outputs "x", where x is an integer.</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">zero</span><span class="params">(self, printNumber)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printNumber: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,self.n+<span class="number">1</span>):</span><br><span class="line">            self.lock1.acquire()</span><br><span class="line">            printNumber(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 为偶数解锁 even</span></span><br><span class="line">                self.lock2.release()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 为奇数解锁 even</span></span><br><span class="line">                self.lock3.release()</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">even</span><span class="params">(self, printNumber)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printNumber: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,self.n+<span class="number">1</span>,<span class="number">2</span>):</span><br><span class="line">            self.lock2.acquire()</span><br><span class="line">            printNumber(i)</span><br><span class="line">            self.lock1.release()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">odd</span><span class="params">(self, printNumber)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type printNumber: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,self.n+<span class="number">1</span>,<span class="number">2</span>):</span><br><span class="line">            self.lock3.acquire()</span><br><span class="line">            printNumber(i)</span><br><span class="line">            self.lock1.release()</span><br></pre></td></tr></table></figure>
+
+<h3 id="队列-2"><a href="#队列-2" class="headerlink" title="队列"></a>队列</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line">class ZeroEvenOdd(object):</span><br><span class="line">    def __init__(self, n):</span><br><span class="line">        self.n = n</span><br><span class="line">        self.q0 = Queue.Queue(<span class="number">1</span>)</span><br><span class="line">        self.q1 = Queue.Queue(<span class="number">1</span>)</span><br><span class="line">        self.q2 = Queue.Queue(<span class="number">1</span>)</span><br><span class="line">        self.q0.put(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">	# printNumber(x) outputs <span class="string">"x"</span>, where x is an integer.</span><br><span class="line">    def zero(self, printNumber):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        :type printNumber: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        <span class="keyword">for</span> i in <span class="keyword">range</span>(<span class="number">1</span>, self.n+<span class="number">1</span>):</span><br><span class="line">            self.q0.get(<span class="number">1</span>)</span><br><span class="line">            printNumber(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span> :</span><br><span class="line">                self.q1.put(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.q2.put(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    def even(self, printNumber):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        :type printNumber: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        <span class="keyword">for</span> i in <span class="keyword">range</span>(<span class="number">2</span>, self.n+<span class="number">1</span>, <span class="number">2</span>):</span><br><span class="line">            self.q2.get(<span class="number">1</span>)</span><br><span class="line">            printNumber(i)</span><br><span class="line">            self.q0.put(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    def odd(self, printNumber):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        :type printNumber: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        <span class="keyword">for</span> i in <span class="keyword">range</span>(<span class="number">1</span>, self.n+<span class="number">1</span>, <span class="number">2</span>):</span><br><span class="line">            self.q1.get(<span class="number">1</span>)</span><br><span class="line">            printNumber(i)</span><br><span class="line">            self.q0.put(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="H2O生成"><a href="#H2O生成" class="headerlink" title="H2O生成"></a>H2O生成</h2><h3 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>现在有两种线程，氢 oxygen 和氧 hydrogen，你的目标是组织这两种线程来产生水分子。</p>
+<p>存在一个屏障（barrier）使得每个线程必须等候直到一个完整水分子能够被产生出来。</p>
+<p>氢和氧线程会被分别给予 releaseHydrogen 和 releaseOxygen 方法来允许它们突破屏障。</p>
+<p>这些线程应该三三成组突破屏障并能立即组合产生一个水分子。</p>
+<p>你必须保证产生一个水分子所需线程的结合必须发生在下一个水分子产生之前。</p>
+<p>换句话说:</p>
+<p>如果一个氧线程到达屏障时没有氢线程到达，它必须等候直到两个氢线程到达。<br>如果一个氢线程到达屏障时没有其它线程到达，它必须等候直到一个氧线程和另一个氢线程到达。<br>书写满足这些限制条件的氢、氧线程同步代码。</p>
+<p>示例 1:</p>
+<p>输入: “HOH”<br>输出: “HHO”<br>解释: “HOH” 和 “OHH” 依然都是有效解。<br>示例 2:</p>
+<p>输入: “OOHHHH”<br>输出: “HHOHHO”<br>解释: “HOHHHO”, “OHHHHO”, “HHOHOH”, “HOHHOH”, “OHHHOH”, “HHOOHH”, “HOHOHH” 和 “OHHOHH” 依然都是有效解。</p>
+<p>限制条件:</p>
+<p>输入字符串的总长将会是 3n, 1 ≤ n ≤ 50；<br>输入字符串中的 “H” 总数将会是 2n；<br>输入字符串中的 “O” 总数将会是 n。</p>
+</blockquote>
+<h3 id="队列-3"><a href="#队列-3" class="headerlink" title="队列"></a>队列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Semaphore</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">H2O</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.h, self.o = [], []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hydrogen</span><span class="params">(self, releaseHydrogen)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type releaseHydrogen: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.h.append(releaseHydrogen)</span><br><span class="line">        self.res()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">oxygen</span><span class="params">(self, releaseOxygen)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type releaseOxygen: method</span></span><br><span class="line"><span class="string">        :rtype: void</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.o.append(releaseOxygen)</span><br><span class="line">        self.res()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">res</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.h) &gt; <span class="number">1</span> <span class="keyword">and</span> len(self.o) &gt; <span class="number">0</span>:</span><br><span class="line">            self.h.pop(<span class="number">0</span>)()</span><br><span class="line">            self.h.pop(<span class="number">0</span>)()</span><br><span class="line">            self.o.pop(<span class="number">0</span>)()</span><br></pre></td></tr></table></figure>
+
+<h2 id="交替打印字符串"><a href="#交替打印字符串" class="headerlink" title="交替打印字符串"></a>交替打印字符串</h2><h3 id="题目-4"><a href="#题目-4" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>编写一个可以从 1 到 n 输出代表这个数字的字符串的程序，但是：</p>
+<p>如果这个数字可以被 3 整除，输出 “fizz”。<br>如果这个数字可以被 5 整除，输出 “buzz”。<br>如果这个数字可以同时被 3 和 5 整除，输出 “fizzbuzz”。<br>例如，当 n = 15，输出： 1, 2, fizz, 4, buzz, fizz, 7, 8, fizz, buzz, 11, fizz, 13, 14, fizzbuzz。</p>
+<p>假设有这么一个类：</p>
+<p>class FizzBuzz {<br>  public FizzBuzz(int n) { … }               // constructor<br>  public void fizz(printFizz) { … }          // only output “fizz”<br>  public void buzz(printBuzz) { … }          // only output “buzz”<br>  public void fizzbuzz(printFizzBuzz) { … }  // only output “fizzbuzz”<br>  public void number(printNumber) { … }      // only output the numbers<br>}<br>请你实现一个有四个线程的多线程版  FizzBuzz， 同一个 FizzBuzz 实例会被如下四个线程使用：</p>
+<p>线程A将调用 fizz() 来判断是否能被 3 整除，如果可以，则输出 fizz。<br>线程B将调用 buzz() 来判断是否能被 5 整除，如果可以，则输出 buzz。<br>线程C将调用 fizzbuzz() 来判断是否同时能被 3 和 5 整除，如果可以，则输出 fizzbuzz。<br>线程D将调用 number() 来实现输出既不能被 3 整除也不能被 5 整除的数字。</p>
+</blockquote>
+<h3 id="列表方式"><a href="#列表方式" class="headerlink" title="列表方式"></a>列表方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FizzBuzz</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n: int)</span>:</span></span><br><span class="line">        self.n = n</span><br><span class="line">        self.d = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fizz</span><span class="params">(self, printFizz: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.d[<span class="string">'f'</span>] = printFizz</span><br><span class="line">        self.res()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">buzz</span><span class="params">(self, printBuzz: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.d[<span class="string">'b'</span>] = printBuzz</span><br><span class="line">        self.res()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fizzbuzz</span><span class="params">(self, printFizzBuzz: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.d[<span class="string">'fb'</span>] = printFizzBuzz</span><br><span class="line">        self.res()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">number</span><span class="params">(self, printNumber: <span class="string">'Callable[[int], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.d[<span class="string">'n'</span>] = printNumber</span><br><span class="line">        self.res()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">res</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.d) == <span class="number">4</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, self.n + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> i % <span class="number">15</span> == <span class="number">0</span>:</span><br><span class="line">                    self.d[<span class="string">'fb'</span>]()</span><br><span class="line">                <span class="keyword">elif</span> i % <span class="number">3</span> == <span class="number">0</span>:</span><br><span class="line">                    self.d[<span class="string">'f'</span>]()</span><br><span class="line">                <span class="keyword">elif</span> i % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">                    self.d[<span class="string">'b'</span>]()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    self.d[<span class="string">'n'</span>](i)</span><br></pre></td></tr></table></figure>
+
+<h3 id="哲学家进餐"><a href="#哲学家进餐" class="headerlink" title="哲学家进餐"></a>哲学家进餐</h3><h4 id="题目-5"><a href="#题目-5" class="headerlink" title="题目"></a>题目</h4><blockquote>
+<p>5 个沉默寡言的哲学家围坐在圆桌前，每人面前一盘意面。叉子放在哲学家之间的桌面上。（5 个哲学家，5 根叉子）</p>
+<p>所有的哲学家都只会在思考和进餐两种行为间交替。哲学家只有同时拿到左边和右边的叉子才能吃到面，而同一根叉子在同一时间只能被一个哲学家使用。每个哲学家吃完面后都需要把叉子放回桌面以供其他哲学家吃面。只要条件允许，哲学家可以拿起左边或者右边的叉子，但在没有同时拿到左右叉子时不能进食。</p>
+<p>假设面的数量没有限制，哲学家也能随便吃，不需要考虑吃不吃得下。</p>
+<p>设计一个进餐规则（并行算法）使得每个哲学家都不会挨饿；也就是说，在没有人知道别人什么时候想吃东西或思考的情况下，每个哲学家都可以在吃饭和思考之间一直交替下去。</p>
+<p>哲学家从 0 到 4 按 顺时针 编号。请实现函数 void wantsToEat(philosopher, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork)：</p>
+<p>philosopher 哲学家的编号。<br>pickLeftFork 和 pickRightFork 表示拿起左边或右边的叉子。<br>eat 表示吃面。<br>putLeftFork 和 pickRightFork 表示放下左边或右边的叉子。<br>由于哲学家不是在吃面就是在想着啥时候吃面，所以思考这个方法没有对应的回调。<br>给你 5 个线程，每个都代表一个哲学家，请你使用类的同一个对象来模拟这个过程。在最后一次调用结束之前，可能会为同一个哲学家多次调用该函数。</p>
+<p>示例：</p>
+<p>输入：n = 1<br>输出：[[4,2,1],[4,1,1],[0,1,1],[2,2,1],[2,1,1],[2,0,3],[2,1,2],[2,2,2],[4,0,3],[4,1,2],[0,2,1],[4,2,2],[3,2,1],[3,1,1],[0,0,3],[0,1,2],[0,2,2],[1,2,1],[1,1,1],[3,0,3],[3,1,2],[3,2,2],[1,0,3],[1,1,2],[1,2,2]]<br>解释:<br>n 表示每个哲学家需要进餐的次数。<br>输出数组描述了叉子的控制和进餐的调用，它的格式如下：<br>output[i] = [a, b, c] (3个整数)</p>
+<ul>
+<li>a 哲学家编号。</li>
+<li>b 指定叉子：{1 : 左边, 2 : 右边}.</li>
+<li>c 指定行为：{1 : 拿起, 2 : 放下, 3 : 吃面}。<br>如 [4,2,1] 表示 4 号哲学家拿起了右边的叉子。</li>
+</ul>
+<p>提示：</p>
+<p>1 &lt;= n &lt;= 60</p>
+</blockquote>
+<h4 id="线程锁"><a href="#线程锁" class="headerlink" title="线程锁"></a>线程锁</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.l = threading.Lock()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wantsToEat</span><span class="params">(self, philosopher, *actions)</span>:</span></span><br><span class="line">        self.l.acquire()</span><br><span class="line">        [*map(<span class="keyword">lambda</span> func: func(), actions)]</span><br><span class="line">        self.l.release()</span><br></pre></td></tr></table></figure>
+
+
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-11-05T01:59:00.000Z" itemprop="dateUpdated">2019-11-05 09:59:00</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/&title=《LeetCode之多线程》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/&title=《LeetCode之多线程》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《LeetCode之多线程》 — Cups&url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/28/2019/Fabric_CA_Operations_Guide/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Fabric CA操作指南</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/03/2019/find-2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">find2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/&title=《LeetCode之多线程》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/&title=《LeetCode之多线程》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《LeetCode之多线程》 — Cups&url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/11/05/2019/leetcode-multithreading/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

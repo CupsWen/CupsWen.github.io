@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Fabric CA操作指南 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,Fabric-CA">
+    <meta name="description" content="Fabric CA Operations GuideThis guide will illustrate how to use Fabric CA to setup a Fabric network. All identities that participate on a Hyperledger Fabric blockchain network must be authorized. This">
+<meta name="keywords" content="Fabric,Fabric-CA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fabric CA操作指南">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;2019&#x2F;Fabric_CA_Operations_Guide&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="Fabric CA Operations GuideThis guide will illustrate how to use Fabric CA to setup a Fabric network. All identities that participate on a Hyperledger Fabric blockchain network must be authorized. This">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;network_topology.png">
+<meta property="og:updated_time" content="2019-11-28T02:48:57.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;network_topology.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Fabric CA操作指南</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Fabric CA操作指南</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-28T02:05:10.000Z" itemprop="datePublished" class="page-time">
+  2019-11-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Fabric-CA-Operations-Guide"><span class="post-toc-text">Fabric CA Operations Guide</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Topology"><span class="post-toc-text">Topology</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Setup-CAs"><span class="post-toc-text">Setup CAs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Download-fabric-ca-client-binary"><span class="post-toc-text">Download fabric-ca-client binary</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Setup-TLS-CA"><span class="post-toc-text">Setup TLS CA</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Enroll-TLS-CA’s-Admin"><span class="post-toc-text">Enroll TLS CA’s Admin</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Setup-Orderer-Org-CA"><span class="post-toc-text">Setup Orderer Org CA</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Enroll-Orderer-Org’s-CA-Admin"><span class="post-toc-text">Enroll Orderer Org’s CA Admin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Setup-Org1’s-CA"><span class="post-toc-text">Setup Org1’s CA</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Enroll-Org1’s-CA-Admin"><span class="post-toc-text">Enroll Org1’s CA Admin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Setup-Org2’s-CA"><span class="post-toc-text">Setup Org2’s CA</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Enrolling-Org2’s-CA-Admin"><span class="post-toc-text">Enrolling Org2’s CA Admin</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Setup-Peers"><span class="post-toc-text">Setup Peers</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Setup-Orderer"><span class="post-toc-text">Setup Orderer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Create-CLI-Containers"><span class="post-toc-text">Create CLI Containers</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Create-and-Join-Channel"><span class="post-toc-text">Create and Join Channel</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Install-and-Instantiate-Chaincode"><span class="post-toc-text">Install and Instantiate Chaincode</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/Fabric_CA_Operations_Guide"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Fabric CA操作指南</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-28 10:05:10" datetime="2019-11-28T02:05:10.000Z"  itemprop="datePublished">2019-11-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Fabric-CA-Operations-Guide"><a href="#Fabric-CA-Operations-Guide" class="headerlink" title="Fabric CA Operations Guide"></a>Fabric CA Operations Guide</h1><p>This guide will illustrate how to use Fabric CA to setup a Fabric network. All identities that participate on a Hyperledger Fabric blockchain network must be authorized. This authorization is provided in the form of cryptographic material that is verified against trusted authorities.</p>
+<p>In this guide, you will see the process for setting up a blockchain network that includes two organizations, each with two peers and an orderer. You’ll see how to generate cryptographic material for orderers, peers, administrators, and end users so that private keys never leave the host or container where they are generated.</p>
+<p>本指南将说明如何使用Fabric CA设置Fabric网络。 参与Hyperledger Fabric区块链网络的所有身份都必须得到授权。 该授权以加密材料的形式提供，该加密材料已根据可信任的权威机构进行了验证。</p>
+<p>在本指南中，您将看到建立包括两个组织的区块链网络的过程，每个组织都有两个对等方和一个订购者。 您将看到如何为订购者，对等方，管理员和最终用户生成加密材料，以使私钥永远不会离开生成它们的主机或容器。</p>
+<h2 id="Topology"><a href="#Topology" class="headerlink" title="Topology"></a>Topology</h2><p>In this example, we will look at how to setup up an orderer, peers, and CAs across three organizations. The topology of this deployment can be seen in the image below: </p>
+<p>在此示例中，我们将研究如何在三个组织中设置Orderer，Peer和CA。 下图显示了此部署的拓扑：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/network_topology.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>This example will simulate a deployment using docker containers. The containers will be treated as if they are running on different host machines. This is done so that you can see which assets need to be exchanged out-of-band between the parties involved in the network.</p>
+<p>The network configuration for docker assumes that all containers are running in the same network. If your deployment is spread across different networks, the example will be need to be adjusted to work with your network configurations.</p>
+<p>The documentation below breaks down the docker-compose file to talk about individual components. To see the entire docker-compose, click <a href="https://hyperledger-fabric-ca.readthedocs.io/en/latest/docker_compose.html" target="_blank" rel="noopener">here</a>.</p>
+<p>本示例将模拟使用docker容器的部署。 容器将被视为在不同的主机上运行。 这样做是为了让您可以看到需要在网络参与方之间进行带外交换的资产。</p>
+<p>docker的网络配置假定所有容器都在同一网络中运行。 如果您的部署分散在不同的网络中，则需要对示例进行调整以使用您的网络配置。</p>
+<p>以下文档细分了docker-compose文件，以讨论各个组件。 要查看整个docker-compose，请单击[此处]（<a href="https://hyperledger-fabric-ca.readthedocs.io/en/latest/docker_compose.html）。" target="_blank" rel="noopener">https://hyperledger-fabric-ca.readthedocs.io/en/latest/docker_compose.html）。</a></p>
+<h2 id="Setup-CAs"><a href="#Setup-CAs" class="headerlink" title="Setup CAs"></a>Setup CAs</h2><h3 id="Download-fabric-ca-client-binary"><a href="#Download-fabric-ca-client-binary" class="headerlink" title="Download fabric-ca-client binary"></a>Download fabric-ca-client binary</h3><p> For each host that needs to acquire cryptographic material, you will need to have the fabric-ca-client binary available on the host machine. The client will be used to connect to the Fabric CA server container. </p>
+<p>对于每个需要获取加密材料的主机，您将需要在主机上使用fabric-ca-client二进制文件。 客户端将用于连接到Fabric CA服务器容器。</p>
+<p> To download the fabric-ca-client binary, browse to this <a href="https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric-ca/hyperledger-fabric-ca/" target="_blank" rel="noopener">repository</a> and select the latest binary for your machine. </p>
+<p>要下载fabric-ca-client二进制文件，请浏览到此[存储库]（<a href="https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric-ca/hyperledger-fabric-ca/）并选择" target="_blank" rel="noopener">https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric-ca/hyperledger-fabric-ca/）并选择</a> 适用于您计算机的最新二进制文件。</p>
+<blockquote>
+<p>note:</p>
+<p>This example is using version 1.4.0 of fabric-ca-client. </p>
+</blockquote>
+<h3 id="Setup-TLS-CA"><a href="#Setup-TLS-CA" class="headerlink" title="Setup TLS CA"></a>Setup TLS CA</h3><p>A TLS CA is used to issue TLS certificates. These certificates are required in order to secure the communication between various processes.</p>
+<p>In order to simplify this example, all organizations will use the same TLS CA and TLS mutual authentication is disabled.</p>
+<p>TLS CA用于颁发TLS证书。 这些证书是必需的，以确保各种过程之间的通信安全。</p>
+<p>为了简化此示例，所有组织将使用相同的TLS CA，并且TLS相互身份验证已禁用。</p>
+<blockquote>
+<p>note:</p>
+<p>In a production environment, you will probably use your organization’s CA to get TLS certificates. You will have to transfer out-of-band your CA’s certificate with organizations that will validate your TLS certificates. </p>
+<p>在生产环境中，您可能会使用组织的CA获得TLS证书。 您将必须与将验证TLS证书的组织一起带外转让CA证书。</p>
+</blockquote>
+<p> A docker service, such as the one below can be used to a launch a Fabric TLS CA container. </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ca-tls:</span></span><br><span class="line"><span class="attr">  container_name:</span> <span class="string">ca-tls</span></span><br><span class="line"><span class="attr">  image:</span> <span class="string">hyperledger/fabric-ca</span></span><br><span class="line"><span class="attr">  command:</span> <span class="string">sh</span> <span class="bullet">-c</span> <span class="string">'fabric-ca-server start -d -b tls-ca-admin:tls-ca-adminpw --port 7052'</span></span><br><span class="line"><span class="attr">  environment:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">FABRIC_CA_SERVER_HOME=/tmp/hyperledger/fabric-ca/crypto</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">FABRIC_CA_SERVER_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">FABRIC_CA_SERVER_CSR_CN=ca-tls</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">FABRIC_CA_SERVER_CSR_HOSTS=0.0.0.0</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">FABRIC_CA_SERVER_DEBUG=true</span></span><br><span class="line"><span class="attr">  volumes:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">/tmp/hyperledger/tls/ca:/tmp/hyperledger/fabric-ca</span></span><br><span class="line"><span class="attr">  networks:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">fabric-ca</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="number">7052</span><span class="string">:7052</span></span><br></pre></td></tr></table></figure>
+
+<p> This container can be started using the following docker command. </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">docker-compose</span> <span class="string">up</span> <span class="string">ca-tls</span></span><br></pre></td></tr></table></figure>
+
+<p> On a successful launch of the container, you will see the following line in the CA container’s log. </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[INFO]</span> <span class="string">Listening</span> <span class="string">on</span> <span class="attr">https://0.0.0.0:7052</span></span><br></pre></td></tr></table></figure>
+
+<p> At this point the TLA CA server is on a listening on a secure socket, and can start issuing TLS certificates. </p>
+<h4 id="Enroll-TLS-CA’s-Admin"><a href="#Enroll-TLS-CA’s-Admin" class="headerlink" title="Enroll TLS CA’s Admin"></a>Enroll TLS CA’s Admin</h4><p>Before you can start using the CA client, you must acquire the signing certificate for the CA’s TLS certificate. This is a required step before you can connect using TLS.</p>
+<p>In our example, you would need to acquire the file located at /tmp/hyperledger/tls/ca/crypto/ca-cert.pem on the machine running the TLS CA server and copy this file over to the host where you will be running the CA client binary. This certificate, also known as the TLS CA’s signing certificate is going to be used to validate the TLS certificate of the CA. Once the certificate has been copied over to the CA client’s host machine, you can start issuing commands using the CA.</p>
+<p>The TLS CA’s signing certificate will need to be available on each host that will run commands against the TLS CA.</p>
+<p>The TLS CA server was started with a bootstrap identity which has full admin privileges for the server. One of the key abilities of the admin is the ability to register new identities. The administrator for this CA will use the Fabric CA client to register four new identities with the CA, one for each peer and one for the orderer. These identities will be used to get TLS certificates for peers and orderers.</p>
+<p>You will issue the commands below to enroll the TLS CA admin and then register identities. We assume the trusted root certificate for the TLS CA has been copied to /tmp/hyperledger/tls-ca/crypto/tls-ca-cert.pem on all host machines that will communicate with this CA via the fabric-ca-client.</p>
+<p>必须先获取CA的TLS证书的签名证书，然后才能开始使用CA客户端。这是必需的步骤，您可以使用TLS进行连接。</p>
+<p>在我们的示例中，您将需要获取运行TLS CA服务器的计算机上/tmp/hyperledger/tls/ca/crypto/ca-cert.pem上的文件，并将该文件复制到要运行的主机上CA客户端二进制文件。该证书（也称为TLS CA的签名证书）将用于验证CA的TLS证书。证书复制到CA客户端的主机后，您可以使用CA开始发布命令。</p>
+<p>TLS CA的签名证书将需要在将对TLS CA运行命令的每台主机上可用。</p>
+<p>TLS CA服务器以引导程序身份启动，该身份具有服务器的完全管理员特权。管理员的关键能力之一是注册新身份的能力。该CA的管理员将使用Fabric CA客户端向CA注册四个新身份，每个身份用于每个对等方，一个用于订购者。这些身份将用于为同级和订购者获取TLS证书。</p>
+<p>您将发出以下命令来注册TLS CA管理员，然后注册身份。我们假定TLS CA的受信任根证书已复制到将通过fabric-ca-client与该CA通信的所有主机上的/tmp/hyperledger/tls-ca/crypto/tls-ca-cert.pem。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export FABRIC_CA_CLIENT_TLS_CERTFILES=/tmp/hyperledger/tls-ca/crypto/tls-ca-cert.pem</span><br><span class="line">export FABRIC_CA_CLIENT_HOME=/tmp/hyperledger/tls-ca/admin</span><br><span class="line">fabric-ca-client enroll -d -u https://tls-ca-admin:tls-ca-adminpw@0.0.0.0:7052</span><br><span class="line">fabric-ca-client register -d --id.name peer1-org1 --id.secret peer1PW --id.type peer -u https://0.0.0.0:7052</span><br><span class="line">fabric-ca-client register -d --id.name peer2-org1 --id.secret peer2PW --id.type peer -u https://0.0.0.0:7052</span><br><span class="line">fabric-ca-client register -d --id.name peer1-org2 --id.secret peer1PW --id.type peer -u https://0.0.0.0:7052</span><br><span class="line">fabric-ca-client register -d --id.name peer2-org2 --id.secret peer2PW --id.type peer -u https://0.0.0.0:7052</span><br><span class="line">fabric-ca-client register -d --id.name orderer1-org0 --id.secret ordererPW --id.type orderer -u https://0.0.0.0:7052</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> <strong>Note</strong> :</p>
+<p> If the path of the environment variable FABRIC_CA_CLIENT_TLS_CERTFILES is not an absolute path, it will be parsed as relative to the client’s home directory. </p>
+</blockquote>
+<p>With the identities registered on the TLS CA, we can move forward to setting up the each organization’s network. Anytime we need to get TLS certificates for a node in an organization, we will refer to this CA.</p>
+<p>借助在TLS CA上注册的身份，我们可以继续建立每个组织的网络。 每当我们需要为组织中的节点获取TLS证书时，我们都将引用此CA。</p>
+<h4 id="Setup-Orderer-Org-CA"><a href="#Setup-Orderer-Org-CA" class="headerlink" title="Setup Orderer Org CA"></a>Setup Orderer Org CA</h4><p>Each organization must have it’s own Certificate Authority (CA) for issuing enrollment certificates. The CA will issue the certificates for each of the peers and clients in the organization.</p>
+<p>Your CA creates the identities that belong to your organization and issue each identity a public and private key. These keys are what allow all of your nodes and applications to sign and verify their actions. Any identity signed by your CA will be understood by other members of the network to identify the components that belong to your organization.</p>
+<p>An administrator for Org0 will launch a Fabric CA docker container, which will be used by Org0 to issue cryptographic material for identities in Org0.</p>
+<p>A docker service such as the one below can be used to a launch a Fabric CA container.</p>
+<p>每个组织必须拥有自己的证书颁发机构（CA）来颁发注册证书。 CA将为组织中的每个对等方和客户端颁发证书。</p>
+<p>您的CA将创建属于您的组织的身份，并为每个身份颁发公钥和私钥。 这些密钥使您所有的节点和应用程序都能签名并验证其操作。 网络的其他成员将了解您的CA签名的任何身份，以识别属于您的组织的组件。</p>
+<p>Org0的管理员将启动Fabric CA docker容器，Org0将使用该容器发布Org0中身份的加密材料。</p>
+<p>您可以使用如下所示的docker服务来启动Fabric CA容器。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rca-org0:</span></span><br><span class="line"><span class="attr">   container_name:</span> <span class="string">rca-org0</span></span><br><span class="line"><span class="attr">   image:</span> <span class="string">hyperledger/fabric-ca</span></span><br><span class="line"><span class="attr">   command:</span> <span class="string">/bin/bash</span> <span class="bullet">-c</span> <span class="string">'fabric-ca-server start -d -b rca-org0-admin:rca-org0-adminpw --port 7053'</span></span><br><span class="line"><span class="attr">   environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_HOME=/tmp/hyperledger/fabric-ca/crypto</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_CSR_CN=rca-org0</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_CSR_HOSTS=0.0.0.0</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_DEBUG=true</span></span><br><span class="line"><span class="attr">   volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">/tmp/hyperledger/org0/ca:/tmp/hyperledger/fabric-ca</span></span><br><span class="line"><span class="attr">   networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">fabric-ca</span></span><br><span class="line"><span class="attr">   ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">7053</span><span class="string">:7053</span></span><br></pre></td></tr></table></figure>
+
+<p> On a successful launch of the container, you will see the following line in the CA container’s log. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[INFO] Listening on https://0.0.0.0:7053</span><br></pre></td></tr></table></figure>
+
+<p> At this point the CA server is listening on a secure socket, and can start issuing cryptographic material. </p>
+<h3 id="Enroll-Orderer-Org’s-CA-Admin"><a href="#Enroll-Orderer-Org’s-CA-Admin" class="headerlink" title="Enroll Orderer Org’s CA Admin"></a>Enroll Orderer Org’s CA Admin</h3><h4 id="Setup-Org1’s-CA"><a href="#Setup-Org1’s-CA" class="headerlink" title="Setup Org1’s CA"></a>Setup Org1’s CA</h4><h3 id="Enroll-Org1’s-CA-Admin"><a href="#Enroll-Org1’s-CA-Admin" class="headerlink" title="Enroll Org1’s CA Admin"></a>Enroll Org1’s CA Admin</h3><h4 id="Setup-Org2’s-CA"><a href="#Setup-Org2’s-CA" class="headerlink" title="Setup Org2’s CA"></a>Setup Org2’s CA</h4><h3 id="Enrolling-Org2’s-CA-Admin"><a href="#Enrolling-Org2’s-CA-Admin" class="headerlink" title="Enrolling Org2’s CA Admin"></a>Enrolling Org2’s CA Admin</h3><h2 id="Setup-Peers"><a href="#Setup-Peers" class="headerlink" title="Setup Peers"></a>Setup Peers</h2><h2 id="Setup-Orderer"><a href="#Setup-Orderer" class="headerlink" title="Setup Orderer"></a>Setup Orderer</h2><h2 id="Create-CLI-Containers"><a href="#Create-CLI-Containers" class="headerlink" title="Create CLI Containers"></a>Create CLI Containers</h2><h2 id="Create-and-Join-Channel"><a href="#Create-and-Join-Channel" class="headerlink" title="Create and Join Channel"></a>Create and Join Channel</h2><h2 id="Install-and-Instantiate-Chaincode"><a href="#Install-and-Instantiate-Chaincode" class="headerlink" title="Install and Instantiate Chaincode"></a>Install and Instantiate Chaincode</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-11-28T02:48:57.875Z" itemprop="dateUpdated">2019-11-28 10:48:57</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric-CA/" rel="tag">Fabric-CA</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/&title=《Fabric CA操作指南》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/&title=《Fabric CA操作指南》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Fabric CA操作指南》 — Cups&url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/13/2019/Fabric_Glossary/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Fabric术语表</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/05/2019/leetcode-multithreading/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LeetCode之多线程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/&title=《Fabric CA操作指南》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/&title=《Fabric CA操作指南》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Fabric CA操作指南》 — Cups&url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/11/28/2019/Fabric_CA_Operations_Guide/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

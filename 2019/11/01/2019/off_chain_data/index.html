@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>fabric-samples之off-chain-data(离链数据) | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,fabric-samples">
+    <meta name="description" content="Off Chain data离链数据This sample demonstrates how you can use Peer channel-based event servicesto replicate the data on your blockchain network to an off chain database.Using an off chain database allows">
+<meta name="keywords" content="Fabric,fabric-samples">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fabric-samples之off-chain-data(离链数据)">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;2019&#x2F;off_chain_data&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="Off Chain data离链数据This sample demonstrates how you can use Peer channel-based event servicesto replicate the data on your blockchain network to an off chain database.Using an off chain database allows">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-01T02:11:00.000Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">fabric-samples之off-chain-data(离链数据)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">fabric-samples之off-chain-data(离链数据)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-01T02:10:10.000Z" itemprop="datePublished" class="page-time">
+  2019-11-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Off-Chain-data"><span class="post-toc-text">Off Chain data</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#离链数据"><span class="post-toc-text">离链数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Getting-started"><span class="post-toc-text">Getting started</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#入门"><span class="post-toc-text">入门</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-dependencies"><span class="post-toc-text">Install dependencies</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装依赖"><span class="post-toc-text">安装依赖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Configuration"><span class="post-toc-text">Configuration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置"><span class="post-toc-text">配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Create-an-instance-of-CouchDB"><span class="post-toc-text">Create an instance of CouchDB</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建一个CouchDB实例"><span class="post-toc-text">创建一个CouchDB实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Starting-the-Network"><span class="post-toc-text">Starting the Network</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动网络"><span class="post-toc-text">启动网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Starting-the-Channel-Event-Listener"><span class="post-toc-text">Starting the Channel Event Listener</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动频道事件监听器"><span class="post-toc-text">启动频道事件监听器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Generate-data-on-the-blockchain"><span class="post-toc-text">Generate data on the blockchain</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在区块链上生成数据"><span class="post-toc-text">在区块链上生成数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Offchain-CouchDB-storage"><span class="post-toc-text">Offchain CouchDB storage:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#脱链CouchDB存储："><span class="post-toc-text">脱链CouchDB存储：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Configure-a-map-reduce-view-for-summarizing-counts-of-marbles-by-color"><span class="post-toc-text">Configure a map/reduce view for summarizing counts of marbles by color:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置地图-缩小视图以按颜色汇总大理石的数量："><span class="post-toc-text">配置地图/缩小视图以按颜色汇总大理石的数量：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Getting-historical-data-from-the-network"><span class="post-toc-text">Getting historical data from the network</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从网络获取历史数据"><span class="post-toc-text">从网络获取历史数据</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Clean-up"><span class="post-toc-text">Clean up</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/off_chain_data"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">fabric-samples之off-chain-data(离链数据)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-01 10:10:10" datetime="2019-11-01T02:10:10.000Z"  itemprop="datePublished">2019-11-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Off-Chain-data"><a href="#Off-Chain-data" class="headerlink" title="Off Chain data"></a>Off Chain data</h1><h1 id="离链数据"><a href="#离链数据" class="headerlink" title="离链数据"></a>离链数据</h1><p>This sample demonstrates how you can use <a href="https://hyperledger-fabric.readthedocs.io/en/release-1.4/peer_event_services.html" target="_blank" rel="noopener">Peer channel-based event services</a><br>to replicate the data on your blockchain network to an off chain database.<br>Using an off chain database allows you to analyze the data from your network or<br>build a dashboard without degrading the performance of your application.</p>
+<p><strong>该示例演示了如何使用[基于peer的事件服务]（<a href="https://hyperledger-fabric.readthedocs.io/en/release-1.4/peer_event_services.html）" target="_blank" rel="noopener">https://hyperledger-fabric.readthedocs.io/en/release-1.4/peer_event_services.html）</a></strong><br><strong>将您的区块链网络上的数据复制到链下数据库。</strong><br><strong>使用链下数据库可让您分析来自网络或网络的数据</strong><br><strong>构建仪表板而不会降低应用程序的性能。</strong></p>
+<p>This sample uses the <a href="https://fabric-sdk-node.github.io/release-1.4/tutorial-listening-to-events.html" target="_blank" rel="noopener">Fabric network event listener</a> from the Node.JS Fabric SDK to write data to local instance of<br>CouchDB.</p>
+<p><strong>此示例使用Node.JS Fabric SDK中的[Fabric网络事件监听器]（<a href="https://fabric-sdk-node.github.io/release-1.4/tutorial-listening-to-events.html）将数据写入" target="_blank" rel="noopener">https://fabric-sdk-node.github.io/release-1.4/tutorial-listening-to-events.html）将数据写入</a> 的本地实例</strong><br><strong>CouchDB。</strong></p>
+<h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started"></a>Getting started</h2><h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>This sample uses Node Fabric SDK application code similar to the <code>fabcar</code> sample<br>to connect to a network created using the <code>first-network</code> sample.</p>
+<p><strong>本示例使用类似于<code>fabcar</code>示例的Node Fabric SDK应用程序代码</strong><br><strong>连接到使用“ first-network”示例创建的网络。</strong></p>
+<h3 id="Install-dependencies"><a href="#Install-dependencies" class="headerlink" title="Install dependencies"></a>Install dependencies</h3><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>You need to install Node.js version 8.9.x to use the sample application code.<br>Execute the following commands to install the required dependencies:</p>
+<p><strong>您需要安装Node.js版本8.9.x才能使用示例应用程序代码。</strong><br><strong>执行以下命令以安装必需的依赖项：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd fabric-samples/off_chain_data</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>The configuration for the listener is stored in the <code>config.json</code> file:</p>
+<p><strong>被侦听的配置存储在<code>config.json</code>文件中：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;peer_name&quot;: &quot;peer0.org1.example.com&quot;,</span><br><span class="line">    &quot;channelid&quot;: &quot;mychannel&quot;,</span><br><span class="line">    &quot;use_couchdb&quot;:true,</span><br><span class="line">    &quot;create_history_log&quot;:true,</span><br><span class="line">    &quot;couchdb_address&quot;: &quot;http://localhost:5990&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>peer_name:</code> is the target peer for the listener.<br><code>channelid:</code> is the channel name for block events.<br><code>use_couchdb:</code> If set to true, events will be stored in a local instance of<br>CouchDB. If set to false, only a local log of events will be stored.<br><code>create_history_log:</code> If true, a local log file will be created with all of the<br>block changes.<br><code>couchdb_address:</code> is the local address for an off chain CouchDB database.</p>
+<h3 id="Create-an-instance-of-CouchDB"><a href="#Create-an-instance-of-CouchDB" class="headerlink" title="Create an instance of CouchDB"></a>Create an instance of CouchDB</h3><h3 id="创建一个CouchDB实例"><a href="#创建一个CouchDB实例" class="headerlink" title="创建一个CouchDB实例"></a>创建一个CouchDB实例</h3><p>If you set the “use_couchdb” option to true in <code>config.json</code>, you can run the<br>following command start a local instance of CouchDB using docker:</p>
+<p><strong>如果您在config.json中将“ use_couchdb”选项设置为true，则可以运行</strong><br><strong>以下命令使用docker启动CouchDB的本地实例：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --publish 5990:5984 --detach --name offchaindb hyperledger/fabric-couchdb</span><br><span class="line">docker start offchaindb</span><br></pre></td></tr></table></figure>
+
+<h3 id="Starting-the-Network"><a href="#Starting-the-Network" class="headerlink" title="Starting the Network"></a>Starting the Network</h3><h3 id="启动网络"><a href="#启动网络" class="headerlink" title="启动网络"></a>启动网络</h3><p>Use the following command to start the sample network:</p>
+<p><strong>使用以下命令启动示例网络：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./startFabric.sh</span><br></pre></td></tr></table></figure>
+
+<p>This command uses the <code>first-network</code> sample to deploy a fabric network with an<br>ordering service, two peer organizations with two peers each, and a channel<br>named <code>mychannel</code>. The marbles chaincode will be installed on all four peers and<br>instantiated on the channel.</p>
+<p><strong>该命令使用“ first-network”示例来部署具有以下功能的光纤网络：</strong><br><strong>订购服务，两个对等组织（每个都有两个peer）和一个渠道</strong><br><strong>名为“ mychannel”。 大理石链代码将安装在所有四个peer上，并且</strong><br><strong>在通道上实例化。</strong></p>
+<h3 id="Starting-the-Channel-Event-Listener"><a href="#Starting-the-Channel-Event-Listener" class="headerlink" title="Starting the Channel Event Listener"></a>Starting the Channel Event Listener</h3><h3 id="启动频道事件监听器"><a href="#启动频道事件监听器" class="headerlink" title="启动频道事件监听器"></a>启动频道事件监听器</h3><p>Once the network has started, we can use the Node.js SDK to create the user and<br>certificates our listener application will use to interact with the network. Run<br>the following command to enroll the admin user:</p>
+<p><strong>网络启动后，我们可以使用Node.js SDK创建用户并</strong><br><strong>我们的侦听器应用程序将用于与网络交互的证书。 跑</strong><br><strong>以下命令来注册管理员用户：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node enrollAdmin.js</span><br></pre></td></tr></table></figure>
+
+<p>You can then run the following command to register and enroll an application<br>user:</p>
+<p><strong>然后，您可以运行以下命令来注册和注册应用程序</strong><br><strong>用户：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node registerUser.js</span><br></pre></td></tr></table></figure>
+
+<p>We can then use our application user to start the block event listener:</p>
+<p><strong>然后，我们可以使用我们的应用程序用户来启动块事件监听器：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node blockEventListener.js</span><br></pre></td></tr></table></figure>
+
+<p>If the command is successful, you should see the output of the listener reading<br>the first 4 configuration blocks of <code>mychannel</code>:</p>
+<p><strong>如果命令成功执行，您应该看到监听器读取的输出</strong><br><strong>mychannel的前4个配置块：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Added block 0 to ProcessingMap</span><br><span class="line">Added block 1 to ProcessingMap</span><br><span class="line">Added block 2 to ProcessingMap</span><br><span class="line">Added block 3 to ProcessingMap</span><br><span class="line">------------------------------------------------</span><br><span class="line">Block Number: 0</span><br><span class="line">------------------------------------------------</span><br><span class="line">Block Number: 1</span><br><span class="line">------------------------------------------------</span><br><span class="line">Block Number: 2</span><br><span class="line">------------------------------------------------</span><br><span class="line">Block Number: 3</span><br><span class="line">Added block 4 to ProcessingMap</span><br><span class="line">------------------------------------------------</span><br><span class="line">Block Number: 4</span><br></pre></td></tr></table></figure>
+
+<p><code>blockEventListener.js</code> creates a listener named “offchain-listener” on the<br>channel <code>mychannel</code>. The listener writes each block added to the channel to a<br>processing map called BlockMap for temporary storage and ordering purposes.<br><code>blockEventListener.js</code> uses <code>nextblock.txt</code> to keep track of the latest block<br>that was retrieved by the listener. The block number in <code>nextblock.txt</code> may be<br>set to a previous block number in order to replay previous blocks. The file<br>may also be deleted and all blocks will be replayed when the block listener is<br>started.</p>
+<p><strong><code>blockEventListener.js</code>在目录上创建一个名为“ offchain-listener”的监听器。</strong><br><strong>频道“ mychannel”。 侦听器将添加到通道的每个块写入到</strong><br><strong>处理称为BlockMap的映射以用于临时存储和订购。</strong><br><strong><code>blockEventListener.js</code>使用<code>nextblock.txt</code>来跟踪最新的块</strong><br><strong>由侦听器检索到的。 “ nextblock.txt”中的块号可能是</strong><br><strong>设置为先前的块号以重播先前的块。 文件</strong><br><strong>可能还会被删除，并且当块侦听器处于</strong><br><strong>开始。</strong></p>
+<p><code>BlockProcessing.js</code> runs as a daemon and pulls each block in order from the<br>BlockMap. It then uses the read-write set of that block to extract the latest<br>key value data and store it in the database. The first four configuration blocks<br>of <code>mychannel</code> did not any data to the database because the blocks did not<br>contain a read-write set.</p>
+<p><strong><code>BlockProcessing.js</code>作为守护进程运行，并从</strong><br><strong>方块图。 然后，它使用该块的读写集来提取最新的</strong><br><strong>键值数据并将其存储在数据库中。 前四个配置块</strong><br><strong>mychannel的数据没有任何数据到数据库，因为块没有</strong><br><strong>包含一个读写集。</strong></p>
+<p>The channel event listener also writes metadata from each block to a log file<br>defined as channelid_chaincodeid.log. In this example, events will be written to<br>a file named <code>mychannel_marbles.log</code>. This allows you to record a history of<br>changes made by each block for each key in addition to storing the latest value<br>of the world state.</p>
+<p><strong>通道事件侦听器还将每个块的元数据写入日志文件</strong><br><strong>定义为channelid_chaincodeid.log。 在此示例中，事件将被写入</strong><br><strong>一个名为“ mychannel_marbles.log”的文件。 这使您可以记录历史</strong><br><strong>除存储最新值外，每个块对每个键所做的更改</strong><br><strong>世界国家。</strong></p>
+<p><strong>Note:</strong> Leave the blockEventListener.js running in a terminal window. Open a<br>new window to execute the next parts of the demo.</p>
+<p><strong>注意：让blockEventListener.js在终端窗口中运行。 打开一个</strong><br><strong>新窗口执行演示的下一部分。</strong></p>
+<h3 id="Generate-data-on-the-blockchain"><a href="#Generate-data-on-the-blockchain" class="headerlink" title="Generate data on the blockchain"></a>Generate data on the blockchain</h3><h3 id="在区块链上生成数据"><a href="#在区块链上生成数据" class="headerlink" title="在区块链上生成数据"></a>在区块链上生成数据</h3><p>Now that our listener is setup, we can generate data using the marbles chaincode<br>and use our application to replicate the data to our database. Open a new<br>terminal and navigate to the <code>fabric-samples/off_chain_data</code> directory.</p>
+<p>You can use the <code>addMarbles.js</code> file to add random sample data to blockchain.<br>The file uses the configuration information stored in <code>addMarbles.json</code> to<br>create a series of marbles. This file will be created during the first execution<br>of <code>addMarbles.js</code> if it does not exist. This program can be run multiple times<br>without changing the properties. The <code>nextMarbleNumber</code> will be incremented and<br>stored in the <code>addMarbles.json</code> file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;nextMarbleNumber&quot;: 100,</span><br><span class="line">    &quot;numberMarblesToAdd&quot;: 20</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Open a new window and run the following command to add 20 marbles to the<br>blockchain:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node addMarbles.js</span><br></pre></td></tr></table></figure>
+
+<p>After the marbles have been added to the ledger, use the following command to<br>transfer one of the marbles to a new owner:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node transferMarble.js marble110 james</span><br></pre></td></tr></table></figure>
+
+<p>Now run the following command to delete the marble that was transferred:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node deleteMarble.js marble110</span><br></pre></td></tr></table></figure>
+
+<h2 id="Offchain-CouchDB-storage"><a href="#Offchain-CouchDB-storage" class="headerlink" title="Offchain CouchDB storage:"></a>Offchain CouchDB storage:</h2><h2 id="脱链CouchDB存储："><a href="#脱链CouchDB存储：" class="headerlink" title="脱链CouchDB存储："></a>脱链CouchDB存储：</h2><p>If you followed the instructions above and set <code>use_couchdb</code> to true,<br><code>blockEventListener.js</code> will create two tables in the local instance of CouchDB.<br><code>blockEventListener.js</code> is written to create two tables for each channel and for<br>each chaincode.</p>
+<p>The first table is an offline representation of the current world state of the<br>blockchain ledger. This table was created using the read-write set data from<br>the blocks. If the listener is running, this table should be the same as the<br>latest values in the state database running on your peer. The table is named<br>after the channelid and chaincodeid, and is named mychannel_marbles in this<br>example. You can navigate to this table using your browser:<br><a href="http://127.0.0.1:5990/mychannel_marbles/_all_docs" target="_blank" rel="noopener">http://127.0.0.1:5990/mychannel_marbles/_all_docs</a></p>
+<p>A second table records each block as a historical record entry, and was created<br>using the block data that was recorded in the log file. The table name appends<br>history to the name of the first table, and is named mychannel_marbles_history<br>in this example. You can also navigate to this table using your browser:<br><a href="http://127.0.0.1:5990/mychannel_marbles_history/_all_docs" target="_blank" rel="noopener">http://127.0.0.1:5990/mychannel_marbles_history/_all_docs</a></p>
+<h3 id="Configure-a-map-reduce-view-for-summarizing-counts-of-marbles-by-color"><a href="#Configure-a-map-reduce-view-for-summarizing-counts-of-marbles-by-color" class="headerlink" title="Configure a map/reduce view for summarizing counts of marbles by color:"></a>Configure a map/reduce view for summarizing counts of marbles by color:</h3><h3 id="配置地图-缩小视图以按颜色汇总大理石的数量："><a href="#配置地图-缩小视图以按颜色汇总大理石的数量：" class="headerlink" title="配置地图/缩小视图以按颜色汇总大理石的数量："></a>配置地图/缩小视图以按颜色汇总大理石的数量：</h3><p>Now that we have state and history data replicated to tables in CouchDB, we<br>can use the following commands query our off-chain data. We will also add an<br>index to support a more complex query. Note that if the <code>blockEventListener.js</code><br>is not running, the database commands below may fail since the database is only<br>created when events are received.</p>
+<p>Open a new terminal window and execute the following:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT http://127.0.0.1:5990/mychannel_marbles/_design/colorviewdesign -d &apos;&#123;&quot;views&quot;:&#123;&quot;colorview&quot;:&#123;&quot;map&quot;:&quot;function (doc) &#123; emit(doc.color, 1);&#125;&quot;,&quot;reduce&quot;:&quot;function ( keys , values , combine ) &#123;return sum( values )&#125;&quot;&#125;&#125;&#125;&apos; -H &apos;Content-Type:application/json&apos;</span><br></pre></td></tr></table></figure>
+
+<p>Execute a query to retrieve the total number of marbles (reduce function):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://127.0.0.1:5990/mychannel_marbles/_design/colorviewdesign/_view/colorview?reduce=true</span><br></pre></td></tr></table></figure>
+
+<p>If successful, this command will return the number of marbles in the blockchain<br>world state, without having to query the blockchain ledger:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;rows&quot;:[</span><br><span class="line">  &#123;&quot;key&quot;:null,&quot;value&quot;:19&#125;</span><br><span class="line">  ]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Execute a new query to retrieve the number of marbles by color (map function):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://127.0.0.1:5990/mychannel_marbles/_design/colorviewdesign/_view/colorview?group=true</span><br></pre></td></tr></table></figure>
+
+<p>The command will return a list of marbles by color from the CouchDB database.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;rows&quot;:[</span><br><span class="line">  &#123;&quot;key&quot;:&quot;blue&quot;,&quot;value&quot;:2&#125;,</span><br><span class="line">  &#123;&quot;key&quot;:&quot;green&quot;,&quot;value&quot;:2&#125;,</span><br><span class="line">  &#123;&quot;key&quot;:&quot;purple&quot;,&quot;value&quot;:3&#125;,</span><br><span class="line">  &#123;&quot;key&quot;:&quot;red&quot;,&quot;value&quot;:4&#125;,</span><br><span class="line">  &#123;&quot;key&quot;:&quot;white&quot;,&quot;value&quot;:6&#125;,</span><br><span class="line">  &#123;&quot;key&quot;:&quot;yellow&quot;,&quot;value&quot;:2&#125;</span><br><span class="line">  ]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>To run a more complex command that reads through the block history database, we<br>will create an index of the blocknumber, sequence, and key fields. This index<br>will support a query that traces the history of each marble. Execute the<br>following command to create the index:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://127.0.0.1:5990/mychannel_marbles_history/_index -d &apos;&#123;&quot;index&quot;:&#123;&quot;fields&quot;:[&quot;blocknumber&quot;, &quot;sequence&quot;, &quot;key&quot;]&#125;,&quot;name&quot;:&quot;marble_history&quot;&#125;&apos;  -H &apos;Content-Type:application/json&apos;</span><br></pre></td></tr></table></figure>
+
+<p>Now execute a query to retrieve the history for the marble we transferred and<br>then deleted:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://127.0.0.1:5990/mychannel_marbles_history/_find -d &apos;&#123;&quot;selector&quot;:&#123;&quot;key&quot;:&#123;&quot;$eq&quot;:&quot;marble110&quot;&#125;&#125;, &quot;fields&quot;:[&quot;blocknumber&quot;,&quot;is_delete&quot;,&quot;value&quot;],&quot;sort&quot;:[&#123;&quot;blocknumber&quot;:&quot;asc&quot;&#125;, &#123;&quot;sequence&quot;:&quot;asc&quot;&#125;]&#125;&apos;  -H &apos;Content-Type:application/json&apos;</span><br></pre></td></tr></table></figure>
+
+<p>You should see the transaction history of the marble that was created,<br>transferred, and then removed from the ledger.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;docs&quot;:[</span><br><span class="line">&#123;&quot;blocknumber&quot;:12,&quot;is_delete&quot;:false,&quot;value&quot;:&quot;&#123;\&quot;docType\&quot;:\&quot;marble\&quot;,\&quot;name\&quot;:\&quot;marble110\&quot;,\&quot;color\&quot;:\&quot;blue\&quot;,\&quot;size\&quot;:60,\&quot;owner\&quot;:\&quot;debra\&quot;&#125;&quot;&#125;,</span><br><span class="line">&#123;&quot;blocknumber&quot;:22,&quot;is_delete&quot;:false,&quot;value&quot;:&quot;&#123;\&quot;docType\&quot;:\&quot;marble\&quot;,\&quot;name\&quot;:\&quot;marble110\&quot;,\&quot;color\&quot;:\&quot;blue\&quot;,\&quot;size\&quot;:60,\&quot;owner\&quot;:\&quot;james\&quot;&#125;&quot;&#125;,</span><br><span class="line">&#123;&quot;blocknumber&quot;:23,&quot;is_delete&quot;:true,&quot;value&quot;:&quot;&quot;&#125;</span><br><span class="line">  ]&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Getting-historical-data-from-the-network"><a href="#Getting-historical-data-from-the-network" class="headerlink" title="Getting historical data from the network"></a>Getting historical data from the network</h2><h2 id="从网络获取历史数据"><a href="#从网络获取历史数据" class="headerlink" title="从网络获取历史数据"></a>从网络获取历史数据</h2><p>You can also use the <code>blockEventListener.js</code> program to retrieve historical data<br>from your network. This allows you to create a database that is up to date with<br>the latest data from the network or recover any blocks that the program may<br>have missed.</p>
+<p>If you ran through the example steps above, navigate back to the terminal window<br>where <code>blockEventListener.js</code> is running and close it. Once the listener is no<br>longer running, use the following command to add 20 more marbles to the<br>ledger:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node addMarbles.js</span><br></pre></td></tr></table></figure>
+
+<p>The listener will not be able to add the new marbles to your CouchDB database.<br>If you check the current state table using the reduce command, you will only<br>be able to see the original marbles in your database.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://127.0.0.1:5990/mychannel_marbles/_design/colorviewdesign/_view/colorview?reduce=true</span><br></pre></td></tr></table></figure>
+
+<p>To add the new data to your off-chain database, remove the <code>nextblock.txt</code><br>file that kept track of the latest block read by <code>blockEventListener.js</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm nextblock.txt</span><br></pre></td></tr></table></figure>
+
+<p>You can new re-run the channel listener to read every block from the channel:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node blockEventListener.js</span><br></pre></td></tr></table></figure>
+
+<p>This will rebuild the CouchDB tables and include the 20 marbles that have been<br>added to the ledger. If you run the reduce command against your database one<br>more time,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://127.0.0.1:5990/mychannel_marbles/_design/colorviewdesign/_view/colorview?reduce=true</span><br></pre></td></tr></table></figure>
+
+<p>you will be able to see that all of the marbles have been added to your<br>database:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;rows&quot;:[</span><br><span class="line">&#123;&quot;key&quot;:null,&quot;value&quot;:39&#125;</span><br><span class="line">]&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Clean-up"><a href="#Clean-up" class="headerlink" title="Clean up"></a>Clean up</h2><p>If you are finished using the sample application, you can bring down the network<br>and any accompanying artifacts.</p>
+<ul>
+<li>Change to <code>fabric-samples/first-network</code> directory.</li>
+<li>To stop the network, run <code>./byfn.sh down</code>.</li>
+<li>Change back to <code>fabric-samples/off_chain_data</code> directory.</li>
+<li>Remove the certificates you generated by deleting the <code>wallet</code> folder.</li>
+<li>Delete <code>nextblock.txt</code> so you can start with the first block next time you<br>operate the listener. You can also reset the <code>nextMarbleNumber</code> in<br><code>addMarbles.json</code> to 100.</li>
+<li>To take down the local CouchDB database, first stop and then remove the<br>docker container:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop offchaindb</span><br><span class="line">docker rm offchaindb</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-11-01T02:11:00.000Z" itemprop="dateUpdated">2019-11-01 10:11:00</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fabric-samples/" rel="tag">fabric-samples</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/&title=《fabric-samples之off-chain-data(离链数据)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/&title=《fabric-samples之off-chain-data(离链数据)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/01/2019/off_chain_data/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之off-chain-data(离链数据)》 — Cups&url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/01/2019/scripts/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">fabric-samples之scripts(常用脚本)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/01/2019/interest_rate_swaps/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fabric-samples之interest-rate-swaps(利率互换)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/&title=《fabric-samples之off-chain-data(离链数据)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/&title=《fabric-samples之off-chain-data(离链数据)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/01/2019/off_chain_data/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之off-chain-data(离链数据)》 — Cups&url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/01/2019/off_chain_data/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/11/01/2019/off_chain_data/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

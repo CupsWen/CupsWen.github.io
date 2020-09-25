@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>fabric-samples之balance-transfer(余额代偿) | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,fabric-samples">
+    <meta name="description" content="Balance transfer余额代偿 我没有答应申请, 因为这个余额代偿我暂时不需要. 余额代偿就简单来说就是把一张信用卡欠的钱转移到另一张卡上. 或者用一张信用卡去偿还另一张信用卡. 为啥要搞这么麻烦呢? 比如 你有两张信用卡A和B, A这个月需要偿还1000英镑, 可是你没有这么多钱, 根据信用卡规定 你即使每个月无法所有还清 也许要还一小部分钱 (一般是按5% 最低5英镑) 也就是说 最">
+<meta name="keywords" content="Fabric,fabric-samples">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fabric-samples之balance-transfer(余额代偿)">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;2019&#x2F;balance-transfer&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="Balance transfer余额代偿 我没有答应申请, 因为这个余额代偿我暂时不需要. 余额代偿就简单来说就是把一张信用卡欠的钱转移到另一张卡上. 或者用一张信用卡去偿还另一张信用卡. 为啥要搞这么麻烦呢? 比如 你有两张信用卡A和B, A这个月需要偿还1000英镑, 可是你没有这么多钱, 根据信用卡规定 你即使每个月无法所有还清 也许要还一小部分钱 (一般是按5% 最低5英镑) 也就是说 最">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.creativecommons.org&#x2F;l&#x2F;by&#x2F;4.0&#x2F;88x31.png">
+<meta property="og:updated_time" content="2019-11-01T01:15:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.creativecommons.org&#x2F;l&#x2F;by&#x2F;4.0&#x2F;88x31.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">fabric-samples之balance-transfer(余额代偿)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">fabric-samples之balance-transfer(余额代偿)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-01T00:59:10.000Z" itemprop="datePublished" class="page-time">
+  2019-11-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Balance-transfer"><span class="post-toc-text">Balance transfer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#余额代偿"><span class="post-toc-text">余额代偿</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Prerequisites-and-setup"><span class="post-toc-text">Prerequisites and setup:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#要求和设置"><span class="post-toc-text">要求和设置 :</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Artifacts"><span class="post-toc-text">Artifacts</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Running-the-sample-program"><span class="post-toc-text">Running the sample program</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运行示例程序"><span class="post-toc-text">运行示例程序</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Option-1"><span class="post-toc-text">Option 1:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Terminal-Window-1"><span class="post-toc-text">Terminal Window 1</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Terminal-Window-2"><span class="post-toc-text">Terminal Window 2</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Terminal-Window-3"><span class="post-toc-text">Terminal Window 3</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Option-2"><span class="post-toc-text">Option 2:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Terminal-Window-1-1"><span class="post-toc-text">Terminal Window 1</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Terminal-Window-2-1"><span class="post-toc-text">Terminal Window 2</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Sample-REST-APIs-Requests"><span class="post-toc-text">Sample REST APIs Requests</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Login-Request"><span class="post-toc-text">Login Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Create-Channel-request"><span class="post-toc-text">Create Channel request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Join-Channel-request"><span class="post-toc-text">Join Channel request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-chaincode"><span class="post-toc-text">Install chaincode</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Instantiate-chaincode"><span class="post-toc-text">Instantiate chaincode</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Invoke-request"><span class="post-toc-text">Invoke request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Chaincode-Query"><span class="post-toc-text">Chaincode Query</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Query-Block-by-BlockNumber"><span class="post-toc-text">Query Block by BlockNumber</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Query-Transaction-by-TransactionID"><span class="post-toc-text">Query Transaction by TransactionID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Query-ChainInfo"><span class="post-toc-text">Query ChainInfo</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Query-Installed-chaincodes"><span class="post-toc-text">Query Installed chaincodes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Query-Instantiated-chaincodes"><span class="post-toc-text">Query Instantiated chaincodes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Query-Channels"><span class="post-toc-text">Query Channels</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Clean-the-network"><span class="post-toc-text">Clean the network</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Network-configuration-considerations"><span class="post-toc-text">Network configuration considerations</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络配置注意事项"><span class="post-toc-text">网络配置注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IP-Address-and-PORT-information"><span class="post-toc-text">IP Address** and PORT information</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IP地址-和端口信息"><span class="post-toc-text">IP地址**和端口信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Discover-IP-Address"><span class="post-toc-text">Discover IP Address</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发现IP地址"><span class="post-toc-text">发现IP地址</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2019/balance-transfer"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">fabric-samples之balance-transfer(余额代偿)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-01 08:59:10" datetime="2019-11-01T00:59:10.000Z"  itemprop="datePublished">2019-11-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Balance-transfer"><a href="#Balance-transfer" class="headerlink" title="Balance transfer"></a>Balance transfer</h2><h2 id="余额代偿"><a href="#余额代偿" class="headerlink" title="余额代偿"></a>余额代偿</h2><blockquote>
+<p>我没有答应申请, 因为这个余额代偿我暂时不需要. 余额代偿就简单来说就是把一张信用卡欠的钱转移到另一张卡上. 或者用一张信用卡去偿还另一张信用卡. 为啥要搞这么麻烦呢? 比如 你有两张信用卡A和B, A这个月需要偿还1000英镑, 可是你没有这么多钱, 根据信用卡规定 你即使每个月无法所有还清 也许要还一小部分钱 (一般是按5% 最低5英镑) 也就是说 最小偿还(Minimal Payment)是50英镑. 那么剩下950英镑你可能需要在接下来的几个月还清, 但是银行会收你利息 (一般来说54天内还清是不收利息的). 碰巧另一张卡B有个1年内免息的活动. 所以你这时候就可以把A卡所欠的债给转移到B卡上, 这样在1年后还清B卡的债就可以了. 这也就相当于免息向银行借钱. 一般来说余额代偿是为了更好的利用银行信用卡的活动来达到少还利息的目的(低的利息甚至是零利息).</p>
+<p>当然, 如果每个月都还清的 (Full Payment) 就用不上这个福利了. 银行也不可能一直都是 0%的 余额代偿, 在搞活动之后就会收取手续费. 所以你想用一个坑填补另一个洞的想法是不太现实的, 至少这种方法持久是不实际的. 短期内也许可以暂时帮你解决燃眉之急 但是出来混迟早是要还的, 欠的钱总有一天要还清, 后面利息越来越高(滚雪球), 这个大洞迟早要大漏的.</p>
+<p>而且如果太多信用卡 并且有经常搞余额代偿就很可能会降低你的信用分数. 我用信用卡最看重的是积分积点换优惠, 所以我每次都拒绝HSBC的好意, 都会和他们说我已经有AMEX美国运通卡.</p>
+</blockquote>
+<p>A sample Node.js app to demonstrate <strong><strong>fabric-client</strong></strong> &amp; <strong><strong>fabric-ca-client</strong></strong> Node.js SDK APIs</p>
+<p><strong>一个示例Node.js应用程序，用于演示fabric-client 和 fabric-ca-client  Node.js SDK API</strong></p>
+<h3 id="Prerequisites-and-setup"><a href="#Prerequisites-and-setup" class="headerlink" title="Prerequisites and setup:"></a>Prerequisites and setup:</h3><h3 id="要求和设置"><a href="#要求和设置" class="headerlink" title="要求和设置 :"></a>要求和设置 :</h3><ul>
+<li><a href="https://www.docker.com/products/overview" target="_blank" rel="noopener">Docker</a> - v1.12 or higher</li>
+<li><a href="https://docs.docker.com/compose/overview/" target="_blank" rel="noopener">Docker Compose</a> - v1.8 or higher</li>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git client</a> - needed for clone commands</li>
+<li><strong>Node.js</strong> v8.4.0 or higher</li>
+<li><a href="http://hyperledger-fabric.readthedocs.io/en/latest/samples.html#binaries" target="_blank" rel="noopener">Download Docker images</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd fabric-samples/balance-transfer/</span><br></pre></td></tr></table></figure>
+
+<p>Once you have completed the above setup, you will have provisioned a local network with the following docker container configuration:</p>
+<p><strong>完成上述设置后，您将使用以下Docker容器配置配置本地网络：</strong></p>
+<ul>
+<li>2 CAs</li>
+<li>A SOLO orderer</li>
+<li>4 peers (2 peers per Org)</li>
+</ul>
+<h4 id="Artifacts"><a href="#Artifacts" class="headerlink" title="Artifacts"></a>Artifacts</h4><ul>
+<li>Crypto material has been generated using the <strong>cryptogen</strong> tool from Hyperledger Fabric and mounted to all peers, the orderering node and CA containers. More details regarding the cryptogen tool are available <a href="http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#crypto-generator" target="_blank" rel="noopener">here</a>.</li>
+</ul>
+<p><strong>加密资料是使用Hyperledger Fabric的cryptogen 工具生成的，并已安装到所有对等方，排序节点和CA容器中。 可在[此处]（<a href="http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#crypto-generator）获得有关cryptogen工具的更多详细信息。" target="_blank" rel="noopener">http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#crypto-generator）获得有关cryptogen工具的更多详细信息。</a></strong></p>
+<ul>
+<li>An Orderer genesis block (genesis.block) and channel configuration transaction (mychannel.tx) has been pre generated using the <strong>configtxgen</strong> tool from Hyperledger Fabric and placed within the artifacts folder. More details regarding the configtxgen tool are available <a href="http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#configuration-transaction-generator" target="_blank" rel="noopener">here</a>.</li>
+</ul>
+<p><strong>orderer创世区块（genesis.block）和通道（mychannel.tx）已被预使用从Hyperledger fabric的 configtxgen工具产生并且放置的工件夹内。可用[这里]关于configtxgen工具更多细节（<a href="http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#configuration-transaction-generator）。" target="_blank" rel="noopener">http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#configuration-transaction-generator）。</a></strong></p>
+<h2 id="Running-the-sample-program"><a href="#Running-the-sample-program" class="headerlink" title="Running the sample program"></a>Running the sample program</h2><h2 id="运行示例程序"><a href="#运行示例程序" class="headerlink" title="运行示例程序"></a>运行示例程序</h2><p>There are two options available for running the balance-transfer sample<br>For each of these options, you may choose to run with chaincode written in golang or in node.js.</p>
+<p><strong>有两个选项可用于运行余额转移样本</strong><br><strong>对于每个选项，您都可以选择使用以golang或node.js编写的链码运行。</strong></p>
+<h4 id="Option-1"><a href="#Option-1" class="headerlink" title="Option 1:"></a>Option 1:</h4><h5 id="Terminal-Window-1"><a href="#Terminal-Window-1" class="headerlink" title="Terminal Window 1"></a>Terminal Window 1</h5><ul>
+<li>Launch the network using docker-compose</li>
+</ul>
+<p><strong>使用docker-compose启动网络</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose -f artifacts/docker-compose.yaml up</span><br></pre></td></tr></table></figure>
+<h5 id="Terminal-Window-2"><a href="#Terminal-Window-2" class="headerlink" title="Terminal Window 2"></a>Terminal Window 2</h5><ul>
+<li>Install the fabric-client and fabric-ca-client node modules</li>
+</ul>
+<p><strong>安装fabric-client和fabric-ca-client节点模块</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Start the node app on PORT 4000</li>
+</ul>
+<p>在PORT 4000上启动节点应用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PORT=4000 node app</span><br></pre></td></tr></table></figure>
+
+<h5 id="Terminal-Window-3"><a href="#Terminal-Window-3" class="headerlink" title="Terminal Window 3"></a>Terminal Window 3</h5><ul>
+<li>Execute the REST APIs from the section <a href="https://github.com/hyperledger/fabric-samples/tree/master/balance-transfer#sample-rest-apis-requests" target="_blank" rel="noopener">Sample REST APIs Requests</a></li>
+</ul>
+<p><strong>从示例REST API请求部分执行REST API</strong></p>
+<h4 id="Option-2"><a href="#Option-2" class="headerlink" title="Option 2:"></a>Option 2:</h4><h5 id="Terminal-Window-1-1"><a href="#Terminal-Window-1-1" class="headerlink" title="Terminal Window 1"></a>Terminal Window 1</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd fabric-samples/balance-transfer</span><br><span class="line"></span><br><span class="line">./runApp.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>This launches the required network on your local machine</li>
+<li>Installs the fabric-client and fabric-ca-client node modules</li>
+<li>And, starts the node app on PORT 4000</li>
+</ul>
+<p><strong>-这会在本地计算机上启动所需的网络</strong><br><strong>-安装fabric-client和fabric-ca-client节点模块</strong><br><strong>-然后在PORT 4000上启动节点应用程序</strong></p>
+<h5 id="Terminal-Window-2-1"><a href="#Terminal-Window-2-1" class="headerlink" title="Terminal Window 2"></a>Terminal Window 2</h5><p>In order for the following shell script to properly parse the JSON, you must install <code>jq</code>:</p>
+<p>instructions <a href="https://stedolan.github.io/jq/" target="_blank" rel="noopener">https://stedolan.github.io/jq/</a></p>
+<p>With the application started in terminal 1, next, test the APIs by executing the script - <strong>testAPIs.sh</strong>:</p>
+<p><strong>为了使以下Shell脚本正确解析JSON，必须安装“jq’’：</strong></p>
+<p><strong>说明<a href="https://stedolan.github.io/jq/" target="_blank" rel="noopener">https://stedolan.github.io/jq/</a></strong></p>
+<p><strong>在终端1中启动应用程序之后，接下来，通过执行脚本testAPIs.sh 来测试API：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd fabric-samples/balance-transfer</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># To use golang chaincode execute the following command</span></span></span><br><span class="line"></span><br><span class="line">./testAPIs.sh -l golang</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># OR use node.js chaincode</span></span></span><br><span class="line"></span><br><span class="line">./testAPIs.sh -l node</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sample-REST-APIs-Requests"><a href="#Sample-REST-APIs-Requests" class="headerlink" title="Sample REST APIs Requests"></a>Sample REST APIs Requests</h2><h3 id="Login-Request"><a href="#Login-Request" class="headerlink" title="Login Request"></a>Login Request</h3><ul>
+<li>Register and enroll new users in Organization - <strong>Org1</strong>:</li>
+</ul>
+<p><code>curl -s -X POST http://localhost:4000/users -H &quot;content-type: application/x-www-form-urlencoded&quot; -d &#39;username=Jim&amp;orgName=Org1&#39;</code></p>
+<p><strong>OUTPUT:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "success": true,</span><br><span class="line">  "secret": "RaxhMgevgJcm",</span><br><span class="line">  "message": "Jim enrolled Successfully",</span><br><span class="line">  "token": "&lt;put JSON Web Token here&gt;"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The response contains the success/failure status, an <strong>enrollment Secret</strong> and a <strong>JSON Web Token (JWT)</strong> that is a required string in the Request Headers for subsequent requests.</p>
+<h3 id="Create-Channel-request"><a href="#Create-Channel-request" class="headerlink" title="Create Channel request"></a>Create Channel request</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X POST \</span><br><span class="line">  http://localhost:4000/channels \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json" \</span><br><span class="line">  -d '&#123;</span><br><span class="line">	"channelName":"mychannel",</span><br><span class="line">	"channelConfigPath":"../artifacts/channel/mychannel.tx"</span><br><span class="line">&#125;'</span><br></pre></td></tr></table></figure>
+
+<p>Please note that the Header <strong>authorization</strong> must contain the JWT returned from the <code>POST /users</code> call</p>
+<h3 id="Join-Channel-request"><a href="#Join-Channel-request" class="headerlink" title="Join Channel request"></a>Join Channel request</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X POST \</span><br><span class="line">  http://localhost:4000/channels/mychannel/peers \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json" \</span><br><span class="line">  -d '&#123;</span><br><span class="line">	"peers": ["peer0.org1.example.com","peer1.org1.example.com"]</span><br><span class="line">&#125;'</span><br></pre></td></tr></table></figure>
+<h3 id="Install-chaincode"><a href="#Install-chaincode" class="headerlink" title="Install chaincode"></a>Install chaincode</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X POST \</span><br><span class="line">  http://localhost:4000/chaincodes \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json" \</span><br><span class="line">  -d '&#123;</span><br><span class="line">	"peers": ["peer0.org1.example.com","peer1.org1.example.com"],</span><br><span class="line">	"chaincodeName":"mycc",</span><br><span class="line">	"chaincodePath":"github.com/example_cc/go",</span><br><span class="line">	"chaincodeType": "golang",</span><br><span class="line">	"chaincodeVersion":"v0"</span><br><span class="line">&#125;'</span><br></pre></td></tr></table></figure>
+<p><strong>NOTE:</strong> <em>chaincodeType</em> must be set to <strong>node</strong> when node.js chaincode is used and <em>chaincodePath</em> must be set to the location of the node.js chaincode. Also put in the $PWD</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ex:</span><br><span class="line">curl -s -X POST \</span><br><span class="line">  http://localhost:4000/chaincodes \</span><br><span class="line">  -H &quot;authorization: Bearer &lt;put JSON Web Token here&gt;&quot; \</span><br><span class="line">  -H &quot;content-type: application/json&quot; \</span><br><span class="line">  -d &apos;&#123;</span><br><span class="line">	&quot;peers&quot;: [&quot;peer0.org1.example.com&quot;,&quot;peer1.org1.example.com&quot;],</span><br><span class="line">	&quot;chaincodeName&quot;:&quot;mycc&quot;,</span><br><span class="line">	&quot;chaincodePath&quot;:&quot;$PWD/artifacts/src/github.com/example_cc/node&quot;,</span><br><span class="line">	&quot;chaincodeType&quot;: &quot;node&quot;,</span><br><span class="line">	&quot;chaincodeVersion&quot;:&quot;v0&quot;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Instantiate-chaincode"><a href="#Instantiate-chaincode" class="headerlink" title="Instantiate chaincode"></a>Instantiate chaincode</h3><p>This is the endorsement policy defined during instantiation.<br>This policy can be fulfilled when members from both orgs sign the transaction proposal.</p>
+<p><strong>这是实例化期间定义的认可策略。</strong><br><strong>当两个组织的成员签署交易建议时，可以执行此政策。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	identities: [&#123;</span><br><span class="line">			role: &#123;</span><br><span class="line">				name: &apos;member&apos;,</span><br><span class="line">				mspId: &apos;Org1MSP&apos;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			role: &#123;</span><br><span class="line">				name: &apos;member&apos;,</span><br><span class="line">				mspId: &apos;Org2MSP&apos;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	policy: &#123;</span><br><span class="line">		&apos;2-of&apos;: [&#123;</span><br><span class="line">			&apos;signed-by&apos;: 0</span><br><span class="line">		&#125;, &#123;</span><br><span class="line">			&apos;signed-by&apos;: 1</span><br><span class="line">		&#125;]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X POST \</span><br><span class="line">  http://localhost:4000/channels/mychannel/chaincodes \</span><br><span class="line">  -H &quot;authorization: Bearer &lt;put JSON Web Token here&gt;&quot; \</span><br><span class="line">  -H &quot;content-type: application/json&quot; \</span><br><span class="line">  -d &apos;&#123;</span><br><span class="line">	&quot;chaincodeName&quot;:&quot;mycc&quot;,</span><br><span class="line">	&quot;chaincodeVersion&quot;:&quot;v0&quot;,</span><br><span class="line">	&quot;chaincodeType&quot;: &quot;golang&quot;,</span><br><span class="line">	&quot;args&quot;:[&quot;a&quot;,&quot;100&quot;,&quot;b&quot;,&quot;200&quot;]</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p><strong>NOTE:</strong> <em>chaincodeType</em> must be set to <strong>node</strong> when node.js chaincode is used</p>
+<h3 id="Invoke-request"><a href="#Invoke-request" class="headerlink" title="Invoke request"></a>Invoke request</h3><p>This invoke request is signed by peers from both orgs, <em>org1</em> &amp; <em>org2</em>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X POST \</span><br><span class="line">  http://localhost:4000/channels/mychannel/chaincodes/mycc \</span><br><span class="line">  -H &quot;authorization: Bearer &lt;put JSON Web Token here&gt;&quot; \</span><br><span class="line">  -H &quot;content-type: application/json&quot; \</span><br><span class="line">  -d &apos;&#123;</span><br><span class="line">	&quot;peers&quot;: [&quot;peer0.org1.example.com&quot;,&quot;peer0.org2.example.com&quot;],</span><br><span class="line">	&quot;fcn&quot;:&quot;move&quot;,</span><br><span class="line">	&quot;args&quot;:[&quot;a&quot;,&quot;b&quot;,&quot;10&quot;]</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p><strong>NOTE:</strong> Ensure that you save the Transaction ID from the response in order to pass this string in the subsequent query transactions.</p>
+<h3 id="Chaincode-Query"><a href="#Chaincode-Query" class="headerlink" title="Chaincode Query"></a>Chaincode Query</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X GET \</span><br><span class="line">  &quot;http://localhost:4000/channels/mychannel/chaincodes/mycc?peer=peer0.org1.example.com&amp;fcn=query&amp;args=%5B%22a%22%5D&quot; \</span><br><span class="line">  -H &quot;authorization: Bearer &lt;put JSON Web Token here&gt;&quot; \</span><br><span class="line">  -H &quot;content-type: application/json&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Query-Block-by-BlockNumber"><a href="#Query-Block-by-BlockNumber" class="headerlink" title="Query Block by BlockNumber"></a>Query Block by BlockNumber</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X GET \</span><br><span class="line">  &quot;http://localhost:4000/channels/mychannel/blocks/1?peer=peer0.org1.example.com&quot; \</span><br><span class="line">  -H &quot;authorization: Bearer &lt;put JSON Web Token here&gt;&quot; \</span><br><span class="line">  -H &quot;content-type: application/json&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Query-Transaction-by-TransactionID"><a href="#Query-Transaction-by-TransactionID" class="headerlink" title="Query Transaction by TransactionID"></a>Query Transaction by TransactionID</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X GET http://localhost:4000/channels/mychannel/transactions/&lt;put transaction id here&gt;?peer=peer0.org1.example.com \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json"</span><br></pre></td></tr></table></figure>
+<p><strong>NOTE</strong>: The transaction id can be from any previous invoke transaction, see results of the invoke request, will look something like <code>8a95b1794cb17e7772164c3f1292f8410fcfdc1943955a35c9764a21fcd1d1b3</code>.</p>
+<p><strong>注意：事务ID可以来自任何先前的调用事务，请参见调用请求的结果，看起来如8a95b1794cb17e7772164c3f1292f8410fcfdc1943955a35c9764a21fcd1d1b3。</strong></p>
+<h3 id="Query-ChainInfo"><a href="#Query-ChainInfo" class="headerlink" title="Query ChainInfo"></a>Query ChainInfo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X GET \</span><br><span class="line">  "http://localhost:4000/channels/mychannel?peer=peer0.org1.example.com" \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json"</span><br></pre></td></tr></table></figure>
+
+<h3 id="Query-Installed-chaincodes"><a href="#Query-Installed-chaincodes" class="headerlink" title="Query Installed chaincodes"></a>Query Installed chaincodes</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X GET \</span><br><span class="line">  "http://localhost:4000/chaincodes?peer=peer0.org1.example.com&amp;type=installed" \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json"</span><br></pre></td></tr></table></figure>
+
+<h3 id="Query-Instantiated-chaincodes"><a href="#Query-Instantiated-chaincodes" class="headerlink" title="Query Instantiated chaincodes"></a>Query Instantiated chaincodes</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X GET \</span><br><span class="line">  "http://localhost:4000/chaincodes?peer=peer0.org1.example.com&amp;type=instantiated" \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json"</span><br></pre></td></tr></table></figure>
+
+<h3 id="Query-Channels"><a href="#Query-Channels" class="headerlink" title="Query Channels"></a>Query Channels</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s -X GET \</span><br><span class="line">  "http://localhost:4000/channels?peer=peer0.org1.example.com" \</span><br><span class="line">  -H "authorization: Bearer &lt;put JSON Web Token here&gt;" \</span><br><span class="line">  -H "content-type: application/json"</span><br></pre></td></tr></table></figure>
+
+<h3 id="Clean-the-network"><a href="#Clean-the-network" class="headerlink" title="Clean the network"></a>Clean the network</h3><p>The network will still be running at this point. Before starting the network manually again, here are the commands which cleans the containers and artifacts.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f $(docker ps -aq)</span><br><span class="line">docker rmi -f $(docker images | grep dev | awk '&#123;print $3&#125;')</span><br><span class="line">rm -rf fabric-client-kv-org[1-2]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Network-configuration-considerations"><a href="#Network-configuration-considerations" class="headerlink" title="Network configuration considerations"></a>Network configuration considerations</h3><h3 id="网络配置注意事项"><a href="#网络配置注意事项" class="headerlink" title="网络配置注意事项"></a>网络配置注意事项</h3><p>You have the ability to change configuration parameters by either directly editing the network-config.yaml file or provide an additional file for an alternative target network. The app uses an optional environment variable “TARGET_NETWORK” to control the configuration files to use. For example, if you deployed the target network on Amazon Web Services EC2, you can add a file “network-config-aws.yaml”, and set the “TARGET_NETWORK” environment to ‘aws’. The app will pick up the settings inside the “network-config-aws.yaml” file.</p>
+<p><strong>您可以通过直接编辑network-config.yaml文件或为备用目标网络提供其他文件来更改配置参数。 该应用程序使用可选的环境变量“ TARGET_NETWORK”来控制要使用的配置文件。 例如，如果您在Amazon Web Services EC2上部署了目标网络，则可以添加文件“ network-config-aws.yaml”，并将“ TARGET_NETWORK”环境设置为“ aws”。 该应用程序将获取“ network-config-aws.yaml”文件中的设置。</strong></p>
+<h4 id="IP-Address-and-PORT-information"><a href="#IP-Address-and-PORT-information" class="headerlink" title="IP Address** and PORT information"></a>IP Address** and PORT information</h4><h4 id="IP地址-和端口信息"><a href="#IP地址-和端口信息" class="headerlink" title="IP地址**和端口信息"></a>IP地址**和端口信息</h4><p>If you choose to customize your docker-compose yaml file by hardcoding IP Addresses and PORT information for your peers and orderer, then you MUST also add the identical values into the network-config.yaml file. The url and eventUrl settings will need to be adjusted to match your docker-compose yaml file.</p>
+<p><strong>如果您选择通过peer和orderer的IP地址和端口信息进行硬编码来自定义docker-compose yaml文件，则还必须将相同的值添加到network-config.yaml文件中。 url和eventUrl设置将需要进行调整以匹配您的docker-compose yaml文件。</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">peer1.org1.example.com:</span><br><span class="line">  url: grpcs://x.x.x.x:7056</span><br><span class="line">  eventUrl: grpcs://x.x.x.x:7058</span><br></pre></td></tr></table></figure>
+
+<h4 id="Discover-IP-Address"><a href="#Discover-IP-Address" class="headerlink" title="Discover IP Address"></a>Discover IP Address</h4><h4 id="发现IP地址"><a href="#发现IP地址" class="headerlink" title="发现IP地址"></a>发现IP地址</h4><p>To retrieve the IP Address for one of your network entities, issue the following command:</p>
+<p><strong>要检索您的网络实体之一的IP地址，请发出以下命令：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> this will <span class="built_in">return</span> the IP Address <span class="keyword">for</span> peer0</span></span><br><span class="line">docker inspect peer0 | grep IPAddress</span><br></pre></td></tr></table></figure>
+
+<p><a rel="license noopener" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license noopener" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-11-01T01:15:20.000Z" itemprop="dateUpdated">2019-11-01 09:15:20</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fabric-samples/" rel="tag">fabric-samples</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/&title=《fabric-samples之balance-transfer(余额代偿)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/&title=《fabric-samples之balance-transfer(余额代偿)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/01/2019/balance-transfer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之balance-transfer(余额代偿)》 — Cups&url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/01/2019/interest_rate_swaps/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">fabric-samples之interest-rate-swaps(利率互换)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/10/31/2019/commercial-paper/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fabric-samples之commercial-paper-tutorial(商业票据教程)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/&title=《fabric-samples之balance-transfer(余额代偿)》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/&title=《fabric-samples之balance-transfer(余额代偿)》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2019/11/01/2019/balance-transfer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-samples之balance-transfer(余额代偿)》 — Cups&url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2019/11/01/2019/balance-transfer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2019/11/01/2019/balance-transfer/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

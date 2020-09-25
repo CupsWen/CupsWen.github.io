@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>访问控制综述 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="访问控制，综述">
+    <meta name="description" content="动机 接下来我们组，要进行区块链医疗数据共享方面的设计。 虽然，以前看过一些访问控制的文章，但是忘的差不多了。 现在来看几篇论文，把访问控制拾起来，别到时候，拖队友后腿。  （一）访问控制模型研究综述_沈海波 沈海波，洪帆.访问控制模型研究综述[J].计算机应用研究，2005(06)：9-11.   1、摘要 为什么研究访问控制模型 访问控制是一种重要的信息安全技术。为了提高效益和增强竞争力，许多">
+<meta name="keywords" content="访问控制，综述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="访问控制综述">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2020&#x2F;09&#x2F;19&#x2F;2020&#x2F;overview-of-access-control&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="动机 接下来我们组，要进行区块链医疗数据共享方面的设计。 虽然，以前看过一些访问控制的文章，但是忘的差不多了。 现在来看几篇论文，把访问控制拾起来，别到时候，拖队友后腿。  （一）访问控制模型研究综述_沈海波 沈海波，洪帆.访问控制模型研究综述[J].计算机应用研究，2005(06)：9-11.   1、摘要 为什么研究访问控制模型 访问控制是一种重要的信息安全技术。为了提高效益和增强竞争力，许多">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;nist-rbac.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;t-rbac.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;t-c.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;ucon.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;a-c-list.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;capacity-relationship-table.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;capacity-relationship-table.png">
+<meta property="og:updated_time" content="2020-09-21T00:40:05.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;access-control&#x2F;nist-rbac.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">访问控制综述</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">访问控制综述</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-19T13:35:10.000Z" itemprop="datePublished" class="page-time">
+  2020-09-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#动机"><span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#（一）访问控制模型研究综述-沈海波"><span class="post-toc-text">（一）访问控制模型研究综述_沈海波</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、摘要"><span class="post-toc-text">1、摘要</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、引言"><span class="post-toc-text">2、引言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、传统的访问控制模型"><span class="post-toc-text">3、传统的访问控制模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1）自主访问控制DAC"><span class="post-toc-text">1）自主访问控制DAC</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2）强制访问控制MAC"><span class="post-toc-text">2）强制访问控制MAC</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、基于角色的访问控制模型RBAC"><span class="post-toc-text">4、基于角色的访问控制模型RBAC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1）NIST-RBAC"><span class="post-toc-text">1）NIST RBAC</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、基于任务和工作流的访问控制模型TBAC"><span class="post-toc-text">5、基于任务和工作流的访问控制模型TBAC</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6、基于任务和角色的访问控制模型T-RBAC"><span class="post-toc-text">6、基于任务和角色的访问控制模型T-RBAC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1）T-RBAC模型"><span class="post-toc-text">1）T-RBAC模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2）模型中的两个重要问题"><span class="post-toc-text">2）模型中的两个重要问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7、下一代访问控制模型UCON"><span class="post-toc-text">7、下一代访问控制模型UCON</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8、结语"><span class="post-toc-text">8、结语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9、笔记"><span class="post-toc-text">9、笔记</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#（二）基于属性证书的访问控制模型研究-刘恒强"><span class="post-toc-text">（二）基于属性证书的访问控制模型研究_刘恒强</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、基本概念"><span class="post-toc-text">1、基本概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、访问控制的内容"><span class="post-toc-text">2、访问控制的内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、访问控制策略"><span class="post-toc-text">3、访问控制策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）自主访问控制策略"><span class="post-toc-text">（1）自主访问控制策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）强制访问控制策略"><span class="post-toc-text">（2）强制访问控制策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）角色访问控制策略"><span class="post-toc-text">（3）角色访问控制策略</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、访问控制实现机制"><span class="post-toc-text">4、访问控制实现机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）访问控制表"><span class="post-toc-text">（1）访问控制表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）能力关系表"><span class="post-toc-text">（2）能力关系表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）权限关系表"><span class="post-toc-text">（3）权限关系表</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、基于证书属性的访问控制"><span class="post-toc-text">5、基于证书属性的访问控制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6、笔记"><span class="post-toc-text">6、笔记</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#（三）区块链中的身份识别和访问控制技术研究"><span class="post-toc-text">（三）区块链中的身份识别和访问控制技术研究</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#（四）访问控制技术-BAIKE"><span class="post-toc-text">（四）访问控制技术-BAIKE</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、概念及要素"><span class="post-toc-text">1、概念及要素</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、访问控制的功能及原理"><span class="post-toc-text">2、访问控制的功能及原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、访问控制的类型"><span class="post-toc-text">3、访问控制的类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）自主访问控制"><span class="post-toc-text">（1）自主访问控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）强制访问控制"><span class="post-toc-text">（2）强制访问控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）基于角色的访问控制"><span class="post-toc-text">（3）基于角色的访问控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、访问控制机制"><span class="post-toc-text">4、访问控制机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）访问控制矩阵"><span class="post-toc-text">（1）访问控制矩阵</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）访问控制列表"><span class="post-toc-text">（2）访问控制列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）能力关系表"><span class="post-toc-text">（3）能力关系表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）授权关系表"><span class="post-toc-text">（4）授权关系表</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、安全策略"><span class="post-toc-text">5、安全策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）安全策略实施原则"><span class="post-toc-text">（1）安全策略实施原则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）基于身份和规则的安全策略"><span class="post-toc-text">（2）基于身份和规则的安全策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）综合访问控制策略"><span class="post-toc-text">（3）综合访问控制策略</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#（五）访问控制技术-BLOG"><span class="post-toc-text">（五）访问控制技术-BLOG</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、概念"><span class="post-toc-text">1、概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、实现技术"><span class="post-toc-text">2、实现技术</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、应用模型"><span class="post-toc-text">3、应用模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#（六）访问控制-wiki"><span class="post-toc-text">（六）访问控制-wiki</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、什么是访问控制"><span class="post-toc-text">1、什么是访问控制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、访问控制的分类"><span class="post-toc-text">2、访问控制的分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、基于对象的访问控制模型"><span class="post-toc-text">1、基于对象的访问控制模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、基于任务的访问控制模型"><span class="post-toc-text">2、基于任务的访问控制模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、基于角色的访问控制模型"><span class="post-toc-text">3、基于角色的访问控制模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、访问控制的实现"><span class="post-toc-text">3、访问控制的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）实现机制"><span class="post-toc-text">（1）实现机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）访问控制表"><span class="post-toc-text">（2）访问控制表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）访问控制矩阵"><span class="post-toc-text">（3）访问控制矩阵</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）访问控制能力列表"><span class="post-toc-text">（4）访问控制能力列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（5）安全标签"><span class="post-toc-text">（5）安全标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（6）具体类别"><span class="post-toc-text">（6）具体类别</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#（六）其他"><span class="post-toc-text">（六）其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、访问控制策略"><span class="post-toc-text">1、访问控制策略</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2020/overview-of-access-control"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">访问控制综述</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-09-19 21:35:10" datetime="2020-09-19T13:35:10.000Z"  itemprop="datePublished">2020-09-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><blockquote>
+<p>接下来我们组，要进行区块链医疗数据共享方面的设计。</p>
+<p>虽然，以前看过一些访问控制的文章，但是忘的差不多了。</p>
+<p>现在来看几篇论文，把访问控制拾起来，别到时候，拖队友后腿。</p>
+</blockquote>
+<h1 id="（一）访问控制模型研究综述-沈海波"><a href="#（一）访问控制模型研究综述-沈海波" class="headerlink" title="（一）访问控制模型研究综述_沈海波"></a>（一）访问控制模型研究综述_沈海波</h1><blockquote>
+<p>沈海波，洪帆.访问控制模型研究综述[J].计算机应用研究，2005(06)：9-11. </p>
+</blockquote>
+<h2 id="1、摘要"><a href="#1、摘要" class="headerlink" title="1、摘要"></a>1、摘要</h2><blockquote>
+<p><code>为什么研究访问控制模型</code></p>
+<p>访问控制是一种重要的信息安全技术。为了提高效益和增强竞争力，许多现代企业采用了此技术来保障其信息管理系统的安全 。</p>
+<p><code>论文主要内容</code></p>
+<p>对传统的访问控制模型、基于角色的访问控制模型 、基于任务和工作流的访问控制模型、基于任务和角色的访问控制模型等几种主流模型进行了比较详尽地论述和比较 ，并简介了有望成为下一代访问控制模型的UCON模型。</p>
+</blockquote>
+<h2 id="2、引言"><a href="#2、引言" class="headerlink" title="2、引言"></a>2、引言</h2><blockquote>
+<p><code>什么是访问控制？</code></p>
+<p><strong>访问控制是通过某种途径显式地准许或限制主体对客体访问能力及范围的一种方法。</strong></p>
+<p><strong>它是针对越权使用系统资源的防御措施，通过限制对关键资源的访问，防止非法用户的侵入或因为合法用户的不慎操作而造成的破坏，从而保证系统资源受控地、合法地使用。</strong></p>
+<p><code>访问控制的目的是什么？</code></p>
+<p>访问控制的目的在于限制系统内用户的行为和操作，包括用户能做什么和系统程序根据用户的行为应该做什么两个方面。</p>
+<p><code>访问控制的核心是什么？</code></p>
+<p>访问控制的核心是授权策略。</p>
+<p>授权策略是用于确定一个主体是否能对客体拥有访问能力的一套规则。 在统一的授权策略下，得到授权的用户就是合法用户，否则就是非法用户。访问控制模型定义了主体、客体、访问是如何表示和操作的，它决定了授权策略的表达能力和灵活性。</p>
+<p><code>访问控制有哪些分类？</code></p>
+<p>若以授权策略来划分，访问控制模型可分为：传统的访问控制模型、基于角色的访问控制(RBAC)模型、基于任务和工作流的访问控制(TBAC)模型、基于任务和角色的访问控制(T-RBAC)模型等。</p>
+</blockquote>
+<h2 id="3、传统的访问控制模型"><a href="#3、传统的访问控制模型" class="headerlink" title="3、传统的访问控制模型"></a>3、传统的访问控制模型</h2><blockquote>
+<p><code>传统访问控制模型包含什么？</code></p>
+<p>传统的访问控制一般被分为两类：自主访问控制 DAC(Discretionary Access Control)和强制访问控制 MAC(Mandatory AccessControl )</p>
+<h3 id="1）自主访问控制DAC"><a href="#1）自主访问控制DAC" class="headerlink" title="1）自主访问控制DAC"></a>1）自主访问控制DAC</h3><p><code>什么是自主访问控制？</code></p>
+<p><strong>自主访问控制DAC是在确认主体身份以及它们所属组的基础上对访问进行限制的一种方法。</strong></p>
+<p>自主访问的含义是指访问许可的主体能够向其他主体转让访问权。</p>
+<p>在基于DAC的系统中，主体的拥有者负责设置访问权限。</p>
+<p><code>DAC存在什么问题</code></p>
+<p>（1）而作为许多操作系统的副作用，一个或多个特权用户也可以改变主体的控制权限。自主访问控制的一个最大问题是主体的权限太大，无意间就可能泄露信息，而且不能防备特洛伊木马的攻击。</p>
+<p>（2）<code>访问控制表(ACL)</code>是 DAC中常用的一种安全机制，系统安全管理员通过维护 ACL来控制用户访问有关数据。ACL的优点在于它的表述直观、易于理解，而且比较容易查出对某一特定资源拥有访问权限的所有用户，有效地实施授权管理。 但当用户数量多、管理数据量大时，ACL就会很庞大。 当组织内的人员发生变化、工作职能发生变化时，ACL的维护就变得非常困难。</p>
+<p>（3） 另外，对分布式网络系统，DAC不利于实现统一的全局访问控制。</p>
+<h3 id="2）强制访问控制MAC"><a href="#2）强制访问控制MAC" class="headerlink" title="2）强制访问控制MAC"></a>2）强制访问控制MAC</h3><p><code>什么是强制访问控制？</code></p>
+<p><strong>强制访问控制 MAC是一种强加给访问主体 (即系统强制主体服从访问控制策略)的一种访问方式，它利用上读/下写来保证数据的完整性，利用下读/上写来保证数据的保密性。</strong></p>
+<p><code>用途</code></p>
+<p>MAC主要用于多层次安全级别的军事系统中，它通过梯度安全标签实现信息的单向流通，可以有效地阻止特洛伊木马的泄露；</p>
+<p><code>缺陷</code></p>
+<p>其缺陷主要在于实现工作量较大，管理不便，不够灵活，而且它过重强调保密性，对系统连续工作能力、授权的可管理性方面考虑不足。</p>
+<blockquote>
+<p><strong><code>为了克服标准矩阵模型中将访问权直接分配给主体，引起管理困难的缺陷 ，在访问控制中引进了聚合体 (Aggregation)概念，如组、角色等。</code></strong> </p>
+<p><code>引入角色</code></p>
+<p><strong>在 RBAC(Role-BasedAccessControl )模型中，就引进了 “角色”概念。 所谓角色，就是一个或一群用户在组织内可执行的操作的集合。 角色意味着用户在组织内的责任和职能。</strong></p>
+<p><strong>在 RBAC模型中，权限并不直接分配给用户，而是先分配给角色，然后用户分配给那些角色，从而获得角色的权限。</strong></p>
+<p><strong>RBAC系统定义了各种角色，每种角色可以完成一定的职能，不同的用户根据其职能和责任被赋予相应的角色，一旦某个用户成为某角色的成员，则此用户可以完成该角色所具有的职能。</strong> </p>
+<p><code>角色-权限</code></p>
+<p><strong>在 RBAC中，可以预先定义角色-权限之间的关系，将预先定义的角色赋予用户，明确责任和授权，从而加强安全策略。与把权限赋予用户的工作相比，把角色赋予用户要容易灵活得多，这简化了系统的管理。</strong></p>
+</blockquote>
+</blockquote>
+<h2 id="4、基于角色的访问控制模型RBAC"><a href="#4、基于角色的访问控制模型RBAC" class="headerlink" title="4、基于角色的访问控制模型RBAC"></a>4、基于角色的访问控制模型RBAC</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/access-control/nist-rbac.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<h3 id="1）NIST-RBAC"><a href="#1）NIST-RBAC" class="headerlink" title="1）NIST RBAC"></a>1）NIST RBAC</h3><p>NIST RBAC参考模型分成基本RBAC、等级RBAC和约束RBAC三个子模型。 </p>
+<p><code>基本 RBAC</code>定义了角色的基本功能，它包括五个基本数据元素：Users(用户)、Roles(角色)、Sessions(会话集)、Objects(客体)、Operations(操作 )，以及角色权限分配(PRA)、用户角色分配 (URA)。</p>
+<p> <strong>其基本思想是通过角色建立用户和访问权限之间的多对多关系，用户由此获得访问权限。</strong></p>
+<p><strong><code>等级RBAC</code>在基本RBAC的基础上增加了角色的等级，以对应功能的或组织的等级结构</strong>。角色等级又可分为通用角色等级和有限角色等级。在<code>通用角色等级</code>中，角色之间是一种代数的偏序关系，而有限角色等级是一种树结构。 在<code>角色等级</code>中，高等级的角色继承低等级角色的全部权限，这是一种“全”继承关系。 但这并不完全符合实际企业环境中的最小特权原则，因为企业中有些权限只需部分继承。</p>
+<p><strong><code>约束RBAC</code>在 基本RBAC的 基础上增加了职责分离(SoD)关系</strong>，而职责分离又分为静态职责分离(SSD)和动态职责分离(DSD)。<code>静态职责分离</code>用于解决角色系统中潜在的利益冲突，强化了对用户角色分配的限制，使得一个用户不能分配给两个互斥的角色 。<code>动态职责分离</code>用于在用户会话中对可激活的当前角色进行限制，用户可被赋予多个角色，但它们不能在同一会话期中被激活。DSD 实际上是最小权限原则的扩展，它使得每个用户根据其执行的任务可以在不同的环境下拥有不同的访问权限。</p>
+<p>NIST RBAC参考模型中还包括功能规范，分为管理功能、系统支持功能和审查功能，这里不再详述。</p>
+<blockquote>
+<p><strong><code>上述的 DAC，MAC和 RBAC都是基于主体-客体 (Subject-Object)观点的被动安全模型，它们都是从系统的角度 (控制环境是静态的)出发保护资源。</code></strong></p>
+<p><strong>在被动安全模型中，授权是静态的，在执行任务之前，主体就拥有权限，没有考虑到操作的上下文，不适合于工作流系统；并且主体一旦拥有某种权限，在任务执行过程中或任务执行完后，会继续拥有这种权限，这显然使系统面临极大的安全威胁。</strong></p>
+<p><strong>工作流是为完成某一目标而由多个相关的任务(活动)构成的业务流程，它的特点是使处理过程自动化，对人和其他资源进行协调管理，从而完成某项工作。 在工作流环境中，当数据在工作流中流动时，执行操作的用户在改变，用户的权限也在改变，这与数据处理的上下文环境相关，传统的访问控制技术DAC和 MAC对此无能为力。</strong></p>
+<p><strong>若使用RBAC，则不仅需频繁更换角色，而且也不适合工作流程的运转。<code>为了解决此问题，人们提出了基于任务的访问控制模型TBAC。</code></strong></p>
+</blockquote>
+</blockquote>
+<h2 id="5、基于任务和工作流的访问控制模型TBAC"><a href="#5、基于任务和工作流的访问控制模型TBAC" class="headerlink" title="5、基于任务和工作流的访问控制模型TBAC"></a>5、基于任务和工作流的访问控制模型TBAC</h2><blockquote>
+<p><code>任务</code></p>
+<p>在TBAC模型中，引进了另一个非常重要的概念——任务。所谓任务(或活动)，就是要进行的一个个操作的统称。<strong>任务是一个动态的概念，每项任务包括其内容 、状态 (如静止态、活动态、等待态、完成态等 )、执行结果、生命周期等。</strong> 任务与任务之间一般存在相互关联，如相互依赖或相互排斥。 如任务 A 必须在任务B之后执行；任务 A 与任务 B不能同时执行等。</p>
+<p><code>思想</code></p>
+<p><strong><code>TBAC模型是一种基于任务、采用动态授权的主动安全模型</code></strong>。 它从应用和企业的角度来解决安全问题。 它采用面向任务的观点，从任务的角度来建立安全模型和实现安全机制，在任务处理的过程中提供实时的安全管理。其基本思想主要有：</p>
+<p><strong>（1）将访问权限与任务相结合，每个任务的执行都被看作是主体使用相关访问权限访问客体的过程。 在任务执行过程中，权限被消耗，当权限用完时，主体就不能再访问客体了。</strong></p>
+<p><strong>（2）系统授予给用户的访问权限，不仅仅与主体、客体有关，还与主体当前执行的任务、任务的状态有关。 客体的访问控制权限并不是静止不变的，而是随着执行任务的上下文环境的变化而变化。</strong> TBAC的主动、动态等特性，使其广泛应用于工作流、分布式处理、多点访问控制的信息处理和事务管理系统的决策制定等方面。</p>
+<blockquote>
+<p>尽管 TBAC具备许多特点，并已应用于实际中，但当应用于复杂的企业环境时，就会暴露出自身的缺陷。 </p>
+<p>例如<strong><code>在实际的企业环境中，角色是一个非常重要的概念，但TBAC中并没有将角色与任务清楚地分离开来，也不支持角色的层次等级；另外，访问控制并非都是主动的，也有属于被动形式的，但TBAC并不支持被动访问控制，需要与RBAC结合使用</code></strong>。</p>
+</blockquote>
+</blockquote>
+<h2 id="6、基于任务和角色的访问控制模型T-RBAC"><a href="#6、基于任务和角色的访问控制模型T-RBAC" class="headerlink" title="6、基于任务和角色的访问控制模型T-RBAC"></a>6、基于任务和角色的访问控制模型T-RBAC</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/access-control/t-rbac.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<h3 id="1）T-RBAC模型"><a href="#1）T-RBAC模型" class="headerlink" title="1）T-RBAC模型"></a>1）T-RBAC模型</h3><p>为了能适应复杂企业的特定环境需求，通过在 RBAC96模型中加入 “任务 ”项，构造了基于企业环境的访问控制模型——T-RBAC(Task-Role-Based A ccess Control)模型，如图所示。</p>
+<p><strong>不像 RBAC中没有将任务从角色中分离出来，也不像TBAC中没有明确地突出角色的作用，T-RBAC模型把任务和角色置于同等重要的地位；它们是两个独立而又相互关联的重要概念。 任务是 RBAC和 TBAC能结合的基础。</strong></p>
+<p><strong>不像 RBAC中将访问权限分配给角色，T-RBAC模型中是先将访问权限分配给任务，再将任务分配给角色，角色通过任务与权限关联，任务是角色和权限交换信息的桥梁。</strong></p>
+<p><strong>在T-RBAC模型中，任务具有权限，即根据具体的执行任务要求和权限约束，任务具有相应的权限，不同的任务拥有不同的权限，权限随着任务的执行而变动。</strong> 这真正实现了权限的按需和动态分配 ，角色只有在执行任务时才具有权限，当角色不执行任务时不具有权限；权限的分配和回收是动态进行的，任务根据流程动态到达角色，权限随之赋予角色，当任务完成时， 角色的权限也随之收回；角色在工作流中不需要赋予权限。这样，不仅使角色的操作、维护和任务的管理变得简单方便，也使得系统变得更为安全。</p>
+<h3 id="2）模型中的两个重要问题"><a href="#2）模型中的两个重要问题" class="headerlink" title="2）模型中的两个重要问题"></a>2）模型中的两个重要问题</h3><p><strong><code>任务分类问题</code></strong></p>
+<p>企事业环境与需求不同，访问控制的要求也就不同，所要执行的任务也应具有不同的特点。 任务应根据企事业的组织结构和访问控制要求进行分类，从而模型可根据任务的分类实现不同的访问控制，即实现任务级的访问控制。 在企业组织中，访问控制基于任务的特点是非常重要的，因为访问权限是根据分配的任务赋给用户的。 如可根据组织结构和业务流程、权限继承和主动/被动访问特性，将任务分成了四类(表 1)：W，S，A，P，从而可实现主动访问控制和被动访问控制的结合。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/access-control/t-c.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p><strong><code>角色继承问题</code></strong></p>
+<p>不像RBAC模型中，角色之间是一种偏序关系，角色的继承是一种向上的 “全 ”继承关系。在T-RBAC模型中，引进了一种新的角色等级 S-RH，即 Supervision Role Inheritance(管理角色等级)。S-RH定义为：如果角色R1的级别比角色 R2的级别高，则R1只继承R2中属于类S或类A中的任务权限。在S-RH中，高等级的角色并不全部继承低等级角色的权限，这就解决了部分继承的问题。</p>
+<p>通过引进新的角色等级S-RH，不仅解决了角色等级中的部分继承问题，而且还解决了RBAC模型中“若角色 A 和角色B是互斥的，则它们不能有相同上层高级角色。”的问题。</p>
+</blockquote>
+<h2 id="7、下一代访问控制模型UCON"><a href="#7、下一代访问控制模型UCON" class="headerlink" title="7、下一代访问控制模型UCON"></a>7、下一代访问控制模型UCON</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/access-control/ucon.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p>在研究访问控制的过程中，为适应不同的应用场合，人们提出了许多新的概念，如信任管理(Trust Management)、数字版权管理 (Digital Rights Management)、义务(Obligations)、禁止(Prohibitions)等。 为了统一这些概念，J. Park和 R. Sandhu提出了一种新的访问控制模型，称作使用控制 (Usage Control：UCON)模型，也称 ABC模型。<strong>UCON 模型包含三个基本元素：主体、客体、权限和另外三个与授权有关的元素：授权规则、条件、义务</strong>，如图示。</p>
+<p><strong><code>UCON模型中的主要元素如下：</code></strong></p>
+<p><code>主体(Subjects)</code>。 它是具有某些属性和对客体(Objects)操作权限的实体。 主体的属性包括身份 、角色、安全级别、成员资格等。 这些属性用于授权过程。</p>
+<p><code>权限(Rights)</code>。 它是主体拥有的对客体操作的一些特权。权限由一个主体对客体进行访问或使用的功能集组成。UCON 中的权限可分成许多功能类，如审计类、修改类等。</p>
+<p><code>授权规则 (Authorization Rules)</code>。它是允许主体对客体进行访问或使用前必须满足的一个需求集。授权规则是用来检查主体是否有资格访问客体的决策因素。</p>
+<p><code>条件(Conditions)</code>。 它是在使用授权规则进行授权过程中，允许主体对客体进行访问权限前必须检验的一个决策因素集。条件是环境的或面向系统的决策因素。条件可用来检查存在的限制，使用权限是否有效，哪些限制必须更新等。</p>
+<p><code>义务(Obligations)</code>。 它是一个主体在获得对客体的访问权限后必须履行的强制需求。分配了权限，就应有执行这些权限的义务责任。</p>
+<p>在UCON模型中，授权规则、条件、义务与授权过程相关，它们是决定一个主体是否有某种权限能对客体进行访问的决策因素。 基于这些元素，UCON有四种可能的授权过程，并由此可以证明：UCON模型不仅包含了 DAC，MAC，RBAC，而且还包含了数字版权管理(DRM)  、信任管理等。UCON模型涵盖了现代商务和信息系统需求中的安全和隐私这两个重要的问题。 因此，UCON模型为研究下一代访问控制提供了一种有希望的方法 ，被称作下一代访问控制模型。</p>
+</blockquote>
+<h2 id="8、结语"><a href="#8、结语" class="headerlink" title="8、结语"></a>8、结语</h2><blockquote>
+<p>访问控制是一种重要的信息安全技术，是现代商务企业保障其信息管理系统安全不可缺少的。 网络技术的发展为访问控制技术提供了更为广阔的发展空间，也使得对访问控制技术的研究显得尤其重要。因篇幅所限，本文只对几种主要的访问控制模型作了概述。事实上，仅 RBAC模型就有多种。很多问题，如权限表示方法等，有待进一步研究。</p>
+</blockquote>
+<h2 id="9、笔记"><a href="#9、笔记" class="headerlink" title="9、笔记"></a>9、笔记</h2><blockquote>
+<p><strong><code>访问控制分类</code></strong></p>
+<p>传统的访问控制模型（DAC、MAC）、基于角色的访问控制模型（RBAC） 、基于任务和工作流的访问控制模型（TBAC）、基于任务和角色的访问控制模型（T-RBAC）、使用控制模型（UCON）。</p>
+<p><strong><code>访问控制模型的发展</code></strong></p>
+<p><strong>自主访问控制模型</strong>：</p>
+<p><code>缺点</code></p>
+<ol>
+<li>操作系统中存在特权用户，主体的权限太大，无意间就可能泄露信息，而且不能防备特洛伊木马的攻击。</li>
+<li>当用户数量多、管理数据量大时，ACL就会很庞大；当组织内的人员发生变化、工作职能发生变化时，ACL的维护就变得非常困难。</li>
+<li>对分布式网络系统，DAC不利于实现统一的全局访问控制。</li>
+</ol>
+<p><code>改进</code></p>
+<p>由访问权限直接分配给主体，改变为聚合体（组、角色）。管理角色-权限之间的关系。</p>
+<p><strong>基于角色的访问控制模型RBAC</strong>：</p>
+<p><code>缺点</code></p>
+<ol>
+<li>是基于主体-客体 (Subject-Object)观点的被动安全模型。</li>
+<li>授权是静态的任务完成前和任务完成后，主体都有相应的权限，这是不安全的。</li>
+<li>工作流条件下，需要来回变更主体角色。</li>
+</ol>
+<p><code>改进</code></p>
+<p>由被动安全模型，改变为主动安全模型。基于任务和工作流进行权限管理。</p>
+<p><strong>基于任务和工作流的访问控制模型TBAC</strong>：</p>
+<p><code>缺点</code></p>
+<ol>
+<li>没有将角色和任务分离开来。</li>
+<li>不支持角色分级。</li>
+<li>不支持被动安全。</li>
+</ol>
+<p><code>改进</code></p>
+<p>将角色和任务分离开来，先将访问权限分配给任务，再将任务分配给角色，角色通过任务与权限关联，任务是角色和权限交换信息的桥梁。</p>
+<p><strong>基于任务和角色的访问控制模型T-RBAC</strong>：</p>
+<p><code>面临的主要问题</code></p>
+<p>任务分类问题（将任务分成了四类）和角色继承问题（ S-RH）。</p>
+<p><strong>使用控制模型</strong>：</p>
+<p>在研究访问控制的过程中，为适应不同的应用场合，人们提出了许多新的概念，如信任管理(Trust Management)、数字版权管理 (Digital Rights Management)、义务(Obligations)、禁止(Prohibitions)等。 为了统一这些概念，J. Park和 R. Sandhu提出了一种新的访问控制模型，称作使用控制 (Usage Control：UCON)模型，也称 ABC模型。</p>
+</blockquote>
+<h1 id="（二）基于属性证书的访问控制模型研究-刘恒强"><a href="#（二）基于属性证书的访问控制模型研究-刘恒强" class="headerlink" title="（二）基于属性证书的访问控制模型研究_刘恒强"></a>（二）基于属性证书的访问控制模型研究_刘恒强</h1><blockquote>
+<p>刘恒强. 基于属性证书的访问控制模型研究[D].郑州大学，2007. </p>
+</blockquote>
+<h2 id="1、基本概念"><a href="#1、基本概念" class="headerlink" title="1、基本概念"></a>1、基本概念</h2><blockquote>
+<p>随着规模的日益增大，网络中存放的敏感数据越来越多，如何保护网络系统不被非法访问这一问题显得越来越重要，因此必须采取有效措施保证信息系统的安全。</p>
+<p>访问控制又称安全访问，是指系统能够对资源的访问包括对系统资源的使用和操作进行控制，保证只有对资源拥有访问权限的主体才能访问资源。<strong>一般来说一个信息系统中的所有资源都需要访问控制，只是所需的访问控制强度不同，这由系统的安全策略制定。<code>访问控制技术就是通过不同的手段和策略实现网络上的安全访问，有效地维护系统的保密性，安全性，可控性。</code></strong></p>
+<p><code>主体</code>：系统中的主动元素，可以是一个人，一个组，一个系统或者一个进程。<br><code>客体</code>：系统中的被动元素，处于主体的作用之下。它可以是一个目录、文件夹、键盘、内存、打印机等。<br><code>访问</code>：指主体和客体之间的交互，这种交互的结果往往引发信息的流动。一般的讲，主体对客体的访问意味着对客体所含数据的访问。<br><code>访问权</code>：指访问权是赋予一个主体访问特定的客体，执行特定操作的许可权。<br><code>访问许可</code>：指与计算机系统中每个文件或目录相联系的访问许可集合，它描述了谁可以执行相应的读写等操作。<br><code>访问级别</code>：一个主体访问一个客体的授权级别。</p>
+<p>目前访问控制技术日益成为网络信息系统的重要保障之一，采取先进的网络安全访问控制技术是构造网络安全防线和保护体系的主要策略之一。</p>
+</blockquote>
+<h2 id="2、访问控制的内容"><a href="#2、访问控制的内容" class="headerlink" title="2、访问控制的内容"></a>2、访问控制的内容</h2><blockquote>
+<p>访问控制就是当计算机系统所属的信息资源遭受未经授权的操作威胁时能够提供适当的管制以及防护措施，来保护信息资源的机密性和完整性。<strong><code>访问控制实质上就是对资源使用的限制，决定主体是否被授权对客体执行某种操作。</code></strong></p>
+<p><strong><code>访问控制的目的是为了限制访问主体用户，进程，服务等对访问客体文件，系统等的访问权限，从而使计算机系统在合法的范围内使用，它用来鉴别主体的合法化，并将组成人员关系和特权与主体联系起来。</code></strong>只有经授权的用户，才允许访问特定的系统资源。当用户向系统正确地确定并验证自己的身份后，他们才可以请求访问系统。但是只有某些管理员才可以完全的访问系统，多数用户只有有限的访问权限。授权是确定用户访问权限的机制。用户访问权限必须遵循最小特权原则，该原则规定用户只拥有执行他们的作业所必需的访问权限，而不能拥有其他权限。为了保证网络资源受控及合法的使用，用户只能根据自己权限的大小来访问系统资源，不能越权访问。</p>
+<p>将访问控制应用在信息管理系统中，<strong><code>以用户认证作为访问控制的前提</code>，将各种安全策略相互配合起来真正做到对企业信息资源的保护作用</strong>。信息系统通过实施访问控制，可以限定对关键资源的访问，防止非法用户的侵入或合法用户的不慎操作造成破坏，它涉及到两个基本要素<strong><code>发起访问的主体，接受访问的客体和访问授权规则</code></strong>。</p>
+</blockquote>
+<h2 id="3、访问控制策略"><a href="#3、访问控制策略" class="headerlink" title="3、访问控制策略"></a>3、访问控制策略</h2><blockquote>
+<p>访问控制策略隶属于系统安全策略，它使管理者在计算机系统中和网络中严格的按照策略执行授权。一般而言，访问控制策略之间不存在什么有优略，只是哪一种安全策略更适合自己安全需求。因为不同的系统通常有不同的安全需求，适合一个系统的安全策略不一定适合另一个系统。访问控制技术涉及的面比较广，根据控制策略的不同通常划分为自主访问控制、强制访问控制和角色访问控制三种策略。</p>
+<h3 id="（1）自主访问控制策略"><a href="#（1）自主访问控制策略" class="headerlink" title="（1）自主访问控制策略"></a>（1）自主访问控制策略</h3><p>自主访问控制DAC，又称随意访问控制。是针对访问资源的用户身份和允许访问权限决定其访问操作。只要用户身份被确认后，即可根据访问控制列表上赋予该用户的权限限制用户的访问。传统的DAC最早出现在分时系统中，它是多用户下最常见的一种访问控制技术，在目前流行UNIX的系统中广泛被采用。DAC基于这样的思想：<strong><code>客体的主人全权管理该客体的访问权限，有权泄露，修改该客体的有关信息。</code></strong>使用这种控制方法，用户或应用可以任意在系统中规定谁能够访问他们的资源。</p>
+<p>由于DAC技术在一定程度上实现了权限隔离和资源保护，同时为用户提供了灵活的数据访问方式，所以在不少商业和工业领域中被大量采用。然而DAC技术对资源内共享难以控制，其提供的安全保护措施很容易被用户绕过而获得访问，用户间的关系不能在系统中体现出来，其原因在于用户在获得文件的访问权后，并没有限制对文件信息的操作，即没有控制数据的分发。所以提供的安全性相对较低，不能对系统的资源提供充分的保护，不能抵御特洛伊马等病毒的攻击。</p>
+<h3 id="（2）强制访问控制策略"><a href="#（2）强制访问控制策略" class="headerlink" title="（2）强制访问控制策略"></a>（2）强制访问控制策略</h3><p><strong><code>强制访问控制MAC在自主访问控制的基础上，增加了对网络资源属性的划分，规定不同属性下的访问权限</code></strong>。MAC最早出现在Multics系统中。其基本思想是<strong><code>每个主体都具有既定的安全属性，每个客体也具有既定的安全属性，主体对客体能否执行特定的操作取决于二者安全属性的关系</code></strong>。系统通过比较主体和客体的安全属性来决定主体能否对客体执行操作。对每个用户及客体被赋予的安全属性，用户是不能随意更改的，即不允许单个用户确定访问权限。只有系统管理员才能确定用户的权限。此外强制访问控制不允许某个进程生成共享文件，从而防止了进程通过访问共享文件将信息从一个用户流到另一个用户。</p>
+<p>我们通常所说的MAC主要是指美国国防部的可信计算机系统的评估标准中的MAC。它主要用来描述美国军用计算机系统环境下的多级安全策略。一般的MAC都要求满足安全模型的两个基本要素：</p>
+<p><strong>简单安全性</strong>：指当主体的安全级别不低于客体的安全级别且主体的类别集合包含客体的类别集合时，才允许主体访问客体。</p>
+<p><strong>特性</strong>：指主体的安全级别不高于客体的安全级且客体的类别集合包含主体的类别集合时，才允许主体写客体。</p>
+<p>上述两个基本要素保证了信息的单向流动，MAC就是通过信息的单向流动防止特洛伊木马的。但MAC的不足之处表现在两个方面首先高安全级别用户拥有的文件永远不可能被安全级别低的用户访问，不同级别的实体之间不能相互通信。其次是完整性方面控制不够，由于MAC强调信息向高安全级别的方向流动，低级别的实体可以任意写高安全级别的客体，因此对高安全级别的信息保护不够。</p>
+<h3 id="（3）角色访问控制策略"><a href="#（3）角色访问控制策略" class="headerlink" title="（3）角色访问控制策略"></a>（3）角色访问控制策略</h3><p>角色访问控制RBAC介于自主访问控制和强制访问控制之间的一种访问控制策略。其基本思想是<strong><code>用户被授予角色，角色被赋予权限，用户通过被赋予的角色来决定访问权限</code></strong>。通过在用户和访问权限之间引入角色的概念，使得一个用户可以与特定的一个或多个角色相联系，一个角色可以与特定的一个或多个访问权限相联系。角色可以根据实际需要生成或撤销，而且登录到系统中的用户可可以根据自己的需要激活相应的角色。在不同的系统下RBAC可以构造出不同的访问控制安全功能，为定义和实施系统的安全策略提供了极大的弹性。</p>
+<p>RBAC模型中的安全策略通常由用户、角色、权限、角色层次、操作、对象等构成。其中的授权过程就是将对象的存取访问权限在可靠的控制下连带角色所固有的操作一起提供给那些角色所代表的用户，一般而言“用户—角色”“角色—权限”之间都是多对多关系。在RBAC模型中每个用户进入系统后都有一个会话，每个会话都是动态产生，从属一个用户。同时RBAC模型支持最小特权原则。</p>
+<p><strong>RBAC由于不是直接授权给用户，而是先授权给角色，然后再授予用户角色，这样可以简单地改变用户的角色分配，当系统中增加新的应用功能时可以在角色中添加新的权限，从而降低系统的复杂度。</strong></p>
+</blockquote>
+<h2 id="4、访问控制实现机制"><a href="#4、访问控制实现机制" class="headerlink" title="4、访问控制实现机制"></a>4、访问控制实现机制</h2><blockquote>
+<p><strong><code>访问控制策略</code>是在较高层次上说明如何对控制对象进行访问控制，而<code>访问控制实现机制</code>则是为了实施相应的<code>控制策略</code>，对资源实施保护所采取的软硬件措施。</strong>访问控制矩阵是最早的实现模型，但是在较大的系统中会浪费很多的存储资源，因此在实际应用中很少使用，取而代之的是以下几种实现机制：</p>
+</blockquote>
+<h3 id="（1）访问控制表"><a href="#（1）访问控制表" class="headerlink" title="（1）访问控制表"></a>（1）访问控制表</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/access-control/a-c-list.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p><strong>访问控制表ACLS是以文件为中心建立访问权限表</strong>，如图1所示，表中记录了该文件的访问用户及访问权隶属关系。利用访问控制表，能够很容易的判断出对特定客体的授权访问，哪些主体可以访问并且有什么访问权限。如果主体的标志没有包含在表中，则这个主体就无法访问这个客体。撤销特定客体的授权访问也很容易，只要把相应的客体访问控制表置空即可，如图1所示。</p>
+<p>由于访问控制表简单、实用，虽然在查询特定主体能够访问的客体时，需要遍历所有的客体访问控制表。但它仍是一种较成熟且有效的访问控制实现机制。许多常用的操作系统使用来提供访问控制服务。另一种复杂的访问控制应用是利用一些访问控制包，通过它制定复杂的访问控制规则，限制何时何地及如何访问，同时这些规则根据用户的定义进行单个用户匹配使用。</p>
+</blockquote>
+<h3 id="（2）能力关系表"><a href="#（2）能力关系表" class="headerlink" title="（2）能力关系表"></a>（2）能力关系表</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/access-control/capacity-relationship-table.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p>能力关系表和访问控制表恰好相反，它是<strong>以用户为中心建立访问权限表</strong>，表中规定了该用户访问的文件名和访问权限，如2图所示。利用能力关系表可以很方便的查询一个主体的所有授权访问。相反检索一个客体的所有能够访问的主体需要检索所有主体的能力关系表。而在这方面的研究没有获得什么突破，现在很多系统还是利用访问控制表，当然二者结合起来的效果会更好。</p>
+</blockquote>
+<h3 id="（3）权限关系表"><a href="#（3）权限关系表" class="headerlink" title="（3）权限关系表"></a>（3）权限关系表</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/access-control/capacity-relationship-table.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p>由上可以看出访问控制表和能力关系表各有优缺点，于是<strong>考虑直接建立用户和文件的隶属关系</strong>，这就是权限关系表的主要原理，如表1所示。</p>
+<p>表1中各行说明了用户和对应的文件权限，不同的权限占不同的行，就如典型的关系数据库表一样。而通过对主体的排序，可以得到能力关系表的特性，通过对客体的排序可以得到访问控制表的特性。</p>
+</blockquote>
+<h2 id="5、基于证书属性的访问控制"><a href="#5、基于证书属性的访问控制" class="headerlink" title="5、基于证书属性的访问控制"></a>5、基于证书属性的访问控制</h2><blockquote>
+<p>下回在写。没看懂。不如直接去看基于属性的访问控制。</p>
+</blockquote>
+<h2 id="6、笔记"><a href="#6、笔记" class="headerlink" title="6、笔记"></a>6、笔记</h2><blockquote>
+<p>硕士论文果然比网上的博客、百科、WIKI好多了，看着舒服。</p>
+<p>终于搞明白了啥是访问控制策略、访问控制实现机制。</p>
+<p>通过图终于搞明白啥是访问控制矩阵、访问控制表、能力关系表、权限关系表。</p>
+</blockquote>
+<h1 id="（三）区块链中的身份识别和访问控制技术研究"><a href="#（三）区块链中的身份识别和访问控制技术研究" class="headerlink" title="（三）区块链中的身份识别和访问控制技术研究"></a>（三）区块链中的身份识别和访问控制技术研究</h1><blockquote>
+<p>张青禾. 区块链中的身份识别和访问控制技术研究[D].北京交通大学,2018. </p>
+</blockquote>
+<p>1、</p>
+<h1 id="（四）访问控制技术-BAIKE"><a href="#（四）访问控制技术-BAIKE" class="headerlink" title="（四）访问控制技术-BAIKE"></a>（四）访问控制技术-BAIKE</h1><p>原文：<a href="https://baike.baidu.com/item/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%8A%80%E6%9C%AF/5652430?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%8A%80%E6%9C%AF/5652430?fr=aladdin</a> </p>
+<h2 id="1、概念及要素"><a href="#1、概念及要素" class="headerlink" title="1、概念及要素"></a>1、概念及要素</h2><blockquote>
+<p><strong><code>访问控制</code></strong>（Access Control）指系统对用户身份及其所属的预先定义的策略组限制其使用数据资源能力的手段。通常用于系统管理员控制用户对服务器、目录、文件等网络资源的访问。访问控制是系统保密性、完整性、可用性和合法使用性的重要基础，是网络安全防范和资源保护的关键策略之一，也是主体依据某些控制策略或权限对客体本身或其资源进行的不同授权访问。 </p>
+<p><strong><code>访问控制的主要目的是限制访问主体对客体的访问，从而保障数据资源在合法范围内得以有效使用和管理。</code></strong>为了达到上述目的，访问控制需要完成两个任务：<strong>识别和确认访问系统的用户</strong>、<strong>决定该用户可以对某一系统资源进行何种类型的访问</strong>。 </p>
+<p><strong><code>访问控制包括三个要素</code></strong>：主体、客体和控制策略。</p>
+<p>（1）主体S（Subject）。是指提出访问资源具体请求。是某一操作动作的发起者，但不一定是动作的执行者，可能是某一用户，也可以是用户启动的进程、服务和设备等。</p>
+<p>（2）客体O（Object）。是指被访问资源的实体。所有可以被操作的信息、资源、对象都可以是客体。客体可以是信息、文件、记录等集合体，也可以是网络上硬件设施、无限通信中的终端，甚至可以包含另外一个客体。</p>
+<p>（3）控制策略A（Attribution）。是主体对客体的相关访问规则集合，即属性集合。访问策略体现了一种授权行为，也是客体对主体某些操作行为的默认。</p>
+</blockquote>
+<h2 id="2、访问控制的功能及原理"><a href="#2、访问控制的功能及原理" class="headerlink" title="2、访问控制的功能及原理"></a>2、访问控制的功能及原理</h2><blockquote>
+<p>访问控制的主要功能包括：保证合法用户访问受权保护的网络资源，防止非法的主体进入受保护的网络资源，或防止合法用户对受保护的网络资源进行非授权的访问。访问控制首先需要对用户身份的合法性进行验证，同时利用控制策略进行选用和管理工作。当用户身份和访问权限验证之后，还需要对越权操作进行监控。 </p>
+<p> <strong><code>访问控制的内容包括认证、控制策略实现和安全审计：</code></strong></p>
+<p><strong>（1）认证。</strong>包括主体对客体的识别及客体对主体的检验确认。</p>
+<p><strong>（2）控制策略。</strong>通过合理地设定控制规则集合，确保用户对信息资源在授权范围内的合法使用。既要确保授权用户的合理使用，又要防止非法用户侵权进入系统，使重要信息资源泄露。同时对合法用户，也不能越权行使权限以外的功能及访问范围。</p>
+<p><strong>（3）安全审计。</strong>系统可以自动根据用户的访问权限，对计算机网络环境下的有关活动或行为进行系统的、独立的检查验证，并做出相应评价与审计。</p>
+</blockquote>
+<h2 id="3、访问控制的类型"><a href="#3、访问控制的类型" class="headerlink" title="3、访问控制的类型"></a>3、访问控制的类型</h2><blockquote>
+<p>主要的访问控制类型有3种模式：自主访问控制（DAC）、强制访问控制（MAC）和基于角色访问控制（RBAC）。</p>
+<h3 id="（1）自主访问控制"><a href="#（1）自主访问控制" class="headerlink" title="（1）自主访问控制"></a>（1）自主访问控制</h3><p>自主访问控制（Discretionary Access Control，DAC）是一种接入控制服务，通过执行基于系统实体身份及其到系统资源的接入授权。包括在文件，文件夹和共享资源中设置许可。用户有权对自身所创建的文件、数据表等访问对象进行访问，并可将其访问权授予其他用户或收回其访问权限。允许访问对象的属主制定针对该对象访问的控制策略，通常，可通过访问控制列表来限定针对客体可执行的操作。</p>
+<p>①每个客体有一个所有者，可按照各自意愿将客体访问控制权限授予其他主体。</p>
+<p>②各客体都拥有一个限定主体对其访问权限的访问控制列表（ACL）。</p>
+<p>③每次访问时都以基于访问控制列表检查用户标志，实现对其访问权限控制。</p>
+<p>④DAC的有效性依赖于资源的所有者对安全政策的正确理解和有效落实。</p>
+<p>DAC提供了适合多种系统环境的灵活方便的数据访问方式，是应用最广泛的访问控制策略。然而，它所提供的安全性可被非法用户绕过，授权用户在获得访问某资源的权限后，可能传送给其他用户。主要是在自由访问策略中，用户获得文件访问后，若不限制对该文件信息的操作，即没有限制数据信息的分发。所以DAC提供的安全性相对较低，无法对系统资源提供严格保护。</p>
+<h3 id="（2）强制访问控制"><a href="#（2）强制访问控制" class="headerlink" title="（2）强制访问控制"></a>（2）强制访问控制</h3><p>强制访问控制（MAC）是系统强制主体服从访问控制策略。是由系统对用户所创建的对象，按照规定的规则控制用户权限及操作对象的访问。主要特征是对所有主体及其所控制的进程、文件、段、设备等客体实施强制访问控制。在MAC中，每个用户及文件都被赋予一定的安全级别，只有系统管理员才可确定用户和组的访问权限，用户不能改变自身或任何客体的安全级别。系统通过比较用户和访问文件的安全级别，决定用户是否可以访问该文件。此外，MAC不允许通过进程生成共享文件，以通过共享文件将信息在进程中传递。MAC可通过使用敏感标签对所有用户和资源强制执行安全策略，一般采用3种方法：限制访问控制、过程控制和系统限制。MAC常用于多级安全军事系统，对专用或简单系统较有效，但对通用或大型系统并不太有效。</p>
+<p>MAC的安全级别有多种定义方式，常用的分为4级：绝密级（Top Secret）、秘密级（Secret）、机密级（Confidential）和无级别级（Unclas sified），其中T&gt;S&gt;C&gt;U。所有系统中的主体（用户，进程）和客体（文件，数据）都分配安全标签，以标识安全等级。</p>
+<p>通常MAC与DAC结合使用，并实施一些附加的、更强的访问限制。一个主体只有通过自主与强制性访问限制检查后，才能访问其客体。用户可利用DAC来防范其他用户对自己客体的攻击，由于用户不能直接改变强制访问控制属性，所以强制访问控制提供了一个不可逾越的、更强的安全保护层，以防范偶然或故意地滥用DAC。</p>
+<h3 id="（3）基于角色的访问控制"><a href="#（3）基于角色的访问控制" class="headerlink" title="（3）基于角色的访问控制"></a>（3）基于角色的访问控制</h3><p>角色（Role）是一定数量的权限的集合。指完成一项任务必须访问的资源及相应操作权限的集合。角色作为一个用户与权限的代理层，表示为权限和用户的关系，所有的授权应该给予角色而不是直接给用户或用户组。</p>
+<p>基于角色的访问控制（Role-Based Access Control，RBAC）是通过对角色的访问所进行的控制。使权限与角色相关联，用户通过成为适当角色的成员而得到其角色的权限。可极大地简化权限管理。为了完成某项工作创建角色，用户可依其责任和资格分派相应的角色，角色可依新需求和系统合并赋予新权限，而权限也可根据需要从某角色中收回。减小了授权管理的复杂性，降低管理开销，提高企业安全策略的灵活性。</p>
+<p>RBAC模型的授权管理方法，主要有3种：</p>
+<p>①根据任务需要定义具体不同的角色。</p>
+<p>②为不同角色分配资源和操作权限。</p>
+<p>③给一个用户组（Group，权限分配的单位与载体）指定一个角色。</p>
+<p>RBAC支持三个著名的安全原则：最小权限原则、责任分离原则和数据抽象原则。前者可将其角色配置成完成任务所需要的最小权限集。第二个原则可通过调用相互独立互斥的角色共同完成特殊任务，如核对账目等。后者可通过权限的抽象控制一些操作，如财务操作可用借款、存款等抽象权限，而不用操作系统提供的典型的读、写和执行权限。这些原则需要通过RBAC各部件的具体配置才可实现。</p>
+</blockquote>
+<h2 id="4、访问控制机制"><a href="#4、访问控制机制" class="headerlink" title="4、访问控制机制"></a>4、访问控制机制</h2><blockquote>
+<p>访问控制机制是检测和防止系统未授权访问，并对保护资源所采取的各种措施。是在文件系统中广泛应用的安全防护方法，一般在操作系统的控制下，按照事先确定的规则决定是否允许主体访问客体，贯穿于系统全过程。</p>
+<h3 id="（1）访问控制矩阵"><a href="#（1）访问控制矩阵" class="headerlink" title="（1）访问控制矩阵"></a>（1）访问控制矩阵</h3><p>访问控制矩阵（Access Contro1 Matrix）是最初实现访问控制机制的概念模型，<code>以二维矩阵规定主体和客体间的访问权限</code>。其行表示主体的访问权限属性，列表示客体的访问权限属性，矩阵格表示所在行的主体对所在列的客体的访问授权，空格为未授权，Y为有操作授权。以确保系统操作按此矩阵授权进行访问。通过引用监控器协调客体对主体访问，实现认证与访问控制的分离。在实际应用中，对于较大系统，由于访问控制矩阵将变得非常大，其中许多空格，造成较大的存储空间浪费。</p>
+<h3 id="（2）访问控制列表"><a href="#（2）访问控制列表" class="headerlink" title="（2）访问控制列表"></a>（2）访问控制列表</h3><p>访问控制列表（Access Control List，ACL）是应用在路由器接口的指令列表，用于路由器利用源地址、目的地址、端口号等的特定指示条件对数据包的抉择。<code>是以文件为中心建立访问权限表，表中记载了该文件的访问用户名和权隶属关系。</code>利用ACL，容易判断出对特定客体的授权访问，可访问的主体和访问权限等。当将该客体的ACL置为空，可撤消特定客体的授权访问。</p>
+<p>基于ACL的访问控制策略简单实用。在查询特定主体访问客体时，虽然需要遍历查询所有客体的ACL，耗费较多资源，但仍是一种成熟且有效的访问控制方法。许多通用的操作系统都使用ACL来提供该项服务。如Unix和VMS系统利用ACL的简略方式，以少量工作组的形式，而不许单个个体出现，可极大地缩减列表大小，增加系统效率。</p>
+<h3 id="（3）能力关系表"><a href="#（3）能力关系表" class="headerlink" title="（3）能力关系表"></a>（3）能力关系表</h3><p><code>能力关系表（Capabilities List）是以用户为中心建立访问权限表。</code>与ACL相反，表中规定了该用户可访问的文件名及权限，利用此表可方便地查询一个主体的所有授权。相反，检索具有授权访问特定客体的所有主体，则需查遍所有主体的能力关系表。</p>
+<h3 id="（4）授权关系表"><a href="#（4）授权关系表" class="headerlink" title="（4）授权关系表"></a>（4）授权关系表</h3><p>每一行表示了主体和客体的一个权限关系；如果这张表按客体进行排序的话，就可以拥有访问能力表的优势；如果按主体进行排序的话，可以拥有访问控制表的好处；这种实现方式特别适合采用关系数据库。</p>
+</blockquote>
+<h2 id="5、安全策略"><a href="#5、安全策略" class="headerlink" title="5、安全策略"></a>5、安全策略</h2><blockquote>
+<p>访问控制的安全策略是指在某个自治区域内（属于某个组织的一系列处理和通信资源范畴），用于所有与安全相关活动的一套访问控制规则。由此安全区域中的安全权力机构建立，并由此安全控制机构来描述和实现。访问控制的安全策略有三种类型：基于身份的安全策略、基于规则的安全策略和综合访问控制方式。 </p>
+<h3 id="（1）安全策略实施原则"><a href="#（1）安全策略实施原则" class="headerlink" title="（1）安全策略实施原则"></a>（1）安全策略实施原则</h3><p>访问控制安全策略原则集中在主体、客体和安全控制规则集三者之间的关系。</p>
+<p>1）最小特权原则。在主体执行操作时，按照主体所需权利的最小化原则分配给主体权力。优点是最大限度地限制了主体实施授权行为，可避免来自突发事件、操作错误和未授权主体等意外情况的危险。为了达到一定目的，主体必须执行一定操作，但只能做被允许的操作，其他操作除外。这是抑制特洛伊木马和实现可靠程序的基本措施。</p>
+<p>2）最小泄露原则。主体执行任务时，按其所需最小信息分配权限，以防泄密。</p>
+<p>3）多级安全策略。主体和客体之间的数据流向和权限控制，按照安全级别的绝密（TS）、秘密（S）、机密（C）、限制（RS）和无级别（U）5级来划分。其优点是避免敏感信息扩散。具有安全级别的信息资源，只有高于安全级别的主体才可访问。</p>
+<p>在访问控制实现方面，实现的安全策略包括8个方面：入网访问控制、网络权限限制、目录级安全控制、属性安全控制、网络服务器安全控制、网络监测和锁定控制、网络端口和节点的安全控制和防火墙控制。</p>
+<h3 id="（2）基于身份和规则的安全策略"><a href="#（2）基于身份和规则的安全策略" class="headerlink" title="（2）基于身份和规则的安全策略"></a>（2）基于身份和规则的安全策略</h3><p>授权行为是建立身份安全策略和规则安全策略的基础，两种安全策略为：</p>
+<p>1）基于身份的安全策略</p>
+<p>主要是过滤主体对数据或资源的访问。只有通过认证的主体才可以正常使用客体的资源。这种安全策略包括基于个人的安全策略和基于组的安全策略。基于个人的安全策略。是以用户个人为中心建立的策略，主要由一些控制列表组成。这些列表针对特定的客体，限定了不同用户所能实现的不同安全策略的操作行为。基于组的安全策略。基于个人策略的发展与扩充，主要指系统对一些用户使用同样的访问控制规则，访问同样的客体。</p>
+<p>2）基于规则的安全策略</p>
+<p>在基于规则的安全策略系统中，所有数据和资源都标注了安全标记，用户的活动进程与其原发者具有相同的安全标记。系统通过比较用户的安全级别和客体资源的安全级别，判断是否允许用户进行访问。这种安全策略一般具有依赖性与敏感性。</p>
+<h3 id="（3）综合访问控制策略"><a href="#（3）综合访问控制策略" class="headerlink" title="（3）综合访问控制策略"></a>（3）综合访问控制策略</h3><p>综合访问控制策略（HAC）继承和吸取了多种主流访问控制技术的优点，有效地解决了信息安全领域的访问控制问题，保护了数据的保密性和完整性，保证授权主体能访问客体和拒绝非授权访问。HAC具有良好的灵活性、可维护性、可管理性、更细粒度的访问控制性和更高的安全性，为信息系统设计人员和开发人员提供了访问控制安全功能的解决方案。综合访问控制策略主要包括：</p>
+<p>1）入网访问控制</p>
+<p>入网访问控制是网络访问的第一层访问控制。对用户可规定所能登入到的服务器及获取的网络资源，控制准许用户入网的时间和登入入网的工作站点。用户的入网访问控制分为用户名和口令的识别与验证、用户账号的默认限制检查。该用户若有任何一个环节检查未通过，就无法登入网络进行访问。</p>
+<p>2）网络的权限控制</p>
+<p>网络的权限控制是防止网络非法操作而采取的一种安全保护措施。用户对网络资源的访问权限通常用一个访问控制列表来描述。</p>
+<p>从用户的角度，网络的权限控制可分为以下3类用户：</p>
+<p>（1）特殊用户。具有系统管理权限的系统管理员等。</p>
+<p>（2）一般用户。系统管理员根据实际需要而分配到一定操作权限的用户。</p>
+<p>（3）审计用户。专门负责审计网络的安全控制与资源使用情况的人员。</p>
+<p>3）目录级安全控制</p>
+<p>目录级安全控制主要是为了控制用户对目录、文件和设备的访问，或指定对目录下的子目录和文件的使用权限。用户在目录一级制定的权限对所有目录下的文件仍然有效，还可进一步指定子目录的权限。在网络和操作系统中，<strong>常见的目录和文件访问权限</strong>有：系统管理员权限（Supervisor）、读权限（Read）、写权限（Write）、创建权限（Create）、删除权限（Erase）、修改权限（Modify）、文件查找权限（File Scan）、控制权限（Access Control）等。一个网络系统管理员应为用户分配适当的访问权限，以控制用户对服务器资源的访问，进一步强化网络和服务器的安全。</p>
+<p>4）属性安全控制</p>
+<p>属性安全控制可将特定的属性与网络服务器的文件及目录网络设备相关联。在权限安全的基础上，对属性安全提供更进一步的安全控制。网络上的资源都应先标示其安全属性，将用户对应网络资源的访问权限存入访问控制列表中，记录用户对网络资源的访问能力，以便进行访问控制。</p>
+<p><strong>属性配置的权限</strong>包括：向某个文件写数据、复制一个文件、删除目录或文件、查看目录和文件、执行文件、隐含文件、共享、系统属性等。安全属性可以保护重要的目录和文件，防止用户越权对目录和文件的查看、删除和修改等。</p>
+<p>5）网络服务器安全控制</p>
+<p>网络服务器安全控制允许通过服务器控制台执行的安全控制操作包括：用户利用控制台装载和卸载操作模块、安装和删除软件等。操作网络服务器的安全控制还包括设置口令锁定服务器控制台，主要防止非法用户修改、删除重要信息。另外，系统管理员还可通过设定服务器的登入时间限制、非法访问者检测，以及关闭的时间间隔等措施，对网络服务器进行多方位地安全控制。</p>
+<p>6）网络监控和锁定控制</p>
+<p>在网络系统中，通常服务器自动记录用户对网络资源的访问，如有非法的网络访问，服务器将以图形、文字或声音等形式向网络管理员报警，以便引起警觉进行审查。对试图登入网络者，网络服务器将自动记录企图登入网络的次数，当非法访问的次数达到设定值时，就会将该用户的账户自动锁定并进行记载。</p>
+<p>7）网络端口和结点的安全控制</p>
+<p>网络中服务器的端口常用自动回复器、静默调制解调器等安全设施进行保护，并以加密的形式来识别结点的身份。自动回复器主要用于防范假冒合法用户，静默调制解调器用于防范黑客利用自动拨号程序进行网络攻击。还应经常对服务器端和用户端进行安全控制，如通过验证器检测用户真实身份，然后，用户端和服务器再进行相互验证。</p>
+</blockquote>
+<h1 id="（五）访问控制技术-BLOG"><a href="#（五）访问控制技术-BLOG" class="headerlink" title="（五）访问控制技术-BLOG"></a>（五）访问控制技术-BLOG</h1><p>原文：<a href="https://blog.csdn.net/skicth/article/details/78883270" target="_blank" rel="noopener">https://blog.csdn.net/skicth/article/details/78883270</a> </p>
+<h2 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h2><blockquote>
+<p><strong>访问控制是通过某种途径显式地准许或者限制访问能力及范围的一种方法。通过限制对关键资源的访问，防止非法用户的侵入或因为合法用户的不慎操作而造成的破坏，从而保证网络资源受控地、合法地使用，它是针对越权使用资源的防御措施。</strong></p>
+<p><code>访问控制技术是建立在身份认证的基础上的。</code></p>
+<p><code>目的</code>：<strong>确保用户合法地和受控地使用网络资源。</strong></p>
+<p><code>作用</code>：<strong>针对越权使用网络资源的防御机制。</strong></p>
+<p><code>方式</code>：<strong>访问控制策略、访问控制技术、访问控制模型。</strong></p>
+<p><code>访问控制三元组</code>：<strong>主体、客体和访问控制策略。</strong></p>
+<p><code>访问控制基本原理</code>：<strong>系统资源的访问权限存放在控制策略数据库中，通过一个参考监视器监视用户对系统资源访问的行为，依据访问控制策略数据库的规则，确定是否允许访问操作。</strong></p>
+</blockquote>
+<h2 id="2、实现技术"><a href="#2、实现技术" class="headerlink" title="2、实现技术"></a>2、实现技术</h2><blockquote>
+<p>实现原理：<code>实现访问控制的基础是如何明确访问控制策略</code>。</p>
+<p>实现方法：<code>访问控制矩阵ACM</code>、<code>访问能力表</code>、<code>访问控制表</code>和<code>授权关系表</code>。</p>
+<p><code>访问控制矩阵ACM</code>：行表示客体，列表示主体，行和列的交叉点表示某个主体对某个客体的访问权限。</p>
+<p><code>访问能力表ACCL</code>：从主体出发，用链表形式表达矩阵一行的信息。</p>
+<p><code>访问控制表ACL</code>：从客体出发，用链表形式表达某一列的信息。</p>
+<p><code>授权关系表ACARL</code>：每一行表示了主体和客体的一个权限关系。</p>
+<p>ACM：实现简单，便于集中控制；用户资源数量多时，执行效率低 ，存储空间严重浪费；极少采用。</p>
+<p>ACCL：用户间权限传递简单；权限回收困难，用户生成一个新的客体并对其授权、或删除一个客体时都比较复杂；用户数量大，动态性高的分布式系统。</p>
+<p>ACL：权限回收容易；权限传递困难，如访问控制列表太大或者经常改变，维护访问控制列表会成为一个问题；操作系统。</p>
+<p>ACARL：兼顾ACCL和ACL的特点；存在信息冗余；关系数据库。</p>
+</blockquote>
+<h2 id="3、应用模型"><a href="#3、应用模型" class="headerlink" title="3、应用模型"></a>3、应用模型</h2><blockquote>
+<p><strong><code>自主访问控制DAC</code></strong></p>
+<p><code>思路</code>：确认主体身份及所属组的基础上，根据访问者的身份和授权来决定访问模式，对访问进行限定。</p>
+<p><code>特点</code>：具有授权某种访问权力的主体能够自己决定是否将访问控制权限的某个子集授予其他的主体或者从其他主体那里回收他所授予的访问权限。</p>
+<p><strong>目前采用较多</strong></p>
+<p><code>优点</code>：自主性为用户提供极大的灵活性，从而适用于许多系统和应用。</p>
+<p><code>缺点</code>：安全级别较低，用户、权限客体间的授权管理复杂。</p>
+<p><code>局限性</code>：不能实现全局性访问控制、不能区分所有权和访问权不能体现严格的组织架构。</p>
+<p><strong><code>强制访问控制MAC</code></strong></p>
+<p><code>思路</code>：为主体和客体统一设定安全标签，根据访问者的安全等级和被访问客体的安全等级来决定访问控制。</p>
+<p><code>特点</code>：安全管理员统一对主体和客体的安全标签赋值，普通用户不能改变。可以提供严格的访问控制策略保障。</p>
+<p><code>BLP模型</code>：安全标签就是安全级，客体的安全级表现客体中所含信息的敏感程度，而主体的安全级别则反映了主体对敏感信息的可信程度。</p>
+<p><code>特点</code>：主体按照“向下读，向上写”的原则访问客体，侧重于信息的保密性；保证了客体的高度安全，使信息流程为单向不可逆，保证了信息流的流向，能阻止木马。</p>
+<p><code>实例</code>：防火墙实现的单向访问机制。</p>
+<p><strong><code>BiBa模型</code></strong>：</p>
+<p><code>特点</code>：主体按照“向上读，向下写”的原则访问客体，侧重于信息的完整性，使信息流总是高安全级别的实体流向低安全级别的实体。</p>
+<p><code>实例</code>：对WEB服务器的访问过程。</p>
+<p><code>优点</code>：通过安全标签实现信息的单向流通，BLP模型可以保证数据机密性，BiBa模型可以保护数据完整性，比MAC有更高的安全性。</p>
+<p><code>缺点</code>：实现工作量太大，管理不便，可用性和灵活性差。</p>
+<p><strong><code>基于角色的访问控制RBAC</code></strong></p>
+<p><code>思路</code>：管理员创建角色，给角色分配权限，给角色分配用户，角色所属的用户可以执行相应的权限。</p>
+<p><code>特点</code>：RBAC实现了用户和权限的分离，具有支持权限的继承，与实际应用密切关联等特点。</p>
+<p><code>基本原则</code>：最小权限、责任分离、数据抽象。</p>
+<p><strong><code>NIST RBAC参考模型</code></strong>：</p>
+<p><code>分类</code>：基本RBAC（用户、许可、用户委派、权限分配、会话-角色、用户-会话）、分级RBAC（角色的结构化分层，定义了角色的继承关系）、静态责任分离（增加了责任分离，对用户分配的角色进行约束，也就是当用户被分配给一个角色时，禁止其成为第二个角色）、动态责任分离（通过对用户会话过程进行约束，对最小特权提供支持：在不同的时间拥有不同的权限）。</p>
+<p><code>RBAC设计实现</code>：用户表、洪湖角色关系、角色表、角色许可关系表、许可表。</p>
+<p><code>RBAC运行过程</code>：前两个直接授权，RBAC间接授权。</p>
+</blockquote>
+<h1 id="（六）访问控制-wiki"><a href="#（六）访问控制-wiki" class="headerlink" title="（六）访问控制-wiki"></a>（六）访问控制-wiki</h1><p> <a href="https://wiki.mbalib.com/wiki/访问控制" target="_blank" rel="noopener">https://wiki.mbalib.com/wiki/访问控制</a></p>
+<h2 id="1、什么是访问控制"><a href="#1、什么是访问控制" class="headerlink" title="1、什么是访问控制"></a>1、什么是访问控制</h2><blockquote>
+<p><strong>访问控制</strong>是给出一套方法，将系统中的所有功能标识出来，组织起来，托管起来，将所有的数据组织起来标识出来托管起来， 然后提供一个简单的唯一的接口，这个接口的一端是应用系统一端是权限引擎。权限引擎所回答的只是：谁是否对某资源具有实施 某个动作（运动、计算）的权限。返回的结果只有：有、没有、权限引擎异常了。</p>
+<p>访问控制是几乎所有系统（包括计算机系统和非计算机系统）都需要用到的一种技术。访问控制是按用户身份及其所归属的某项定义组来限制用户对某些信息项的访问，或限制对某些控制功能的使用的一种技术，如UniNAC网络准入控制系统的原理就是基于此技术之上。访问控制通常用于系统管理员控制用户对服务器、目录、文件等网络资源的访问。</p>
+</blockquote>
+<h2 id="2、访问控制的分类"><a href="#2、访问控制的分类" class="headerlink" title="2、访问控制的分类"></a>2、访问控制的分类</h2><blockquote>
+<p><strong>访问控制可分为自主访问控制和强制访问控制两大类。</strong></p>
+<p><strong>自主访问控制</strong>，是指由用户有权对自身所创建的访问对象（文件、数据表等）进行访问，并可将对这些对象的访问权授予其他用户和从授予权限的用户收回其访问权限。</p>
+<p><strong>强制访问控制</strong>，是指由系统（通过专门设置的系统安全员）对用户所创建的对象进行统一的强制性控制，按照规定的规则决定哪些用户可以对哪些对象进行什么样操作系统类型的访问，即使是创建者用户，在创建一个对象后，也可能无权访问该对象。</p>
+<h3 id="1、基于对象的访问控制模型"><a href="#1、基于对象的访问控制模型" class="headerlink" title="1、基于对象的访问控制模型"></a>1、基于对象的访问控制模型</h3><p>基于对象的访问控制（OBAC Model：Object-based Access Control Model）：<code>DAC或MAC模型的主要任务都是对系统中的访问主体和受控对象进行一维的权限管理</code>。当用户数量多、处理的信息数据量巨大时，用户权限的管理任务将变得十分繁重且难以维护，这就降低了系统的安全性和可靠性。</p>
+<p>对于海量的数据和差异较大的数据类型，需要用专门的系统和专门的人员加以处理，要是采用RBAC模型的话，安全管理员除了维护用户和角色的关联关系外，还需要将庞大的信息资源访问权限赋予有限个角色。</p>
+<p>当信息资源的种类增加或减少时，安全管理员必须更新所有角色的访问权限设置，如果受控对象的属性发生变化，和需要将受控对象不同属性的数据分配给不同的访问主体处理时，安全管理员将不得不增加新的角色，并且还必须更新原来所有角色的访问权限设置以及访问主体的角色分配设置。</p>
+<p>这样的访问控制需求变化往往是不可预知的，造成访问控制管理的难度和工作量巨大。所以在这种情况下，有必要引入基于受控对象的访问控制模型。</p>
+<p><strong>控制策略和控制规则是OBAC访问控制系统的核心所在</strong>，在基于受控对象的访问控制模型中，将访问控制列表与受控对象或受控对象的属性相关联，并将访问控制选项设计成为用户、组或角色及其对应权限的集合；同时允许对策略和规则进行重用、继承和派生操作。</p>
+<p>这样，不仅可以对受控对象本身进行访问控制，受控对象的属性也可以进行访问控制，而且派生对象可以继承父对象的访问控制设置，这对于信息量巨大、信息内容更新变化频繁的管理信息系统非常有益，可以减轻由于信息资源的派生、演化和重组等带来的分配、设定角色权限等的工作量。</p>
+<p>OBAC访问控制系统是从信息系统的数据差异变化和用户需求出发，有效地解决了信息数据量大、数据种类繁多、数据更新变化频繁的大型管理信息系统的安全管理。并从受控对象的角度出发，将访问主体的访问权限直接与受控对象相关联，一方面定义对象的访问控制列表，增、删、修改访问控制项易于操作，另一方面，当受控对象的属性发生改变，或者受控对象发生继承和派生行为时，无须更新访问主体的权限，只需要修改受控对象的相应访问控制项即可，从而减少了访问主体的权限管理，降低了授权数据管理的复杂性。</p>
+<h3 id="2、基于任务的访问控制模型"><a href="#2、基于任务的访问控制模型" class="headerlink" title="2、基于任务的访问控制模型"></a>2、基于任务的访问控制模型</h3><p><strong>基于任务的访问控制模型（TBAC Model，Task-based Access Control Model）是从应用和企业层角度来解决安全问题，以面向任务的观点，从任务（活动）的角度来建立安全模型和实现安全机制，在任务处理的过程中提供动态实时的安全管理。</strong></p>
+<p>在TBAC中，对象的访问权限控制并不是静止不变的，而是随着执行任务的上下文环境发生变化。TBAC首要考虑的是在工作流的环境中对信息的保护问题：在工作流环境中，数据的处理与上一次的处理相关联，相应的访问控制也如此，因而TBAC是一种上下文相关的访问控制模型。其次，TBAC不仅能对不同工作流实行不同的访问控制策略，而且还能对同一工作流的不同任务实例实行不同的访问控制策略。从这个意义上说，TBAC是基于任务的，这也表明，TBAC是一种基于实例（instance-based）的访问控制模型。</p>
+<p>TBAC模型由工作流、授权结构体、受托人集、许可集四部分组成。</p>
+<p>任务（task）是工作流程中的一个逻辑单元，是一个可区分的动作，与多个用户相关，也可能包括几个子任务。授权结构体是任务在计算机中进行控制的一个实例。任务中的子任务，对应于授权结构体中的授权步。</p>
+<p>授权结构体（authorization unit）：是由一个或多个授权步组成的结构体，它们在逻辑上是联系在一起的。授权结构体分为一般授权结构体和原子授权结构体。一般授权结构体内的授权步依次执行，原子授权结构体内部的每个授权步紧密联系，其中任何一个授权步失败都会导致整个结构体的失败。</p>
+<p>授权步（authorization step）表示一个原始授权处理步，是指在一个工作流程中对处理对象的一次处理过程。授权步是访问控制所能控制的最小单元，由受托人集（trustee-set）和多个许可集（permissions set）组成。</p>
+<p>受托人集是可被授予执行授权步的用户的集合，许可集则是受托集的成员被授予授权步时拥有的访问许可。当授权步初始化以后，一个来自受托人集中的成员将被授予授权步，我们称这个受托人为授权步的执行委托者，该受托人执行授权步过程中所需许可的集合称为执行者许可集。授权步之间或授权结构体之间的相互关系称为依赖（dependency），依赖反映了基于任务的访问控制的原则。授权步的状态变化一般自我管理，依据执行的条件而自动变迁状态，但有时也可以由管理员进行调配。</p>
+<p>一个工作流的业务流程由多个任务构成。而一个任务对应于一个授权结构体，每个授权结构体由特定的授权步组成。授权结构体之间以及授权步之间通过依赖关系联系在一起。在TBAC中，一个授权步的处理可以决定后续授权步对处理对象的操作许可，上述许可集合称为激活许可集。执行者许可集和激活许可集一起称为授权步的保护态。</p>
+<p>TBAC模型一般用五元组（S，O，P，L，AS）来表示，其中S表示主体，O表示客体，P表示许可，L表示生命期（lifecycle），AS表示授权步。由于任务都是有时效性的，所以在基于任务的访问控制中，用户对于授予他的权限的使用也是有时效性的。</p>
+<p>因此，若P是授权步AS所激活的权限，那么L则是授权步AS的存活期限。在授权步AS被激活之前，它的保护态是无效的，其中包含的许可不可使用。当授权步AS被触发时，它的委托执行者开始拥有执行者许可集中的权限，同时它的生命期开始倒记时。在生命期期间，五元组（S，O，P，L，AS）有效。生命期终止时，五元组（S，O，P，L，AS）无效，委托执行者所拥有的权限被回收。</p>
+<p>TBAC的访问政策及其内部组件关系一般由系统管理员直接配置。通过授权步的动态权限管理，TBAC支持最小特权原则和最小泄漏原则，在执行任务时只给用户分配所需的权限，未执行任务或任务终止后用户不再拥有所分配的权限；而且在执行任务过程中，当某一权限不再使用时，授权步自动将该权限回收；另外，对于敏感的任务需要不同的用户执行，这可通过授权步之间的分权依赖实现。</p>
+<p>TBAC从工作流中的任务角度建模，可以依据任务和任务状态的不同，对权限进行动态管理。因此，TBAC非常适合分布式计算和多点访问控制的信息处理控制以及在工作流、分布式处理和事务管理系统中的决策制定。</p>
+<h3 id="3、基于角色的访问控制模型"><a href="#3、基于角色的访问控制模型" class="headerlink" title="3、基于角色的访问控制模型"></a>3、基于角色的访问控制模型</h3><p>基于角色的访问控制模型（RBAC Model，Role-based Access Model）：RBAC模型的基本思想是将访问许可权分配给一定的角色，用户通过饰演不同的角色获得角色所拥有的访问许可权。这是因为在很多实际应用中，用户并不是可以访问的客体信息资源的所有者（这些信息属于企业或公司），这样的话，访问控制应该基于员工的职务而不是基于员工在哪个组或是谁信息的所有者，即访问控制是由各个用户在部门中所担任的角色来确定的，例如，一个学校可以有教工、老师、学生和其他管理人员等角色。</p>
+<p><strong>RBAC从控制主体的角度出发，根据管理中相对稳定的职权和责任来划分角色，将访问权限与角色相联系，这点与传统的MAC和DAC将权限直接授予用户的方式不同；通过给用户分配合适的角色，让用户与访问权限相联系。角色成为访问控制中访问主体和受控对象之间的一座桥梁。</strong></p>
+<p>角色可以看作是一组操作的集合，不同的角色具有不同的操作集，这些操作集由系统管理员分配给角色。在下面的实例中，我们假设Tch1，Tch2，Tch3……Tchi是对应的教师，Stud1，Stud 2，Stud3 …Studj是相应的学生，Mng1，Mng 2，Mng 3…Mngk是教务处管理人员，那么老师的权限为TchMN={查询成绩、上传所教课程的成绩}；学生的权限为Stud MN={查询成绩、反映意见}；教务管理人员的权限为MngMN={查询、修改成绩、打印成绩清单}。</p>
+<p>那么，依据角色的不同，每个主体只能执行自己所制定的访问功能。用户在一定的部门中具有一定的角色，其所执行的操作与其所扮演的角色的职能相匹配，这正是基于角色的访问控制（RBAC）的根本特征，即：依据RBAC策略，系统定义了各种角色，每种角色可以完成一定的职能，不同的用户根据其职能和责任被赋予相应的角色，一旦某个用户成为某角色的成员，则此用户可以完成该角色所具有的职能。</p>
+<p>如今数据安全成疾，蠕虫和病毒横行，如何提高网络安全？选择网络访问控制（NAC）成为必然，它能够帮助企业网络免于多种网络安全威胁。</p>
+<p>许多企业往往不愿意实施基于角色的访问控制。因为企业担心冗长而复杂的实施过程，并且由于雇员访问权要发生变化，也会对工作效率带来副作用。完成基于角色的矩阵可能是一个需要花费企业几年时间的复杂过程。</p>
+<p>有一些新方法可以缩短这个过程，并当即带来好处。企业可以采用人力资源系统作为数据源，收集所有雇员的部门、职位、位置以及企业的层次结构等信息，并将这些信息用于创建每个访问级别的角色。下一步就是从活动目录等位置获得当前的权利，以及与不同角色的雇员有关的数据共享。</p>
+<p>下一步，使数据标准化，确保相同角色的雇员拥有相同的访问权。可以通过从人力资源和活动目录、修正报告以及雇员的管理者那里收集数据，用于检查和纠正。基于角色的访问控制应用与身份管理系统结合使用，可以实施管理员在自动模式中做出的变化。此过程可以在包含敏感信息的企业网络的其它应用中多次反复实施，确保访问权的正确性。</p>
+</blockquote>
+<h2 id="3、访问控制的实现"><a href="#3、访问控制的实现" class="headerlink" title="3、访问控制的实现"></a>3、访问控制的实现</h2><blockquote>
+<h3 id="（1）实现机制"><a href="#（1）实现机制" class="headerlink" title="（1）实现机制"></a>（1）实现机制</h3><p>访问控制的实现机制<code>建立访问控制模型</code>和<code>实现访问控制</code>都是抽象和复杂的行为，<code>实现访问的控制</code><strong>不仅要保证授权用户使用的权限与其所拥有的权限对应，制止非授权用户的非授权行为；还要保证敏感信息的交叉感染。</strong>为了便于讨论这一问题，我们以<code>文件的访问控制</code>为例对访问控制的实现做具体说明。通常用户访问信息资源（文件或是数据库），可能的行为有读、写和管理。为方便起见，我们用Read或是R表示读操作，Write或是W表示写操作，Own或是O表示管理操作。我们之所以将管理操作从读写中分离出来，是因为管理员也许会对控制规则本身或是文件的属性等做修改，也就是修改我们在下面提到的访问控制表。</p>
+<h3 id="（2）访问控制表"><a href="#（2）访问控制表" class="headerlink" title="（2）访问控制表"></a>（2）访问控制表</h3><p>访问控制表（ACLs：Access Control Lists）是以文件为中心建立的访问权限表，简记为ACLs。目前，大多数PC、服务器和主机都使用ACLs作为访问控制的实现机制。访问控制表的优点在于实现简单，任何得到授权的主体都可以有一个访问表，例如授权用户A1的访问控制规则存储在文件File1中，A1的访问规则可以由A1下面的权限表ACLsA1来确定，权限表限定了用户UserA1的访问权限。</p>
+<p> 路由器的ACL：https：//blog.csdn.net/weixin_42442713/article/details/80925110 </p>
+<p>主要用于说明拒绝那个路由器的数据表。</p>
+<p> 文件管理的ACL：https：//blog.csdn.net/Aizwz/article/details/89516527 </p>
+<p>主要用于规定文件的从属，属于哪一个用户或用户组。</p>
+<h3 id="（3）访问控制矩阵"><a href="#（3）访问控制矩阵" class="headerlink" title="（3）访问控制矩阵"></a>（3）访问控制矩阵</h3><p>访问控制矩阵（ACM：Access Control Matrix）是通过矩阵形式表示访问控制规则和授权用户权限的方法；也就是说，对每个主体而言，都拥有对哪些客体的哪些访问权限；而对客体而言，又有哪些主体对他可以实施访问；将这种关连关系加以阐述，就形成了控制矩阵。其中，特权用户或特权用户组可以修改主体的访问控制权限。访问控制矩阵的实现很易于理解，但是查找和实现起来有一定的难度，而且，如果用户和文件系统要管理的文件很多，那么控制矩阵将会成几何级数增长，这样对于增长的矩阵而言，会有大量的空余空间。</p>
+<h3 id="（4）访问控制能力列表"><a href="#（4）访问控制能力列表" class="headerlink" title="（4）访问控制能力列表"></a>（4）访问控制能力列表</h3><p>能力是访问控制中的一个重要概念，它是指请求访问的发起者所拥有的一个有效标签（ticket），它授权标签表明的持有者可以按照何种访问方式访问特定的客体。访问控制能力表（ACCLs：Access Control Capabilitis Lists）是以用户为中心建立访问权限表。例如，访问控制权限表ACCLsF1表明了授权用户UserA对文件File1的访问权限，UserAF表明了UserA对文件系统的访问控制规则集。因此，ACCLs的实现与ACLs正好相反。定义能力的重要作用在于能力的特殊性，如果赋予哪个主体具有一种能力，事实上是说明了这个主体具有了一定对应的权限。能力的实现有两种方式，传递的和不可传递的。一些能力可以由主体传递给其他主体使用，另一些则不能。能力的传递牵扯到了授权的实现，我们在后面会具体阐述访问控制的授权管理。</p>
+<h3 id="（5）安全标签"><a href="#（5）安全标签" class="headerlink" title="（5）安全标签"></a>（5）安全标签</h3><p>安全标签是限制和附属在主体或客体上的一组安全属性信息。安全标签的含义比能力更为广泛和严格，因为它实际上还建立了一个严格的安全等级集合。访问控制标签列表（ACSLLs： Access Control Security Labels Lists）是限定一个用户对一个客体目标访问的安全属性集合。安全标签能对敏感信息加以区分，这样就可以对用户和客体资源强制执行安全策略，因此，强制访问控制经常会用到这种实现机制。</p>
+<h3 id="（6）具体类别"><a href="#（6）具体类别" class="headerlink" title="（6）具体类别"></a>（6）具体类别</h3><p>访问控制实现的具体类别访问控制是网络安全防范和保护的重要手段，它的主要任务是维护网络系统安全、保证网络资源不被非法使用和非常访问。通常在技术实现上，包括以下几部分：</p>
+<p>（1）<strong>资源访问控制：是对客体整体资源信息的访问控制管理</strong>。其中包括文件系统的访问控制（文件目录访问控制和系统访问控制）、文件属性访问控制、信息内容访问控制。<code>文件目录访问控制</code>是指用户和用户组被赋予一定的权限，在权限的规则控制许可下，哪些用户和用户组可以访问哪些目录、子目录、文件和其他资源，哪些用户可以对其中的哪些文件、目录、子目录、设备等能够执行何种操作。<code>系统访问控制</code>是指一个网络系统管理员应当为用户指定适当的访问权限，这些访问权限控制着用户对服务器的访问；应设置口令锁定服务器控制台，以防止非法用户修改、删除重要信息或破坏数据；应设定服务器登录时间限制、非法访问者检测和关闭的时间间隔；应对网络实施监控，记录用户对网络资源的访问，对非法的网络访问，能够用图形或文字或声音等形式报警等。<code>文件属性访问控制</code>：当用文件、目录和网络设备时，应给文件、目录等指定访问属性。属性安全控制可以将给定的属性与要访问的文件、目录和网络设备联系起来。</p>
+<p>（2）<strong>网络端口和节点的访问控制：网络中的节点和端口往往加密传输数据，这些重要位置的管理必须防止黑客发动的攻击。对于管理和修改数据，应该要求访问者提供足以证明身份的验证器（如智能卡）</strong>。</p>
+</blockquote>
+<h1 id="（六）其他"><a href="#（六）其他" class="headerlink" title="（六）其他"></a>（六）其他</h1><h2 id="1、访问控制策略"><a href="#1、访问控制策略" class="headerlink" title="1、访问控制策略"></a>1、访问控制策略</h2><blockquote>
+<p><code>自主型访问控制</code>（Discretionary Access Control -DAC）：<strong>用户/对象来决定访问控制权限。信息的所有者来决定谁有权利来访问信息以及操作类型（读，写，执行。。。）。是一种基于身份的访问控制。例如UNIX权限管理。</strong></p>
+<p><code>强制性访问控制</code>（Mandatory Access Controll -MAC）：<strong>系统来决定访问权限。安全属性是强制型的规定，它由安全管理员或操作系统根据限定的规则确定的，是一种规则的访问控制。</strong></p>
+<p><code>基于角色的访问控制</code>（RABC）：<strong>角色决定权限。用组织角色来同意或拒绝访问。比MAC、DAC更灵活。</strong></p>
+<p><code>规则驱动的基于角色的访问控制</code>：<strong>提供了一种基于约束的访问控制。</strong></p>
+<p><code>基于属性证书的访问控制</code>：<strong>访问权限信息存放在用户属性证书的权限属性中，每个权限属性描述了一个或多个用户的访问权限。当用户对某一个资源提出访问请求时，系统根据用户的属性证书中的权限来判断是否允许。</strong></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-09-21T00:40:05.640Z" itemprop="dateUpdated">2020-09-21 08:40:05</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%8C%E7%BB%BC%E8%BF%B0/" rel="tag">访问控制，综述</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/&title=《访问控制综述》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/&title=《访问控制综述》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《访问控制综述》 — Cups&url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/09/24/2020/blockchain-explorer/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hyperledger Explorer</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/15/2020/kafka/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">kafka集群部署</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/&title=《访问控制综述》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/&title=《访问控制综述》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《访问控制综述》 — Cups&url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2020/09/19/2020/overview-of-access-control/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

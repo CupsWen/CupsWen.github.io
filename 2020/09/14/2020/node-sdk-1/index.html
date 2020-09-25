@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>fabric-node-sdk简单使用 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,node-sdk">
+    <meta name="description" content="动机 使用node-sdk进行了简单交易，有一些问题没有解决。  cryptogen模块生成的证书如何给node-sdk进行使用。 node-sdk中的主要模块包含哪些可用函数，可以完成哪些工作。   架构设计 sdk在fabric中扮演的角色:  通过节点的gRPC协议访问安装在peer节点上的链码 将peer返回的背书,封装成交易,发送给orderer,作排序">
+<meta name="keywords" content="Fabric,node-sdk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fabric-node-sdk简单使用">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2020&#x2F;09&#x2F;14&#x2F;2020&#x2F;node-sdk-1&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="动机 使用node-sdk进行了简单交易，有一些问题没有解决。  cryptogen模块生成的证书如何给node-sdk进行使用。 node-sdk中的主要模块包含哪些可用函数，可以完成哪些工作。   架构设计 sdk在fabric中扮演的角色:  通过节点的gRPC协议访问安装在peer节点上的链码 将peer返回的背书,封装成交易,发送给orderer,作排序">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;node-sdk-framework.webp">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;fabric-ca-client.webp">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;fabric-client.webp">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;fabric-network.webp">
+<meta property="og:updated_time" content="2020-09-25T09:01:45.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;node-sdk-framework.webp">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">fabric-node-sdk简单使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">fabric-node-sdk简单使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-14T02:28:10.000Z" itemprop="datePublished" class="page-time">
+  2020-09-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#动机"><span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#架构设计"><span class="post-toc-text">架构设计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#connection-org1-json"><span class="post-toc-text">connection-org1.json</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#fabric-ca-client"><span class="post-toc-text">fabric-ca-client</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#fabric-client"><span class="post-toc-text">fabric-client</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#fabric-network"><span class="post-toc-text">fabric-network</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cryptogen模块改造为fabric-network可以使用的格式"><span class="post-toc-text">cryptogen模块改造为fabric-network可以使用的格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查块命令"><span class="post-toc-text">查块命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#queryBlock-blockNumber-target-useAdmin-skipDecode"><span class="post-toc-text"> queryBlock(blockNumber, target, useAdmin, skipDecode)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Parameters"><span class="post-toc-text">Parameters:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Returns"><span class="post-toc-text">Returns:</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#queryBlockByHash-blockHash-target-useAdmin-skipDecode"><span class="post-toc-text"> queryBlockByHash(blockHash, target, useAdmin, skipDecode)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Parameters-1"><span class="post-toc-text">Parameters:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Returns-1"><span class="post-toc-text">Returns:</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#queryBlockByTxID-tx-id-target-useAdmin-skipDecode"><span class="post-toc-text"> queryBlockByTxID(tx_id, target, useAdmin, skipDecode)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Parameters-2"><span class="post-toc-text">Parameters:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Returns-2"><span class="post-toc-text">Returns:</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#官网"><span class="post-toc-text">官网</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2020/node-sdk-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">fabric-node-sdk简单使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-09-14 10:28:10" datetime="2020-09-14T02:28:10.000Z"  itemprop="datePublished">2020-09-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><blockquote>
+<p>使用node-sdk进行了简单交易，有一些问题没有解决。</p>
+<ol>
+<li>cryptogen模块生成的证书如何给node-sdk进行使用。</li>
+<li>node-sdk中的主要模块包含哪些可用函数，可以完成哪些工作。</li>
+</ol>
+</blockquote>
+<h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><blockquote>
+<p>sdk在fabric中扮演的角色:</p>
+<ul>
+<li>通过节点的gRPC协议访问安装在peer节点上的链码</li>
+<li>将peer返回的背书,封装成交易,发送给orderer,作排序</li>
+</ul>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/node-sdk-framework.webp" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<ul>
+<li><strong>分为以下三大模块:</strong></li>
+<li>fabric-ca-client</li>
+<li>fabric-client</li>
+<li>fabric-network</li>
+</ul>
+</blockquote>
+<h2 id="connection-org1-json"><a href="#connection-org1-json" class="headerlink" title="connection-org1.json"></a>connection-org1.json</h2><p>连接文件，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "name": "cups-own",</span><br><span class="line">    "version": "1.0.0",</span><br><span class="line">    "client": &#123;</span><br><span class="line">        "organization": "Own",</span><br><span class="line">        "connection": &#123;</span><br><span class="line">            "timeout": &#123;</span><br><span class="line">                "peer": &#123;</span><br><span class="line">                    "endorser": "300"</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    "organizations": &#123;</span><br><span class="line">        "Own": &#123;</span><br><span class="line">            "mspid": "OwnMSP",</span><br><span class="line">            "peers": [</span><br><span class="line">                "peer0.own.example.com"</span><br><span class="line">            ],</span><br><span class="line">            "certificateAuthorities": [</span><br><span class="line">                "ca.own.example.com"</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    "peers": &#123;</span><br><span class="line">        "peer0.own.example.com": &#123;</span><br><span class="line">            "url": "grpcs://peer0.own.example.com:7051",</span><br><span class="line">            "tlsCACerts": &#123;</span><br><span class="line">                "pem": "-----BEGIN CERTIFICATE-----\nMIICUzCCAfqgAwIBAgIRAL4rdMnI4iRg3twvukKf5y8wCgYIKoZIzj0EAwIwdDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGDAWBgNVBAoTD293bi5leGFtcGxlLmNvbTEeMBwGA1UEAxMVdGxz\nY2Eub3duLmV4YW1wbGUuY29tMB4XDTIwMDExMTEwNTcwMFoXDTMwMDEwODEwNTcw\nMFowdDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcT\nDVNhbiBGcmFuY2lzY28xGDAWBgNVBAoTD293bi5leGFtcGxlLmNvbTEeMBwGA1UE\nAxMVdGxzY2Eub3duLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcD\nQgAEyqZoMKICe4b9gIMflqfhL7mJivcTp7PXIJUgQZO1+yg23zxfMidpISEnPb1L\nzEzRR3Cy7H3MDXOyQXdKQbcijKNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQW\nMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQi\nBCDXeveORLINQVQrC0uyBA0q/FmhLG9/uGjdO3VJpgwgWjAKBggqhkjOPQQDAgNH\nADBEAiBkmYjBmSJLGxCwPhk9AewgjqEGXgUP7iJ8Ib/+3YASJAIgTBhBrKPN5vmQ\nE/FGnmn2P4GbaGNzxNrTMfTCN5dNu2k=\n-----END CERTIFICATE-----\n"</span><br><span class="line">            &#125;,</span><br><span class="line">            "grpcOptions": &#123;</span><br><span class="line">                "ssl-target-name-override": "peer0.own.example.com",</span><br><span class="line">                "hostnameOverride": "peer0.own.example.com"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    "certificateAuthorities": &#123;</span><br><span class="line">        "ca.own.example.com": &#123;</span><br><span class="line">            "url": "https://192.168.1.112:7054",</span><br><span class="line">            "caName": "ca",</span><br><span class="line">            "tlsCACerts": &#123;</span><br><span class="line">                "pem": "-----BEGIN CERTIFICATE-----\nMIICTTCCAfOgAwIBAgIQJiMfYRB742NDqQco0bG/vzAKBggqhkjOPQQDAjBxMQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEYMBYGA1UEChMPb3duLmV4YW1wbGUuY29tMRswGQYDVQQDExJjYS5v\nd24uZXhhbXBsZS5jb20wHhcNMjAwMTExMTA1NzAwWhcNMzAwMTA4MTA1NzAwWjBx\nMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2Fu\nIEZyYW5jaXNjbzEYMBYGA1UEChMPb3duLmV4YW1wbGUuY29tMRswGQYDVQQDExJj\nYS5vd24uZXhhbXBsZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARonS0o\nyh2+WcZ0mHIQPFbbh0EvjIr4lEbIk3oXKfysPDt4n9wmpZQA9i3uSSlIQPFbeZFR\nzQuYO3zUwYybbB+Wo20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYB\nBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEIKGDFPMz\nu6833nXgsrxqBva8x+Va8YT1C4dPvZwzptR0MAoGCCqGSM49BAMCA0gAMEUCIQDn\nI0uuwv0MhauGCM1MbT6+SstsPkMtnbZ61TvkDdYjsAIgB7MAgp6Dyh52IU4kZawr\nURvtELqGy78PQRxs++mL/jE=\n-----END CERTIFICATE-----\n"</span><br><span class="line">            &#125;,</span><br><span class="line">            "httpOptions": &#123;</span><br><span class="line">                "verify": false</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="fabric-ca-client"><a href="#fabric-ca-client" class="headerlink" title="fabric-ca-client"></a>fabric-ca-client</h2><blockquote>
+<p> 与fabric-ca 模块交互,主要负责证书管理,如向ca申请证书 。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/fabric-ca-client.webp" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">// 镜像</span><br><span class="line">// curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -</span><br><span class="line">// nodejs</span><br><span class="line">// sudo apt-get install -y nodejs</span><br><span class="line">// node -v # v10.14.1</span><br><span class="line">// express</span><br><span class="line">// https://www.cnblogs.com/wgl0126/p/9290157.html</span><br><span class="line"></span><br><span class="line">// 导入相关模块和类</span><br><span class="line">// FabricCAServices:</span><br><span class="line">// FileSystemWallet:以文件方式管理证书的类</span><br><span class="line">// X509WalletMixin:证书x509处理类</span><br><span class="line">// fs:文件信息读取类</span><br><span class="line">// path:路径信息处理类</span><br><span class="line">const FabricCAServices = require('fabric-ca-client');</span><br><span class="line">const &#123;FileSystemWallet, X509WalletMixin&#125; = require('fabric-network');</span><br><span class="line">const fs = require('fs');</span><br><span class="line">const path = require('path');</span><br><span class="line"></span><br><span class="line">// 连接文件路径</span><br><span class="line">const ccpPath = path.resolve(__dirname, 'connection', 'connection-org1.json');</span><br><span class="line">// 对连接文件进行异步读取</span><br><span class="line">const ccpJSON = fs.readFileSync(ccpPath, 'utf8');</span><br><span class="line">// json解析</span><br><span class="line">const ccp = JSON.parse(ccpJSON);</span><br><span class="line"></span><br><span class="line">async function main() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">    	// 域名为ca.own.example.com的ca：相关信息</span><br><span class="line">        const caInfo = ccp.certificateAuthorities['ca.own.example.com'];</span><br><span class="line">        const caTLSCACerts = caInfo.tlsCACerts.pem;</span><br><span class="line">		</span><br><span class="line">		// 创建FabricCAServices对象</span><br><span class="line">		// caInfo.url:域名</span><br><span class="line">		// trustedRoots:TLS通信证书证书</span><br><span class="line">		// verify:是否进行验证</span><br><span class="line">		// caInfo.caName:ca名称</span><br><span class="line">        const ca = new FabricCAServices(caInfo.url, &#123; trustedRoots: caTLSCACerts, verify: false &#125;, caInfo.caName);</span><br><span class="line"></span><br><span class="line">        // 创建文件系统管理证书</span><br><span class="line">        const walletPath = path.join(process.cwd(), 'wallet');</span><br><span class="line">        const wallet = new FileSystemWallet(walletPath);</span><br><span class="line">        console.log(`Wallet path: $&#123;walletPath&#125;`);</span><br><span class="line"></span><br><span class="line">        // 检查admin是否存在</span><br><span class="line">        const adminExists = await wallet.exists('admin');</span><br><span class="line">        if (adminExists) &#123;</span><br><span class="line">            console.log('An identity for the admin user "admin" already exists in the wallet');</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 登记信心</span><br><span class="line">        const enrollment = await ca.enroll(&#123; enrollmentID: 'admin', enrollmentSecret: 'adminpw' &#125;);</span><br><span class="line">        // 生成X509格式的证书（组织编号、证书、私钥）</span><br><span class="line">        const identity = X509WalletMixin.createIdentity('OwnMSP', enrollment.certificate, enrollment.key.toBytes());</span><br><span class="line">        // 导入文件系统</span><br><span class="line">        await wallet.import('admin', identity);</span><br><span class="line">        console.log('Successfully enrolled admin user "admin" and imported it into the wallet');</span><br><span class="line">    &#125; catch (error) &#123;</span><br><span class="line">        console.error(`Failed to enroll admin user "admin": $&#123;error&#125;`);</span><br><span class="line">        process.exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="fabric-client"><a href="#fabric-client" class="headerlink" title="fabric-client"></a>fabric-client</h2><blockquote>
+<p> 负责与fabric网络交互,如发送提案,发送交易监听区块等,试用场景偏向与特殊业务定制。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/fabric-client.webp" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 创建身份标识</span><br><span class="line">let client = new Client()</span><br><span class="line">let keyPem = fs.readFileSync('.msp/keystore/user-key.pem','utf-8')</span><br><span class="line">let certPem = fs.readFileSync('./msp/signcerts/user-cert.pem','utf-8')</span><br><span class="line">let user = await client.createUser(&#123;        //创建User对象</span><br><span class="line">  username: 'user',                         //用户名称</span><br><span class="line">  mspid: 'Org1MSP',                       //所属MSP的ID</span><br><span class="line">  cryptoContent: &#123;</span><br><span class="line">    privateKeyPEM: keyPem,                  //用户私钥</span><br><span class="line">    signedCertPEM: certPem                  //用户证书</span><br><span class="line">  &#125;,</span><br><span class="line">  skipPersistence: true                     //不计入缓存</span><br><span class="line">&#125;)</span><br><span class="line">client.setUserContext(user,true)            //设置为client的当前身份</span><br><span class="line"></span><br><span class="line">// 创建通道对象,并添加peer与orderer</span><br><span class="line">let channel = client.newChannel('mychannel')</span><br><span class="line">channel.addPeer(client.newPeer('grpc://127.0.0.1:7051'))</span><br><span class="line">channel.addOrderer(client.newOrderer('grpc://127.0.0.1:7050'))</span><br><span class="line"></span><br><span class="line">// 发送invoke交易</span><br><span class="line">// 构建请求参数</span><br><span class="line">let req = &#123;</span><br><span class="line">  chaincodeId: 'mycc',</span><br><span class="line">  fcn: 'invoke',</span><br><span class="line">  args: ['10'],</span><br><span class="line">  txId: client.newTransactionID() // 创建交易id</span><br><span class="line">&#125;</span><br><span class="line">// 获取背书</span><br><span class="line">let prsp = await channel.sendTransactionProposal(req) </span><br><span class="line">// 提交交易</span><br><span class="line">let rsp = await channel.sendTransaction(&#123;</span><br><span class="line">  proposalResponses: prsp[0],</span><br><span class="line">  proposal: prsp[1]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="fabric-network"><a href="#fabric-network" class="headerlink" title="fabric-network"></a>fabric-network</h2><blockquote>
+<p> 负责与fabric网络交互,如发送交易,监听区块等,是fabric-client的封装,适用场景偏向普通业务直接集成。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/fabric-network.webp" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">// 导入相关对象</span><br><span class="line">// FileSystemWallet:以文件方式管理证书的类</span><br><span class="line">// Gateway:网关对象</span><br><span class="line">// path：路径处理对象</span><br><span class="line">const &#123; FileSystemWallet, Gateway &#125; = require('fabric-network');</span><br><span class="line">const path = require('path');</span><br><span class="line"></span><br><span class="line">// 连接文件所在路径</span><br><span class="line">const ccpPath = path.resolve(__dirname, 'connection', 'connection-org1.json');</span><br><span class="line"></span><br><span class="line">// 异步函数</span><br><span class="line">async function main() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        // 证书存储路径</span><br><span class="line">        const walletPath = path.join(process.cwd(), 'wallet');</span><br><span class="line">        // 证书管理对象</span><br><span class="line">        const wallet = new FileSystemWallet(walletPath);</span><br><span class="line">        console.log(`Wallet path: $&#123;walletPath&#125;`);</span><br><span class="line">		</span><br><span class="line">		// 检查文件系统中是否存在lable为admin的一套证书</span><br><span class="line">        const userExists = await wallet.exists('admin');</span><br><span class="line">        if (!userExists) &#123;</span><br><span class="line">            console.log('An identity for the admin "admin" does not exist in the wallet');</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">		</span><br><span class="line">		// 创建网关对象</span><br><span class="line">        const gateway = new Gateway();</span><br><span class="line">        // 连接到连接文件所说明的Fabric网络</span><br><span class="line">        await gateway.connect(ccpPath, &#123; wallet, identity: 'admin', discovery: &#123; enabled: true, asLocalhost: false &#125; &#125;);</span><br><span class="line">        // 连接到通道名称为channelss的网络,返回网络对象network</span><br><span class="line">        const network = await gateway.getNetwork('channelss');</span><br><span class="line">        // 获取名称为cc的智能合约</span><br><span class="line">        const contract = network.getContract('cc');</span><br><span class="line"></span><br><span class="line">        // 仓单申请</span><br><span class="line">        // peer chaincode invoke -n mycc -c '&#123;"Args":["warehousecreate","001","20201-1-6","sugar","edible","3000kg","20000","50000000","8","IBM","xiaozhao","0771-4919611","123456789","Facebook","xiaohai","0771-4919611","147258369","s1",""]&#125;' -C myc</span><br><span class="line">        // 提交仓单申请</span><br><span class="line">        var result = await contract.submitTransaction("warehousecreate","001","20201-1-6","sugar","edible","3000kg","20000","50000000","8","IBM",</span><br><span class="line">        "xiaozhao","0771-4919611","123456789","Facebook","xiaohai","0771-4919611","147258369","s1","");</span><br><span class="line">        console.log(`contract.submitTransaction('warehousecreate', "001", "20201-1-6", "sugar", "edible", "3000kg", "20000",</span><br><span class="line">        "50000000", "8", "IBM", "xiaozhao", "0771-4919611", "123456789", "Facebook", "xiaohai", "0771-4919611",</span><br><span class="line">        "987654321", "147258369", "s1", "")`);</span><br><span class="line">        console.log(byteToString(result));</span><br><span class="line">		</span><br><span class="line">		// 网关对象断开连接</span><br><span class="line">        await gateway.disconnect();</span><br><span class="line">    &#125; catch (error) &#123;</span><br><span class="line">        console.error(`$&#123;error&#125;`);</span><br><span class="line">        process.exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 解析返回字节的数据</span><br><span class="line">function byteToString(arr)</span><br><span class="line">&#123;</span><br><span class="line">	if(typeof arr === 'string') &#123;</span><br><span class="line">		return arr;</span><br><span class="line">	&#125;</span><br><span class="line">	var str = '',</span><br><span class="line">	_arr = arr;</span><br><span class="line">	for(var i = 0; i &lt; _arr.length; i++) &#123;</span><br><span class="line">		var one = _arr[i].toString(2),</span><br><span class="line">			v = one.match(/^1+?(?=0)/);</span><br><span class="line">		if(v &amp;&amp; one.length == 8) &#123;</span><br><span class="line">			var bytesLength = v[0].length;</span><br><span class="line">			var store = _arr[i].toString(2).slice(7 - bytesLength);</span><br><span class="line">			for(var st = 1; st &lt; bytesLength; st++) &#123;</span><br><span class="line">				store += _arr[st + i].toString(2).slice(2);</span><br><span class="line">			&#125;</span><br><span class="line">			str += String.fromCharCode(parseInt(store, 2));</span><br><span class="line">			i += bytesLength - 1;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			str += String.fromCharCode(_arr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return str;</span><br><span class="line">&#125;</span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<h2 id="cryptogen模块改造为fabric-network可以使用的格式"><a href="#cryptogen模块改造为fabric-network可以使用的格式" class="headerlink" title="cryptogen模块改造为fabric-network可以使用的格式"></a>cryptogen模块改造为fabric-network可以使用的格式</h2><blockquote>
+<p>cryptogen模块生成的证书无法被fabric-network直接使用。下面是处理代码。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 导入相关类</span><br><span class="line">const &#123;FileSystemWallet, X509WalletMixin&#125; = require('fabric-network');</span><br><span class="line">const fs = require('fs');</span><br><span class="line">const path = require('path');</span><br><span class="line"></span><br><span class="line">async function main() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        // 路径</span><br><span class="line">        const walletPath = path.join(process.cwd(), 'wallet');</span><br><span class="line">        // 文件系统类</span><br><span class="line">        const wallet = new FileSystemWallet(walletPath);</span><br><span class="line">        // 读取证书</span><br><span class="line">        var certificate = fs.readFileSync('./wallet/User1@org1.example.com/User1@org1.example.com-cert.pem', 'utf-8');</span><br><span class="line">        console.log("certificate: " + certificate.toString());</span><br><span class="line">        // 读取私钥</span><br><span class="line">        var key = fs.readFileSync('./wallet/User1@org1.example.com/7365294a1793d88ab82ce6d825bb5fd8e828deed402e25e37f0e2999e9d68278_sk', 'utf-8');</span><br><span class="line">        console.log("key: " + key.toString());</span><br><span class="line">        // 生成X509证书</span><br><span class="line">        const identity = X509WalletMixin.createIdentity('OwnMSP', certificate, key);</span><br><span class="line">        // 导入文件系统，标识为User1</span><br><span class="line">        await wallet.import('User1', identity);</span><br><span class="line">    &#125; catch (error) &#123;</span><br><span class="line">        console.error("error.....");</span><br><span class="line">        process.exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<h2 id="查块命令"><a href="#查块命令" class="headerlink" title="查块命令"></a>查块命令</h2><blockquote>
+<p>fabric-network中给的示例代码并没有给查块的示例代码。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 创建网关对象</span><br><span class="line">const gateway = new Gateway();</span><br><span class="line">// 连接到连接文件所说明的Fabric网络</span><br><span class="line">await gateway.connect(ccpPath, &#123; wallet, identity: 'admin', discovery: &#123; enabled: true, asLocalhost: false &#125; &#125;);</span><br><span class="line">// 连接到通道名称为channelss的网络,返回网络对象network</span><br><span class="line">const network = await gateway.getNetwork('channelss');</span><br><span class="line">const channel = network.getChannel()</span><br><span class="line">const data = channel.queryBlockByHash(“hash”)</span><br></pre></td></tr></table></figure>
+
+<h4 id="queryBlock-blockNumber-target-useAdmin-skipDecode"><a href="#queryBlock-blockNumber-target-useAdmin-skipDecode" class="headerlink" title=" queryBlock(blockNumber, target, useAdmin, skipDecode)"></a><async> queryBlock(blockNumber, target, useAdmin, skipDecode)</h4><p>Queries the ledger on the target peer for Block by block number.</p>
+<h5 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters:"></a>Parameters:</h5><table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>blockNumber</code></td>
+<td align="left">number</td>
+<td align="left">The number of the Block in question.</td>
+</tr>
+<tr>
+<td align="left"><code>target</code></td>
+<td align="left"><a href="https://hyperledger.github.io/fabric-sdk-node/release-1.4/Peer.html" target="_blank" rel="noopener">Peer</a></td>
+<td align="left">Optional. The peer to send this query to. If no target is passed, the query is sent to the first peer that was added to the channel object.</td>
+</tr>
+<tr>
+<td align="left"><code>useAdmin</code></td>
+<td align="left">boolean</td>
+<td align="left">Optional. Indicates that the admin credentials should be used in making this call to the peer.</td>
+</tr>
+<tr>
+<td align="left"><code>skipDecode</code></td>
+<td align="left">boolean</td>
+<td align="left">Optional. If true, this function returns an encoded block.</td>
+</tr>
+</tbody></table>
+<h5 id="Returns"><a href="#Returns" class="headerlink" title="Returns:"></a>Returns:</h5><p>A Promise for a <a href="https://hyperledger.github.io/fabric-sdk-node/release-1.4/global.html#Block" target="_blank" rel="noopener">Block</a> at the blockNumber slot in the ledger, fully decoded into an object.</p>
+<ul>
+<li><p>Type</p>
+<p>Promise</p>
+</li>
+</ul>
+<h4 id="queryBlockByHash-blockHash-target-useAdmin-skipDecode"><a href="#queryBlockByHash-blockHash-target-useAdmin-skipDecode" class="headerlink" title=" queryBlockByHash(blockHash, target, useAdmin, skipDecode)"></a><async> queryBlockByHash(blockHash, target, useAdmin, skipDecode)</h4><p>Queries the ledger on the target peer for a Block by block hash.</p>
+<h5 id="Parameters-1"><a href="#Parameters-1" class="headerlink" title="Parameters:"></a>Parameters:</h5><table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>blockHash</code></td>
+<td align="left">Array.<byte></td>
+<td align="left">of the Block in question.</td>
+</tr>
+<tr>
+<td align="left"><code>target</code></td>
+<td align="left"><a href="https://hyperledger.github.io/fabric-sdk-node/release-1.4/Peer.html" target="_blank" rel="noopener">Peer</a></td>
+<td align="left">Optional. The peer to send the query to. If no target is passed, the query is sent to the first peer that was added to the channel object.</td>
+</tr>
+<tr>
+<td align="left"><code>useAdmin</code></td>
+<td align="left">boolean</td>
+<td align="left">Optional. Indicates that the admin credentials should be used in making this call to the peer.</td>
+</tr>
+<tr>
+<td align="left"><code>skipDecode</code></td>
+<td align="left">boolean</td>
+<td align="left">Optional. If true, this function returns an encoded block.</td>
+</tr>
+</tbody></table>
+<h5 id="Returns-1"><a href="#Returns-1" class="headerlink" title="Returns:"></a>Returns:</h5><p>A Promise for a <a href="https://hyperledger.github.io/fabric-sdk-node/release-1.4/global.html#Block" target="_blank" rel="noopener">Block</a> matching the hash, fully decoded into an object.</p>
+<ul>
+<li><p>Type</p>
+<p>Promise</p>
+</li>
+</ul>
+<hr>
+<h4 id="queryBlockByTxID-tx-id-target-useAdmin-skipDecode"><a href="#queryBlockByTxID-tx-id-target-useAdmin-skipDecode" class="headerlink" title=" queryBlockByTxID(tx_id, target, useAdmin, skipDecode)"></a><async> queryBlockByTxID(tx_id, target, useAdmin, skipDecode)</h4><p>Queries the ledger on the target peer for a Block TransactionID.</p>
+<h5 id="Parameters-2"><a href="#Parameters-2" class="headerlink" title="Parameters:"></a>Parameters:</h5><table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>tx_id</code></td>
+<td align="left">string</td>
+<td align="left">The TransactionID of the Block in question.</td>
+</tr>
+<tr>
+<td align="left"><code>target</code></td>
+<td align="left"><a href="https://hyperledger.github.io/fabric-sdk-node/release-1.4/Peer.html" target="_blank" rel="noopener">Peer</a></td>
+<td align="left">Optional. The peer to send the query to. If no target is passed, the query is sent to the first peer that was added to the channel object.</td>
+</tr>
+<tr>
+<td align="left"><code>useAdmin</code></td>
+<td align="left">boolean</td>
+<td align="left">Optional. Indicates that the admin credentials should be used in making this call to the peer.</td>
+</tr>
+<tr>
+<td align="left"><code>skipDecode</code></td>
+<td align="left">boolean</td>
+<td align="left">Optional. If true, this function returns an encoded block.</td>
+</tr>
+</tbody></table>
+<h5 id="Returns-2"><a href="#Returns-2" class="headerlink" title="Returns:"></a>Returns:</h5><p>A Promise for a <a href="https://hyperledger.github.io/fabric-sdk-node/release-1.4/global.html#Block" target="_blank" rel="noopener">Block</a> matching the tx_id, fully decoded into an object.</p>
+<ul>
+<li><p>Type</p>
+<p>Promise</p>
+</li>
+</ul>
+<h2 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h2><p> <a href="https://hyperledger.github.io/fabric-sdk-node/release-1.4/Channel.html" target="_blank" rel="noopener">https://hyperledger.github.io/fabric-sdk-node/release-1.4/Channel.html</a> </p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-09-25T09:01:45.210Z" itemprop="dateUpdated">2020-09-25 17:01:45</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-sdk/" rel="tag">node-sdk</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/&title=《fabric-node-sdk简单使用》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/&title=《fabric-node-sdk简单使用》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-node-sdk简单使用》 — Cups&url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/09/15/2020/generate-self-certification-certificates-using-openssl/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">使用openssl生成自签名证书并提供给fabric-ca使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/14/2020/disaster-recovery-backup-and-recovery-method/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hyperledger Fabric的容灾备份及恢复方法简介</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/&title=《fabric-node-sdk简单使用》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/&title=《fabric-node-sdk简单使用》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fabric-node-sdk简单使用》 — Cups&url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2020/09/14/2020/node-sdk-1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
