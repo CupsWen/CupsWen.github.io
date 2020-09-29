@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Raft集群部署 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Fabric,Raft">
+    <meta name="description" content="参考博客：  https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;6844904187285749767 虚拟机资源                                                                                                            组织、域名、ip匹配表   域名 ip地址 组织 内网ip    orde">
+<meta name="keywords" content="Fabric,Raft">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raft集群部署">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2020&#x2F;09&#x2F;27&#x2F;2020&#x2F;raft&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="参考博客：  https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;6844904187285749767 虚拟机资源                                                                                                            组织、域名、ip匹配表   域名 ip地址 组织 内网ip    orde">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;virtual-machine.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;map.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;ip.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;kafka-2.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;kafka-3.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;kafka-4.jpg">
+<meta property="og:updated_time" content="2020-09-28T06:22:16.912Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;virtual-machine.png">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Raft集群部署</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Raft集群部署</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-27T13:43:10.000Z" itemprop="datePublished" class="page-time">
+  2020-09-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#虚拟机资源"><span class="post-toc-text">虚拟机资源</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#组织、域名、ip匹配表"><span class="post-toc-text">组织、域名、ip匹配表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#网络拓扑"><span class="post-toc-text">网络拓扑</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置这些虚拟机"><span class="post-toc-text">配置这些虚拟机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）虚拟机基础环境配置"><span class="post-toc-text">（一）虚拟机基础环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）Xshell登录"><span class="post-toc-text">（1）Xshell登录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）使虚拟机可以上网"><span class="post-toc-text">（2）使虚拟机可以上网</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）防火墙"><span class="post-toc-text">（3）防火墙</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）设置Selinux"><span class="post-toc-text">（4）设置Selinux</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（5）设置时间同步"><span class="post-toc-text">（5）设置时间同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（6）安装常用工具"><span class="post-toc-text">（6）安装常用工具</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（7）更换软件源"><span class="post-toc-text">（7）更换软件源</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（8）更改hosts文件"><span class="post-toc-text">（8）更改hosts文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（二）Fabric基础环境配置"><span class="post-toc-text">（二）Fabric基础环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）go"><span class="post-toc-text">（1）go</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）docker-ce"><span class="post-toc-text">（2）docker-ce</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）docker-compose"><span class="post-toc-text">（3）docker-compose</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）bin"><span class="post-toc-text">（4）bin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（5）images"><span class="post-toc-text">（5）images</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（6）fabric-samples"><span class="post-toc-text">（6）fabric-samples</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（7）nodejs"><span class="post-toc-text">（7）nodejs*</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Fabric相关操作"><span class="post-toc-text">Fabric相关操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）准备相关文件"><span class="post-toc-text">（一）准备相关文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）crypto-config-yaml"><span class="post-toc-text">（1）crypto-config.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）configtx-yaml"><span class="post-toc-text">（2）configtx.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）生成公私钥和证书"><span class="post-toc-text">（3）生成公私钥和证书</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）生成创世区块"><span class="post-toc-text">（4）生成创世区块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（5）生成通道配置区块"><span class="post-toc-text">（5）生成通道配置区块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（6）智能合约"><span class="post-toc-text">（6）智能合约</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（7）docker-compose-orderer-yaml"><span class="post-toc-text">（7）docker-compose-orderer.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（10）docker-compose-peer-yaml"><span class="post-toc-text">（10）docker-compose-peer.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（11）分发文件"><span class="post-toc-text">（11）分发文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（12）文件目录"><span class="post-toc-text">（12）文件目录*</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（二）按顺序依次启动各节点"><span class="post-toc-text">（二）按顺序依次启动各节点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）orderer"><span class="post-toc-text">（1）orderer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）peer01-192-168-30-21"><span class="post-toc-text">（2）peer01-192.168.30.21</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）peer11-192-168-30-22"><span class="post-toc-text">（3）peer11-192.168.30.22</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）peer02-192-168-30-23"><span class="post-toc-text">（4）peer02-192.168.30.23</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（5）peer12-192-168-30-24"><span class="post-toc-text">（5）peer12-192.168.30.24</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#常用命令"><span class="post-toc-text">常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#清空所有容器"><span class="post-toc-text">清空所有容器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#清空所有镜像"><span class="post-toc-text">清空所有镜像</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#清理文件"><span class="post-toc-text">清理文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#切换到kafka目录"><span class="post-toc-text">切换到kafka目录</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-text">遇到的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无法上网"><span class="post-toc-text">无法上网</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装链码出错"><span class="post-toc-text">安装链码出错</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LSCC出错"><span class="post-toc-text">LSCC出错</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#相关知识"><span class="post-toc-text">相关知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）Kafka"><span class="post-toc-text">（一）Kafka</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、Kafka工作原理"><span class="post-toc-text">1、Kafka工作原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、Hyperledger-Fabric中的Kafka"><span class="post-toc-text">2、Hyperledger Fabric中的Kafka</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、Hyperledger-Fabric-Kafka实例解析"><span class="post-toc-text">3、Hyperledger Fabric Kafka实例解析</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2020/raft"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Raft集群部署</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-09-27 21:43:10" datetime="2020-09-27T13:43:10.000Z"  itemprop="datePublished">2020-09-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Fabric/">Fabric</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>参考博客：  <a href="https://juejin.im/post/6844904187285749767" target="_blank" rel="noopener">https://juejin.im/post/6844904187285749767</a></p>
+<h1 id="虚拟机资源"><a href="#虚拟机资源" class="headerlink" title="虚拟机资源"></a>虚拟机资源</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/kafka/virtual-machine.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="组织、域名、ip匹配表"><a href="#组织、域名、ip匹配表" class="headerlink" title="组织、域名、ip匹配表"></a>组织、域名、ip匹配表</h1><table>
+<thead>
+<tr>
+<th align="left">域名</th>
+<th>ip地址</th>
+<th align="center">组织</th>
+<th align="center">内网ip</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">orderer0.example.com</td>
+<td>192.168.30.18</td>
+<td align="center">orderer</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="left">orderer1.example.com</td>
+<td>192.168.30.19</td>
+<td align="center">orderer</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="left">orderer2.example.com</td>
+<td>192.168.30.20</td>
+<td align="center">orderer</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="left">peer0.org1.example.com</td>
+<td>192.168.30.21</td>
+<td align="center">org1</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="left">peer1.org2.example.com</td>
+<td>192.168.30.22</td>
+<td align="center">org1</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="left">peer0.org1.example.com</td>
+<td>192.168.30.23</td>
+<td align="center">org2</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="left">peer1.org2.example.com</td>
+<td>192.168.30.24</td>
+<td align="center">org2</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="left">nfs-server</td>
+<td>192.168.30.25</td>
+<td align="center"></td>
+<td align="center">123</td>
+</tr>
+</tbody></table>
+<h1 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/raft/map.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="配置这些虚拟机"><a href="#配置这些虚拟机" class="headerlink" title="配置这些虚拟机"></a>配置这些虚拟机</h1><p>由于虚拟机在不和本电脑在一个网段，若要通信需要配一个静态的本地IP（192.168.1.x）和一个虚拟机所在网段的IP地址（192.168.30.x）。</p>
+<blockquote>
+<p>ip配置如下。</p>
+<p>192.168.1.200（路由器下的ip，供上网使用）</p>
+<p>192.168.30.200（192.168.30.x，供连接虚拟机使用）</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/raft/ip.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p>注意保存。</p>
+</blockquote>
+<blockquote>
+<p>win10下打开命令行，ping 一下虚拟机的ip测试连接情况。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\cups&gt;ping 192.168.30.18</span><br><span class="line"></span><br><span class="line">正在 Ping 192.168.30.18 具有 32 字节的数据:</span><br><span class="line">来自 192.168.30.18 的回复: 字节=32 时间&lt;1ms TTL=64</span><br><span class="line">来自 192.168.30.18 的回复: 字节=32 时间&lt;1ms TTL=64</span><br><span class="line">来自 192.168.30.18 的回复: 字节=32 时间&lt;1ms TTL=64</span><br><span class="line"></span><br><span class="line">192.168.30.18 的 Ping 统计信息:</span><br><span class="line">    数据包: 已发送 = 3，已接收 = 3，丢失 = 0 (0% 丢失)，</span><br><span class="line">往返行程的估计时间(以毫秒为单位):</span><br><span class="line">    最短 = 0ms，最长 = 0ms，平均 = 0ms</span><br><span class="line">Control-C</span><br><span class="line">^C</span><br><span class="line">C:\Users\cups&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="（一）虚拟机基础环境配置"><a href="#（一）虚拟机基础环境配置" class="headerlink" title="（一）虚拟机基础环境配置"></a>（一）虚拟机基础环境配置</h2><h3 id="（1）Xshell登录"><a href="#（1）Xshell登录" class="headerlink" title="（1）Xshell登录"></a>（1）Xshell登录</h3><p>Xshell下载地址： <a href="https://www.netsarang.com/zh/xshell/" target="_blank" rel="noopener">https://www.netsarang.com/zh/xshell/</a> </p>
+<p>Xshell登录流程： <a href="https://jingyan.baidu.com/article/624e7459032b4334e8ba5a33.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/624e7459032b4334e8ba5a33.html</a> </p>
+<p>登录后输出如下所示。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Connecting to 192.168.30.18:22...</span><br><span class="line">Connection established.</span><br><span class="line">To escape to local shell, press 'Ctrl+Alt+]'.</span><br><span class="line">Last login: Sun Sep 27 20:31:53 2020 from 192.168.30.200</span><br><span class="line">[root@vm1921683018 ~]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）使虚拟机可以上网"><a href="#（2）使虚拟机可以上网" class="headerlink" title="（2）使虚拟机可以上网"></a>（2）使虚拟机可以上网</h3><blockquote>
+<p>原因：生成的虚拟机（内网）在192.168.30.x网段，无法上网。需要配置一个192.168.1.x网段的的ip地址才能上网。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换到网络配置文件所在的路径</span></span><br><span class="line">cd /etc/sysconfig/network-scripts/</span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份文件</span></span><br><span class="line">cp ifcfg-ens160  ifcfg-ens160.bat</span><br><span class="line"><span class="meta">#</span><span class="bash"> 更改文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 内容示例如下所示</span></span><br><span class="line">vim ifcfg-ens160</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启虚拟机使更改生效；重启网络服务总是失败(.........)</span></span><br><span class="line">reboot</span><br><span class="line"><span class="meta">#</span><span class="bash"> 等待片刻从新连接虚拟机</span></span><br><span class="line">ping www.baidu.com</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###################配置文件示例</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###################################################</span></span></span><br><span class="line">HWADDR=00:50:56:B8:D7:DC</span><br><span class="line">NAME=ens160</span><br><span class="line">GATEWAY=192.168.1.1			# 网关需要改为192.168.1.1</span><br><span class="line">DNS1=8.8.8.8</span><br><span class="line">DNS2=114.114.114.114</span><br><span class="line">DEVICE=ens160</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">IPADDR=192.168.30.18</span><br><span class="line">PEERDNS=no</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注销结束的标志</span></span><br><span class="line"><span class="meta">#</span><span class="bash">NM: <span class="function"><span class="title">check_link_down</span></span>() &#123;	</span></span><br><span class="line"><span class="meta">#</span><span class="bash">NM:  <span class="built_in">return</span> 1; </span></span><br><span class="line"><span class="meta">#</span><span class="bash">NM: &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加新的IP地址192.168.1.x</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">PREFIX=24</span><br><span class="line">IPADDR1=192.168.1.123</span><br><span class="line">PREFIX1=24</span><br><span class="line">NETMASK1=255.255.255.0</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=no</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#################################################</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）防火墙"><a href="#（3）防火墙" class="headerlink" title="（3）防火墙"></a>（3）防火墙</h3><p>关闭防火墙</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl status firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：</p>
+<p>1)设置防火墙</p>
+<p><code>firewall-cmd --zone=public --permanent --add-port=5984/tcp --add-port=7050/tcp --add-port=7051/tcp --add-port=7052/tcp --add-port=7053/tcp --add-port=7054/tcp --add-port=8053/tcp --add-port=9053/tcp --add-port=10053/tcp</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@vm192168302 ~]# firewall-cmd --zone=public --permanent --add-port=5984/tcp --add-port=7050/tcp --add-port=7051/tcp --add-port=7052/tcp --add-port=7053/tcp --add-port=7054/tcp --add-port=8053/tcp --add-port=9053/tcp --add-port=10053/tcp</span><br><span class="line">success</span><br><span class="line">[root@vm192168302 ~]# </span><br></pre></td></tr></table></figure>
+
+<p>2)重新载入</p>
+<p><code>firewall-cmd --reload</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">[root@vm192168302 ~]<span class="comment"># firewall-cmd --reload </span></span></span><br><span class="line">success</span><br><span class="line">[root@vm192168302 ~]# </span><br></pre></td></tr></table></figure>
+
+<p>3)查看开放的端口</p>
+<p> <code>firewall-cmd --zone=public --list-ports</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">[root@vm192168302 ~]<span class="comment"># firewall-cmd --zone=public --list-ports </span></span></span><br><span class="line">5984/tcp 7050/tcp 7051/tcp 7052/tcp 7053/tcp 7054/tcp 8053/tcp 9053/tcp 10053/tcp</span><br><span class="line">[root@vm192168302 ~]# </span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="（4）设置Selinux"><a href="#（4）设置Selinux" class="headerlink" title="（4）设置Selinux"></a>（4）设置Selinux</h3><blockquote>
+<p> SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现，是 Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在这种访问控制体系的限制下，进程只能访问那些在他的任务中所需要文件。SELinux 默认安装在 Fedora 和 Red Hat Enterprise Linux 上，也可以作为其他发行版上容易安装的包得到。 </p>
+<p> 博客上都这么做，暂时不清楚为啥做。理解上就是关闭了这样个安全子系统。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过命令获取状态 </span></span><br><span class="line">getenforce </span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行设置selinux，enforcing,permissive 或者 1,0。 </span></span><br><span class="line">etenforce 0 </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看selinux的信息 </span></span><br><span class="line">sestatus -v </span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑配置 </span></span><br><span class="line">vi /etc/selinux/config</span><br><span class="line"><span class="meta">#</span><span class="bash">将配置中的 SELINUX=enforcing 改为 SELINUX=disabled</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）设置时间同步"><a href="#（5）设置时间同步" class="headerlink" title="（5）设置时间同步"></a>（5）设置时间同步</h3><blockquote>
+<p>进行时间同步</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 移除本地时间</span></span><br><span class="line">rm -rf /etc/localtime</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改时区</span></span><br><span class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置系统时钟</span></span><br><span class="line">echo "ZONE="Asia/Shanghai"</span><br><span class="line">UTC=false</span><br><span class="line">ARC=false"&gt;&gt;/etc/sysconfig/clock</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装时间服务</span></span><br><span class="line">yum install -y ntp</span><br><span class="line">systemctl start ntpd</span><br><span class="line">systemctl enable ntpd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 时间同步指向阿里云时间服务器</span></span><br><span class="line">echo "/usr/sbin/ntpdate ntp1.aliyun.com &gt; /dev/null 2&gt;&amp;1; /sbin/hwclock -w"&gt;&gt;/etc/rc.d/rc.local</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定时任务，每分钟同步一次</span></span><br><span class="line">echo "0 */1 * * * ntpdate ntp1.aliyun.com &gt; /dev/null 2&gt;&amp;1; /sbin/hwclock -w"&gt;&gt;/etc/cro</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）安装常用工具"><a href="#（6）安装常用工具" class="headerlink" title="（6）安装常用工具"></a>（6）安装常用工具</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install -y curl \</span><br><span class="line">wget \</span><br><span class="line">tree \</span><br><span class="line">lrzsz \</span><br><span class="line">dos2unix \</span><br><span class="line">git</span><br></pre></td></tr></table></figure>
+
+<h3 id="（7）更换软件源"><a href="#（7）更换软件源" class="headerlink" title="（7）更换软件源"></a>（7）更换软件源</h3><blockquote>
+<p>提升相关软件包下载速度</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用网易的镜像源</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 源存储目录</span></span><br><span class="line">cd /etc/yum.repos.d/</span><br><span class="line"><span class="meta">#</span><span class="bash"> 更改名称进行备份</span></span><br><span class="line">mv CentOS-Base.repo CentOS-Base.repo.ori</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载文件</span></span><br><span class="line">wget http://mirrors.163.com/.help/CentOS6-Base-163.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 更改名称</span></span><br><span class="line">mv CentOS6-Base-163.repo CentOS-Base.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 清空缓存</span></span><br><span class="line">yum -y clean all</span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新 </span></span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<h3 id="（8）更改hosts文件"><a href="#（8）更改hosts文件" class="headerlink" title="（8）更改hosts文件"></a>（8）更改hosts文件</h3><blockquote>
+<p>默认域名IP的对应关系。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line">192.168.30.18 orderer0.example.com</span><br><span class="line">192.168.30.19 orderer1.example.com</span><br><span class="line">192.168.30.20 orderer2.example.com</span><br><span class="line">192.168.30.21 peer0.org1.example.com</span><br><span class="line">192.168.30.22 peer1.org1.example.com</span><br><span class="line">192.168.30.23 peer0.org2.example.com</span><br><span class="line">192.168.30.24 peer1.org2.example.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="（二）Fabric基础环境配置"><a href="#（二）Fabric基础环境配置" class="headerlink" title="（二）Fabric基础环境配置"></a>（二）Fabric基础环境配置</h2><blockquote>
+<p>我们做了一个基础环境包，按照基础环境包进行讲解。</p>
+<p>基础环境包目录如下：</p>
+<p>每个子目录下的readme.txt文件中都写入有：</p>
+<p>（1）该文件夹下文件的下载路径。</p>
+<p>（2）在该文件夹下需要进行的操作。</p>
+<p>注：system中的配置在（一）虚拟机基础环境配置中都介绍，不再赘述。</p>
+</blockquote>
+<blockquote>
+<p>这个材料包通过Xftp传输到虚拟机虚拟机的/root目录下。</p>
+<p>Xftp下载地址： <a href="https://www.netsarang.com/zh/xshell/" target="_blank" rel="noopener">https://www.netsarang.com/zh/xshell/</a> </p>
+<p>Xftp登录流程： <a href="https://jingyan.baidu.com/article/19020a0a64d941529c284279.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/19020a0a64d941529c284279.html</a> </p>
+</blockquote>
+<h3 id="（1）go"><a href="#（1）go" class="headerlink" title="（1）go"></a>（1）go</h3><blockquote>
+<p>Fabric代码是go写的，需要go环境才能运行。</p>
+</blockquote>
+<p>GO安装包下载路径：<a href="https://studygolang.com/dl/golang/go1.11.linux-amd64.tar.gz" target="_blank" rel="noopener">https://studygolang.com/dl/golang/go1.11.linux-amd64.tar.gz</a></p>
+<p>命令行切换到go目录下：<code>cd /root/fabric-tools/go</code></p>
+<p>按readme.txt中的提示进行操作即可。readme.txt内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">https://studygolang.com/dl/golang/go1.11.linux-amd64.tar.gz</span><br><span class="line"></span><br><span class="line">// 解压到安装包到/usr/local</span><br><span class="line">tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz</span><br><span class="line">// 打开/etc/profile</span><br><span class="line">sudo vim /etc/profile</span><br><span class="line">// 添加下列内容</span><br><span class="line">export  PATH=$PATH:/usr/local/go/bin</span><br><span class="line">export  GOROOT=/usr/local/go</span><br><span class="line">export  GOPATH=$HOME/go</span><br><span class="line">export  PATH=$PATH:$HOME/go/bin</span><br><span class="line">// 更新/etc/profile</span><br><span class="line">source /etc/profile</span><br><span class="line">// 查看go版本</span><br><span class="line">go version</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）docker-ce"><a href="#（2）docker-ce" class="headerlink" title="（2）docker-ce"></a>（2）docker-ce</h3><blockquote>
+<p>安装社区版dokcer。</p>
+</blockquote>
+<p>docker-ce安装包下载路径：<a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/" target="_blank" rel="noopener">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</a></p>
+<p>命令行切换到docker-ce目录下：<code>cd /root/fabric-tools/docker-ce</code></p>
+<p>按readme.txt中的提示进行操作即可。readme.txt内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#######################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###############(1)在线安装</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#######################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 清理旧版本</span></span><br><span class="line">yum remove docker \</span><br><span class="line">             docker-client \</span><br><span class="line">             docker-client-latest \</span><br><span class="line">             docker-common \</span><br><span class="line">             docker-latest \</span><br><span class="line">             docker-latest-logrotate \</span><br><span class="line">             docker-logrotate \</span><br><span class="line">             docker-selinux \</span><br><span class="line">             docker-engine-selinux \</span><br><span class="line">             docker-engine</span><br><span class="line">rm -rf /var/lib/docker/</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装相关依赖</span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定镜像为阿里云</span></span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装docker-ce</span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动docker-ce</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看docker版本</span></span><br><span class="line">docker --version</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置开机启动</span></span><br><span class="line">chkconfig docker on</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#######################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##############(2)离线安装</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#######################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 清理旧版本</span></span><br><span class="line">yum remove docker \</span><br><span class="line">             docker-client \</span><br><span class="line">             docker-client-latest \</span><br><span class="line">             docker-common \</span><br><span class="line">             docker-latest \</span><br><span class="line">             docker-latest-logrotate \</span><br><span class="line">             docker-logrotate \</span><br><span class="line">             docker-selinux \</span><br><span class="line">             docker-engine-selinux \</span><br><span class="line">             docker-engine</span><br><span class="line">rm -rf /var/lib/docker/</span><br><span class="line"><span class="meta">#</span><span class="bash"> 强制组成docker的相关软件</span></span><br><span class="line">rpm -ivh containerd.io-1.2.6-3.3.el7.x86_64.rpm --force --nodeps</span><br><span class="line">rpm -ivh container-selinux-2.119.2-1.911c772.el7_8.noarch.rpm --force --nodeps</span><br><span class="line">rpm -ivh docker-ce-19.03.9-3.el7.x86_64.rpm --force --nodeps</span><br><span class="line">rpm -ivh docker-ce-cli-19.03.9-3.el7.x86_64.rpm --force --nodeps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动docker-ce</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看docker版本</span></span><br><span class="line">docker --version</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置开机启动</span></span><br><span class="line">chkconfig docker on</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#######################################################</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）docker-compose"><a href="#（3）docker-compose" class="headerlink" title="（3）docker-compose"></a>（3）docker-compose</h3><blockquote>
+<p>docker镜像管理工具。</p>
+</blockquote>
+<p>docker-compose安装包下载路径：<a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">https://github.com/docker/compose/releases</a></p>
+<p>命令行切换到docker-compose目录下：<code>cd /root/fabric-tools/docker-compose</code></p>
+<p>按readme.txt中的提示进行操作即可。readme.txt内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/docker/compose/releases</span><br><span class="line"></span><br><span class="line">// 赋予docker-compose可执行</span><br><span class="line">chmod 777 docker-compose-Linux-x86_64</span><br><span class="line">// 复制到/usr/local/bin</span><br><span class="line">sudo cp docker-compose-Linux-x86_64 /usr/local/bin/docker-compose</span><br><span class="line">// 查看版本</span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）bin"><a href="#（4）bin" class="headerlink" title="（4）bin"></a>（4）bin</h3><blockquote>
+<p>Fabric可执行二进制文件。</p>
+</blockquote>
+<p>命令行切换到bin目录下：<code>cd /root/fabric-tools/bin</code></p>
+<p>按readme.txt中的提示进行操作即可。readme.txt内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 设置当前目录下文件可读可写可执行</span></span><br><span class="line">chmod 777 -R ./*</span><br><span class="line"><span class="meta">#</span><span class="bash"> 移动到/usr/<span class="built_in">local</span>/bin</span></span><br><span class="line">cp ./* /usr/local/bin</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看二进制文件版本</span></span><br><span class="line">peer version</span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）images"><a href="#（5）images" class="headerlink" title="（5）images"></a>（5）images</h3><blockquote>
+<p>Fabric镜像。</p>
+</blockquote>
+<blockquote>
+<p>fabric-tools是本地客户端镜像，主要用来执行peer节点中的相关操作，如频道、智能合约等。</p>
+<p>fabric-peer是fabric中网络节点的镜像。peer节点会对客户端提交的数据进行提交前的验证和背书。</p>
+<p>fabric-orderer是fabric中网络节点的镜像。orderer节点会对客户单提交的数据进行校验、打包和分发。</p>
+<p>fabric-ccenv是chaincode的运行环境。</p>
+<p>fabric-baseos是chaincode编译环境里的一个os的基础 。</p>
+<p>fabric-couchdb是第三方可插拔式数据库镜像。</p>
+<p>fabric-kafka是供分布式基于发布/订阅的消息系统的镜像。</p>
+<p>fabric-zookeeper提供高可用、高性能且一致的开源协调服务 。</p>
+<blockquote>
+<p>注：1.4.0拉取的镜像中不包含fabric-ca。fabric-ca是服务器本地CA Server，可以执行fabric-ca-client中的相关操作，实现登录、注册以及注销等操作。在非自定义CA服务的情况下，可以不下载该镜像。</p>
+</blockquote>
+</blockquote>
+<p>docker镜像下载地址：<a href="https://hub.docker.com/t/hyperledger" target="_blank" rel="noopener">https://hub.docker.com/t/hyperledger</a></p>
+<p>命令行切换到images目录下：<code>cd /root/fabric-tools/images</code></p>
+<p>按readme.txt中的进行迁移操作即可。readme.txt内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##################################################################</span></span></span><br><span class="line">打包</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打包镜像</span></span><br><span class="line">docker save 18ed4db0cd57&gt; /home/cups/images/fabric-tools-1.4.3.tar</span><br><span class="line">docker save c18a0d3cc958&gt; /home/cups/images/fabric-ca-1.4.3.tar</span><br><span class="line">docker save 3d31661a812a&gt; /home/cups/images/fabric-ccenv-1.4.3.tar</span><br><span class="line">docker save b666a6ebbe09&gt; /home/cups/images/fabric-orderer-1.4.3.tar</span><br><span class="line">docker save fa87ccaed0ef&gt; /home/cups/images/fabric-peer-1.4.3.tar</span><br><span class="line">docker save 20c6045930c8&gt; /home/cups/images/fabric-zookeeper-0.4.15.tar</span><br><span class="line">docker save b4ab82bbaf2f&gt; /home/cups/images/fabric-kafka-0.4.15.tar</span><br><span class="line">docker save 8de128a55539&gt; /home/cups/images/fabric-couchdb-0.4.15.tar</span><br><span class="line">docker save 9d6ec11c60ff&gt; /home/cups/images/fabric-baseos-amd64-0.4.15.tar</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##################################################################</span></span></span><br><span class="line">迁移</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载+标记</span></span><br><span class="line">docker load &lt; fabric-tools-1.4.3.tar</span><br><span class="line">docker tag 18ed4db0cd57 hyperledger/fabric-tools:latest</span><br><span class="line">docker load &lt; fabric-ca-1.4.3.tar</span><br><span class="line">docker tag c18a0d3cc958 hyperledger/fabric-ca:latest</span><br><span class="line">docker load &lt; fabric-ccenv-1.4.3.tar</span><br><span class="line">docker tag 3d31661a812a hyperledger/fabric-ccenv:latest</span><br><span class="line">docker load &lt; fabric-orderer-1.4.3.tar</span><br><span class="line">docker tag b666a6ebbe09 hyperledger/fabric-orderer:latest</span><br><span class="line">docker load &lt; fabric-peer-1.4.3.tar</span><br><span class="line">docker tag fa87ccaed0ef hyperledger/fabric-peer:latest</span><br><span class="line">docker load &lt; fabric-zookeeper-0.4.15.tar</span><br><span class="line">docker tag 20c6045930c8 hyperledger/fabric-zookeeper:latest</span><br><span class="line">docker load &lt; fabric-kafka-0.4.15.tar</span><br><span class="line">docker tag b4ab82bbaf2f hyperledger/fabric-kafka:latest</span><br><span class="line">docker load &lt; fabric-couchdb-0.4.15.tar</span><br><span class="line">docker tag 8de128a55539 hyperledger/fabric-couchdb:latest</span><br><span class="line">docker load &lt; fabric-baseos-amd64-0.4.15.tar</span><br><span class="line">docker tag 9d6ec11c60ff hyperledger/fabric-baseos-amd64-0.4.15:latest</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）fabric-samples"><a href="#（6）fabric-samples" class="headerlink" title="（6）fabric-samples"></a>（6）fabric-samples</h3><blockquote>
+<p>fabric示例代码，其中的first-network非常适合于测试Fabric基础环境是否配置完整。</p>
+</blockquote>
+<p>下载地址： <a href="https://github.com/hyperledger/fabric-samples" target="_blank" rel="noopener">https://github.com/hyperledger/fabric-samples</a> </p>
+<p>命令行切换到fabric-samples目录下：<code>cd /root/fabric-tools/fabric-samples</code></p>
+<p>进入first-network：<code>cd first-network</code></p>
+<p>为目录下文件赋予可读可写可执行权限：<code>chmod 777 -R ./*</code></p>
+<p>执行./byfn.sh启动示例网络：<code>./byfn.sh up</code></p>
+<p>成功出现END表示Fabric基础环境没有问题。</p>
+<p>执行./byfn关闭示例网络：<code>./byfn.sh down</code></p>
+<h3 id="（7）nodejs"><a href="#（7）nodejs" class="headerlink" title="（7）nodejs*"></a>（7）nodejs*</h3><blockquote>
+<p>nodejs是fabric-node-sdk的运行环境。fabric-node-sdk支持的nodejs版本为8.x.x到10.x.x。</p>
+<p>该软件看情况而定，不一定需要装。</p>
+</blockquote>
+<p>nodejs安装包下载路径：<a href="https://nodejs.org/dist/v10.15.0/" target="_blank" rel="noopener">https://nodejs.org/dist/v10.15.0/</a></p>
+<p>命令行切换到nodejs目录下：<code>cd /root/fabric-tools/nodejs</code></p>
+<p>按readme.txt中的提示进行操作即可。readme.txt内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 解压</span><br><span class="line">tar -C /usr/local -xzf node-v10.15.0-linux-x64.tar.gz</span><br><span class="line">// 重命名</span><br><span class="line">cd /usr/local</span><br><span class="line">mv node-v10.15.0-linux-x64.tar.gz nodejs</span><br><span class="line">// 回到根目录</span><br><span class="line">cd ~</span><br><span class="line">// 打开环境变量配置文件</span><br><span class="line">sudo vim /ect/profile</span><br><span class="line">// 写入</span><br><span class="line">export PATH=$PATH:/usr/local/nodejs/bin</span><br><span class="line">// 更新</span><br><span class="line">source /etc/profile</span><br><span class="line">// 查看版本</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<h1 id="Fabric相关操作"><a href="#Fabric相关操作" class="headerlink" title="Fabric相关操作"></a>Fabric相关操作</h1><h2 id="（一）准备相关文件"><a href="#（一）准备相关文件" class="headerlink" title="（一）准备相关文件"></a>（一）准备相关文件</h2><h3 id="（1）crypto-config-yaml"><a href="#（1）crypto-config-yaml" class="headerlink" title="（1）crypto-config.yaml"></a>（1）crypto-config.yaml</h3><blockquote>
+<p>供cryptogen模块解释执行生成相关证书。</p>
+<p>这些证书一部分用以网络节点的启动，另一部分用作客户端证书。</p>
+<p> 更多内容请参考： <a href="https://hyperledgercn.github.io/hyperledgerDocs/" target="_blank" rel="noopener">https://hyperledgercn.github.io/hyperledgerDocs/</a> </p>
+</blockquote>
+<p>建立文件夹kafka用于存储相关文件:<code>mkdir raft</code></p>
+<p>进入生成的文件夹：<code>cd raft</code></p>
+<p>新建crypto-config.yaml并写入如下内容：<code>vim crypto-config.yaml</code> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">OrdererOrgs:</span><br><span class="line">  - Name: Orderer</span><br><span class="line">    Domain: example.com</span><br><span class="line">    EnableNodeOUs: true</span><br><span class="line">    CA:</span><br><span class="line">      Country: CN</span><br><span class="line">      Province: HeNan</span><br><span class="line">      Locality: ZhengZhou</span><br><span class="line">    Specs:</span><br><span class="line">      - Hostname: orderer0</span><br><span class="line">      - Hostname: orderer1</span><br><span class="line">      - Hostname: orderer2</span><br><span class="line"></span><br><span class="line">PeerOrgs:</span><br><span class="line">  - Name: Org1</span><br><span class="line">    Domain: org1.example.com</span><br><span class="line">    EnableNodeOUs: true</span><br><span class="line">    CA:</span><br><span class="line">      Country: CN</span><br><span class="line">      Province: HeNan</span><br><span class="line">      Locality: ZhengZhou</span><br><span class="line">    Template:</span><br><span class="line">      Count: 2</span><br><span class="line">    Users:</span><br><span class="line">      Count: 1</span><br><span class="line"></span><br><span class="line">  - Name: Org2</span><br><span class="line">    Domain: org2.example.com</span><br><span class="line">    EnableNodeOUs: true</span><br><span class="line">    CA:</span><br><span class="line">      Country: CN</span><br><span class="line">      Province: HeNan</span><br><span class="line">      Locality: ZhengZhou</span><br><span class="line">    Template:</span><br><span class="line">      Count: 2</span><br><span class="line">    Users:</span><br><span class="line">      Count: 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）configtx-yaml"><a href="#（2）configtx-yaml" class="headerlink" title="（2）configtx.yaml"></a>（2）configtx.yaml</h3><blockquote>
+<p> configtx.yaml是Hyperledger Fabric区块链网络运维工具configtxgen用于生成通道创世块或通道交易的配置文件，configtx.yaml的内容直接决定了所生成的创世区块的内容。 </p>
+<p>更多内容请参考： <a href="https://segmentfault.com/a/1190000018990043?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018990043?utm_source=tag-newest</a> </p>
+</blockquote>
+<p>新建configtx.yaml 并写入如下内容：<code>vim configtx.yaml</code> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br></pre></td><td class="code"><pre><span class="line">Organizations:</span><br><span class="line">    - &amp;OrdererOrg</span><br><span class="line">        Name: OrdererOrg</span><br><span class="line">        ID: OrdererMSP</span><br><span class="line">        MSPDir: crypto-config/ordererOrganizations/example.com/msp</span><br><span class="line">        Policies:</span><br><span class="line">            Readers:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('OrdererMSP.member')"</span><br><span class="line">            Writers:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('OrdererMSP.member')"</span><br><span class="line">            Admins:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('OrdererMSP.admin')"</span><br><span class="line"></span><br><span class="line">    - &amp;Org1</span><br><span class="line">        Name: Org1MSP</span><br><span class="line">        ID: Org1MSP</span><br><span class="line">        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp</span><br><span class="line">        Policies:</span><br><span class="line">            Readers:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"</span><br><span class="line">            Writers:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"</span><br><span class="line">            Admins:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('Org1MSP.admin')"</span><br><span class="line"></span><br><span class="line">        AnchorPeers:</span><br><span class="line">            - Host: peer0.org1.example.com</span><br><span class="line">              Port: 7051</span><br><span class="line"></span><br><span class="line">    - &amp;Org2</span><br><span class="line">        Name: Org2MSP</span><br><span class="line">        ID: Org2MSP</span><br><span class="line">        MSPDir: crypto-config/peerOrganizations/org2.example.com/msp</span><br><span class="line">        Policies:</span><br><span class="line">            Readers:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"</span><br><span class="line">            Writers:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"</span><br><span class="line">            Admins:</span><br><span class="line">                Type: Signature</span><br><span class="line">                Rule: "OR('Org2MSP.admin')"</span><br><span class="line"></span><br><span class="line">        AnchorPeers:</span><br><span class="line">            - Host: peer0.org2.example.com</span><br><span class="line">              Port: 7051</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Capabilities:</span><br><span class="line">    Channel: &amp;ChannelCapabilities</span><br><span class="line">        V1_4_3: true</span><br><span class="line">        V1_3: false</span><br><span class="line">        V1_1: false</span><br><span class="line"></span><br><span class="line">    Orderer: &amp;OrdererCapabilities</span><br><span class="line">        V1_4_2: true</span><br><span class="line">        V1_1: false</span><br><span class="line"></span><br><span class="line">    Application: &amp;ApplicationCapabilities</span><br><span class="line">        V1_4_2: true</span><br><span class="line">        V1_3: false</span><br><span class="line">        V1_2: false</span><br><span class="line">        V1_1: false</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Application: &amp;ApplicationDefaults</span><br><span class="line">    Organizations:</span><br><span class="line">    Policies:</span><br><span class="line">        Readers:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "ANY Readers"</span><br><span class="line">        Writers:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "ANY Writers"</span><br><span class="line">        Admins:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "MAJORITY Admins"</span><br><span class="line"></span><br><span class="line">    Capabilities:</span><br><span class="line">        &lt;&lt;: *ApplicationCapabilities</span><br><span class="line"></span><br><span class="line">Orderer: &amp;OrdererDefaults</span><br><span class="line">    OrdererType: etcdraft</span><br><span class="line">    Addresses:</span><br><span class="line">        - orderer0.example.com:7050</span><br><span class="line">        - orderer1.example.com:7050</span><br><span class="line">        - orderer2.example.com:7050</span><br><span class="line"></span><br><span class="line">    BatchTimeout: 2s</span><br><span class="line">    BatchSize:</span><br><span class="line">        MaxMessageCount: 10</span><br><span class="line">        AbsoluteMaxBytes: 99 MB</span><br><span class="line">        PreferredMaxBytes: 512 KB</span><br><span class="line">    Kafka:</span><br><span class="line">        Brokers:</span><br><span class="line">            - 127.0.0.1:9092</span><br><span class="line"></span><br><span class="line">    EtcdRaft:</span><br><span class="line">        Consenters:</span><br><span class="line">            - Host: orderer0.example.com</span><br><span class="line">              Port: 7050</span><br><span class="line">              ClientTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/server.crt</span><br><span class="line">              ServerTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/server.crt</span><br><span class="line">            - Host: orderer1.example.com</span><br><span class="line">              Port: 7050</span><br><span class="line">              ClientTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer1.example.com/tls/server.crt</span><br><span class="line">              ServerTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer1.example.com/tls/server.crt</span><br><span class="line">            - Host: orderer2.example.com</span><br><span class="line">              Port: 7050</span><br><span class="line">              ClientTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/server.crt</span><br><span class="line">              ServerTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/server.crt</span><br><span class="line">    Organizations:</span><br><span class="line"></span><br><span class="line">    Policies:</span><br><span class="line">        Readers:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "ANY Readers"</span><br><span class="line">        Writers:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "ANY Writers"</span><br><span class="line">        Admins:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "MAJORITY Admins"</span><br><span class="line">        BlockValidation:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "ANY Writers"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Channel: &amp;ChannelDefaults</span><br><span class="line">    Policies:</span><br><span class="line">        Readers:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "ANY Readers"</span><br><span class="line">        Writers:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "ANY Writers"</span><br><span class="line">        Admins:</span><br><span class="line">            Type: ImplicitMeta</span><br><span class="line">            Rule: "MAJORITY Admins"</span><br><span class="line"></span><br><span class="line">    Capabilities:</span><br><span class="line">        &lt;&lt;: *ChannelCapabilities</span><br><span class="line"></span><br><span class="line">Profiles:</span><br><span class="line"></span><br><span class="line">    TwoOrgsOrdererGenesis:</span><br><span class="line">        &lt;&lt;: *ChannelDefaults</span><br><span class="line">        Orderer:</span><br><span class="line">            &lt;&lt;: *OrdererDefaults</span><br><span class="line">            Organizations:</span><br><span class="line">                - *OrdererOrg</span><br><span class="line">            Capabilities:</span><br><span class="line">                &lt;&lt;: *OrdererCapabilities</span><br><span class="line">        Consortiums:</span><br><span class="line">            SampleConsortium:</span><br><span class="line">                Organizations:</span><br><span class="line">                    - *Org1</span><br><span class="line">                    - *Org2</span><br><span class="line">    TwoOrgsChannel:</span><br><span class="line">        Consortium: SampleConsortium</span><br><span class="line">        &lt;&lt;: *ChannelDefaults</span><br><span class="line">        Application:</span><br><span class="line">            &lt;&lt;: *ApplicationDefaults</span><br><span class="line">            Organizations:</span><br><span class="line">                - *Org1</span><br><span class="line">                - *Org2</span><br><span class="line">            Capabilities:</span><br><span class="line">                &lt;&lt;: *ApplicationCapabilities</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）生成公私钥和证书"><a href="#（3）生成公私钥和证书" class="headerlink" title="（3）生成公私钥和证书"></a>（3）生成公私钥和证书</h3><blockquote>
+<p>生成公私钥以及证书。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cryptogen generate --config=./crypto-config.yaml</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="（4）生成创世区块"><a href="#（4）生成创世区块" class="headerlink" title="（4）生成创世区块"></a>（4）生成创世区块</h3><blockquote>
+<p>创世区块中包含有网络信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir channel-artifacts</span><br><span class="line">configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="（5）生成通道配置区块"><a href="#（5）生成通道配置区块" class="headerlink" title="（5）生成通道配置区块"></a>（5）生成通道配置区块</h3><blockquote>
+<p>通道文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/mychannel.tx -channelID mychannel</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="（6）智能合约"><a href="#（6）智能合约" class="headerlink" title="（6）智能合约"></a>（6）智能合约</h3><blockquote>
+<p>在通道内安装的智能合约。</p>
+<p>以chaincode_example02.go为例。</p>
+</blockquote>
+<p>智能合约代码如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="（7）docker-compose-orderer-yaml"><a href="#（7）docker-compose-orderer-yaml" class="headerlink" title="（7）docker-compose-orderer.yaml"></a>（7）docker-compose-orderer.yaml</h3><blockquote>
+<p>启动orderer节点的配置文件。</p>
+<p>docker-compose-orderer0.yaml  &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;192.168.30.18</p>
+<p>docker-compose-orderer1.yaml  &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;192.168.30.19</p>
+<p>docker-compose-orderer2.yaml  &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;192.168.30.20</p>
+</blockquote>
+<p><code>docker-compose-orderer0.yaml</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  orderer0.example.com:</span><br><span class="line">    container_name: orderer0.example.com</span><br><span class="line">    image: hyperledger/fabric-orderer</span><br><span class="line">    environment:</span><br><span class="line">      - ORDERER_GENERAL_LOGLEVEL=debug</span><br><span class="line">      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0</span><br><span class="line">      - ORDERER_GENERAL_GENESISMETHOD=file</span><br><span class="line">      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block</span><br><span class="line">      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP</span><br><span class="line">      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp</span><br><span class="line">      # enabled TLS</span><br><span class="line">      - ORDERER_GENERAL_TLS_ENABLED=true</span><br><span class="line">      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span><br><span class="line">      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span><br><span class="line">      - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt</span><br><span class="line">      - ORDERER_KAFKA_TOPIC_REPLICATIONFACTOR=1</span><br><span class="line">      - ORDERER_KAFKA_VERBOSE=true</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric</span><br><span class="line">    command: orderer</span><br><span class="line">    volumes:</span><br><span class="line">      - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/genesis.block</span><br><span class="line">      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp:/var/hyperledger/orderer/msp</span><br><span class="line">      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/:/var/hyperledger/orderer/tls</span><br><span class="line">    ports:</span><br><span class="line">      - 7050:7050</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br></pre></td></tr></table></figure>
+
+<p><code>docker-compose-orderer1.yaml</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  orderer1.example.com:</span><br><span class="line">    container_name: orderer1.example.com</span><br><span class="line">    image: hyperledger/fabric-orderer</span><br><span class="line">    environment:</span><br><span class="line">      - ORDERER_GENERAL_LOGLEVEL=debug</span><br><span class="line">      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0</span><br><span class="line">      - ORDERER_GENERAL_GENESISMETHOD=file</span><br><span class="line">      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block</span><br><span class="line">      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP</span><br><span class="line">      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp</span><br><span class="line">      # enabled TLS</span><br><span class="line">      - ORDERER_GENERAL_TLS_ENABLED=true</span><br><span class="line">      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span><br><span class="line">      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span><br><span class="line">      - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt</span><br><span class="line">      - ORDERER_KAFKA_TOPIC_REPLICATIONFACTOR=1</span><br><span class="line">      - ORDERER_KAFKA_VERBOSE=true</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric</span><br><span class="line">    command: orderer</span><br><span class="line">    volumes:</span><br><span class="line">      - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/genesis.block</span><br><span class="line">      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer1.example.com/msp:/var/hyperledger/orderer/msp</span><br><span class="line">      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer1.example.com/tls/:/var/hyperledger/orderer/tls</span><br><span class="line">    ports:</span><br><span class="line">      - 7050:7050</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br></pre></td></tr></table></figure>
+
+<p><code>docker-compose-orderer2.yaml</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  orderer2.example.com:</span><br><span class="line">    container_name: orderer2.example.com</span><br><span class="line">    image: hyperledger/fabric-orderer</span><br><span class="line">    environment:</span><br><span class="line">      - ORDERER_GENERAL_LOGLEVEL=debug</span><br><span class="line">      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0</span><br><span class="line">      - ORDERER_GENERAL_GENESISMETHOD=file</span><br><span class="line">      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block</span><br><span class="line">      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP</span><br><span class="line">      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp</span><br><span class="line">      # enabled TLS</span><br><span class="line">      - ORDERER_GENERAL_TLS_ENABLED=true</span><br><span class="line">      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span><br><span class="line">      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span><br><span class="line">      - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt</span><br><span class="line">      - ORDERER_KAFKA_TOPIC_REPLICATIONFACTOR=1</span><br><span class="line">      - ORDERER_KAFKA_VERBOSE=true</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span><br><span class="line">      - ORDERER_GENERAL_CLUSTER_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric</span><br><span class="line">    command: orderer</span><br><span class="line">    volumes:</span><br><span class="line">      - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/genesis.block</span><br><span class="line">      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/msp:/var/hyperledger/orderer/msp</span><br><span class="line">      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/:/var/hyperledger/orderer/tls</span><br><span class="line">    ports:</span><br><span class="line">      - 7050:7050</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br></pre></td></tr></table></figure>
+
+<h3 id="（10）docker-compose-peer-yaml"><a href="#（10）docker-compose-peer-yaml" class="headerlink" title="（10）docker-compose-peer.yaml"></a>（10）docker-compose-peer.yaml</h3><blockquote>
+<p>启动peer节点的配置文件。</p>
+<p>docker-compose-peer01.yaml&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;192.168.30.21</p>
+<p>docker-compose-peer11.yaml&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;192.168.30.22</p>
+<p>docker-compose-peer02.yaml&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;192.168.30.23</p>
+<p>docker-compose-peer12.yaml&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;192.168.30.24</p>
+</blockquote>
+<p><code>docker-compose-peer01.yaml</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  peer0.org1.example.com:</span><br><span class="line">    container_name: peer0.org1.example.com</span><br><span class="line">    hostname: peer0.org1.example.com</span><br><span class="line">    image: hyperledger/fabric-peer</span><br><span class="line">    environment:</span><br><span class="line">       - CORE_PEER_ID=peer0.org1.example.com</span><br><span class="line">       - CORE_PEER_ADDRESS=peer0.org1.example.com:7051</span><br><span class="line">       - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org1.example.com:7052</span><br><span class="line">       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7051</span><br><span class="line">       - CORE_PEER_LOCALMSPID=Org1MSP</span><br><span class="line">       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=share_default</span><br><span class="line">       # the following setting starts chaincode containers on the same</span><br><span class="line">       # bridge network as the peers</span><br><span class="line">       # https://docs.docker.com/compose/networking/</span><br><span class="line">       #- CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">       - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">       - CORE_PEER_GOSSIP_USELEADERELECTION=true</span><br><span class="line">       - CORE_PEER_GOSSIP_ORGLEADER=false</span><br><span class="line">       - CORE_PEER_PROFILE_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt</span><br><span class="line">       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key</span><br><span class="line">       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    command: peer node start</span><br><span class="line">    volumes:</span><br><span class="line">       - /var/run/:/host/var/run/</span><br><span class="line">       - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/msp</span><br><span class="line">       - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls</span><br><span class="line">    ports:</span><br><span class="line">      - 7051:7051</span><br><span class="line">      - 7052:7052</span><br><span class="line">      - 7053:7053</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line"></span><br><span class="line">  cli:</span><br><span class="line">    container_name: cli</span><br><span class="line">    image: hyperledger/fabric-tools</span><br><span class="line">    tty: true</span><br><span class="line">    environment:</span><br><span class="line">      - GOPATH=/opt/gopath</span><br><span class="line">      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">      # - CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">      - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">      - CORE_PEER_ID=cli</span><br><span class="line">      - CORE_PEER_ADDRESS=peer0.org1.example.com:7051</span><br><span class="line">      - CORE_PEER_LOCALMSPID=Org1MSP</span><br><span class="line">      - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt</span><br><span class="line">      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key</span><br><span class="line">      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt</span><br><span class="line">      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    volumes:</span><br><span class="line">        - /var/run/:/host/var/run/</span><br><span class="line">        - ./chaincode:/opt/gopath/src/github.com/hyperledger/fabric/chaincode</span><br><span class="line">        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/</span><br><span class="line">        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line">      - "peer0.org1.example.com:192.168.30.21"</span><br><span class="line">      - "peer1.org1.example.com:192.168.30.22"</span><br><span class="line">      - "peer0.org2.example.com:192.168.30.23"</span><br><span class="line">      - "peer1.org2.example.com:192.168.30.24"</span><br></pre></td></tr></table></figure>
+
+<p><code>docker-compose-peer11.yaml</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  peer1.org1.example.com:</span><br><span class="line">    container_name: peer1.org1.example.com</span><br><span class="line">    hostname: peer1.org1.example.com</span><br><span class="line">    image: hyperledger/fabric-peer</span><br><span class="line">    environment:</span><br><span class="line">       - CORE_PEER_ID=peer1.org1.example.com</span><br><span class="line">       - CORE_PEER_ADDRESS=peer1.org1.example.com:7051</span><br><span class="line">       - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org1.example.com:7052</span><br><span class="line">       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.example.com:7051</span><br><span class="line">       - CORE_PEER_LOCALMSPID=Org1MSP</span><br><span class="line">       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=share_default</span><br><span class="line">       # the following setting starts chaincode containers on the same</span><br><span class="line">       # bridge network as the peers</span><br><span class="line">       # https://docs.docker.com/compose/networking/</span><br><span class="line">       #- CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">       - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">       - CORE_PEER_GOSSIP_USELEADERELECTION=true</span><br><span class="line">       - CORE_PEER_GOSSIP_ORGLEADER=false</span><br><span class="line">       - CORE_PEER_PROFILE_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt</span><br><span class="line">       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key</span><br><span class="line">       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    command: peer node start</span><br><span class="line">    volumes:</span><br><span class="line">       - /var/run/:/host/var/run/</span><br><span class="line">       - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/fabric/msp</span><br><span class="line">       - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls:/etc/hyperledger/fabric/tls</span><br><span class="line">    ports:</span><br><span class="line">      - 7051:7051</span><br><span class="line">      - 7052:7052</span><br><span class="line">      - 7053:7053</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line"></span><br><span class="line">  cli:</span><br><span class="line">    container_name: cli</span><br><span class="line">    image: hyperledger/fabric-tools</span><br><span class="line">    tty: true</span><br><span class="line">    environment:</span><br><span class="line">      - GOPATH=/opt/gopath</span><br><span class="line">      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">      # - CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">      - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">      - CORE_PEER_ID=cli</span><br><span class="line">      - CORE_PEER_ADDRESS=peer1.org1.example.com:7051</span><br><span class="line">      - CORE_PEER_LOCALMSPID=Org1MSP</span><br><span class="line">      - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/server.crt</span><br><span class="line">      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/server.key</span><br><span class="line">      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt</span><br><span class="line">      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    volumes:</span><br><span class="line">        - /var/run/:/host/var/run/</span><br><span class="line">        - ./chaincode:/opt/gopath/src/github.com/hyperledger/fabric/chaincode</span><br><span class="line">        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/</span><br><span class="line">        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line">      - "peer0.org1.example.com:192.168.30.21"</span><br><span class="line">      - "peer1.org1.example.com:192.168.30.22"</span><br><span class="line">      - "peer0.org2.example.com:192.168.30.23"</span><br><span class="line">      - "peer1.org2.example.com:192.168.30.24"</span><br></pre></td></tr></table></figure>
+
+<p><code>docker-compose-peer02.yaml</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  peer0.org2.example.com:</span><br><span class="line">    container_name: peer0.org2.example.com</span><br><span class="line">    hostname: peer0.org2.example.com</span><br><span class="line">    image: hyperledger/fabric-peer</span><br><span class="line">    environment:</span><br><span class="line">       - CORE_PEER_ID=peer0.org2.example.com</span><br><span class="line">       - CORE_PEER_ADDRESS=peer0.org2.example.com:7051</span><br><span class="line">       - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org2.example.com:7052</span><br><span class="line">       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.example.com:7051</span><br><span class="line">       - CORE_PEER_LOCALMSPID=Org2MSP</span><br><span class="line">       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=share_default</span><br><span class="line">       # the following setting starts chaincode containers on the same</span><br><span class="line">       # bridge network as the peers</span><br><span class="line">       # https://docs.docker.com/compose/networking/</span><br><span class="line">       #- CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">       - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">       - CORE_PEER_GOSSIP_USELEADERELECTION=true</span><br><span class="line">       - CORE_PEER_GOSSIP_ORGLEADER=false</span><br><span class="line">       - CORE_PEER_PROFILE_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt</span><br><span class="line">       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key</span><br><span class="line">       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    command: peer node start</span><br><span class="line">    volumes:</span><br><span class="line">       - /var/run/:/host/var/run/</span><br><span class="line">       - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/fabric/msp</span><br><span class="line">       - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls:/etc/hyperledger/fabric/tls</span><br><span class="line">    ports:</span><br><span class="line">      - 7051:7051</span><br><span class="line">      - 7052:7052</span><br><span class="line">      - 7053:7053</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line"></span><br><span class="line">  cli:</span><br><span class="line">    container_name: cli</span><br><span class="line">    image: hyperledger/fabric-tools</span><br><span class="line">    tty: true</span><br><span class="line">    environment:</span><br><span class="line">      - GOPATH=/opt/gopath</span><br><span class="line">      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">      # - CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">      - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">      - CORE_PEER_ID=cli</span><br><span class="line">      - CORE_PEER_ADDRESS=peer0.org2.example.com:7051</span><br><span class="line">      - CORE_PEER_LOCALMSPID=Org2MSP</span><br><span class="line">      - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/server.crt</span><br><span class="line">      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/server.key</span><br><span class="line">      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt</span><br><span class="line">      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    volumes:</span><br><span class="line">        - /var/run/:/host/var/run/</span><br><span class="line">        - ./chaincode:/opt/gopath/src/github.com/hyperledger/fabric/chaincode</span><br><span class="line">        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/</span><br><span class="line">        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line">      - "peer0.org1.example.com:192.168.30.21"</span><br><span class="line">      - "peer1.org1.example.com:192.168.30.22"</span><br><span class="line">      - "peer0.org2.example.com:192.168.30.23"</span><br><span class="line">      - "peer1.org2.example.com:192.168.30.24"</span><br></pre></td></tr></table></figure>
+
+<p><code>docker-compose-peer12.yaml</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">version: '2'</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  peer1.org2.example.com:</span><br><span class="line">    container_name: peer1.org2.example.com</span><br><span class="line">    hostname: peer1.org2.example.com</span><br><span class="line">    image: hyperledger/fabric-peer</span><br><span class="line">    environment:</span><br><span class="line">       - CORE_PEER_ID=peer1.org2.example.com</span><br><span class="line">       - CORE_PEER_ADDRESS=peer1.org2.example.com:7051</span><br><span class="line">       - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org2.example.com:7052</span><br><span class="line">       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.example.com:7051</span><br><span class="line">       - CORE_PEER_LOCALMSPID=Org2MSP</span><br><span class="line">       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=share_default</span><br><span class="line">       # the following setting starts chaincode containers on the same</span><br><span class="line">       # bridge network as the peers</span><br><span class="line">       # https://docs.docker.com/compose/networking/</span><br><span class="line">       #- CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">       - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">       - CORE_PEER_GOSSIP_USELEADERELECTION=true</span><br><span class="line">       - CORE_PEER_GOSSIP_ORGLEADER=false</span><br><span class="line">       - CORE_PEER_PROFILE_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt</span><br><span class="line">       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key</span><br><span class="line">       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    command: peer node start</span><br><span class="line">    volumes:</span><br><span class="line">       - /var/run/:/host/var/run/</span><br><span class="line">       - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp:/etc/hyperledger/fabric/msp</span><br><span class="line">       - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls:/etc/hyperledger/fabric/tls</span><br><span class="line">    ports:</span><br><span class="line">      - 7051:7051</span><br><span class="line">      - 7052:7052</span><br><span class="line">      - 7053:7053</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line"></span><br><span class="line">  cli:</span><br><span class="line">    container_name: cli</span><br><span class="line">    image: hyperledger/fabric-tools</span><br><span class="line">    tty: true</span><br><span class="line">    environment:</span><br><span class="line">      - GOPATH=/opt/gopath</span><br><span class="line">      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">      # - CORE_LOGGING_LEVEL=ERROR</span><br><span class="line">      - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">      - CORE_PEER_ID=cli</span><br><span class="line">      - CORE_PEER_ADDRESS=peer1.org2.example.com:7051</span><br><span class="line">      - CORE_PEER_LOCALMSPID=Org2MSP</span><br><span class="line">      - CORE_PEER_TLS_ENABLED=true</span><br><span class="line">      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/server.crt</span><br><span class="line">      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/server.key</span><br><span class="line">      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/ca.crt</span><br><span class="line">      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp</span><br><span class="line">    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer</span><br><span class="line">    volumes:</span><br><span class="line">        - /var/run/:/host/var/run/</span><br><span class="line">        - ./chaincode:/opt/gopath/src/github.com/hyperledger/fabric/chaincode</span><br><span class="line">        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/</span><br><span class="line">        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts</span><br><span class="line">    extra_hosts:</span><br><span class="line">      - "orderer0.example.com:192.168.30.18"</span><br><span class="line">      - "orderer1.example.com:192.168.30.19"</span><br><span class="line">      - "orderer2.example.com:192.168.30.20"</span><br><span class="line">      - "peer0.org1.example.com:192.168.30.21"</span><br><span class="line">      - "peer1.org1.example.com:192.168.30.22"</span><br><span class="line">      - "peer0.org2.example.com:192.168.30.23"</span><br><span class="line">      - "peer1.org2.example.com:192.168.30.24"</span><br></pre></td></tr></table></figure>
+
+<h3 id="（11）分发文件"><a href="#（11）分发文件" class="headerlink" title="（11）分发文件"></a>（11）分发文件</h3><blockquote>
+<p>按理说应当把除了自己节点用到的私钥保留，其他私钥全部删除再传输。</p>
+<p>操作过于繁琐了，且这只是一个简单的小实验。</p>
+<p>直接全部复制。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /root</span><br><span class="line">scp -r raft/ root@192.168.30.19:/root/</span><br><span class="line">...</span><br><span class="line">scp -r raft/ root@192.168.30.25:/root/</span><br></pre></td></tr></table></figure>
+
+<h3 id="（12）文件目录"><a href="#（12）文件目录" class="headerlink" title="（12）文件目录*"></a>（12）文件目录*</h3><blockquote>
+<p>最终目录结构如下所示。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@vm1921683018 raft]# tree -L 3</span><br><span class="line">.</span><br><span class="line">├── chaincode</span><br><span class="line">│   └── chaincode_example02</span><br><span class="line">│       └── chaincode_example02.go</span><br><span class="line">├── channel-artifacts</span><br><span class="line">│   ├── genesis.block</span><br><span class="line">│   └── mychannel.tx</span><br><span class="line">├── configtx.yaml</span><br><span class="line">├── crypto-config</span><br><span class="line">│   ├── ordererOrganizations</span><br><span class="line">│   │   └── example.com</span><br><span class="line">│   └── peerOrganizations</span><br><span class="line">│       ├── org1.example.com</span><br><span class="line">│       └── org2.example.com</span><br><span class="line">├── crypto-config.yaml</span><br><span class="line">├── docker-compose-orderer0.yaml</span><br><span class="line">├── docker-compose-orderer1.yaml</span><br><span class="line">├── docker-compose-orderer2.yaml</span><br><span class="line">├── docker-compose-peer01.yaml</span><br><span class="line">├── docker-compose-peer02.yaml</span><br><span class="line">├── docker-compose-peer11.yaml</span><br><span class="line">└── docker-compose-peer12.yaml</span><br><span class="line"></span><br><span class="line">9 directories, 12 files</span><br><span class="line">[root@vm1921683018 raft]#</span><br></pre></td></tr></table></figure>
+
+<h2 id="（二）按顺序依次启动各节点"><a href="#（二）按顺序依次启动各节点" class="headerlink" title="（二）按顺序依次启动各节点"></a>（二）按顺序依次启动各节点</h2><h3 id="（1）orderer"><a href="#（1）orderer" class="headerlink" title="（1）orderer"></a>（1）orderer</h3><blockquote>
+<p>docker-compose -f docker-compose-orderer0.yaml up -d</p>
+<p>docker-compose -f docker-compose-orderer1.yaml up -d</p>
+<p>docker-compose -f docker-compose-orderer2.yaml up -d</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###########################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##############192.168.30.18</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###########################################################################</span></span></span><br><span class="line">[root@vm1921683018 raft]# docker-compose -f docker-compose-orderer0.yaml up -d</span><br><span class="line">Creating network "raft_default" with the default driver</span><br><span class="line">Creating orderer0.example.com ... done</span><br><span class="line">[root@vm1921683018 raft]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE                        COMMAND             CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">149d4b03a49f        hyperledger/fabric-orderer   "orderer"           16 seconds ago      Up 10 seconds       0.0.0.0:7050-&gt;7050/tcp   orderer0.example.com</span><br><span class="line">[root@vm1921683018 raft]# </span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###########################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##############192.168.30.19</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###########################################################################</span></span></span><br><span class="line">[root@vm1921683019 raft]# docker-compose -f docker-compose-orderer1.yaml up -d</span><br><span class="line">Creating network "raft_default" with the default driver</span><br><span class="line">Creating orderer1.example.com ... done</span><br><span class="line">[root@vm1921683019 raft]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE                        COMMAND             CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">92a8fddadd57        hyperledger/fabric-orderer   "orderer"           4 seconds ago       Up 2 seconds        0.0.0.0:7050-&gt;7050/tcp   orderer1.example.com</span><br><span class="line">[root@vm1921683019 raft]# </span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###########################################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##############192.168.30.20</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###########################################################################</span></span></span><br><span class="line">[root@vm1921683020 raft]# docker-compose -f docker-compose-orderer2.yaml up -d</span><br><span class="line">Creating network "raft_default" with the default driver</span><br><span class="line">Creating orderer2.example.com ... done</span><br><span class="line">[root@vm1921683020 raft]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE                        COMMAND             CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">15cc2d11b382        hyperledger/fabric-orderer   "orderer"           15 seconds ago      Up 4 seconds        0.0.0.0:7050-&gt;7050/tcp   orderer2.example.com</span><br><span class="line">[root@vm1921683020 raft]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）peer01-192-168-30-21"><a href="#（2）peer01-192-168-30-21" class="headerlink" title="（2）peer01-192.168.30.21"></a>（2）peer01-192.168.30.21</h3><blockquote>
+<p>#####################################</p>
+<p>##############启动容器</p>
+<p>#####################################</p>
+<p>// 启动容器</p>
+<p>docker-compose -f docker-compose-peer01.yaml up -d</p>
+<p>#####################################</p>
+<p>##############创建并加入通道</p>
+<p>#####################################</p>
+<p>// 进入容器</p>
+<p>docker exec -it cli bash</p>
+<p>// 设置orderer0 TLS通信公钥的路径</p>
+<p>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</p>
+<p>// 创建通道</p>
+<p>peer channel create -o orderer0.example.com:7050 -c mychannel -f ./channel-artifacts/mychannel.tx –tls –cafile $ORDERER_CA </p>
+<p>// 加入通道</p>
+<p>peer channel join -b mychannel.block</p>
+<p>#####################################</p>
+<p>##############实例化智能合约</p>
+<p>#####################################</p>
+<p>// 安装智能合约</p>
+<p>peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</p>
+<p>// 实例化智能合约</p>
+<p>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</p>
+<p>peer chaincode instantiate -o orderer0.example.com:7050 –tls –cafile $ORDERER_CA -C mychannel -n mycc -v 1.0 -c ‘{“Args”:[“init”,”a”,”200”,”b”,”400”]}’ -P “OR (‘Org1MSP.peer’,’Org2MSP.peer’)”</p>
+<p>// 查询a</p>
+<p>peer chaincode query -C mychannel -n mycc -c ‘{“Args”:[“query”,”a”]}’</p>
+<p>// 退出容器</p>
+<p>ctrl+D</p>
+<p>#####################################</p>
+<p>##############复制通道文件</p>
+<p>#####################################</p>
+<p>// 从镜像复制到本地</p>
+<p>docker cp cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/mychannel.block ./</p>
+<p>// 传输给另外3台peer</p>
+<p>scp ./mychannel.block <a href="mailto:root@192.168.30.7" target="_blank" rel="noopener">root@192.168.30.7</a>:/root/kafka</p>
+<p>scp ./mychannel.block <a href="mailto:root@192.168.30.8" target="_blank" rel="noopener">root@192.168.30.8</a>:/root/kafka</p>
+<p>scp ./mychannel.block <a href="mailto:root@192.168.30.9" target="_blank" rel="noopener">root@192.168.30.9</a>:/root/kafka</p>
+<p>#####################################</p>
+<p>##############查看chaincode容器</p>
+<p>#####################################</p>
+<p>docker ps</p>
+<p>docker logs ee6761722c9c</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">[root@vm192168306 kafka]# docker-compose -f docker-compose-peer10.yaml up -d</span><br><span class="line">Creating peer0.org1.example.com ... done</span><br><span class="line">Creating cli                    ... done</span><br><span class="line">[root@vm192168306 kafka]# docker exec -it cli bash</span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel create -o orderer0.example.com:7050 -c mychannel -f ./channel-artifacts/mychannel.tx --tls --cafile $ORDERER_CA </span><br><span class="line">2020-09-18 06:51:21.070 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:21.089 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:21.097 UTC [channelCmd] InitCmdFactory -&gt; INFO 003 Endorser and orderer connections initialized</span><br><span class="line">2020-09-18 06:51:21.154 UTC [cli.common] readBlock -&gt; INFO 004 Got status: &amp;&#123;SERVICE_UNAVAILABLE&#125;</span><br><span class="line">2020-09-18 06:51:21.159 UTC [channelCmd] InitCmdFactory -&gt; INFO 005 Endorser and orderer connections initialized</span><br><span class="line">2020-09-18 06:51:21.361 UTC [cli.common] readBlock -&gt; INFO 006 Got status: &amp;&#123;SERVICE_UNAVAILABLE&#125;</span><br><span class="line">2020-09-18 06:51:21.365 UTC [channelCmd] InitCmdFactory -&gt; INFO 007 Endorser and orderer connections initialized</span><br><span class="line">2020-09-18 06:51:21.568 UTC [cli.common] readBlock -&gt; INFO 008 Received block: 0</span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel join -b mychannel.block</span><br><span class="line">2020-09-18 06:51:28.777 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:28.794 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:28.800 UTC [channelCmd] InitCmdFactory -&gt; INFO 003 Endorser and orderer connections initialized</span><br><span class="line">2020-09-18 06:51:28.843 UTC [channelCmd] executeJoin -&gt; INFO 004 Successfully submitted proposal to join channel</span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</span><br><span class="line">2020-09-18 06:51:38.701 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:38.718 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:38.725 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 003 Using default escc</span><br><span class="line">2020-09-18 06:51:38.725 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 004 Using default vscc</span><br><span class="line">2020-09-18 06:51:39.229 UTC [chaincodeCmd] install -&gt; INFO 005 Installed remotely response:&lt;status:200 payload:"OK" &gt; </span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode instantiate -o orderer0.example.com:7050 --tls --cafile $ORDERER_CA -C mychannel -n mycc -v 1.0 -c '&#123;"Args":["init","a","200","b","400"]&#125;' -P "OR ('Org1MSP.peer','Org2MSP.peer')"</span><br><span class="line">2020-09-18 06:51:58.054 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:58.071 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:51:58.085 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 003 Using default escc</span><br><span class="line">2020-09-18 06:51:58.085 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 004 Using default vscc</span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">2020-09-18 06:52:07.416 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:52:07.434 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">200</span><br><span class="line">root@c46011557243:/opt/gopath/src/github.com/hyperledger/fabric/peer# exit</span><br><span class="line">[root@vm192168306 kafka]# ls</span><br><span class="line">chaincode                   docker-compose-kafka2.yaml    docker-compose-peer20.yaml</span><br><span class="line">channel-artifacts           docker-compose-kafka3.yaml    docker-compose-peer21.yaml</span><br><span class="line">configtx.yaml               docker-compose-orderer0.yaml  docker-compose-zookeeper0.yaml</span><br><span class="line">crypto-config               docker-compose-orderer1.yaml  docker-compose-zookeeper1.yaml</span><br><span class="line">crypto-config.yaml          docker-compose-orderer2.yaml  docker-compose-zookeeper2.yaml</span><br><span class="line">docker-compose-kafka0.yaml  docker-compose-peer10.yaml    mychannel.block</span><br><span class="line">docker-compose-kafka1.yaml  docker-compose-peer11.yaml</span><br><span class="line">[root@vm192168306 kafka]# scp ./mychannel.block root@192.168.30.7:/root/kafka</span><br><span class="line">root@192.168.30.7's password: </span><br><span class="line">./mychannel.block: No such file or directory</span><br><span class="line">[root@vm192168306 kafka]# docker cp cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/mychannel.block ./</span><br><span class="line">[root@vm192168306 kafka]# scp ./mychannel.block root@192.168.30.7:/root/kafka</span><br><span class="line">root@192.168.30.7's password: </span><br><span class="line">mychannel.block                                                          100%   15KB   9.9MB/s   00:00    </span><br><span class="line">[root@vm192168306 kafka]# scp ./mychannel.block root@192.168.30.8:/root/kafka</span><br><span class="line">root@192.168.30.8's password: </span><br><span class="line">mychannel.block                                                          100%   15KB   6.4MB/s   00:00    </span><br><span class="line">[root@vm192168306 kafka]# scp ./mychannel.block root@192.168.30.9:/root/kafka</span><br><span class="line">root@192.168.30.9's password: </span><br><span class="line">mychannel.block                                                          100%   15KB   6.9MB/s   00:00    </span><br><span class="line">[root@vm192168306 kafka]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE                                                                                                  COMMAND                  CREATED             STATUS              PORTS                              NAMES</span><br><span class="line">d922efbec000        dev-peer0.org1.example.com-mycc-1.0-384f11f484b9302df90b453200cfb25174305fce8f53f4e94d45ee3b6cab0ce9   "chaincode -peer.add…"   11 minutes ago      Up 11 minutes                                          dev-peer0.org1.example.com-mycc-1.0</span><br><span class="line">c46011557243        hyperledger/fabric-tools                                                                               "/bin/bash"              12 minutes ago      Up 12 minutes                                          cli</span><br><span class="line">7ab0090cdf13        hyperledger/fabric-peer                                                                                "peer node start"        12 minutes ago      Up 12 minutes       0.0.0.0:7051-7053-&gt;7051-7053/tcp   peer0.org1.example.com</span><br><span class="line">[root@vm192168306 kafka]# docker logs d922efbec000</span><br><span class="line">ex02 Init</span><br><span class="line">Aval = 200, Bval = 400</span><br><span class="line">ex02 Invoke</span><br><span class="line">Query Response:&#123;"Name":"a","Amount":"200"&#125;</span><br><span class="line">[root@vm192168306 kafka]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）peer11-192-168-30-22"><a href="#（3）peer11-192-168-30-22" class="headerlink" title="（3）peer11-192.168.30.22"></a>（3）peer11-192.168.30.22</h3><blockquote>
+<p>#####################################</p>
+<p>##############启动容器</p>
+<p>#####################################</p>
+<p>docker-compose -f docker-compose-peer11.yaml up -d</p>
+<p>#####################################</p>
+<p>##############加入通道</p>
+<p>#####################################</p>
+<p>// 复制通道文件到容器</p>
+<p>docker cp /root/kafka/mychannel.block cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/</p>
+<p>// 进入客户端</p>
+<p>docker exec -it cli bash</p>
+<p>// 加入通道</p>
+<p>peer channel join -b mychannel.block</p>
+<p>#####################################</p>
+<p>##############安装链码</p>
+<p>#####################################</p>
+<p>// 安装链码</p>
+<p>peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</p>
+<p>// 调用链码查询“a”的值</p>
+<p>peer chaincode query -C mychannel -n mycc -c ‘{“Args”:[“query”,”a”]}’</p>
+<p>// orderer节点的TLS通信公钥</p>
+<p>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</p>
+<p>// 调用链码进行转账</p>
+<p>peer chaincode invoke –tls –cafile $ORDERER_CA -C mychannel -n mycc -c ‘{“Args”:[“invoke”,”a”,”b”,”20”]}’</p>
+<blockquote>
+<p>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</p>
+<p>peer chaincode invoke –tls –cafile $ORDERER_CA -C mychannel -n mycc -c ‘{“Args”:[“invoke”,”b”,”a”,”20”]}’</p>
+</blockquote>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@vm192168307 kafka]# docker-compose -f docker-compose-peer11.yaml up -d</span><br><span class="line">Creating cli                    ... done</span><br><span class="line">Creating peer1.org1.example.com ... done</span><br><span class="line">[root@vm192168307 kafka]# docker cp /root/kafka/mychannel.block cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/</span><br><span class="line">[root@vm192168307 kafka]# docker exec -it cli bash</span><br><span class="line">root@f66402657c83:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel join -b mychannel.block</span><br><span class="line">2020-09-18 06:54:52.196 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:54:52.215 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:54:52.222 UTC [channelCmd] InitCmdFactory -&gt; INFO 003 Endorser and orderer connections initialized</span><br><span class="line">2020-09-18 06:54:52.261 UTC [channelCmd] executeJoin -&gt; INFO 004 Successfully submitted proposal to join channel</span><br><span class="line">root@f66402657c83:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</span><br><span class="line">2020-09-18 06:55:00.693 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:55:00.711 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:55:00.717 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 003 Using default escc</span><br><span class="line">2020-09-18 06:55:00.717 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 004 Using default vscc</span><br><span class="line">2020-09-18 06:55:01.253 UTC [chaincodeCmd] install -&gt; INFO 005 Installed remotely response:&lt;status:200 payload:"OK" &gt; </span><br><span class="line">root@f66402657c83:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">2020-09-18 06:55:09.809 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:55:09.826 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">200</span><br><span class="line">root@f66402657c83:/opt/gopath/src/github.com/hyperledger/fabric/peer# ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">root@f66402657c83:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode invoke --tls --cafile $ORDERER_CA -C mychannel -n mycc -c '&#123;"Args":["invoke","a","b","20"]&#125;'</span><br><span class="line">2020-09-18 06:55:48.139 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:55:48.156 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:55:48.177 UTC [chaincodeCmd] InitCmdFactory -&gt; INFO 003 Retrieved channel (mychannel) orderer endpoint: orderer0.example.com:7050</span><br><span class="line">2020-09-18 06:55:48.202 UTC [chaincodeCmd] chaincodeInvokeOrQuery -&gt; INFO 004 Chaincode invoke successful. result: status:200 </span><br><span class="line">root@f66402657c83:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">2020-09-18 06:55:51.621 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:55:51.638 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">180</span><br><span class="line">root@f66402657c83:/opt/gopath/src/github.com/hyperledger/fabric/peer# exit</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）peer02-192-168-30-23"><a href="#（4）peer02-192-168-30-23" class="headerlink" title="（4）peer02-192.168.30.23"></a>（4）peer02-192.168.30.23</h3><blockquote>
+<p>#####################################</p>
+<p>##############启动容器</p>
+<p>#####################################</p>
+<p>docker-compose -f docker-compose-peer02.yaml up -d</p>
+<p>#####################################</p>
+<p>##############加入通道</p>
+<p>#####################################</p>
+<p>// 复制通道文件到容器</p>
+<p>docker cp /root/kafka/mychannel.block cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/</p>
+<p>// 进入客户端</p>
+<p>docker exec -it cli bash</p>
+<p>// 加入通道</p>
+<p>peer channel join -b mychannel.block</p>
+<p>#####################################</p>
+<p>##############安装链码</p>
+<p>#####################################</p>
+<p>// 安装链码</p>
+<p>peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</p>
+<p>// Orderer节点TLS通信公钥</p>
+<p>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</p>
+<p>// 转账</p>
+<p>peer chaincode invoke –tls –cafile $ORDERER_CA -C mychannel -n mycc -c ‘{“Args”:[“invoke”,”a”,”b”,”20”]}’</p>
+<p>// 查询</p>
+<p>peer chaincode query -C mychannel -n mycc -c ‘{“Args”:[“query”,”a”]}’</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@vm192168308 kafka]# docker-compose -f docker-compose-peer20.yaml up -d</span><br><span class="line">Creating cli                    ... done</span><br><span class="line">Creating peer0.org2.example.com ... done</span><br><span class="line">[root@vm192168308 kafka]# docker cp /root/kafka/mychannel.block cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/</span><br><span class="line">[root@vm192168308 kafka]# docker exec -it cli bash</span><br><span class="line">root@95238f5e0140:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel join -b mychannel.block</span><br><span class="line">2020-09-18 06:57:29.819 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:57:29.837 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:57:29.841 UTC [channelCmd] InitCmdFactory -&gt; INFO 003 Endorser and orderer connections initialized</span><br><span class="line">2020-09-18 06:57:29.872 UTC [channelCmd] executeJoin -&gt; INFO 004 Successfully submitted proposal to join channel</span><br><span class="line">root@95238f5e0140:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</span><br><span class="line">2020-09-18 06:57:37.992 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:57:38.010 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:57:38.023 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 003 Using default escc</span><br><span class="line">2020-09-18 06:57:38.023 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 004 Using default vscc</span><br><span class="line">2020-09-18 06:57:38.511 UTC [chaincodeCmd] install -&gt; INFO 005 Installed remotely response:&lt;status:200 payload:"OK" &gt; </span><br><span class="line">root@95238f5e0140:/opt/gopath/src/github.com/hyperledger/fabric/peer# ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">root@95238f5e0140:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode invoke --tls --cafile $ORDERER_CA -C mychannel -n mycc -c '&#123;"Args":["invoke","a","b","20"]&#125;'</span><br><span class="line">2020-09-18 06:57:53.504 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:57:53.521 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:57:53.544 UTC [chaincodeCmd] InitCmdFactory -&gt; INFO 003 Retrieved channel (mychannel) orderer endpoint: orderer0.example.com:7050</span><br><span class="line">2020-09-18 06:57:54.064 UTC [chaincodeCmd] chaincodeInvokeOrQuery -&gt; INFO 004 Chaincode invoke successful. result: status:200 </span><br><span class="line">root@95238f5e0140:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">2020-09-18 06:58:17.286 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:58:17.304 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">160</span><br><span class="line">root@95238f5e0140:/opt/gopath/src/github.com/hyperledger/fabric/peer#</span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）peer12-192-168-30-24"><a href="#（5）peer12-192-168-30-24" class="headerlink" title="（5）peer12-192.168.30.24"></a>（5）peer12-192.168.30.24</h3><blockquote>
+<p>#####################################</p>
+<p>##############启动容器</p>
+<p>#####################################</p>
+<p>docker-compose -f docker-compose-peer12.yaml up -d</p>
+<p>#####################################</p>
+<p>##############加入通道</p>
+<p>#####################################</p>
+<p>// 复制通道文件到容器里</p>
+<p>docker cp /root/kafka/mychannel.block cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/</p>
+<p>// 进入客户端</p>
+<p>docker exec -it cli bash</p>
+<p>// 加入通道</p>
+<p>peer channel join -b mychannel.block</p>
+<p>#####################################</p>
+<p>##############安装链码</p>
+<p>#####################################</p>
+<p>// 安装链码</p>
+<p>peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</p>
+<p>// 查询</p>
+<p>peer chaincode query -C mychannel -n mycc -c ‘{“Args”:[“query”,”a”]}’</p>
+<p>// 交易</p>
+<p>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem<br>peer chaincode invoke –tls –cafile $ORDERER_CA -C mychannel -n mycc -c ‘{“Args”:[“invoke”,”b”,”a”,”20”]}’</p>
+<p>// 查询</p>
+<p>peer chaincode query -C mychannel -n mycc -c ‘{“Args”:[“query”,”a”]}’</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@vm192168309 kafka]# docker-compose -f docker-compose-peer21.yaml up -d</span><br><span class="line">Creating cli                    ... done</span><br><span class="line">Creating peer1.org2.example.com ... done</span><br><span class="line">[root@vm192168309 kafka]# docker cp /root/kafka/mychannel.block cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/</span><br><span class="line">[root@vm192168309 kafka]# docker exec -it cli bash</span><br><span class="line">root@bf85599530d3:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel join -b mychannel.block</span><br><span class="line">2020-09-18 06:59:09.387 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:59:09.406 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:59:09.410 UTC [channelCmd] InitCmdFactory -&gt; INFO 003 Endorser and orderer connections initialized</span><br><span class="line">2020-09-18 06:59:09.435 UTC [channelCmd] executeJoin -&gt; INFO 004 Successfully submitted proposal to join channel</span><br><span class="line">root@bf85599530d3:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode install -n mycc -p github.com/hyperledger/fabric/chaincode/chaincode_example02 -v 1.0</span><br><span class="line">2020-09-18 06:59:19.867 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:59:19.884 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:59:19.894 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 003 Using default escc</span><br><span class="line">2020-09-18 06:59:19.894 UTC [chaincodeCmd] checkChaincodeCmdParams -&gt; INFO 004 Using default vscc</span><br><span class="line">2020-09-18 06:59:20.444 UTC [chaincodeCmd] install -&gt; INFO 005 Installed remotely response:&lt;status:200 payload:"OK" &gt; </span><br><span class="line">root@bf85599530d3:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">2020-09-18 06:59:31.832 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 06:59:31.849 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">160</span><br><span class="line">root@bf85599530d3:/opt/gopath/src/github.com/hyperledger/fabric/peer# ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">root@bf85599530d3:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode invoke --tls --cafile $ORDERER_CA -C mychannel -n mycc -c '&#123;"Args":["invoke","b","a","20"]&#125;'</span><br><span class="line">2020-09-18 07:00:10.098 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 07:00:10.116 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 07:00:10.136 UTC [chaincodeCmd] InitCmdFactory -&gt; INFO 003 Retrieved channel (mychannel) orderer endpoint: orderer0.example.com:7050</span><br><span class="line">2020-09-18 07:00:10.155 UTC [chaincodeCmd] chaincodeInvokeOrQuery -&gt; INFO 004 Chaincode invoke successful. result: status:200 </span><br><span class="line">root@bf85599530d3:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode query -C mychannel -n mycc -c '&#123;"Args":["query","a"]&#125;'</span><br><span class="line">2020-09-18 07:00:18.661 UTC [main] InitCmd -&gt; WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">2020-09-18 07:00:18.678 UTC [main] SetOrdererEnv -&gt; WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable</span><br><span class="line">180</span><br><span class="line">root@bf85599530d3:/opt/gopath/src/github.com/hyperledger/fabric/peer#</span><br></pre></td></tr></table></figure>
+
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><blockquote>
+<h2 id="清空所有容器"><a href="#清空所有容器" class="headerlink" title="清空所有容器"></a>清空所有容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo docker stop $(docker ps -a -q)</span><br><span class="line">sudo docker ps -qa|xargs docker rm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启</span></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h2 id="清空所有镜像"><a href="#清空所有镜像" class="headerlink" title="清空所有镜像"></a>清空所有镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker image rm $(docker images -a -q)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h2 id="清理文件"><a href="#清理文件" class="headerlink" title="清理文件"></a>清理文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">rm -rf fabric-tools/</span><br><span class="line">rm -rf kafka/</span><br><span class="line">rm -rf /root/.local/share/Trash/files</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h2 id="切换到kafka目录"><a href="#切换到kafka目录" class="headerlink" title="切换到kafka目录"></a>切换到kafka目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /root/kafka</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><blockquote>
+<h2 id="无法上网"><a href="#无法上网" class="headerlink" title="无法上网"></a>无法上网</h2><p>（1）原因：实验系统生成的虚拟机，默认网段为192.168.30.x（内网），无法上网。</p>
+<p>（1）尝试：使用命令行修改IP配置；使用可视化界面修改IP配置。===&gt;无法上网。</p>
+<p>（2）原因：重启网卡，或重启网络服务均不能成功。</p>
+<p>（2）结果：重启虚拟机可以，更新IP配置。</p>
+<p>总结：修改ip配置文件后，若无法通过重启网卡或重启网络更新配置文件，可以通过重启来进行更新。</p>
+<h2 id="安装链码出错"><a href="#安装链码出错" class="headerlink" title="安装链码出错"></a>安装链码出错</h2><blockquote>
+<p>Error: got unexpected status: BAD_REQUEST – error validating channel creation transaction for new channel ‘mychannel’, could not succesfully apply update to template configuration: error authorizing update: error validating DeltaSet: policy for [Group]  /Channel/Application not satisfied: implicit policy evaluation failed - 0 sub-policies were satisfied, but this policy requires 1 of the ‘Admins’ sub-policies to be satisfied </p>
+<p>相关文章：<a href="https://blog.csdn.net/weixin_43562234/article/details/105657686" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43562234/article/details/105657686</a></p>
+</blockquote>
+<blockquote>
+<p>尝试一</p>
+<p>把数据清理干净。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker stop $(docker ps -a -q)</span><br><span class="line">sudo docker ps -qa|xargs docker rm</span><br></pre></td></tr></table></figure>
+
+<p>没有用。</p>
+</blockquote>
+<blockquote>
+<p>尝试二</p>
+<p>一个一个的down：<code>docker-compose -f docker-compose-peer21.yaml down</code></p>
+<p>到存链的地方删除残留：<code>cd /var/lib/docker/volumes</code></p>
+<p>没有用。</p>
+</blockquote>
+<blockquote>
+<p>尝试三</p>
+<p>习惯性使用1.4.3版本，因为fabric镜像、fabric二进制文件容易获取。1.4.2版本开始出现raft，可能1.4.3不支持kafka。可能是fabric版本的问题，更换版本为1.4.0。</p>
+<p>链码可以成功安装。</p>
+</blockquote>
+<h2 id="LSCC出错"><a href="#LSCC出错" class="headerlink" title="LSCC出错"></a>LSCC出错</h2><blockquote>
+<p>现象</p>
+<p>第一个加入通道安装链码的peer节点，链码查询链码交易没有问题。其后的节点，无法正常的进行链码查询和交易。</p>
+<p>相关文章： <a href="https://blog.csdn.net/weixin_38751513/article/details/104619536" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38751513/article/details/104619536</a> </p>
+</blockquote>
+<p><strong>链码查询</strong></p>
+<p><strong>cli：</strong>Error: endorsement failure during query. response: status:500 message:”failed to execute transaction 20f0d96ae478c6550fa19529089377c5b79c480e95b4b88e966b0ae683eed550: [channel mychannel] could not launch chaincode mycc:1.0: timeout expired while starting chaincode mycc:1.0 for transaction” </p>
+<p><strong>peer：</strong>2020-09-18 03:32:10.792 UTC [endorser] SimulateProposal -&gt; ERRO 053 [mychannel][20f0d96a] failed to invoke chaincode name:”mycc” , error: timeout expired while starting chaincode mycc:1.0 for transaction</p>
+<p><strong>交易</strong></p>
+<p><strong>cli：</strong>Error: endorsement failure during invoke. response: status:500 message:”failed to execute transaction bd6063d5ecc94f2266fdf9559e8238c8c87daaf19991c9ac772d9dcad5c2a7b5: [channel mychannel] could not launch chaincode mycc:1.0: timeout expired while starting chaincode mycc:1.0 for transaction” </p>
+<p><strong>peer：</strong>2020-09-18 03:34:10.317 UTC [endorser] SimulateProposal -&gt; ERRO 044 [mychannel][bd6063d5] failed to invoke chaincode name:”mycc” , error: timeout expired while starting chaincode mycc:1.0 for transaction</p>
+<p><strong>镜像</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@vm192168307 kafka]# docker images</span><br><span class="line">REPOSITORY                                                                                             TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">dev-peer1.org1.example.com-mycc-1.0-cd123150154e6bf2df7ce682e0b1bcbea40499416f37a6da3aae14c4eb51b08d   latest              0e65b32fb9c1        2 hours ago         141MB</span><br><span class="line">hyperledger/fabric-baseos                                                                              amd64-0.4.15        9d6ec11c60ff        18 months ago       145MB</span><br><span class="line">hyperledger/fabric-tools                                                                               latest              0a44f4261a55        20 months ago       1.56GB</span><br><span class="line">hyperledger/fabric-ccenv                                                                               latest              5b31d55f5f3a        20 months ago       1.43GB</span><br><span class="line">hyperledger/fabric-orderer                                                                             latest              54f372205580        20 months ago       150MB</span><br><span class="line">hyperledger/fabric-peer                                                                                latest              304fac59b501        20 months ago       157MB</span><br><span class="line">hyperledger/fabric-zookeeper                                                                           latest              d36da0db87a4        23 months ago       1.43GB</span><br><span class="line">hyperledger/fabric-kafka                                                                               latest              a3b095201c66        23 months ago       1.44GB</span><br><span class="line">hyperledger/fabric-couchdb                                                                             latest              f14f97292b4c        23 months ago       1.5GB</span><br><span class="line">hyperledger/fabric-baseos-amd64-0.4.15                                                                 latest              75f5fb1a0e0c        23 months ago       124MB</span><br><span class="line">hyperledger/fabric-baseos                                                                              amd64-0.4.14        75f5fb1a0e0c        23 months ago       124MB</span><br><span class="line">[root@vm192168307 kafka]# </span><br></pre></td></tr></table></figure>
+
+<p><strong>容器</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@vm192168307 kafka]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE                                                                                                  COMMAND                  CREATED             STATUS              PORTS                              NAMES</span><br><span class="line">994240b843df        hyperledger/fabric-peer                                                                                "peer node start"        2 hours ago         Up 2 hours          0.0.0.0:7051-7053-&gt;7051-7053/tcp   peer1.org1.example.com</span><br><span class="line">f66402657c83        hyperledger/fabric-tools                                                                               "/bin/bash"              2 hours ago         Up 2 hours                                             cli</span><br><span class="line">[root@vm192168307 kafka]# </span><br></pre></td></tr></table></figure>
+
+<p><strong>分析：</strong>peer节点在安装智能合约时，会使用baseos进行链码编译，装载到ccenv形成一个chaincode容器。这个容器启动后一段时间自行关闭。导致LSCC（系统链码，主要用于链码生命周期）出错。</p>
+<blockquote>
+<p>尝试一</p>
+<p>仔细baidu。</p>
+<p>解决方法：- CORE_PEER_ADDRESSAUTODETECT=true</p>
+<p>结果依旧。</p>
+</blockquote>
+<blockquote>
+<p>尝试二</p>
+<p>仔细回看所有步骤。</p>
+<p>hosts文件配置上192.168.30.6和192.168.30.7的域名配反了。</p>
+<p>可以正常调用链码。</p>
+</blockquote>
+</blockquote>
+<h1 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h1><h2 id="（一）Kafka"><a href="#（一）Kafka" class="headerlink" title="（一）Kafka"></a>（一）Kafka</h2><blockquote>
+<p>Kafa是一个分布式、具有水平伸缩能力、崩溃容错能力 的日志系统。在Hyperledger Fabric区块链中可以有多个Kafka节点，使用zookeeper进行同步管理。 </p>
+</blockquote>
+<h3 id="1、Kafka工作原理"><a href="#1、Kafka工作原理" class="headerlink" title="1、Kafka工作原理"></a>1、Kafka工作原理</h3><blockquote>
+<p><strong>Kafka本质上是一个消息处理系统，它使用的是经典的发布-订阅模型。消息的消费者订阅特定的主题，以便收到新消息的通知，生产者则负责消息的发布。</strong> </p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/kafka/kafka-2.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p>当主题的数据规模变得越来越大时，可以拆分为多个分区，Kafka保障在一个分区内的消息是按顺序排列的。</p>
+<p>Kafka并不跟踪消费者读取了哪些消息，也不会自动删除已经读取的消息。Kafka会保存消息一段时间，例如一天，或者直到数据规模超过一定的阈值。消费者需要轮询新的消息，这使得他们可以根据自己的需求来定位消息，因此可以重放或重新处理事件。消费者处于不同的消费者分组，对应一个或多个消费者进程。每个分区被分贝给单一的消费者进程，因此同样的消息不会被多次读取。</p>
+<p>崩溃容错机制是通过在多个Kafka代理之间复制分区来实现的。因此如果一个代理由于软件或硬件故障挂掉，数据也不会丢失。当然接下来还需要一个领导-跟随机制，领导者持有分区，跟随者则进行分区的复制。当领导者挂掉后，会有某个跟随者转变为新的领导者。</p>
+<p>如果一个消费者订阅了某个主体，那么它怎么知道从哪个分区领导者来读取订阅的消息？</p>
+<p>答案在于zookeeper服务。</p>
+<p>zookeeper是一个分布式key-value存储库，通常用于存储元数据及集群机制的实现。zookeeper允许服务（Kafka代理）的客户端订阅变化并获得实时通知。这就是代理如何确定应当使用哪个分区领导者的原因。zookeeper有超强的故障容错能力，因此Kafka的运行严重依赖于它。</p>
+<p>在zookeeper中存储的元数据包括：</p>
+<ul>
+<li>消费者分组在每个分区的读取偏移量</li>
+<li>访问控制清单，用于访问授权与限制</li>
+<li>生产者及消费者配额，每秒最多消息数量</li>
+<li>分区领导者及健康信息</li>
+</ul>
+</blockquote>
+<h3 id="2、Hyperledger-Fabric中的Kafka"><a href="#2、Hyperledger-Fabric中的Kafka" class="headerlink" title="2、Hyperledger Fabric中的Kafka"></a>2、Hyperledger Fabric中的Kafka</h3><blockquote>
+<p>要理解在超级账本Hyperledger Fabric中的Kafka是如何工作的，首先需要理解几个重要的术语：</p>
+<ul>
+<li><p>Chain - 指的是一组客户端（通道/channel）可以访问的日志</p>
+</li>
+<li><p>Channel - 一个通道类似于一个主题，授权的对等节点（peer）可以订阅并且成为通道的成员。 只有通道的成员可以在通道上交易，一个通道中的交易在其他通道中看不到</p>
+</li>
+<li><p>OSN - 即排序服务节点（Ordering Service Node），在Fabric中被称为排序节点。排序节点负责：</p>
+</li>
+<li><ul>
+<li>进行客户鉴权</li>
+<li>允许客户端通过一个简单的接口写入或读取通道</li>
+<li>执行配置交易的过滤与验证，实现通道的重新配置或创建新的通道</li>
+</ul>
+</li>
+<li><p>RPC - 即远程过程调用（Remote Procedure Call），是一种用于调用其他机器上的服务而无需了解 通信与实现细节的通信协议，目的是像调用本地函数一样调用网络中其他机器上的函数</p>
+</li>
+<li><p>广播PRC - 交易提交调用，由排序节点执行</p>
+</li>
+<li><p>分发RPC - 交易分发请求，当交易由kafka代理处理后，分发给请求节点</p>
+</li>
+</ul>
+<p>注意，虽然在Hyperledger Fabric中Kafka被称为共识（Consensus），但是其核心是交易排序服务以及额外的崩溃容错能力。</p>
+<p>在Hyperledger Fabric中的Kafka实际运行逻辑如下：</p>
+<ul>
+<li>对于每一条链，都有一个对应的分区</li>
+<li>每个链对应一个单一的分区主题</li>
+<li>排序节点负责将来自特定链的交易（通过广播RPC接收）中继到对应的分区</li>
+<li>排序节点可以读取分区并获得在所有排序节点间达成一致的排序交易列表</li>
+<li>一个链中的交易是定时分批处理的，也就是说当一个新的批次的第一个交易进来时，开始计时</li>
+<li>当交易达到最大数量时或超时后进行批次切分，生成新的区块</li>
+<li>定时交易是另一个交易，由上面描述的定时器生成</li>
+<li>每个排序节点为每个链维护一个本地日志，生成的区块保存在本地账本中</li>
+<li>交易区块通过分发RPC返回客户端</li>
+<li>当发生崩溃时，可以利用不同的排序节点分发区块，因为所有的排序节点都维护有本地日志</li>
+</ul>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/kafka/kafka-3.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure> 
+
+<h3 id="3、Hyperledger-Fabric-Kafka实例解析"><a href="#3、Hyperledger-Fabric-Kafka实例解析" class="headerlink" title="3、Hyperledger Fabric Kafka实例解析"></a>3、Hyperledger Fabric Kafka实例解析</h3><blockquote>
+<p>考虑下图，假设排序节点OSN0和OSN2时连接到广播客户端，OSN1连接到分发客户端。 </p>
+</blockquote>
+<p><img src="/img/kafka/kafka-4.jpg" alt=""> </p>
+<blockquote>
+<ul>
+<li>OSN0已经有了交易foo，中继到kafka集群</li>
+<li>此时OSN2将交易baz广播到集群中</li>
+<li>最后，交易bar由OSN0发送到集群中</li>
+<li>集群现在有三个交易，可以在图中看到三个交易的在日志中的位置偏移量</li>
+<li>客户端发送分发请求，在OSN1的本地日志中，上述三个交易在4#区块里。</li>
+<li>因此OSN1将4#区块返回客户端，处理结束</li>
+</ul>
+<p>Kakfa的高性能对于Hyperledger Fabric有很大的帮助，多个排序节点通过Kafka实现同步，而Kafka本身并不是排序节点，它只是将排序节点通过流连接起来。虽然Kafka支持崩溃容错，它并不能提供对网络中恶意攻击的保护。需要一种拜占庭容错方案（BFT）才可以对抗恶意的攻击，但是目前Hyperledger Farbic框架中还有待实现这一机制。</p>
+<p>总而言之，在Hyperledger Farbic中，Kafka共识模块是可以用于生产环境的，它可以支持崩溃容错， 但无法对抗恶意攻击。</p>
+<p>原文：<a href="https://link.zhihu.com/?target=http%3A//blog.hubwiz.com/2019/04/25/fabric-kafka-abc/">Fabric Kafka入门 — 汇智网</a> </p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-09-28T06:22:16.912Z" itemprop="dateUpdated">2020-09-28 14:22:16</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/" rel="tag">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raft/" rel="tag">Raft</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/27/2020/raft/&title=《Raft集群部署》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/27/2020/raft/&title=《Raft集群部署》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/27/2020/raft/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Raft集群部署》 — Cups&url=http://cupswen.github.io/2020/09/27/2020/raft/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/27/2020/raft/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/24/2020/blockchain-explorer/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hyperledger Explorer</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2020/09/27/2020/raft/&title=《Raft集群部署》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2020/09/27/2020/raft/&title=《Raft集群部署》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2020/09/27/2020/raft/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Raft集群部署》 — Cups&url=http://cupswen.github.io/2020/09/27/2020/raft/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2020/09/27/2020/raft/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2020/09/27/2020/raft/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
