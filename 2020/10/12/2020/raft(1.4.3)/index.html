@@ -21,17 +21,18 @@
     
     
     <meta name="keywords" content="Fabric,Raft">
-    <meta name="description" content="参考博客：  https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;6844904187285749767 材料包所在地（实验系统）： IP：192.168.30.9 账号：root 密码：123456 大小18.5G 占时先不做。 先看看Fabric-CA和论文。  虚拟机资源">
+    <meta name="description" content="材料包所在地（实验系统）： IP：192.168.30.9 账号：root 密码：123456 大小18.5G  虚拟机资源                                                                                                            组织、域名、ip匹配表   域名 ip地址 组织  内网i">
 <meta name="keywords" content="Fabric,Raft">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Raft集群部署(Fabric1.4.3)">
 <meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2020&#x2F;10&#x2F;12&#x2F;2020&#x2F;raft(1.4.3)&#x2F;index.html">
 <meta property="og:site_name" content="Cups">
-<meta property="og:description" content="参考博客：  https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;6844904187285749767 材料包所在地（实验系统）： IP：192.168.30.9 账号：root 密码：123456 大小18.5G 占时先不做。 先看看Fabric-CA和论文。  虚拟机资源">
+<meta property="og:description" content="材料包所在地（实验系统）： IP：192.168.30.9 账号：root 密码：123456 大小18.5G  虚拟机资源                                                                                                            组织、域名、ip匹配表   域名 ip地址 组织  内网i">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;virtual-machine.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;map1.4.3.png">
-<meta property="og:updated_time" content="2020-10-12T11:54:45.077Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;ca1.4.3.png">
+<meta property="og:updated_time" content="2020-10-13T08:04:58.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;virtual-machine.png">
     
@@ -166,7 +167,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#虚拟机资源"><span class="post-toc-text">虚拟机资源</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#组织、域名、ip匹配表"><span class="post-toc-text">组织、域名、ip匹配表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#网络拓扑"><span class="post-toc-text">网络拓扑</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置这些虚拟机"><span class="post-toc-text">配置这些虚拟机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）虚拟机基础环境配置"><span class="post-toc-text">（一）虚拟机基础环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、防火墙"><span class="post-toc-text">1、防火墙</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、更改hosts文件"><span class="post-toc-text">2、更改hosts文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（二）Fabric基础环境配置"><span class="post-toc-text">（二）Fabric基础环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、bin"><span class="post-toc-text">1、bin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、images"><span class="post-toc-text">2、images</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Fabric相关操作"><span class="post-toc-text">Fabric相关操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）准备相关文件"><span class="post-toc-text">（一）准备相关文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、crypto-config-yaml"><span class="post-toc-text">1、crypto-config.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、configtx-yaml"><span class="post-toc-text">2、configtx.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、生成公私钥和证书"><span class="post-toc-text">3、生成公私钥和证书</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、生成创世区块"><span class="post-toc-text">4、生成创世区块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、生成通道配置区块"><span class="post-toc-text">5、生成通道配置区块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6、智能合约"><span class="post-toc-text">6、智能合约</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7、docker-compose-orderer-yaml"><span class="post-toc-text">7、docker-compose-orderer.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10、docker-compose-peer-yaml"><span class="post-toc-text">10、docker-compose-peer.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11、docker-compose-ca-yaml"><span class="post-toc-text">11、docker-compose-ca.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12、复制文件"><span class="post-toc-text">12、复制文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13、文件目录"><span class="post-toc-text">13、文件目录*</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（二）启动网络"><span class="post-toc-text">（二）启动网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、orderer节点"><span class="post-toc-text">1、orderer节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、peer节点"><span class="post-toc-text">2、peer节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）peer01-192-168-30-5"><span class="post-toc-text">（1）peer01-192.168.30.5</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）peer11-192-168-30-7"><span class="post-toc-text">（2）peer11-192.168.30.7</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）peer02-192-168-30-8"><span class="post-toc-text">（3）peer02-192.168.30.8</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）peer12-192-168-30-9"><span class="post-toc-text">（4）peer12-192.168.30.9</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、fabric-ca"><span class="post-toc-text">3、fabric-ca</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#常用命令"><span class="post-toc-text">常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#清空所有容器"><span class="post-toc-text">清空所有容器</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#虚拟机资源"><span class="post-toc-text">虚拟机资源</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#组织、域名、ip匹配表"><span class="post-toc-text">组织、域名、ip匹配表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#网络拓扑"><span class="post-toc-text">网络拓扑</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CA架构"><span class="post-toc-text">CA架构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置这些虚拟机"><span class="post-toc-text">配置这些虚拟机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）虚拟机基础环境配置"><span class="post-toc-text">（一）虚拟机基础环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、防火墙"><span class="post-toc-text">1、防火墙</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、更改hosts文件"><span class="post-toc-text">2、更改hosts文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（二）Fabric基础环境配置"><span class="post-toc-text">（二）Fabric基础环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、bin"><span class="post-toc-text">1、bin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、images"><span class="post-toc-text">2、images</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Fabric相关操作"><span class="post-toc-text">Fabric相关操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（一）准备相关文件"><span class="post-toc-text">（一）准备相关文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、crypto-config-yaml"><span class="post-toc-text">1、crypto-config.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、configtx-yaml"><span class="post-toc-text">2、configtx.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、生成公私钥和证书"><span class="post-toc-text">3、生成公私钥和证书</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、生成创世区块"><span class="post-toc-text">4、生成创世区块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、生成通道配置区块"><span class="post-toc-text">5、生成通道配置区块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6、智能合约"><span class="post-toc-text">6、智能合约</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7、docker-compose-orderer-yaml"><span class="post-toc-text">7、docker-compose-orderer.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10、docker-compose-peer-yaml"><span class="post-toc-text">10、docker-compose-peer.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11、docker-compose-ca-yaml"><span class="post-toc-text">11、docker-compose-ca.yaml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12、复制文件"><span class="post-toc-text">12、复制文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13、文件目录"><span class="post-toc-text">13、文件目录*</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#（二）启动网络"><span class="post-toc-text">（二）启动网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、orderer节点"><span class="post-toc-text">1、orderer节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、peer节点"><span class="post-toc-text">2、peer节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（1）peer01-192-168-30-5"><span class="post-toc-text">（1）peer01-192.168.30.5</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（2）peer11-192-168-30-7"><span class="post-toc-text">（2）peer11-192.168.30.7</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（3）peer02-192-168-30-8"><span class="post-toc-text">（3）peer02-192.168.30.8</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（4）peer12-192-168-30-9"><span class="post-toc-text">（4）peer12-192.168.30.9</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、fabric-ca"><span class="post-toc-text">3、fabric-ca</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#常用命令"><span class="post-toc-text">常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#清空所有容器"><span class="post-toc-text">清空所有容器</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -193,14 +194,11 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <blockquote>
-<p>参考博客：  <a href="https://juejin.im/post/6844904187285749767" target="_blank" rel="noopener">https://juejin.im/post/6844904187285749767</a></p>
 <p>材料包所在地（实验系统）：</p>
 <p>IP：192.168.30.9</p>
 <p>账号：root</p>
 <p>密码：123456</p>
 <p>大小18.5G</p>
-<p>占时先不做。</p>
-<p>先看看Fabric-CA和论文。</p>
 </blockquote>
 <h1 id="虚拟机资源"><a href="#虚拟机资源" class="headerlink" title="虚拟机资源"></a>虚拟机资源</h1><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -216,6 +214,7 @@
 <th align="left">域名</th>
 <th>ip地址</th>
 <th align="center">组织</th>
+<th></th>
 <th align="center">内网ip</th>
 </tr>
 </thead>
@@ -223,54 +222,63 @@
 <td align="left">orderer0.order.com</td>
 <td>192.168.30.2</td>
 <td align="center">orderer</td>
+<td>orderer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">orderer1.order.com</td>
 <td>192.168.30.3</td>
 <td align="center">orderer</td>
+<td>orderer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">orderer2.order.com</td>
 <td>192.168.30.4</td>
 <td align="center">orderer</td>
+<td>orderer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer0.court.com</td>
 <td>192.168.30.5</td>
 <td align="center">court</td>
+<td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer1.court.com</td>
 <td>192.168.30.6</td>
 <td align="center">court</td>
+<td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer0.user.com</td>
 <td>192.168.30.7</td>
 <td align="center">user</td>
+<td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer1.user.com</td>
 <td>192.168.30.8</td>
 <td align="center">user</td>
+<td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">ca.court.com</td>
-<td>192.168.30.9:</td>
+<td>192.168.30.9:7054</td>
 <td align="center">court</td>
+<td>ca</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">ca.user.com</td>
-<td>192.168.30.9:</td>
+<td>192.168.30.9:7055</td>
 <td align="center">user</td>
+<td>ca</td>
 <td align="center">123</td>
 </tr>
 </tbody></table>
@@ -282,6 +290,40 @@
                 <div class="image-caption"></div>
             </figure>
 
+<p><code>需求:</code></p>
+<blockquote>
+<p>法院组织和用户组织想建立一个区块链网络来存储用户组织所产生的电子合同。（砍去律所）</p>
+<p>法院组织的核心需求：用户组织的内部用户在法院取证时，能够取到符合真实的电子合同。</p>
+<p>用户组织的核心需求：签订的电子合同在发生问题时可以被法院公正的执行。</p>
+</blockquote>
+<p><code>组织:</code></p>
+<blockquote>
+<p>法院组织：court。</p>
+<p>用户组织：user。</p>
+<p>为网络提供排序和分发服务的组织：order。</p>
+<p>注：order组织在实际场景的划分中很难说清楚，但是fabric架构又必须有，而且需要拥有独立于peer组织的一套证书体系。order组织的orderer节点视情况划分于法院组织、用户组织的管理范围内（如：法院组织2个节点、用户组织1个节点）；order组织的证书由法院组织和用户组织共同管理。</p>
+</blockquote>
+<p><code>节点：</code></p>
+<blockquote>
+<p>order节点组成集群。</p>
+<p>法院组织节点：peer0.court.com、peer1.court.com。设定peer0.court.com为anchors节点；Leader节点由他们自行选举；peer0.court.com、peer1.court.com都是committer节点和Endorse节点。</p>
+<p>用户组织节点：peer0.user.com、peer1.user.com。设定peer0.user.com为anchors节点；Leader节点由他们自行选举；peer0.user.com、peer1.user.com都是committer节点和Endorse节点。</p>
+</blockquote>
+<p><code>ca:</code></p>
+<blockquote>
+<p>法院组织节点：ca.court.com给组织内用户颁发证书。</p>
+<p>用户组织节点：ca.user.com给组织内部用户颁发证书。</p>
+</blockquote>
+<h1 id="CA架构"><a href="#CA架构" class="headerlink" title="CA架构"></a>CA架构</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/raft/ca1.4.3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>将ca.court.com、ca.user.com启动起来颁发用户证书。</p>
+<p>其他ca、tlsca视情况而定。</p>
 <h1 id="配置这些虚拟机"><a href="#配置这些虚拟机" class="headerlink" title="配置这些虚拟机"></a>配置这些虚拟机</h1><h2 id="（一）虚拟机基础环境配置"><a href="#（一）虚拟机基础环境配置" class="headerlink" title="（一）虚拟机基础环境配置"></a>（一）虚拟机基础环境配置</h2><h3 id="1、防火墙"><a href="#1、防火墙" class="headerlink" title="1、防火墙"></a>1、防火墙</h3><p>关闭防火墙</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl status firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
 
@@ -479,7 +521,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-10-12T11:54:45.077Z" itemprop="dateUpdated">2020-10-12 19:54:45</time>
+    Last updated: <time datetime="2020-10-13T08:04:58.757Z" itemprop="dateUpdated">2020-10-13 16:04:58</time>
 </span><br>
 
 
