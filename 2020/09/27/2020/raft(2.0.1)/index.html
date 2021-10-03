@@ -33,7 +33,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;map.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;ip.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;chaincode.png">
-<meta property="og:updated_time" content="2020-10-03T08:55:31.573Z">
+<meta property="og:updated_time" content="2021-04-06T08:37:56.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;virtual-machine.png">
     
@@ -329,7 +329,7 @@
 <p> SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现，是 Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在这种访问控制体系的限制下，进程只能访问那些在他的任务中所需要文件。SELinux 默认安装在 Fedora 和 Red Hat Enterprise Linux 上，也可以作为其他发行版上容易安装的包得到。 </p>
 <p> 博客上都这么做，暂时不清楚为啥做。理解上就是关闭了这样个安全子系统。</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过命令获取状态 </span></span><br><span class="line">getenforce </span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行设置selinux，enforcing,permissive 或者 1,0。 </span></span><br><span class="line">etenforce 0 </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看selinux的信息 </span></span><br><span class="line">sestatus -v </span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑配置 </span></span><br><span class="line">vi /etc/selinux/config</span><br><span class="line"><span class="meta">#</span><span class="bash">将配置中的 SELINUX=enforcing 改为 SELINUX=disabled</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过命令获取状态 </span></span><br><span class="line">getenforce </span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行设置selinux，enforcing,permissive 或者 1,0。 </span></span><br><span class="line">getenforce 0 </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看selinux的信息 </span></span><br><span class="line">sestatus -v </span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑配置 </span></span><br><span class="line">vi /etc/selinux/config</span><br><span class="line"><span class="meta">#</span><span class="bash">将配置中的 SELINUX=enforcing 改为 SELINUX=disabled</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="5、设置时间同步"><a href="#5、设置时间同步" class="headerlink" title="5、设置时间同步"></a>5、设置时间同步</h3><blockquote>
 <p>进行时间同步</p>
@@ -718,7 +718,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-10-03T08:55:31.573Z" itemprop="dateUpdated">2020-10-03 16:55:31</time>
+    Last updated: <time datetime="2021-04-06T08:37:56.058Z" itemprop="dateUpdated">2021-04-06 16:37:56</time>
 </span><br>
 
 
@@ -842,7 +842,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>CupsWen &copy; 2019 - 2020</span>
+        <p><span>CupsWen &copy; 2019 - 2021</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>

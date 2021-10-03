@@ -32,7 +32,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;virtual-machine.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;map1.4.3.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;raft&#x2F;ca1.4.3.png">
-<meta property="og:updated_time" content="2020-10-14T09:11:05.878Z">
+<meta property="og:updated_time" content="2021-04-01T11:28:50.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;img&#x2F;kafka&#x2F;virtual-machine.png">
     
@@ -220,63 +220,63 @@
 </thead>
 <tbody><tr>
 <td align="left">orderer0.order.com</td>
-<td>192.168.30.2</td>
+<td>192.168.30.41</td>
 <td align="center">orderer</td>
 <td>orderer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">orderer1.order.com</td>
-<td>192.168.30.3</td>
+<td>192.168.30.42</td>
 <td align="center">orderer</td>
 <td>orderer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">orderer2.order.com</td>
-<td>192.168.30.4</td>
+<td>192.168.30.43</td>
 <td align="center">orderer</td>
 <td>orderer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer0.court.com</td>
-<td>192.168.30.5</td>
+<td>192.168.30.44</td>
 <td align="center">court</td>
 <td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer1.court.com</td>
-<td>192.168.30.6</td>
+<td>192.168.30.45</td>
 <td align="center">court</td>
 <td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer0.user.com</td>
-<td>192.168.30.7</td>
+<td>192.168.30.46</td>
 <td align="center">user</td>
 <td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">peer1.user.com</td>
-<td>192.168.30.8</td>
+<td>192.168.30.47</td>
 <td align="center">user</td>
 <td>peer</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">ca.court.com</td>
-<td>192.168.30.9:7054</td>
+<td>192.168.30.48</td>
 <td align="center">court</td>
 <td>ca</td>
 <td align="center">123</td>
 </tr>
 <tr>
 <td align="left">ca.user.com</td>
-<td>192.168.30.9:7055</td>
+<td>192.168.30.49</td>
 <td align="center">user</td>
 <td>ca</td>
 <td align="center">123</td>
@@ -357,7 +357,7 @@
 </blockquote>
 <p>命令行切换到bin目录下：<code>cd /root/fabric-tools/fabric-1.4.3/bin</code></p>
 <p>按readme.txt中的提示进行操作即可。readme.txt内容如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 设置当前目录下文件可读可写可执行</span></span><br><span class="line">chmod 777 -R ./*</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除原有的二进制文件</span></span><br><span class="line">rm -rf /usr/local/bin</span><br><span class="line"><span class="meta">#</span><span class="bash"> 移动到/usr/<span class="built_in">local</span>/bin</span></span><br><span class="line">cp ./* /usr/local/bin</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看二进制文件版本</span></span><br><span class="line">peer version</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 设置当前目录下文件可读可写可执行</span></span><br><span class="line">chmod 777 -R ./*</span><br><span class="line"><span class="meta">#</span><span class="bash"> 移动到/usr/<span class="built_in">local</span>/bin</span></span><br><span class="line">cp ./* /usr/local/bin</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看二进制文件版本</span></span><br><span class="line">peer version</span><br></pre></td></tr></table></figure>
 
 <h3 id="2、images"><a href="#2、images" class="headerlink" title="2、images"></a>2、images</h3><blockquote>
 <p>Fabric镜像。</p>
@@ -490,7 +490,7 @@
 <p>docker-compose -f docker-compose-peer12.yaml up -d</p>
 </blockquote>
 <h3 id="（1）peer01-192-168-30-5"><a href="#（1）peer01-192-168-30-5" class="headerlink" title="（1）peer01-192.168.30.5"></a>（1）peer01-192.168.30.5</h3><blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############启动容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 启动容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker-compose -f docker-compose-peer01.yaml up -d</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############创建并加入通道</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 进入容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker <span class="built_in">exec</span> -it cli bash</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 创建通道</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/order.com/orderers/orderer0.order.com/msp/tlscacerts/tlsca.order.com-cert.pem</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer channel create \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-o orderer0.order.com:7050 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-c mychannel \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-f ./channel-artifacts/mychannel.tx \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--tls \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--cafile <span class="variable">$ORDERER_CA</span> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 加入通道</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer channel join -b mychannel.block</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############实例化智能合约</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 安装智能合约</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer chaincode install \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-n mycc \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-p github.com/hyperledger/fabric/chaincode/chaincode_example02 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-v 1.0</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 实例化智能合约</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/order.com/orderers/orderer0.order.com/msp/tlscacerts/tlsca.order.com-cert.pem</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer chaincode instantiate \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-o orderer0.order.com:7050 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--tls \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--cafile <span class="variable">$ORDERER_CA</span> \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-C mychannel \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-n mycc \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-v 1.0 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-c <span class="string">'&#123;"Args":["init","a","200","b","400"]&#125;'</span> \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-P <span class="string">"AND ('UserMSP.peer','CourtMSP.peer')"</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 查询a</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer chaincode query -C mychannel -n mycc -c <span class="string">'&#123;"Args":["query","a"]&#125;'</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 退出容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">ctrl+D</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############复制通道文件</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 从镜像复制到本地</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker cp cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/mychannel.block ./</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 传输给另外3台peer</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">scp ./mychannel.block root@192.168.30.6:/root/contract-deposit</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">scp ./mychannel.block root@192.168.30.7:/root/contract-deposit</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">scp ./mychannel.block root@192.168.30.8:/root/contract-deposit</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############查看chaincode容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker ps</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker logs peer0.court.com</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############启动容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 启动容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker-compose -f docker-compose-peer01.yaml up -d</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############创建并加入通道</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 进入容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker <span class="built_in">exec</span> -it cli bash</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 创建通道</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/order.com/orderers/orderer0.order.com/msp/tlscacerts/tlsca.order.com-cert.pem</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer channel create \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-o orderer0.order.com:7050 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-c mychannel \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-f ./channel-artifacts/mychannel.tx \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--tls \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--cafile <span class="variable">$ORDERER_CA</span> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 加入通道</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer channel join -b mychannel.block</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############实例化智能合约</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 安装智能合约</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer chaincode install \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-n mycc \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-p github.com/hyperledger/fabric/chaincode/chaincode_example02 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-v 1.0</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 实例化智能合约</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/order.com/orderers/orderer0.order.com/msp/tlscacerts/tlsca.order.com-cert.pem</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer chaincode instantiate \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-o orderer0.order.com:7050 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--tls \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">--cafile <span class="variable">$ORDERER_CA</span> \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-C mychannel \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-n mycc \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-v 2.0 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-c <span class="string">'&#123;"Args":["init","a","200","b","400"]&#125;'</span> \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">-P <span class="string">"AND ('UserMSP.peer','CourtMSP.peer')"</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 查询a</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">peer chaincode query -C mychannel -n mycc -c <span class="string">'&#123;"Args":["query","a"]&#125;'</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 退出容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">ctrl+D</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############复制通道文件</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 从镜像复制到本地</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker cp cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/mychannel.block ./</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment"># 传输给另外3台peer</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">scp ./mychannel.block root@192.168.30.6:/root/contract-deposit</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">scp ./mychannel.block root@192.168.30.7:/root/contract-deposit</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">scp ./mychannel.block root@192.168.30.8:/root/contract-deposit</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">##############查看chaincode容器</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker ps</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">docker logs peer0.court.com</span></span><br></pre></td></tr></table></figure>
 
 </blockquote>
 <h3 id="（2）peer11-192-168-30-6"><a href="#（2）peer11-192-168-30-6" class="headerlink" title="（2）peer11-192.168.30.6"></a>（2）peer11-192.168.30.6</h3><blockquote>
@@ -526,7 +526,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-10-14T09:11:05.878Z" itemprop="dateUpdated">2020-10-14 17:11:05</time>
+    Last updated: <time datetime="2021-04-01T11:28:50.223Z" itemprop="dateUpdated">2021-04-01 19:28:50</time>
 </span><br>
 
 
@@ -601,7 +601,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/03/22/2021/RegisterOfCopyright/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">2021/RegisterOfCopyright</h4>
+      </a>
+    </div>
   
 
   
@@ -643,7 +650,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>CupsWen &copy; 2019 - 2020</span>
+        <p><span>CupsWen &copy; 2019 - 2021</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>

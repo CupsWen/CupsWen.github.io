@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>原创性检测服务器 | Cups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Node,百度智云,摄影作品原创性检测">
+    <meta name="description" content="项目说明文档   项目名称 项目描述 项目功能 项目特点    摄影作品原创性检测服务器 基于百度智云对摄影作品进行原创性检测 1.原创性检测 2.日志管理 3.监控与报警 原创性检测内容全面   一、 原创性检测   原创性检测内容 所使用技术 所属领域 描述    具有唯一性或违反法律法规和公序良俗 图片内容审核 图片内容识别 深度学习图片分类   复制抄袭行为 相似图片检索 数据检索 深度哈">
+<meta name="keywords" content="Node,百度智云,摄影作品原创性检测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原创性检测服务器">
+<meta property="og:url" content="http:&#x2F;&#x2F;cupswen.github.io&#x2F;2021&#x2F;10&#x2F;03&#x2F;2021&#x2F;%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3&#x2F;index.html">
+<meta property="og:site_name" content="Cups">
+<meta property="og:description" content="项目说明文档   项目名称 项目描述 项目功能 项目特点    摄影作品原创性检测服务器 基于百度智云对摄影作品进行原创性检测 1.原创性检测 2.日志管理 3.监控与报警 原创性检测内容全面   一、 原创性检测   原创性检测内容 所使用技术 所属领域 描述    具有唯一性或违反法律法规和公序良俗 图片内容审核 图片内容识别 深度学习图片分类   复制抄袭行为 相似图片检索 数据检索 深度哈">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-10-03T10:24:47.616Z">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/img/brand.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/the_Huanghe_River.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">CupsWen</h5>
+          <a href="mailto:1191567189@qq.com" target="_blank" rel="noopener" title="1191567189@qq.com" class="mail">1191567189@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/index.html"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CupsWen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://cupswen.github.io/hyperlink"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">原创性检测服务器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">原创性检测服务器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-10-03T10:24:10.000Z" itemprop="datePublished" class="page-time">
+  2021-10-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Node/">Node</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#项目说明文档"><span class="post-toc-text">项目说明文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、-原创性检测"><span class="post-toc-text">一、 原创性检测</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、日志管理"><span class="post-toc-text">二、日志管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、监控与报警"><span class="post-toc-text">三、监控与报警</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接口汇总"><span class="post-toc-text">接口汇总</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#模块选型"><span class="post-toc-text">模块选型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、框架选型"><span class="post-toc-text">一、框架选型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、日志管理模块"><span class="post-toc-text">二、日志管理模块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、监控与报警模块"><span class="post-toc-text">三、监控与报警模块</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、-摄影作品原创性检测服务"><span class="post-toc-text">一、 摄影作品原创性检测服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口说明"><span class="post-toc-text">接口说明</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、-日志管理"><span class="post-toc-text">二、 日志管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口说明-1"><span class="post-toc-text">接口说明</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、-监控和报警"><span class="post-toc-text">三、 监控和报警</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口说明-2"><span class="post-toc-text">接口说明</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四、配置文件说明"><span class="post-toc-text">四、配置文件说明</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2021/项目说明文档"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">原创性检测服务器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-10-03 18:24:10" datetime="2021-10-03T10:24:10.000Z"  itemprop="datePublished">2021-10-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Node/">Node</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="项目说明文档"><a href="#项目说明文档" class="headerlink" title="项目说明文档"></a>项目说明文档</h1><table>
+<thead>
+<tr>
+<th align="center">项目名称</th>
+<th align="center">项目描述</th>
+<th align="center">项目功能</th>
+<th align="center">项目特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">摄影作品原创性检测服务器</td>
+<td align="center">基于百度智云对摄影作品进行原创性检测</td>
+<td align="center">1.原创性检测</br> 2.日志管理</br> 3.监控与报警</td>
+<td align="center">原创性检测内容全面</td>
+</tr>
+</tbody></table>
+<h2 id="一、-原创性检测"><a href="#一、-原创性检测" class="headerlink" title="一、 原创性检测"></a>一、 原创性检测</h2><table>
+<thead>
+<tr>
+<th align="center">原创性检测内容</th>
+<th align="center">所使用技术</th>
+<th align="center">所属领域</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">具有唯一性或违反法律法规和公序良俗</td>
+<td align="center">图片内容审核</td>
+<td align="center">图片内容识别</td>
+<td align="center">深度学习图片分类</td>
+</tr>
+<tr>
+<td align="center">复制抄袭行为</td>
+<td align="center">相似图片检索</td>
+<td align="center">数据检索</td>
+<td align="center">深度哈希+大规模数据检索</td>
+</tr>
+<tr>
+<td align="center">艺术审美差</td>
+<td align="center">图片美学质量评价</td>
+<td align="center">图片美学</td>
+<td align="center">深度学习图片分类</td>
+</tr>
+<tr>
+<td align="center">三者本质上都是使用深度学习对摄影图片进行分类。</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="二、日志管理"><a href="#二、日志管理" class="headerlink" title="二、日志管理"></a>二、日志管理</h2><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">……</th>
+<th align="center">……</th>
+<th align="center">……</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">日志分级</td>
+<td align="center">级别</td>
+<td align="center">名称</td>
+<td align="center">是否选用</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">ALL</td>
+<td align="center">所有日志</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">TRACE</td>
+<td align="center">追踪日志</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">DEBUG</td>
+<td align="center">调试日志</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">INFO</td>
+<td align="center">普通日志</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">WARN</td>
+<td align="center">警告日志</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">ERROR</td>
+<td align="center">错误日志</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">FATAL</td>
+<td align="center">严重错误日志</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">OFF</td>
+<td align="center">最高级别日志</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">日志分类</td>
+<td align="center">类别</td>
+<td align="center">名称</td>
+<td align="center">是否选用</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">SERVICE</td>
+<td align="center">web服务</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">LOG</td>
+<td align="center">日志管理</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">MONITOR</td>
+<td align="center">监控与报警</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">日志落盘</td>
+<td align="center">存储路径</td>
+<td align="center">分割方法</td>
+<td align="center">是否选用</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center">logs/{$Category}/{$Date}_{$Level}.log</td>
+<td align="center">日志按类别和级别每天进行分割</td>
+<td align="center">✔</td>
+</tr>
+</tbody></table>
+<h2 id="三、监控与报警"><a href="#三、监控与报警" class="headerlink" title="三、监控与报警"></a>三、监控与报警</h2><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">类型</th>
+<th align="center">所属类别</th>
+<th align="center">名称</th>
+<th align="center">说明</th>
+<th align="center">邮件报警</th>
+<th align="center">短信报警</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">rss</td>
+<td align="center">Int</td>
+<td align="center">进程监控</td>
+<td align="center">常驻集大小(M)</td>
+<td align="center">防止内存泄露</td>
+<td align="center">……</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">heapUsage</td>
+<td align="center">Int</td>
+<td align="center">进程监控</td>
+<td align="center">堆空间占用率(%)</td>
+<td align="center">防止堆空间不够用</td>
+<td align="center">&gt;70%</td>
+<td align="center">&gt;90%</td>
+</tr>
+<tr>
+<td align="center">external</td>
+<td align="center">Int</td>
+<td align="center">进程监控</td>
+<td align="center">C++对象内存(M)</td>
+<td align="center">防止内存泄露</td>
+<td align="center">……</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">arrayBuffers</td>
+<td align="center">Int</td>
+<td align="center">进程监控</td>
+<td align="center">Buffer占用内存(M)</td>
+<td align="center">防止内存泄露</td>
+<td align="center">……</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">memUsage</td>
+<td align="center">Int</td>
+<td align="center">内存监控</td>
+<td align="center">内存占用率(M)</td>
+<td align="center">防止内存不足</td>
+<td align="center">&gt;70%</td>
+<td align="center">&gt;90%</td>
+</tr>
+<tr>
+<td align="center">cpuUsage</td>
+<td align="center">Int</td>
+<td align="center">CPU占用监控</td>
+<td align="center">CPU占用率(%)</td>
+<td align="center">防止CPU占用率过高</td>
+<td align="center">&gt;70%</td>
+<td align="center">&gt;90%</td>
+</tr>
+<tr>
+<td align="center">diskUsage</td>
+<td align="center">Int</td>
+<td align="center">磁盘监控</td>
+<td align="center">磁盘占用率(%)</td>
+<td align="center">防止磁盘空间不足</td>
+<td align="center">&gt;70%</td>
+<td align="center">&gt;90%</td>
+</tr>
+</tbody></table>
+<h1 id="接口汇总"><a href="#接口汇总" class="headerlink" title="接口汇总"></a>接口汇总</h1><table>
+<thead>
+<tr>
+<th align="center">路由</th>
+<th align="center">服务名称</th>
+<th align="center">请求方式</th>
+<th align="center">协议</th>
+<th align="center">请求数据类型</th>
+<th align="center">响应数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/imageDetection</td>
+<td align="center">摄影作品原创性检测</td>
+<td align="center">POST</td>
+<td align="center">HTTPS</td>
+<td align="center">JSON</td>
+<td align="center">JSON</td>
+</tr>
+<tr>
+<td align="center">/log</td>
+<td align="center">日志管理</td>
+<td align="center">POST/GET</td>
+<td align="center">HTTPS</td>
+<td align="center">JSON</td>
+<td align="center">JSON</td>
+</tr>
+<tr>
+<td align="center">/monitor</td>
+<td align="center">监控与报警</td>
+<td align="center">POST</td>
+<td align="center">HTTPS</td>
+<td align="center">JSON</td>
+<td align="center">JSON</td>
+</tr>
+</tbody></table>
+<h1 id="模块选型"><a href="#模块选型" class="headerlink" title="模块选型"></a>模块选型</h1><h2 id="一、框架选型"><a href="#一、框架选型" class="headerlink" title="一、框架选型"></a>一、框架选型</h2><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">NPM下载量(周)</th>
+<th align="center">说明</th>
+<th align="center">优势</th>
+<th align="center">缺点</th>
+<th align="center">是否选用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Express</td>
+<td align="center">17,754,331</td>
+<td align="center">最流行的Node Web框架</td>
+<td align="center">常用框架<br>（简单易上手）</td>
+<td align="center">简单</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">koa</td>
+<td align="center">1,118,469</td>
+<td align="center">Express原班人马打造的<br>轻量级Web框架</td>
+<td align="center">Express继任者<br/>（简单易上手）</td>
+<td align="center">简单</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">egg</td>
+<td align="center">30,447</td>
+<td align="center">阿里系企业级框架</td>
+<td align="center">基于koa的企业级框架<br/>（国内企业级项目首选）</td>
+<td align="center">复杂</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">koa2</td>
+<td align="center">8,228</td>
+<td align="center">koa TS版本</td>
+<td align="center">TS版koa<br/>（ES6发展迅猛，常用于微服务）</td>
+<td align="center">简单</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">nest</td>
+<td align="center">2,801</td>
+<td align="center">REST API’s.</td>
+<td align="center">松耦合接口首选</td>
+<td align="center">简单</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">选择<strong>koa</strong>的理由：项目工程量不大，只有一个原创性检测功能，没必要选择大型企业级框架<strong>egg</strong>。</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="二、日志管理模块"><a href="#二、日志管理模块" class="headerlink" title="二、日志管理模块"></a>二、日志管理模块</h2><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">NPM下载量(周)</th>
+<th align="center">说明</th>
+<th align="center">优势</th>
+<th align="center">缺点</th>
+<th align="center">是否选用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">winston</td>
+<td align="center">5,308,033</td>
+<td align="center">日志管理工具</td>
+<td align="center">简单易用，且支持多种传输通道</td>
+<td align="center">TS；1年没更新</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">morgan</td>
+<td align="center">2,354,545</td>
+<td align="center">HTTP日志管理工具</td>
+<td align="center">为Web服务器专门定制的日志管理工具</td>
+<td align="center">2年没更新</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">log4js</td>
+<td align="center">2,179,082</td>
+<td align="center">日志管理工具</td>
+<td align="center">简单易用，Fabric Explorer使用的日志模块</td>
+<td align="center">1年没更新</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">选择<strong>log4js</strong>的理由：使用简单。</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="三、监控与报警模块"><a href="#三、监控与报警模块" class="headerlink" title="三、监控与报警模块"></a>三、监控与报警模块</h2><table>
+<thead>
+<tr>
+<th align="center">类别</th>
+<th align="center">名称</th>
+<th align="center">说明</th>
+<th align="center">是否选用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">进程监控</td>
+<td align="center">process</td>
+<td align="center">核心模块</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">内存监控</td>
+<td align="center">os</td>
+<td align="center">核心模块</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">CPU占用监控</td>
+<td align="center">os</td>
+<td align="center">核心模块</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">磁盘监控</td>
+<td align="center">diskinfo</td>
+<td align="center">文件模块</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">邮箱报警</td>
+<td align="center">nodemailer</td>
+<td align="center">文件模块</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">短信报警</td>
+<td align="center">阿里云(GET)</td>
+<td align="center">……</td>
+<td align="center">✘</td>
+</tr>
+<tr>
+<td align="center">短信报警暂时放弃。</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">## 四、安全防护模块</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">名称</td>
+<td align="center">NPM下载量(周)</td>
+<td align="center">说明</td>
+<td align="center">功能</td>
+</tr>
+<tr>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+</tr>
+<tr>
+<td align="center">passport</td>
+<td align="center">1,080,333</td>
+<td align="center">登录验证</td>
+<td align="center">…</td>
+</tr>
+<tr>
+<td align="center">passport-jwt</td>
+<td align="center">388,027</td>
+<td align="center">token验证</td>
+<td align="center">…</td>
+</tr>
+<tr>
+<td align="center">validator</td>
+<td align="center">4,894,424</td>
+<td align="center">数据验证</td>
+<td align="center">防止用户输入非法数据</td>
+</tr>
+<tr>
+<td align="center">mongoose</td>
+<td align="center">1,348,015</td>
+<td align="center">DOM框架（MongoDB）</td>
+<td align="center">防止SQL注入；数据格式验证</td>
+</tr>
+<tr>
+<td align="center">sequelize</td>
+<td align="center">891,131</td>
+<td align="center">DOM框架（MySQL/MSSQL/PostgreSQL/SQLite）</td>
+<td align="center">防止SQL注入；数据格式验证</td>
+</tr>
+<tr>
+<td align="center">hibernate</td>
+<td align="center">74,111</td>
+<td align="center">DOM框架(MySQL/PostgreSQL/SQLite3)</td>
+<td align="center">防止SQL注入；数据格式验证</td>
+</tr>
+<tr>
+<td align="center">helmet</td>
+<td align="center">74,111</td>
+<td align="center">防Web攻击(XXS/CSRF/点击劫持/文件嗅探等)</td>
+<td align="center">Web安全防护</td>
+</tr>
+<tr>
+<td align="center">xss</td>
+<td align="center">1,468,038</td>
+<td align="center">防Web攻击(XXS)</td>
+<td align="center">Web安全防护</td>
+</tr>
+<tr>
+<td align="center">csrf</td>
+<td align="center">377,334</td>
+<td align="center">防Web攻击(CSRF)</td>
+<td align="center">Web安全防护</td>
+</tr>
+</tbody></table>
+<h1 id="一、-摄影作品原创性检测服务"><a href="#一、-摄影作品原创性检测服务" class="headerlink" title="一、 摄影作品原创性检测服务"></a>一、 摄影作品原创性检测服务</h1><h2 id="接口说明"><a href="#接口说明" class="headerlink" title="接口说明"></a>接口说明</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">摄影作品原创性检测</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">URL</td>
+<td align="center">/imageDetection</td>
+</tr>
+<tr>
+<td align="center">请求方式</td>
+<td align="center">POST</td>
+</tr>
+<tr>
+<td align="center">认证方式</td>
+<td align="center">证书</td>
+</tr>
+<tr>
+<td align="center">参数位置</td>
+<td align="center">Body</td>
+</tr>
+<tr>
+<td align="center">参数格式</td>
+<td align="center">JSON</td>
+</tr>
+<tr>
+<td align="center">## 请求说明</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">参数</td>
+<td align="center">类型</td>
+</tr>
+<tr>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+</tr>
+<tr>
+<td align="center">workHash</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">publicKey</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">workName</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">workDescribe</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">workAddress</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">image</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">## 响应说明</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">参数</td>
+<td align="center">类型</td>
+</tr>
+<tr>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+</tr>
+<tr>
+<td align="center">workHash</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">mspId</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">isPass</td>
+<td align="center">Boolean</td>
+</tr>
+<tr>
+<td align="center">evaluation</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">signature</td>
+<td align="center">String</td>
+</tr>
+</tbody></table>
+<h1 id="二、-日志管理"><a href="#二、-日志管理" class="headerlink" title="二、 日志管理"></a>二、 日志管理</h1><h2 id="接口说明-1"><a href="#接口说明-1" class="headerlink" title="接口说明"></a>接口说明</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">摄影作品原创性检测</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">URL</td>
+<td align="center">/log</td>
+</tr>
+<tr>
+<td align="center">请求方式</td>
+<td align="center">POST</td>
+</tr>
+<tr>
+<td align="center">认证方式</td>
+<td align="center">证书+属性</td>
+</tr>
+<tr>
+<td align="center">参数位置</td>
+<td align="center">Body</td>
+</tr>
+<tr>
+<td align="center">参数格式</td>
+<td align="center">JSON</td>
+</tr>
+<tr>
+<td align="center">## 请求说明</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">method</td>
+<td align="center">JSON</td>
+</tr>
+<tr>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’getAllFileDir’}</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’downloadOne’, path:{$path}}</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’downloadAll’}</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’deleteOne’, path:{$path}}</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’deleteAll’}</td>
+</tr>
+</tbody></table>
+<h1 id="三、-监控和报警"><a href="#三、-监控和报警" class="headerlink" title="三、 监控和报警"></a>三、 监控和报警</h1><h2 id="接口说明-2"><a href="#接口说明-2" class="headerlink" title="接口说明"></a>接口说明</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">摄影作品原创性检测</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">URL</td>
+<td align="center">/monitor</td>
+</tr>
+<tr>
+<td align="center">请求方式</td>
+<td align="center">POST</td>
+</tr>
+<tr>
+<td align="center">认证方式</td>
+<td align="center">证书+属性</td>
+</tr>
+<tr>
+<td align="center">参数位置</td>
+<td align="center">Body</td>
+</tr>
+<tr>
+<td align="center">参数格式</td>
+<td align="center">JSON</td>
+</tr>
+<tr>
+<td align="center">## 请求说明</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">参数</td>
+<td align="center">类型</td>
+</tr>
+<tr>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+</tr>
+<tr>
+<td align="center">code</td>
+<td align="center">Int</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">code</th>
+<th align="center">功能</th>
+<th align="center">响应格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">获取进程状态</td>
+<td align="center">{rss,heapUsage,external,arrayBuffers}</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">获取内存状态</td>
+<td align="center">{memUsage}</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">获取CPU占用状态</td>
+<td align="center">{cpuUsage}</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">获取磁盘状态</td>
+<td align="center">{diskUsage}</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">获取所有状态</td>
+<td align="center">{rss,heapUsage,external,arrayBuffers,<br>memUsage,diskUsage,queueUsage}</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">method</th>
+<th align="center">JSON</th>
+<th align="center">功能</th>
+<th align="center">响应格式</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">POST</td>
+<td align="center">{command:’getProcessState’}</td>
+<td align="center">获取进程状态</td>
+<td align="center">{rss, external, heapTotal, heapUsage}</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’getMemUsage’}</td>
+<td align="center">获取内存状态</td>
+<td align="center">{totalmem, memUsage}</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’getCpuUsage’}</td>
+<td align="center">获取CPU占用状态</td>
+<td align="center">{cpuUsage}</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’getDiskUsage’}</td>
+<td align="center">获取磁盘状态</td>
+<td align="center">{diskTotal, diskUsage}</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">{command:’getAll’}</td>
+<td align="center">获取所有状态</td>
+<td align="center">{above all}</td>
+<td align="center">……</td>
+</tr>
+<tr>
+<td align="center">## 响应说明</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">参数</td>
+<td align="center">类型</td>
+<td align="center">所属类别</td>
+<td align="center">名称</td>
+<td align="center">说明</td>
+</tr>
+<tr>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+<td align="center">:—-:</td>
+</tr>
+<tr>
+<td align="center">rss</td>
+<td align="center">Int</td>
+<td align="center">进程监控</td>
+<td align="center">常驻集大小(M)</td>
+<td align="center">防止内存泄露</td>
+</tr>
+<tr>
+<td align="center">heapUsage</td>
+<td align="center">Int</td>
+<td align="center">进程监控</td>
+<td align="center">堆空间占用率(%)</td>
+<td align="center">防止堆空间不够用</td>
+</tr>
+<tr>
+<td align="center">external</td>
+<td align="center">Int</td>
+<td align="center">进程监控</td>
+<td align="center">C++对象内存(M)</td>
+<td align="center">防止内存泄露</td>
+</tr>
+<tr>
+<td align="center">totalmem</td>
+<td align="center">Int</td>
+<td align="center">内存监控</td>
+<td align="center">内存总量(M)</td>
+<td align="center">防止内存不足</td>
+</tr>
+<tr>
+<td align="center">memUsage</td>
+<td align="center">Int</td>
+<td align="center">内存监控</td>
+<td align="center">内存占用率(M)</td>
+<td align="center">防止内存不足</td>
+</tr>
+<tr>
+<td align="center">cpuUsage</td>
+<td align="center">Int</td>
+<td align="center">CPU占用监控</td>
+<td align="center">CPU占用率(%)</td>
+<td align="center">防止CPU占用率过高</td>
+</tr>
+<tr>
+<td align="center">diskTotal</td>
+<td align="center">Int</td>
+<td align="center">磁盘监控</td>
+<td align="center">磁盘总量(M)</td>
+<td align="center">防止磁盘空间不足</td>
+</tr>
+<tr>
+<td align="center">diskUsage</td>
+<td align="center">Int</td>
+<td align="center">磁盘监控</td>
+<td align="center">磁盘占用率(%)</td>
+<td align="center">防止磁盘空间不足</td>
+</tr>
+</tbody></table>
+<h1 id="四、配置文件说明"><a href="#四、配置文件说明" class="headerlink" title="四、配置文件说明"></a>四、配置文件说明</h1><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">host</td>
+<td align="center">服务器IP地址</td>
+</tr>
+<tr>
+<td align="center">port</td>
+<td align="center">服务器端口</td>
+</tr>
+<tr>
+<td align="center">mspId</td>
+<td align="center">服务器编号</td>
+</tr>
+<tr>
+<td align="center">privateKey</td>
+<td align="center">服务器私钥</td>
+</tr>
+<tr>
+<td align="center">publicKey</td>
+<td align="center">服务器公钥</td>
+</tr>
+<tr>
+<td align="center">caCertificateList</td>
+<td align="center">信任的CA列表</td>
+</tr>
+<tr>
+<td align="center">testPrivateKey</td>
+<td align="center">测试客户端私钥</td>
+</tr>
+<tr>
+<td align="center">testPublicKey</td>
+<td align="center">测试客户端公钥</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">imageDetection</th>
+<th align="center">原创性检测</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">imageSavePath</td>
+<td align="center">图片存储路径</td>
+</tr>
+<tr>
+<td align="center">userNames</td>
+<td align="center">可以访问的用户名列表</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">log</th>
+<th align="center">日志管理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">path</td>
+<td align="center">日志存储目录</td>
+</tr>
+<tr>
+<td align="center">userNames</td>
+<td align="center">可以访问的用户名列表</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">monitor</th>
+<th align="center">状态监控</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">schedule</td>
+<td align="center">时间表</td>
+</tr>
+<tr>
+<td align="center">userNames</td>
+<td align="center">可以访问的用户名列表</td>
+</tr>
+<tr>
+<td align="center">heapUsage</td>
+<td align="center">进程堆空间预警阈值</td>
+</tr>
+<tr>
+<td align="center">memUsage</td>
+<td align="center">系统内存预警阈值</td>
+</tr>
+<tr>
+<td align="center">cpuUsage</td>
+<td align="center">系统CPU占用预警阈值</td>
+</tr>
+<tr>
+<td align="center">diskUsage</td>
+<td align="center">系统磁盘预警阈值</td>
+</tr>
+<tr>
+<td align="center">emailAddress</td>
+<td align="center">报警邮箱</td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-10-03T10:24:47.616Z" itemprop="dateUpdated">2021-10-03 18:24:47</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://cupswen.github.io">
+            <img src="/img/the_Huanghe_River.png" alt="CupsWen">
+            CupsWen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%91%84%E5%BD%B1%E4%BD%9C%E5%93%81%E5%8E%9F%E5%88%9B%E6%80%A7%E6%A3%80%E6%B5%8B/" rel="tag">摄影作品原创性检测</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%99%BA%E4%BA%91/" rel="tag">百度智云</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/&title=《原创性检测服务器》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/&title=《原创性检测服务器》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《原创性检测服务器》 — Cups&url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/03/22/2021/RegisterOfCopyright/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">2021/RegisterOfCopyright</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>CupsWen &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme indigo.</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/&title=《原创性检测服务器》 — Cups&pic=http://cupswen.github.io/img/the_Huanghe_River.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/&title=《原创性检测服务器》 — Cups&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《原创性检测服务器》 — Cups&url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/&via=http://cupswen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cupswen.github.io/2021/10/03/2021/%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Cups';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Cups';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
